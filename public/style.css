@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+:root{
+    --orange: #FF6600;
+    --cream: #D0AE6E;
+    --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.2);
+}
+
+/* Styling for login page */
+.login{
+
+    width: 500px;
+    position: relative; 
+    margin-top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.login .header-login h1{
+    font-weight: bolder;
+    font-size: 50px;
+    color: var(--orange);
+}
+.login .header-login p{
+    margin-top: -10px;
+}
+.login .body-login{
+    padding: 25px;
+    background-color: #f3f3f3;
+    border-radius: 40px;
+}
+.login .body-login input{
+    width: 95%;
+    padding: 5px 0;
+    border: none;
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #888;
+}
+.login .body-login input:focus{
+    outline-width: 0;
+}
+.login .body-login .row{
+    margin-bottom: 20px;
+}
+.login .row-btn{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.login .row-btn a{
+    text-decoration: none;
+    color: #000;
+}
+.login .row-btn .btn-login{
+    padding: 10px 50px;
+    border: none;
+    border-radius: 35px;
+    background-color: var(--orange);
+    color: #fff;
+}
+@media screen and (max-width: 1100px) {
+    .img-login {
+      display: none;
+    }
+}

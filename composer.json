@@ -1,0 +1,19 @@
+{
+    "name": "attar/app-rahmatan-travel",
+    "description": "aplikasi travel untuk memesan umrah dan haji",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Attar\\App\\Rahmatan\\Travel\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "adzazarif",
+            "email": "adzazarf@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8"
+    }
+}
