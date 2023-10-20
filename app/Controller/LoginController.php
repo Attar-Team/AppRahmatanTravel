@@ -31,6 +31,9 @@ class LoginController
             if(!$row){
                 throw new ValidationException("Username dan password salah");
             }
+            session_start();
+            $_SESSION['status_login'] = true;
+            $_SESSION['level'] = $row['level'];
             View::redirect("/product");
         } catch (\Throwable $th) {
             View::render("login",["error" => $th->getMessage()]);

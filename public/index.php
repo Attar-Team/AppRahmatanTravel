@@ -6,12 +6,15 @@ use Attar\App\Rahmatan\Travel\App\Router;
 use Attar\App\Rahmatan\Travel\Controller\HomeController;
 use Attar\App\Rahmatan\Travel\Controller\LoginController;
 use Attar\App\Rahmatan\Travel\Controller\Test;
+use Attar\App\Rahmatan\Travel\Middleware\AdminMiddleware;
 use Attar\App\Rahmatan\Travel\Middleware\ApiMiddleware;
 use Attar\App\Rahmatan\Travel\Middleware\AuthMiddleware;
 
 // Router::add("GET","/",Test::class,"index");
 Router::add("GET","/test/([0-9a-zA-Z]*)",Test::class,"test");
-Router::add("POST","/addApi", Test::class, "testt", [ApiMiddleware::class]);
+Router::add("POST","/addApi", Test::class, "testt");
+Router::add("POST","/createSesion", Test::class,"createSesion" );
+Router::add("POST","/deleteSesion", Test::class,"deleteSesion");
 
 //Router untuk menangani login
 Router::add("GET","/login",LoginController::class,"index");

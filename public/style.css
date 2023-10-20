@@ -64,6 +64,58 @@
     background-color: var(--orange);
     color: #fff;
 }
+
+/* Styling for home page */
+.nav-image{
+    background-image: url("image/Mask\ groupbg\ \(1\).png");
+    height: 88vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  background-size: cover;
+}
+.nav-image .home{
+    margin-top: 94px;
+    padding-left: 30px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+.nav-image .home h1{
+    font-size: 55px;
+    font-weight: bold;
+    color: var(--orange);
+}
+.nav-image .home .desc p{
+    font-weight: bolder;
+    font-size: 27px;
+}
+.nav-image .home .desc a{
+    margin-top: 25px;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: var(--cream);
+    color: #fff;
+    padding: 16px 30px;
+    transition: .5s;
+    text-decoration: none;
+}
+.nav-image .home .desc a:hover{
+    background-color: #fff;
+    color: #000;
+} 
+/* .nav-image .desc{
+    position: relative;
+    top: 160px;
+    left: 60px;
+    display: inline-block;
+}
+.nav-image .desc h1{
+
+    
+}
+*/
+
 @media screen and (max-width: 1100px) {
     .img-login {
       display: none;

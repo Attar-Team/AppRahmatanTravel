@@ -16,7 +16,7 @@
 
 <body>
     <div class="d-flex" style=" height: 100vh;">
-        <img class="img-login" src="image/Mekkah 1.png" alt="">
+        <img class="img-login" src="image/Mekkah.png" alt="">
 
         <div class="d-inline-block" style=" width: 100%;">
             <nav class="navbar navbar-expand-lg navbar-light ">
