@@ -12,7 +12,7 @@ use Attar\App\Rahmatan\Travel\Middleware\AuthMiddleware;
 
 // Router::add("GET","/",Test::class,"index");
 Router::add("GET","/test/([0-9a-zA-Z]*)",Test::class,"test");
-Router::add("POST","/addApi", Test::class, "testt");
+Router::add("POST","/addApi", Test::class, "testt", [ApiMiddleware::class]);
 Router::add("POST","/createSesion", Test::class,"createSesion" );
 Router::add("POST","/deleteSesion", Test::class,"deleteSesion");
 
