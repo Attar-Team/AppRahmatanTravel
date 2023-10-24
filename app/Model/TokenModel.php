@@ -10,6 +10,14 @@ class TokenModel
         $this->connection = $pdo;
     }
 
+    public function getToken($id)
+    {
+        $query = "SELECT * FROM token WHERE user_id = ?";
+        $result = $this->connection->prepare($query);
+        $result->execute([$id]);
+        $token = $result->fetch(\PDO::FETCH_ASSOC);
+        return $token;
+    }
     public function createToken(string $id)
     {
         try {
