@@ -4,10 +4,13 @@ require_once __DIR__ ."/../vendor/autoload.php";
 
 use Attar\App\Rahmatan\Travel\App\Router;
 use Attar\App\Rahmatan\Travel\Controller\AgenController;
+use Attar\App\Rahmatan\Travel\Controller\ArtikelController;
 use Attar\App\Rahmatan\Travel\Controller\CustomerController;
 use Attar\App\Rahmatan\Travel\Controller\DashboardController;
+use Attar\App\Rahmatan\Travel\Controller\GaleryController;
 use Attar\App\Rahmatan\Travel\Controller\HomeController;
 use Attar\App\Rahmatan\Travel\Controller\KeberangkatanController;
+use Attar\App\Rahmatan\Travel\Controller\LaporanController;
 use Attar\App\Rahmatan\Travel\Controller\LoginController;
 use Attar\App\Rahmatan\Travel\Controller\PaketController;
 use Attar\App\Rahmatan\Travel\Controller\PemesananController;
@@ -52,9 +55,16 @@ Router::add("GET","/admin/keberangkatan", KeberangkatanController::class,"index"
 
 //Router untuk menangani Dashboard Agen
 Router::add("GET","/admin/agen", AgenController::class,"index");
-Router::add("GET","/admin/verivikasi-komisi-agen", AgenController::class,"viewVerifikasiAgen");
+Router::add("GET","/admin/verifikasi-komisi-agen", AgenController::class,"viewVerifikasiAgen");
 
+//Router untuk menangani Dashboard Galery
+Router::add("GET","/admin/galery", GaleryController::class,"index");
 
+//Router untuk menangani Dashboard Artikel
+Router::add("GET","/admin/artikel", ArtikelController::class,"index");
+
+//Router untuk menangani Dashboard Laporan
+Router::add("GET","/admin/laporan", LaporanController::class,"index");
 
 //Router Untuk Menangani API ke MOBILE JANGAN di ubah ubah
 //1. api login

@@ -137,7 +137,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/admin/verivikasi-komisi-agen" class="menu-link">
+                  <a href="/admin/verifikasi-komisi-agen" class="menu-link">
                     <div data-i18n="Without navbar">Verivikasi Gaji</div>
                   </a>
                 </li>
@@ -168,7 +168,7 @@
             </li>
             <!-- Laporan -->
             <li class="menu-item <?php echo ($data['title'] == 'Laporan') ? "active" : "" ?>">
-              <a href="/admin/dashboard" class="menu-link">
+              <a href="/admin/laporan" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Laporan</div>
               </a>

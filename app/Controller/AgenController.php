@@ -19,7 +19,7 @@ class AgenController
         View::render("Admin/footer",[]);
     }
 
-    public function viewVerivikasiAgen()
+    public function viewVerifikasiAgen()
     {
         View::render("Admin/header",["title"=> "Verifikasi Agen"]);
         View::render("Admin/verifikasiKomisiAgen",[]);
