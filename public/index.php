@@ -22,7 +22,7 @@ use Attar\App\Rahmatan\Travel\Middleware\AuthMiddleware;
 
 // Router::add("GET","/",Test::class,"index");
 // Router::add("GET","/test/([0-9a-zA-Z]*)",Test::class,"test");
-// Router::add("POST","/addApi", Test::class, "testt", [ApiMiddleware::class]);
+Router::add("POST","/addApi", Test::class, "testt", [ApiMiddleware::class]);
 // Router::add("POST","/createSesion", Test::class,"createSesion" );
 // Router::add("POST","/deleteSesion", Test::class,"deleteSesion");
 
@@ -45,6 +45,8 @@ Router::add("GET","/admin/customer", CustomerController::class,"index");
 
 //Router untuk menangani Dashboard Paket
 Router::add("GET","/admin/paket", PaketController::class,"index");
+Router::add("GET","/admin/tambah-paket", PaketController::class,"viewTambahData");
+Router::add("POST","/admin/tambah-paket", PaketController::class,"tambahPaket");
 
 //Router untuk menangani Dashboard Pemesanan
 Router::add("GET","/admin/pemesanan", PemesananController::class,"index");
@@ -72,5 +74,9 @@ Router::add("POST","/apiLogin", LoginController::class,"apiLogin");
 Router::add("POST","/apiDeleteToken", LoginController::class,"apiDeleteToken", [ApiMiddleware::class]);
 Router::add("POST","/apiGetUser", UserController::class,"apiGetAll");
 Router::add("POST","/apiGetToken", LoginController::class,"apiGetToken");
+
+
+//2. api paket
+Router::add("GET","/apiGetPaket", PaketController::class,"apiGetPaket");
 
 Router::run();

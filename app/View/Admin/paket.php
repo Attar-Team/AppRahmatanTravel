@@ -11,7 +11,8 @@
                     />
                   </div>
                 </div>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#basicModal" class="btn btn-primary">Tambah</button>
+                <a href="/admin/tambah-paket" class="btn btn-primary d-flex align-items-center">Tambah</a>
+                
               </div>
               
               <div class="card">
@@ -21,26 +22,29 @@
                       <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Nomor Telepon</th>
-                        <th>Jenis Kelamin</th>
+                        <th>Menu</th>
+                        <th>lama</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        $no = 1;
+                        foreach($data["dataPaket"] as $d): ?>
                       <tr>
-                        <td>1</td>
-                        <td>Zarif</td>
-                        <td>BLitar</td>
-                        <td>085942972801</td>
-                        <td>Laki - Laki</td>
-                        <td>
-                        
-                          <button type="button" data-bs-toggle="modal" data-bs-target="#updateContact<?= $d['contactId'] ?>" data-bs-whatever="@mdo" class="btn btn-primary">Updated</button>
-                          <a class="btn btn-danger" href="/admin/deleteClientAddress/<?= $d['clientId'] ?>" role="button">Deleted</a>
+                        <td><?= $no++ ?></td>
+                        <td><?= $d['nama'] ?></td>
+                        <td><?= $d['menu'] ?></td>
+                        <td><?= $d['lama_hari'] ?></td>
+                        <td>    
+                          
+                          <a class="btn btn-danger" href="" role="button"><i class='bx bx-trash' ></i></a>
+                          <a class="btn btn-warning" href="" role="button"><i class='bx bxs-edit-alt'></i></a>
+                          <a class="btn btn-success" href="" role="button"><i class='bx bx-message-detail' ></i></a>
                      
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                       
                     </tbody>
                    
