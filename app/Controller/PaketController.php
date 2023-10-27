@@ -16,6 +16,7 @@ class PaketController
         $this->paket = new PaketModel($connection);
     }
 
+    
     public function index()
     {
         $data = $this->paket->getPaket();
@@ -117,16 +118,103 @@ class PaketController
 
     public function editPaket()
     {
-        // var_dump($_POST);
-        // die();
-
         try {
-            
-        } catch (\Throwable $th) {
-            //throw $th;
+            $paket_id = $_POST['paket_id'];
+
+            if($_FILES['foto_brosur_update']['name']!= ''){
+                $filename_brosur  = $_FILES['foto_brosur_update']['name'];
+                $tmpname_brosur   = $_FILES['foto_brosur_update']['tmp_name'];
+                $filesize_brosur  = $_FILES['foto_brosur_update']['size'];
+
+                $formatfile_brosur    = pathinfo($filename_brosur, PATHINFO_EXTENSION);
+                $foto_brosur        = 'hotel6'.time().'.'.$formatfile_brosur;
+                $allowedtype_update1   = array('png','jpeg','jpg','gif');
+
+                if(!in_array($formatfile_brosur,$allowedtype_update1)){
+                    throw new ValidationException('file tidak di izinkan');
+                }elseif($filesize_brosur > 1000000){
+                    throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
+                }else{
+                    if(file_exists("uploads/foto_brosur/" .$_POST['foto_brosur'])){
+                        unlink("uploads/foto_brosur/" .$_POST['foto_brosur']);
+                    }
+                }
+
+                move_uploaded_file($tmpname_brosur, "uploads/foto_brosur/" .$foto_brosur);
+            }else{
+
+                $foto_brosur = $_POST['foto_brosur'];
+            }
+            $dataTermasuk = implode(",",$_POST['harga_termasuk']);
+                $dataTidakTermasuk = implode(',',$_POST['tidak_termasuk_harga']);
+                $keunggulan = implode(',',$_POST['keunggulan']);
+            $dataPaket = [
+                'nama'=> $_POST['nama_paket'],
+                'menu'=> $_POST['menu'],
+                    'lama_hari'=> $_POST['durasi'],
+                    'minim_dp'=> $_POST['minim_dp'],
+                    'termasuk_harga'=> $dataTermasuk,
+                    'tidak_termasuk_harga'=> $dataTidakTermasuk,
+                    'keunggulan'=> $keunggulan,
+                    'maskapai'=> $_POST['maskapai'],
+                    'foto_brosur'=> $foto_brosur,
+                    'paket_id'=> $paket_id
+            ];
+
+            $updatePaket = $this->paket->updatePaket($dataPaket);
+            $deleteHarga = $this->paket->deleteHargaPaket($_POST['paket_id']);
+            for( $i = 0; $i < count($_POST['nama_jenis']); $i++ ) {
+                $this->paket->saveHarga($paket_id,$_POST['nama_jenis'][$i],$_POST['diskon'][$i],$_POST['harga'][$i] );
+            }
+
+            for($j = 0; $j < count($_POST['nama_hotel']); $j++){
+                if($_FILES['foto_hotel_update']['name'][$j]!= ''){
+                    $filename_hotel  = $_FILES['foto_hotel_update']['name'][$j];
+                    $tmpname_hotel   = $_FILES['foto_hotel_update']['tmp_name'][$j];
+                    $filesize_hotel  = $_FILES['foto_hotel_update']['size'][$j];
+    
+                    $formatfile_hotel    = pathinfo($filename_hotel, PATHINFO_EXTENSION);
+                    $foto_hotel        = 'foto_hotel'.time().'.'.$formatfile_hotel;
+                    $allowedtype_hotel   = array('png','jpeg','jpg','gif');
+    
+                    if(!in_array($formatfile_hotel,$allowedtype_hotel)){
+                        throw new ValidationException('file tidak di izinkan');
+                    }elseif($filesize_hotel > 1000000){
+                        throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
+                    }else{
+                        if(file_exists("uploads/foto_hotel/" .$_POST['foto_hotel'][$j])){
+                            unlink("uploads/foto_hotel/" .$_POST['foto_hotel'][$j]);
+                        }
+                    }
+                    move_uploaded_file($tmpname_hotel, "uploads/foto_hotel/" .$foto_hotel);
+                }else{
+                    $foto_hotel = $_POST['foto_hotel'][$j];
+                }
+                $dateCheckin = str_replace('-"', '/', $_POST['checkin'][$j]);  
+                            $newDateIn = date("Y-m-d", strtotime($dateCheckin));  
+                            $dateCheckOut = str_replace('-"', '/', $_POST['checkout'][$j]);  
+                            $newDateOut = date("Y-m-d", strtotime($dateCheckOut));  
+                $this->paket->updateHotel($_POST['nama_hotel'][$j],$_POST['deskripsi'][$j],$_POST['bintang'][$j],$newDateIn,$newDateOut,$foto_hotel,$_POST['hotel_id'][$j]);
+            }
+            View::redirect('/admin/paket');
+
+        } catch (\Throwable $e) {
+            throw new ValidationException($e->getMessage());
         }
     }
-
+    public function deleteHarga($id, $hotel_id)
+    {
+        try {
+            $delete = $this->paket->deleteHargaById($hotel_id);
+            if($delete > 0){
+                View::redirect("/admin/edit-paket/$id");
+            }else{
+                throw new \Exception("salah");
+            }
+        } catch (\Throwable $e) {
+            throw new ValidationException($e->getMessage());
+        }
+    }
     public function apiGetPaket()
     {
         try {

@@ -43,6 +43,7 @@ foreach($data["dataPaket"] as $d) :
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class="bx bx-user"></i></span>
+                                        <input type="hidden" name="paket_id" value="<?= $d->paket_id ?>">
                                 <input type="text" name="nama_paket" value="<?= $d->nama ?>" class="form-control" id="basic-icon-default-fullname" />
                             </div>
                         </div>
@@ -194,8 +195,9 @@ foreach($data["dataPaket"] as $d) :
                         <div class="mb-3">
                             
                         <label for="formFile" class="form-label">Foto Brosur</label><br>
+                        <input type="hidden" name="foto_brosur" value="<?= $d->foto_brosur ?>">
                         <img src="/uploads/foto_brosur/<?= $d->foto_brosur ?>" class="mb-3 shadow" style="width: 200px;border-radius: 10px;" alt="">
-                        <input class="form-control" type="file" name="foto_brosur" id="formFile" />
+                        <input class="form-control" type="file" name="foto_brosur_update" id="formFile" />
                       </div>
                         <?php endforeach; ?>
                 </div>
@@ -205,12 +207,16 @@ foreach($data["dataPaket"] as $d) :
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Harga</h5>
+                    
                 </div>
                 <div class="card-body">
                     
                 <?php $no = 1; foreach($data['dataHarga'] as $h ) : ?>
                         <div style="margin-bottom: 10px; border: 1px solid #ddd; padding: 10px 20px;">
-                            <h5>jenis <?= $no; ?></h5>
+                            
+                            <h5 clas>jenis <?= $no; ?></h5>
+                            
+                    
                             <div class="mb-3">
                                 <label class="form-label" for="basic-icon-default-fullname">Nama Jenis</label>
                                 <div class="input-group input-group-merge">
@@ -235,7 +241,9 @@ foreach($data["dataPaket"] as $d) :
                                     <input type="number" id="basic-icon-default-company" value="<?= $h['harga'] ?>" name="harga[]" class="form-control"/>
                                 </div>
                             </div>
+                            <a class="btn btn-danger" href="/admin/delete-harga/<?= $d->paket_id ?>/<?= $h['harga_paket_id'] ?>"><i class='bx bx-trash' ></i></a>
                         </div>
+                        
                         <?php $no++; endforeach; ?>
                         <div class="inp-group" id="inp-group">
 
@@ -248,6 +256,7 @@ foreach($data["dataPaket"] as $d) :
             
             <div class="card mb-4">
                 <?php foreach($data['dataHotel'] as $t) : ?>
+                    <input type="hidden" name="hotel_id[]" value="<?= $t['hotel_id'] ?>">
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <h5 class="mb-0">Hotel di <?= $t['lokasi'] ?></h5>
                     </div>
@@ -299,7 +308,8 @@ foreach($data["dataPaket"] as $d) :
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Hotel</label><br>
                         <img src="/uploads/foto_hotel/<?= $t['foto_hotel'] ?>" class="mb-3 shadow" style="width: 200px;border-radius: 10px;" alt="">
-                        <input class="form-control" name="foto_hotel[]" type="file" id="formFile" />
+                        <input type="hidden" name="foto_hotel[]" value="<?= $t['foto_hotel'] ?>" id="">
+                        <input class="form-control" name="foto_hotel_update[]" type="file" id="formFile" />
                       </div>
 
                         <div class="mb-3">
@@ -312,7 +322,7 @@ foreach($data["dataPaket"] as $d) :
                               id="basic-icon-default-message"
                               class="form-control"
                               name="deskripsi[]"
-                            ><?= $t['nama_hotel'] ?></textarea>
+                            ><?= $t['deskripsi'] ?></textarea>
                           </div>
                         </div>
                         

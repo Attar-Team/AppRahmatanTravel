@@ -26,38 +26,63 @@ class PaketModel
 
     public function getHargaPaket($id)
     {
-        $query = $this->connection->prepare("SELECT * FROM harga_paket WHERE paket_id = ?");
-        $query->execute([$id]);
-        return $query->fetchAll();
+        $statement = $this->connection->prepare("SELECT * FROM harga_paket WHERE paket_id = ?");
+        $statement->execute([$id]);
+        return $statement->fetchAll();
     }
 
     public function getHotelPaket($id)
     {
-        $query = $this->connection->prepare("SELECT * FROM hotel WHERE paket_id = ?");
-        $query->execute([$id]);
-        return $query->fetchAll();
+        $statement = $this->connection->prepare("SELECT * FROM hotel WHERE paket_id = ?");
+        $statement->execute([$id]);
+        return $statement->fetchAll();
     }
 
     public function savePaket(array $data)
     {
-        $query = $this->connection->prepare("INSERT INTO paket (`nama`,`menu`,`lama_hari`,`minim_dp`,`termasuk_harga`,`tidak_termasuk_harga`,`keunggulan`,`maskapai`,`foto_brosur`) VALUES (?,?,?,?,?,?,?,?,?)");
-        $query->execute([$data["nama"], $data["menu"], $data["lama_hari"],$data['minim_dp'],$data['termasuk_harga'],$data['tidak_termasuk_harga'],$data['keunggulan'],$data['maskapai'],$data['foto_brosur']]);
-        $result = ['count'=> $query->rowCount(),'lastId'=> $this->connection->lastInsertId()];
+        $statement = $this->connection->prepare("INSERT INTO paket (`nama`,`menu`,`lama_hari`,`minim_dp`,`termasuk_harga`,`tidak_termasuk_harga`,`keunggulan`,`maskapai`,`foto_brosur`) VALUES (?,?,?,?,?,?,?,?,?)");
+        $statement->execute([$data["nama"], $data["menu"], $data["lama_hari"],$data['minim_dp'],$data['termasuk_harga'],$data['tidak_termasuk_harga'],$data['keunggulan'],$data['maskapai'],$data['foto_brosur']]);
+        $result = ['count'=> $statement->rowCount(),'lastId'=> $this->connection->lastInsertId()];
         return $result;
     }
 
     public function saveHotel($paket_id,$lokasi,$nama,$deskripsi,$bintang,$checkin,$checkout,$foto_hotel)
     {
-        $query = $this->connection->prepare('INSERT INTO hotel (`paket_id`,`lokasi`,`nama_hotel`,`deskripsi`,`bintang`,`check_in`,`check_out`,foto_hotel) VALUES (?,?,?,?,?,?,?,?)');
-        $query->execute([$paket_id, $lokasi, $nama, $deskripsi, $bintang, $checkin, $checkout,$foto_hotel]);
-    return $query->rowCount();
+        $statement = $this->connection->prepare('INSERT INTO hotel (`paket_id`,`lokasi`,`nama_hotel`,`deskripsi`,`bintang`,`check_in`,`check_out`,foto_hotel) VALUES (?,?,?,?,?,?,?,?)');
+        $statement->execute([$paket_id, $lokasi, $nama, $deskripsi, $bintang, $checkin, $checkout,$foto_hotel]);
+    return $statement->rowCount();
     }
 
     public function saveHarga($paket_id, $nama_jenis,$diskon,$harga)
     {
-        $query = $this->connection->prepare('INSERT INTO harga_paket (`paket_id`,`nama_jenis`,`diskon`,`harga`) VALUES (?,?,?,?)');
-        $query->execute([$paket_id, $nama_jenis, $diskon, $harga]);
-        return $query->rowCount();
+        $statement = $this->connection->prepare('INSERT INTO harga_paket (`paket_id`,`nama_jenis`,`diskon`,`harga`) VALUES (?,?,?,?)');
+        $statement->execute([$paket_id, $nama_jenis, $diskon, $harga]);
+        return $statement->rowCount();
+    }
+
+    public function updatePaket($data)
+    {
+        $statement = $this->connection->prepare('UPDATE paket SET nama = ?, menu = ?, lama_hari = ?, minim_dp = ?, termasuk_harga = ?, tidak_termasuk_harga = ?, keunggulan = ?, maskapai = ?, foto_brosur = ? WHERE paket_id = ?');
+        $statement->execute([$data["nama"], $data["menu"], $data["lama_hari"],$data['minim_dp'],$data['termasuk_harga'],$data['tidak_termasuk_harga'],$data['keunggulan'],$data['maskapai'],$data['foto_brosur'],$data['paket_id']]);
+        return $statement->rowCount();
+    }
+
+    public function deleteHargaPaket($id)
+    {
+        $statement = $this->connection->prepare('DELETE FROM harga_paket WHERE paket_id = ?');
+        $statement->execute([$id]);
+        return $statement->rowCount();
+    }
+    public function deleteHargaById($id)
+    {
+        $statement = $this->connection->prepare('DELETE FROM harga_paket WHERE harga_paket_id = ?');
+        $statement->execute([$id]);
+        return $statement->rowCount();
+    }
+    public function updateHotel($nama,$deskripsi,$bintang,$checkin,$checkout,$foto_hotel,$hotel_id)
+    {
+        $statement = $this->connection->prepare('UPDATE hotel SET nama_hotel = ?, deskripsi = ?, bintang = ?,check_in = ?, check_out = ?, foto_hotel = ? WHERE hotel_id = ?');
+        $statement->execute([$nama, $deskripsi, $bintang, $checkin, $checkout,$foto_hotel,$hotel_id]);
     }
 
 }
