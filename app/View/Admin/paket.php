@@ -39,7 +39,7 @@
                         <td>    
                           
                           <a class="btn btn-danger" href="" role="button"><i class='bx bx-trash' ></i></a>
-                          <a class="btn btn-warning" href="" role="button"><i class='bx bxs-edit-alt'></i></a>
+                          <a class="btn btn-warning" href="/admin/edit-paket/<?= $d['paket_id'] ?>" role="button"><i class='bx bxs-edit-alt'></i></a>
                           <a class="btn btn-success" href="" role="button"><i class='bx bx-message-detail' ></i></a>
                      
                         </td>

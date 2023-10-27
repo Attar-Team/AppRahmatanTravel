@@ -17,6 +17,13 @@ class PaketModel
         return $query->fetchAll();
     }
 
+    public function getPaketById($id)
+    {
+        $query = $this->connection->prepare("SELECT * FROM paket WHERE paket_id = ?");
+        $query->execute([$id]);
+        return $query->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function getHargaPaket($id)
     {
         $query = $this->connection->prepare("SELECT * FROM harga_paket WHERE paket_id = ?");
@@ -53,8 +60,4 @@ class PaketModel
         return $query->rowCount();
     }
 
-    public function getIdDesc()
-    {
-        return $this->connection->lastInsertId();
-    }
 }

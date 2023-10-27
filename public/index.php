@@ -46,7 +46,9 @@ Router::add("GET","/admin/customer", CustomerController::class,"index");
 //Router untuk menangani Dashboard Paket
 Router::add("GET","/admin/paket", PaketController::class,"index");
 Router::add("GET","/admin/tambah-paket", PaketController::class,"viewTambahData");
+Router::add("GET","/admin/edit-paket/([0-9a-zA-Z]*)", PaketController::class,"viewEditData");
 Router::add("POST","/admin/tambah-paket", PaketController::class,"tambahPaket");
+Router::add("POST","/admin/edit-paket", PaketController::class,"editPaket");
 
 //Router untuk menangani Dashboard Pemesanan
 Router::add("GET","/admin/pemesanan", PemesananController::class,"index");
@@ -74,9 +76,10 @@ Router::add("POST","/apiLogin", LoginController::class,"apiLogin");
 Router::add("POST","/apiDeleteToken", LoginController::class,"apiDeleteToken", [ApiMiddleware::class]);
 Router::add("POST","/apiGetUser", UserController::class,"apiGetAll");
 Router::add("POST","/apiGetToken", LoginController::class,"apiGetToken");
-
+Router::add("POST","/apiRegister", UserController::class,"apiRegister", [ApiMiddleware::class]);
 
 //2. api paket
 Router::add("GET","/apiGetPaket", PaketController::class,"apiGetPaket");
+Router::add("GET","/apiGetPaket/([0-9a-zA-Z]*)", PaketController::class,"apiGetPaketById");
 
 Router::run();

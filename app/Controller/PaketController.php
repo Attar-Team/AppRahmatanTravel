@@ -31,6 +31,16 @@ class PaketController
         View::render("/Admin/footer", []);
     }
 
+    public function viewEditData($id)
+    {
+        $dataPaket = $this->paket->getPaketById($id);
+        $dataHotel = $this->paket->getHotelPaket($id);
+        $dataHarga = $this->paket->getHargaPaket($id);
+        View::render("/Admin/header", ["title" => "Paket"]);
+        View::render("/Admin/editPaket", ["dataPaket" => $dataPaket,"dataHotel" => $dataHotel,"dataHarga"=> $dataHarga]);
+        View::render("/Admin/footer", []);
+    }
+
     public function tambahPaket()
     {
 
@@ -105,28 +115,44 @@ class PaketController
         }
     }
 
+    public function editPaket()
+    {
+        // var_dump($_POST);
+        // die();
+
+        try {
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
     public function apiGetPaket()
     {
         try {
             $data = array_map(function ($paket) {
                 return [
+                    "paket_id" => $paket["paket_id"],
                     "nama" => $paket['nama'],
                     "menu" => $paket['menu'],
                     "lama_hari" => $paket['lama_hari'],
                     "minim_dp" => $paket['minim_dp'],
                     "termasuk_harga" => explode(",", $paket['termasuk_harga']),
                     "tidak_termasuk_harga" => explode(",", $paket['tidak_termasuk_harga']),
+                    "keunggulan" => $paket["keunggulan"],
+                    "foto_paket" => $paket["foto_brosur"],
                     'harga' => array_map(fn ($harga) => [
                         'jenis' => $harga['nama_jenis'],
                         'diskon' => $harga['diskon'],
                         'harga' => $harga['harga']
                     ], $this->paket->getHargaPaket($paket["paket_id"])),
-                    "hotel" => array_map(fn ($hotel) => [
+                    "hotel" => array_map(fn ($hotel) => [ 
                         'nama_hotel' => $hotel['nama_hotel'],
                         'deskripsi' => $hotel['deskripsi'],
                         'bintang' => $hotel['bintang'],
                         'check_in' => $hotel['check_in'],
-                        'check_out' => $hotel['check_out']
+                        'check_out' => $hotel['check_out'],
+                        'foto_hotel'=> $hotel['foto_hotel']
                     ], $this->paket->getHotelPaket($paket['paket_id']))
                 ];
             }, $this->paket->getPaket());
@@ -145,5 +171,52 @@ class PaketController
                         );
                         echo json_encode($result);
         }
+    }
+
+    public function apiGetPaketById($id)
+    {
+        try {
+            $data = array_map(function ($paket) {
+                return [
+                    "paket_id" => $paket->paket_id,
+                    "nama" => $paket->nama,
+                    "menu" => $paket->menu,
+                    "lama_hari" => $paket->lama_hari,
+                    "minim_dp" => $paket->minim_dp,
+                    "termasuk_harga" => explode(",", $paket->termasuk_harga),
+                    "tidak_termasuk_harga" => explode(",", $paket->tidak_termasuk_harga),
+                    "keunggulan" => $paket->keunggulan,
+                    "foto_paket" => $paket->foto_brosur,
+                    'harga' => array_map(fn ($harga) => [
+                        'jenis' => $harga['nama_jenis'],
+                        'diskon' => $harga['diskon'],
+                        'harga' => $harga['harga']
+                    ], $this->paket->getHargaPaket($paket->paket_id)),
+                    "hotel" => array_map(fn ($hotel) => [ 
+                        'nama_hotel' => $hotel['nama_hotel'],
+                        'deskripsi' => $hotel['deskripsi'],
+                        'bintang' => $hotel['bintang'],
+                        'check_in' => $hotel['check_in'],
+                        'check_out' => $hotel['check_out'],
+                        'foto_hotel'=> $hotel['foto_hotel']
+                    ], $this->paket->getHotelPaket($paket->paket_id))
+                ];
+            }, $this->paket->getPaketById($id));
+            $result = [
+                'status' => '200',
+                'message' => 'success',
+                'data' => $data
+            ];
+echo json_encode($result);
+        } catch (\Throwable $e) {
+            http_response_code(404);
+            $result = array(
+                "status" => "Failed",
+                "response" => 404,
+                "message" => $e->getMessage()
+            );
+            echo json_encode($result);
+        }
+
     }
 }
