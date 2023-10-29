@@ -42,6 +42,16 @@ class PaketController
         View::render("/Admin/footer", []);
     }
 
+    public function viewDetailData($id)
+    {
+        $dataPaket = $this->paket->getPaketById($id);
+        $dataHotel = $this->paket->getHotelPaket($id);
+        $dataHarga = $this->paket->getHargaPaket($id);
+        View::render("/Admin/header", ["title" => "Paket"]);
+        View::render("/Admin/detailPaket", ["dataPaket" => $dataPaket,"dataHotel" => $dataHotel,"dataHarga"=> $dataHarga]);
+        View::render("/Admin/footer", []);
+    }
+
     public function tambahPaket()
     {
 
@@ -127,7 +137,7 @@ class PaketController
                 $filesize_brosur  = $_FILES['foto_brosur_update']['size'];
 
                 $formatfile_brosur    = pathinfo($filename_brosur, PATHINFO_EXTENSION);
-                $foto_brosur        = 'hotel6'.time().'.'.$formatfile_brosur;
+                $foto_brosur        = 'foto_brosur'.time().'.'.$formatfile_brosur;
                 $allowedtype_update1   = array('png','jpeg','jpg','gif');
 
                 if(!in_array($formatfile_brosur,$allowedtype_update1)){
@@ -213,6 +223,23 @@ class PaketController
                 View::redirect("/admin/edit-paket/$id");
             }else{
                 throw new \Exception("salah");
+            }
+        } catch (\Throwable $e) {
+            throw new ValidationException($e->getMessage());
+        }
+    }
+
+    public function hapusPaket($id)
+    {
+        try {
+            $hapusPaket = $this->paket->deletePaket($id);
+            $hapusHarga = $this->paket->deleteHargaPaket($id);
+            $hapusHotel = $this->paket->deleteHotel($id);
+
+            if( $hapusPaket > 0 || $hapusHarga > 0 || $hapusHotel > 0){
+                View::redirect("/admin/paket");
+            }else{
+                throw new ValidationException('data gagal di delete');
             }
         } catch (\Throwable $e) {
             throw new ValidationException($e->getMessage());

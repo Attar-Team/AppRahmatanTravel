@@ -291,7 +291,7 @@ foreach($data["dataPaket"] as $d) :
                           </div>
                         </div>
 
-                        <div class="mb-3 row">
+                        <!-- <div class="mb-3 row">
                         <label for="html5-date-input" class="col-md-2 col-form-label">Check In</label>
                         <div class="col-md-10">
                           <input class="form-control" type="date" name="checkin[]"  id="html5-date-input" value="<?= $t['check_in'] ?>" />
@@ -303,7 +303,7 @@ foreach($data["dataPaket"] as $d) :
                         <div class="col-md-10">
                           <input class="form-control" type="date" name="checkout[]" value="<?= $t['check_out'] ?>" id="html5-date-input" />
                         </div>
-                      </div>
+                      </div> -->
                  
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Hotel</label><br>

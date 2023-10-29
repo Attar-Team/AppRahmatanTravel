@@ -85,4 +85,17 @@ class PaketModel
         $statement->execute([$nama, $deskripsi, $bintang, $foto_hotel,$hotel_id]);
     }
 
+    public function deletePaket($id)
+    {
+        $statement = $this->connection->prepare('DELETE FROM paket WHERE paket_id = ?');
+        $statement->execute([$id]);
+        return $statement->rowCount();
+    }
+
+    public function deleteHotel($id)
+    {
+        $statement = $this->connection->prepare('DELETE FROM hotel WHERE hotel_id = ?');
+        $statement->execute([$id]);
+        return $statement->rowCount();
+    }
 }
