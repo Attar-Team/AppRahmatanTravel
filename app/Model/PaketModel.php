@@ -46,10 +46,10 @@ class PaketModel
         return $result;
     }
 
-    public function saveHotel($paket_id,$lokasi,$nama,$deskripsi,$bintang,$checkin,$checkout,$foto_hotel)
+    public function saveHotel($paket_id,$lokasi,$nama,$deskripsi,$bintang,$foto_hotel)
     {
-        $statement = $this->connection->prepare('INSERT INTO hotel (`paket_id`,`lokasi`,`nama_hotel`,`deskripsi`,`bintang`,`check_in`,`check_out`,foto_hotel) VALUES (?,?,?,?,?,?,?,?)');
-        $statement->execute([$paket_id, $lokasi, $nama, $deskripsi, $bintang, $checkin, $checkout,$foto_hotel]);
+        $statement = $this->connection->prepare('INSERT INTO hotel (`paket_id`,`lokasi`,`nama_hotel`,`deskripsi`,`bintang`,`foto_hotel`) VALUES (?,?,?,?,?,?)');
+        $statement->execute([$paket_id, $lokasi, $nama, $deskripsi, $bintang,$foto_hotel]);
     return $statement->rowCount();
     }
 
@@ -79,10 +79,10 @@ class PaketModel
         $statement->execute([$id]);
         return $statement->rowCount();
     }
-    public function updateHotel($nama,$deskripsi,$bintang,$checkin,$checkout,$foto_hotel,$hotel_id)
+    public function updateHotel($nama,$deskripsi,$bintang,$foto_hotel,$hotel_id)
     {
-        $statement = $this->connection->prepare('UPDATE hotel SET nama_hotel = ?, deskripsi = ?, bintang = ?,check_in = ?, check_out = ?, foto_hotel = ? WHERE hotel_id = ?');
-        $statement->execute([$nama, $deskripsi, $bintang, $checkin, $checkout,$foto_hotel,$hotel_id]);
+        $statement = $this->connection->prepare('UPDATE hotel SET nama_hotel = ?, deskripsi = ?, bintang = ?,foto_hotel = ? WHERE hotel_id = ?');
+        $statement->execute([$nama, $deskripsi, $bintang, $foto_hotel,$hotel_id]);
     }
 
 }

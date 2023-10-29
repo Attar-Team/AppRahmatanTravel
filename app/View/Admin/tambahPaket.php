@@ -272,7 +272,7 @@ $(document).ready(function() {
                           </div>
                         </div>
 
-                        <div class="mb-3 row">
+                        <!-- <div class="mb-3 row">
                         <label for="html5-date-input" class="col-md-2 col-form-label">Check In</label>
                         <div class="col-md-10">
                           <input class="form-control" type="date" name="checkin[]"  id="html5-date-input" />
@@ -284,7 +284,7 @@ $(document).ready(function() {
                         <div class="col-md-10">
                           <input class="form-control" type="date" name="checkout[]"  id="html5-date-input" />
                         </div>
-                      </div>
+                      </div> -->
                  
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Hotel</label>
@@ -340,7 +340,7 @@ $(document).ready(function() {
                           </div>
                         </div>
                  
-                        <div class="mb-3 row">
+                        <!-- <div class="mb-3 row">
                         <label for="html5-date-input" class="col-md-2 col-form-label">Check In</label>
                         <div class="col-md-10">
                           <input class="form-control" type="date" name="checkin[]"  id="html5-date-input" />
@@ -352,7 +352,7 @@ $(document).ready(function() {
                         <div class="col-md-10">
                           <input class="form-control" type="date" name="checkout[]"  id="html5-date-input" />
                         </div>
-                      </div>
+                      </div> -->
 
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Hotel</label>

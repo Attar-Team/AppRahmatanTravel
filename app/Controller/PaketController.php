@@ -101,11 +101,11 @@ class PaketController
                             throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
                         }else{
                             move_uploaded_file($tmpname, "uploads/foto_hotel/" .$rename);
-                            $dateCheckin = str_replace('-"', '/', $_POST['checkin'][$j]);  
-                            $newDateIn = date("Y-m-d", strtotime($dateCheckin));  
-                            $dateCheckOut = str_replace('-"', '/', $_POST['checkout'][$j]);  
-                            $newDateOut = date("Y-m-d", strtotime($dateCheckOut));  
-                            $this->paket->saveHotel($lastId,$_POST['lokasi'][$j],$_POST['nama_hotel'][$j],$_POST['deskripsi'][$j],$_POST['bintang'][$j],$newDateIn,$newDateOut,$rename);
+                            // $dateCheckin = str_replace('-"', '/', $_POST['checkin'][$j]);  
+                            // $newDateIn = date("Y-m-d", strtotime($dateCheckin));  
+                            // $dateCheckOut = str_replace('-"', '/', $_POST['checkout'][$j]);  
+                            // $newDateOut = date("Y-m-d", strtotime($dateCheckOut));  
+                            $this->paket->saveHotel($lastId,$_POST['lokasi'][$j],$_POST['nama_hotel'][$j],$_POST['deskripsi'][$j],$_POST['bintang'][$j],$rename);
                         }
                     }       
                     View::redirect('/admin/paket');
@@ -163,6 +163,9 @@ class PaketController
 
             $updatePaket = $this->paket->updatePaket($dataPaket);
             $deleteHarga = $this->paket->deleteHargaPaket($_POST['paket_id']);
+            if(!$deleteHarga && $updatePaket){
+                throw new ValidationException('Data gagal di update');
+            }
             for( $i = 0; $i < count($_POST['nama_jenis']); $i++ ) {
                 $this->paket->saveHarga($paket_id,$_POST['nama_jenis'][$i],$_POST['diskon'][$i],$_POST['harga'][$i] );
             }
@@ -190,11 +193,11 @@ class PaketController
                 }else{
                     $foto_hotel = $_POST['foto_hotel'][$j];
                 }
-                $dateCheckin = str_replace('-"', '/', $_POST['checkin'][$j]);  
-                            $newDateIn = date("Y-m-d", strtotime($dateCheckin));  
-                            $dateCheckOut = str_replace('-"', '/', $_POST['checkout'][$j]);  
-                            $newDateOut = date("Y-m-d", strtotime($dateCheckOut));  
-                $this->paket->updateHotel($_POST['nama_hotel'][$j],$_POST['deskripsi'][$j],$_POST['bintang'][$j],$newDateIn,$newDateOut,$foto_hotel,$_POST['hotel_id'][$j]);
+                // $dateCheckin = str_replace('-"', '/', $_POST['checkin'][$j]);  
+                //             $newDateIn = date("Y-m-d", strtotime($dateCheckin));  
+                //             $dateCheckOut = str_replace('-"', '/', $_POST['checkout'][$j]);  
+                //             $newDateOut = date("Y-m-d", strtotime($dateCheckOut));  
+                $this->paket->updateHotel($_POST['nama_hotel'][$j],$_POST['deskripsi'][$j],$_POST['bintang'][$j],$foto_hotel,$_POST['hotel_id'][$j]);
             }
             View::redirect('/admin/paket');
 
@@ -238,8 +241,8 @@ class PaketController
                         'nama_hotel' => $hotel['nama_hotel'],
                         'deskripsi' => $hotel['deskripsi'],
                         'bintang' => $hotel['bintang'],
-                        'check_in' => $hotel['check_in'],
-                        'check_out' => $hotel['check_out'],
+                        // 'check_in' => $hotel['check_in'],
+                        // 'check_out' => $hotel['check_out'],
                         'foto_hotel'=> $hotel['foto_hotel']
                     ], $this->paket->getHotelPaket($paket['paket_id']))
                 ];
@@ -284,8 +287,8 @@ class PaketController
                         'nama_hotel' => $hotel['nama_hotel'],
                         'deskripsi' => $hotel['deskripsi'],
                         'bintang' => $hotel['bintang'],
-                        'check_in' => $hotel['check_in'],
-                        'check_out' => $hotel['check_out'],
+                        // 'check_in' => $hotel['check_in'],
+                        // 'check_out' => $hotel['check_out'],
                         'foto_hotel'=> $hotel['foto_hotel']
                     ], $this->paket->getHotelPaket($paket->paket_id))
                 ];
