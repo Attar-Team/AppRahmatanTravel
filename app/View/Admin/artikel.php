@@ -11,40 +11,50 @@
                     />
                   </div>
                 </div>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#basicModal" class="btn btn-primary">Tambah</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalTambah" class="btn btn-primary">Tambah</button>
               </div>
-              
+
+              <?php include 'Modal/ModalTambahArtikel.php'?>
               <div class="card">
                 <div class="table-responsive text-nowrap">
                   <table class="table text-center table-hover">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Nomor Telepon</th>
-                        <th>Jenis Kelamin</th>
+                        <th>Judul Artikel</th>
+                        <th>Tanggal Posting</th>
+                        <th>Gambar</th>
+                        <th>Deskripsi</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($data['dataArtikel'] as $article) : ?>
                       <tr>
-                        <td>1</td>
-                        <td>Zarif</td>
-                        <td>BLitar</td>
-                        <td>085942972801</td>
-                        <td>Laki - Laki</td>
+                        <td><?= $article['artikel_id'] ?></td>
+                        <td><?= $article['judul']?></td>
+                        <td><?= $article['tanggal']?></td>
+                        <td><?= $article['foto']?></td>
+                        <td> <?=substr($article['isi'], 0, 20)?> ...</td>
                         <td>
-                        
-                          <button type="button" data-bs-toggle="modal" data-bs-target="#updateContact<?= $d['contactId'] ?>" data-bs-whatever="@mdo" class="btn btn-primary">Updated</button>
-                          <a class="btn btn-danger" href="/admin/deleteClientAddress/<?= $d['clientId'] ?>" role="button">Deleted</a>
-                     
+                        <button class="btn btn-danger" href="/admin/deleteArtikel/<?= $article['artikel_id']?>" role="button"><i class='bx bx-trash' ></i></button>
+                          <button type="button"
+                          class="btn btn-warning"
+                          data-bs-toggle="modal"
+                          data-bs-target="#ModalEdit"><i class='bx bxs-edit-alt'></i></button>
+                          <button class="btn btn-success" href="" role="button"><i class='bx bx-message-detail' ></i></button>
                         </td>
                       </tr>
                       
+                      <?php 
+                        include 'Modal/ModalEditArtikel.php';
+                      endforeach; ?>
+
                     </tbody>
-                   
+
                   </table>
                 </div>
               </div>
             </div>
+
+            
