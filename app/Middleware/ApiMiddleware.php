@@ -18,7 +18,6 @@ class ApiMiddleware implements Middleware
         $jsonData = file_get_contents("php://input");
         $data = json_decode($jsonData, true);
         $checkToken = $this->token->checkToken($data["token"]);
-
         if (!$checkToken) {
             http_response_code(404);
             $result = array(

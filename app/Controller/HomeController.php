@@ -15,7 +15,7 @@ class HomeController
     public function index()
     {
         View::render("headerhome", []);
-        View::render("home/PageConstruction", []);
+        View::render("home/index", []);
         View::render("footerHome", []);
     }
 }

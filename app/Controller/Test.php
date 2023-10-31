@@ -23,5 +23,15 @@ class Test
     public function testt(){
         echo "testt";
     }
+
+    public function createSesion(){
+        session_start();
+        $_SESSION['status_login'] = true;
+        $_SESSION['level'] = 'admin';
+    }
     
+    public function deleteSesion(){
+        session_start();
+        session_destroy();
+    }
 }
