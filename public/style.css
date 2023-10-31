@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/kaufmann-bt');
 *{
     padding: 0;
     margin: 0;
@@ -10,10 +11,30 @@
     --cream: #D0AE6E;
     --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.2);
 }
-
+.tittle{
+    text-align: center;
+    font-weight: bold;
+    font-size: 35px;
+    color: var(--orange);
+}
+.tittle-desc{
+    font-size: 30px;
+    text-align: center;
+    
+}
+section{
+    margin: 150px 0;
+}
+.active-nav{
+    color: var(--orange) !important;
+}
+.sticky{
+    /* padding: 13px 40px; */
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+}
 /* Styling for login page */
 .login{
-
     width: 500px;
     position: relative; 
     margin-top: 150px;
@@ -66,56 +87,219 @@
 }
 
 /* Styling for home page */
+.list-navbar{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.list-navbar li{
+    margin: 0 15px;
+}
 .nav-image{
-    background-image: url("image/Mask\ groupbg\ \(1\).png");
-    height: 88vh;
+    background-image: url("image/bg-nav.png");
+    height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: -1;
+  z-index: -5;
   background-size: cover;
 }
-.nav-image .home{
-    margin-top: 94px;
-    padding-left: 30px;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
+
+.nav-image .desc p{
+    color: #666;
+    margin-top: -15px;
 }
-.nav-image .home h1{
-    font-size: 55px;
-    font-weight: bold;
-    color: var(--orange);
-}
-.nav-image .home .desc p{
-    font-weight: bolder;
-    font-size: 27px;
-}
-.nav-image .home .desc a{
-    margin-top: 25px;
+.nav-image .desc .btn-book{
+    margin-top: 5px;
     display: inline-block;
-    border-radius: 4px;
-    background-color: var(--cream);
+    border-radius: 40px;
+    background-color: var(--orange);
     color: #fff;
-    padding: 16px 30px;
+    padding: 10px 30px;
     transition: .5s;
     text-decoration: none;
 }
-.nav-image .home .desc a:hover{
+.nav-image .desc .btn-contact{
+    margin-top: 5px;
+    display: inline-block;
+    border-radius: 40px;
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    padding: 10px 30px;
+    transition: .5s;
+    text-decoration: none;
+}
+.nav-image .desc .btn-book:hover{
     background-color: #fff;
     color: #000;
 } 
-/* .nav-image .desc{
+ .nav-image .desc{
     position: relative;
-    top: 160px;
+ 
+    top: 200px;
     left: 60px;
     display: inline-block;
 }
+.nav-image .desc h3{
+    font-family: 'Kaufmann BT', sans-serif;
+    font-size: 55px;
+    font-weight: bold;
+    color: var(--orange);                               
+}
 .nav-image .desc h1{
-
+    font-size: 45px;
+    font-weight: bold;                               
+}
+.welcome{
+    margin: 100px 0;
+    display: flex;
+    padding: 0 50px;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+.welcome img{
+    width: 45%;
+}
+.welcome .desc{
+    width: 45%;
+}
+.welcome .desc h2{
+    color: var(--orange);
+    font-size: 45px;
     
 }
-*/
+.welcome .desc h3{
+    font-weight: bolder;
+}
+.welcome .desc p{
+    color: #666;
+}
 
+/* paket */
+.paket .header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.paket .header-content .title {
+    width: 60%;
+}
+.paket .header-content .title h1{
+    font-size: 30px;
+    font-weight: bold;
+}
+.paket .header-content .btn a{
+    padding: 15px;
+    background-color: var(--cream);
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    text-decoration: none;
+}
+.paket .container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.paket .container .box{
+    width: 31%;
+}
+.paket .container .box .image{
+   position: relative;
+   width: 90%;
+   left: 50%;
+   
+transform: translateX(-50%);
+}
+.paket .container .box .image img{
+
+    border-radius: 20px;
+    
+}
+.paket .container .box .body{
+    padding-top: 180px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: -150px;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    transition: .3s;
+}
+.paket .container .box .body:hover{
+    box-shadow: var(--box-shadow);
+}
+.paket .container .box .body .btn{
+    background-color: var(--cream);
+    color: #fff;
+}
+.paket .container .box .body h5{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bolder;
+}
+.paket .container .box .body .ket{
+    justify-content: space-between;
+    display: flex;
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #777;
+     align-items: center;
+}
+.paket .container .box .body .ket .ttl p{
+    margin: 0;
+}
+.paket .container .box .body .ket .ttl{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.paket .container .box .body .ket .ttl i{
+    margin-right: 10px;
+}
+
+/* Pengalaman */
+
+.pengalaman .container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+.pengalaman .container .box{
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    background-color: #f4f4f4;
+}
+.pengalaman .container .box p{
+    color: #444;
+}
+.pengalaman .container .box .person{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.pengalaman .container .box .person img{
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+}
+.pengalaman .container .box .person .desc h5{
+    font-size: 17px;
+}
+.pengalaman .container .box .person .desc i{
+    color: #FCCC29;
+}
 @media screen and (max-width: 1100px) {
     .img-login {
       display: none;
@@ -126,3 +310,25 @@
         width: 350px;
     }
 }
+
+    .swiper {
+      width: 80%;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+    }
+    .swiper-wraper{
+        position: relative;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+    }

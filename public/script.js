@@ -1,3 +1,28 @@
+window.addEventListener("scroll", function(){ 
+    var header = document.querySelector("nav");
+    header.classList.toggle("sticky", window.scrollY > 1) 
+   })
+
+var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      loop : true,
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 3,
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+        spaceBetween: 30
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable :true
+      },
+    });
+
 const togglePassword = document.querySelector("#togglePassword");
 const password = document.querySelector("#password");
 
@@ -9,6 +34,8 @@ togglePassword.addEventListener("click", function () {
     // toggle the icon
     this.classList.toggle("bi-eye");
 });
+
+
 
 // const addBtn = document.querySelector(".add-inp");
 // const input = doucument.querySelector(".inp-group");
