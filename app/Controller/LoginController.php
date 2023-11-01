@@ -23,6 +23,10 @@ class LoginController
     {
         View::render("login", []);
     }
+    public function register()
+    {
+        View::render("register", []);
+    }
 
     public function login()
     {

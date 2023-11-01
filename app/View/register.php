@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login</title>
+    <title>Register</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
@@ -37,20 +37,26 @@
     <!-- Form Login -->
     <div class="wrapper">
       <form action="">
-        <h1>Login</h1>
+        <h1>Register</h1>
         <div class="input-box">
-          <input type="text" placeholder="Username" required />
+          <label class="input-user" for="nama-lengkap">Nama Lengkap</label>
+          <input id="nama-lengkap" type="text" placeholder="Masukkan Nama Lengkap Anda" required />
         </div>
         <div class="input-box">
-          <input type="password" placeholder="Password" required />
+          <label class="input-user" for="email">E-mail</label>
+          <input id="email" type="text" placeholder="Masukkan E-mail Anda" required />
         </div>
-        <button type="button" class="btn">Masuk</button>
-        <div class="forgot">
-          <label> <input type="checkbox" />Remember me</label>
-          <a href="#">Forgot Password</a>
+        <div class="input-box">
+          <label class="input-user" for="telpon">No Telpon</label>
+          <input id="telp" type="text" placeholder="Masukkan No Telpon Anda" required />
         </div>
+        <div class="input-box">
+          <label class="input-password" for="Password">Password</label>
+          <input id="Password" type="password" placeholder="Password" required />
+        </div>
+        <button type="button" class="btn">Daftar</button>
         <div class="register-link">
-          <p>Belum Punya Akun?<a href="/register"> Daftar</a></p>
+          <p>Punya Akun ?<a href="/login">Login</a></p>
         </div>
       </form>
     </div>

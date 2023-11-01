@@ -32,6 +32,7 @@ Router::add("POST","/addApi", Test::class, "testt", [ApiMiddleware::class]);
 //NOTE ISI PARAMETER ADD(METHOD,BUAT URL,CONTROLLER, METHOD)
 //Router untuk menangani login
 Router::add("GET","/login",LoginController::class,"index");
+Router::add("GET","/register",LoginController::class,"register");
 Router::add("POST","/login",LoginController::class,"login");
 
 //Router untuk menangani Homepage
