@@ -189,7 +189,8 @@ $(document).ready(function() {
 
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Brosur</label>
-                        <input class="form-control" type="file" name="foto_brosur" id="formFile" />
+                        <img width="200px" src="" id="blah" alt="">
+                        <input id="imgInp" class="form-control" type="file" name="foto_brosur" id="formFile" />
                       </div>
                         
                 </div>
@@ -383,3 +384,13 @@ $(document).ready(function() {
       </form>
     </div>
 </div>
+
+<script>
+  
+imgInp.onchange = evt => {
+  const [file] = imgInp.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+}
+</script>

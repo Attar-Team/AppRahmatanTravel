@@ -20,6 +20,7 @@ class UserModel
     public function save($data){
         $statement = $this->connection->prepare("INSERT INTO user (`email`,`password`,`level`) VALUES (?,?,?)");
         $statement->execute([$data['email'], $data['password'], $data['level']]);
-        return $statement->rowCount();
+        $result = ['count'=> $statement->rowCount(),'lastId'=> $this->connection->lastInsertId()];
+        return $result;
     }
 }
