@@ -1,7 +1,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
 
               
-              <div class="card">
+              <div class="card" style="margin-top: -16px;">
                 <div class="table-responsive text-nowrap p-3">
                   <button type="button" data-bs-toggle="modal" data-bs-target="#ModalTambahKeberangkatan" class="btn btn-primary mb-3">Tambah</button>
                   <table id="myTable" class="table text-center table-hover">
