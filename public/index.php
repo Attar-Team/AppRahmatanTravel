@@ -43,13 +43,17 @@ Router::add("GET","/admin/dashboard", DashboardController::class,"index");
 
 //Router untuk menangani Dashboard Customer
 Router::add("GET","/admin/customer", CustomerController::class,"index");
+Router::add("GET","/admin/tambah-customer", CustomerController::class,"viewTambah");
+Router::add("POST","/admin/tambah-customer", CustomerController::class,"tambahCustomer");
 
 //Router untuk menangani Dashboard Paket
 Router::add("GET","/admin/paket", PaketController::class,"index");
 Router::add("GET","/admin/tambah-paket", PaketController::class,"viewTambahData");
 Router::add("GET","/admin/edit-paket/([0-9a-zA-Z]*)", PaketController::class,"viewEditData");
+Router::add("GET","/admin/detail-paket/([0-9a-zA-Z]*)", PaketController::class,"viewDetailData");
 Router::add("POST","/admin/tambah-paket", PaketController::class,"tambahPaket");
 Router::add("POST","/admin/edit-paket", PaketController::class,"editPaket");
+Router::add("GET","/admin/hapus-paket/([0-9a-zA-Z]*)", PaketController::class,"hapusPaket");
 
 //Router untuk menangani Dashboard Pemesanan
 Router::add("GET","/admin/pemesanan", PemesananController::class,"index");
@@ -57,6 +61,7 @@ Router::add("GET","/admin/verifikasi-pemesanan", PemesananController::class,"vie
 
 //Router untuk menangani Dashboard Keberangkatan
 Router::add("GET","/admin/keberangkatan", KeberangkatanController::class,"index");
+Router::add("POST","/admin/tambah-keberangkatan", KeberangkatanController::class,"tambahKeberangkatan");
 
 //Router untuk menangani Dashboard Agen
 Router::add("GET","/admin/agen", AgenController::class,"index");
@@ -80,8 +85,11 @@ Router::add("POST","/apiGetToken", LoginController::class,"apiGetToken");
 Router::add("POST","/apiRegister", UserController::class,"apiRegister");
 
 //2. api paket
-Router::add("GET","/apiGetPaket", PaketController::class,"apiGetPaket");
+Router::add("GET","/kontolPaket", PaketController::class,"apiGetPaket");
 Router::add("GET","/apiGetPaket/([0-9a-zA-Z]*)", PaketController::class,"apiGetPaketById");
 
+//3. api keberangkatan
+Router::add("GET","/apiGetKeberangkatan", KeberangkatanController::class,'apiGetKeberangkatan');
+Router::add("GET","/apiGetKeberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,'apiGetKeberangkatanById');
 Router::add("GET","/admin/delete-harga/([0-9a-zA-Z]*)/([0-9a-zA-Z]*)", PaketController::class, "deleteHarga");
 Router::run();
