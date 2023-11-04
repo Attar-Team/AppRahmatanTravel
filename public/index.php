@@ -45,6 +45,7 @@ Router::add("GET","/admin/dashboard", DashboardController::class,"index");
 Router::add("GET","/admin/customer", CustomerController::class,"index");
 Router::add("GET","/admin/tambah-customer", CustomerController::class,"viewTambah");
 Router::add("GET","/admin/edit-customer/([0-9a-zA-Z]*)", CustomerController::class,"viewEditTambah");
+Router::add("GET","/admin/detail-customer/([0-9a-zA-Z]*)", CustomerController::class,"viewDetailTambah");
 Router::add("POST","/admin/tambah-customer", CustomerController::class,"tambahCustomer");
 Router::add("POST","/admin/edit-customer", CustomerController::class,"editCustomer");
 

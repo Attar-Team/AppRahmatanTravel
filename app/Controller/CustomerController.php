@@ -44,6 +44,14 @@ class CustomerController
         View::render("Admin/footer", []);
     }
 
+    public function viewDetailTambah($id)
+    {
+        $dataCustomer = $this->customer->getById($id);
+        View::render("Admin/header", ["title" => "Customer"]);
+        View::render("Admin/detailCustomer", ['dataCustomer' => $dataCustomer]);
+        View::render("Admin/footer", []);
+    }
+
     public function tambahCustomer()
     {
 
