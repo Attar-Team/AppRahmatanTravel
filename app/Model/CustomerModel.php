@@ -87,6 +87,31 @@ class CustomerModel
         return $query->rowCount();
     }
 
+    public function deleteCustomer($id)
+    {
+        $query = $this->connection->prepare('DELETE FROM customer WHERE NIK = ?');
+        $query->execute([$id]);
+        $query->closeCursor();
+        return $query->rowCount();
+    }
+
+    public function deletePasport($id)
+    {
+        $query = $this->connection->prepare('DELETE FROM pasport WHERE customer_id = ?');
+        $query->execute([$id]);
+        $query->closeCursor();
+        return $query->rowCount();
+    }
+
+    public function deleteDokument($id)
+    {
+        $query = $this->connection->prepare('DELETE FROM customer WHERE NIK = ?');
+        $query->execute([$id]);
+        $query->closeCursor();
+        return $query->rowCount();
+    }
+    
+
     // public function save()
     // {
 

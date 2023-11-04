@@ -194,4 +194,65 @@ class CustomerController
             throw new ValidationException($e->getMessage());
         }
     }
+
+    public function hapusCustomer($id)
+    {
+        try {
+            // var_dump($id); 
+            // if(file_exists("uploads/foto_customer/foto_customer1699116602.png")) {
+            //     echo "ada";
+            //     // unlink('public/uploads/foto_customer/'.$c->foto);
+            // }
+            // die();
+            // foreach($check as $c){
+                
+            // }
+            $check = $this->customer->getById($id);
+            
+        $count = count($check);
+        if($count > 0){
+            foreach($check as $c){
+            if(file_exists('uploads/foto_customer/'.$c->foto)) {
+                unlink('uploads/foto_customer/'.$c->foto);
+            }
+
+            if(file_exists('uploads/foto_ktp/'.$c->foto_ktp)) {
+                unlink('uploads/foto_ktp/'.$c->foto_ktp);
+            }
+
+            if(file_exists('uploads/foto_paspor/'.$c->foto_paspor)) {
+                unlink('uploads/foto_paspor/'.$c->foto_paspor);
+            }
+
+            if(file_exists('uploads/foto_bpjs/'.$c->foto_bpjs)) {
+                unlink('uploads/foto_bpjs/'.$c->foto_bpjs);
+            }
+
+            if(file_exists('uploads/foto_paspor2/'.$c->foto_paspor_hal2)) {
+                unlink('uploads/foto_paspor2/'.$c->foto_paspor_hal2);
+            }
+
+            if(file_exists('uploads/foto_keluarga/'.$c->foto_kartu_keluarga)) {
+                unlink('uploads/foto_keluarga/'.$c->foto_kartu_keluarga);
+            }
+            
+            if(file_exists('uploads/foto_akte/'.$c->foto_akte_kelahiran)) {
+                unlink('uploads/foto_akte/'.$c->foto_akte_kelahiran);
+            }
+
+            // if(file_exists('/uploads/foto_ktp'.$c->foto_ktp)) {
+            //     unlink('/uploads/foto_ktp'.$c->foto_ktp);
+            // }
+        }
+        }
+
+        $this->customer->deletePasport($id);
+        $this->customer->deleteDokument($id);
+        $this->customer->deleteCustomer($id);
+        View::redirect('/admin/customer');
+        } catch (\Throwable $e) {
+            throw new ValidationException($e->getMessage());
+        }
+
+    }
 }

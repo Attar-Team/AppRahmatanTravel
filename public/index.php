@@ -48,6 +48,7 @@ Router::add("GET","/admin/edit-customer/([0-9a-zA-Z]*)", CustomerController::cla
 Router::add("GET","/admin/detail-customer/([0-9a-zA-Z]*)", CustomerController::class,"viewDetailTambah");
 Router::add("POST","/admin/tambah-customer", CustomerController::class,"tambahCustomer");
 Router::add("POST","/admin/edit-customer", CustomerController::class,"editCustomer");
+Router::add("GET","/admin/hapus-customer/([0-9a-zA-Z]*)", CustomerController::class,"hapusCustomer");
 
 //Router untuk menangani Dashboard Paket
 Router::add("GET","/admin/paket", PaketController::class,"index");
