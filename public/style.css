@@ -300,6 +300,47 @@ transform: translateX(-50%);
 .pengalaman .container .box .person .desc i{
     color: #FCCC29;
 }
+
+footer{
+    background-color: #000;
+    color: #fff;
+}
+footer .footer{
+    padding: 100px 150px 60px 150px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+footer .footer .box{
+    width: 300px;
+}
+footer .footer .box .sosial a{
+    color: #000;
+    /* padding: 15px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    height: 50px;
+    font-size: 20px;
+    width: 50px;
+    margin-right: 10px;
+    background-color: #ddd;
+}
+
+footer .footer .box a{
+    color: #fff;
+    text-decoration: none;
+}
+
+footer .copyright{
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid #ddd;
+}
+
+
+
 @media screen and (max-width: 1100px) {
     .img-login {
       display: none;
