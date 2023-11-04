@@ -9,7 +9,7 @@
     </div>
     <!-- / Layout wrapper -->
 
-    <!-- <script src="script.js"></script> -->
+    <script src="/script.js"></script>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

@@ -1,27 +1,92 @@
+var swiper = new Swiper(".mySwiper", {
+  effect: "coverflow",
+  loop : true,
+  grabCursor: true,
+  centeredSlides: true,
+  slidesPerView: 3,
+  coverflowEffect: {
+    rotate: 50,
+    stretch: 0,
+    depth: 100,
+    modifier: 1,
+    slideShadows: true,
+    spaceBetween: 30
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable :true
+  },
+});
 window.addEventListener("scroll", function(){ 
     var header = document.querySelector("nav");
     header.classList.toggle("sticky", window.scrollY > 1) 
    })
 
-var swiper = new Swiper(".mySwiper", {
-      effect: "coverflow",
-      loop : true,
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 3,
-      coverflowEffect: {
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: true,
-        spaceBetween: 30
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable :true
-      },
-    });
+   imgInpBrosur.onchange = evt => {
+    const [file] = imgInpBrosur.files
+    if (file) {
+      outputBrosur.src = URL.createObjectURL(file)
+    }
+  }
+
+  imgInpMekkah.onchange = evt => {
+    const [file] = imgInpMekkah.files
+    if (file) {
+      outputMekkah.src = URL.createObjectURL(file)
+    }
+  }
+
+  imgInpMadinah.onchange = evt => {
+    const [file] = imgInpMadinah.files
+    if (file) {
+      outputMadinah.src = URL.createObjectURL(file)
+    }
+  }
+  
+  imgInpCustomer.onchange = evt => {
+    const [file] = imgInpCustomer.files
+    if (file) {
+      outputCustomer.src = URL.createObjectURL(file)
+    }
+  }
+  imgInpPasport.onchange = evt => {
+    const [file] = imgInpPasport.files
+    if (file) {
+      outputPasport.src = URL.createObjectURL(file)
+    }
+  }
+  imgInpPasport2.onchange = evt => {
+    const [file] = imgInpPasport2.files
+    if (file) {
+      outputPasport2.src = URL.createObjectURL(file)
+    }
+  }
+  imgInpKtp.onchange = evt => {
+    const [file] = imgInpKtp.files
+    if (file) {
+      outputKtp.src = URL.createObjectURL(file)
+    }
+  }
+  imgInpKk.onchange = evt => {
+    const [file] = imgInpKk.files
+    if (file) {
+      outputKk.src = URL.createObjectURL(file)
+    }
+  }
+  imgInpAkte.onchange = evt => {
+    const [file] = imgInpAkte.files
+    if (file) {
+      outputAkte.src = URL.createObjectURL(file)
+    }
+  }
+  imgInpBpjs.onchange = evt => {
+    const [file] = imgInpBpjs.files
+    if (file) {
+      outputBpjs.src = URL.createObjectURL(file)
+    }
+  }
+
+
 
 const togglePassword = document.querySelector("#togglePassword");
 const password = document.querySelector("#password");

@@ -1,5 +1,8 @@
+<?php
+    foreach($data['dataCustomer'] as $d):
+?>
 <div class="container-xxl flex-grow-1 container-p-y">
-<form method="POST" action="/admin/tambah-customer" enctype="multipart/form-data">
+<form method="POST" action="/admin/edit-customer" enctype="multipart/form-data">
     <div class="row">
         <div class="col-xl">
             <div class="card mb-4">
@@ -13,7 +16,8 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                     class="bx bx-user"></i></span>
-                            <input type="text" name="NIK" class="form-control"
+                                    <input type="hidden" name="NIK" value="<?= $d->NIK ?>" >
+                            <input disabled value="<?= $d->NIK ?>" type="text" class="form-control"
                                 id="basic-icon-default-fullname" />
                         </div>
                     </div>
@@ -22,29 +26,29 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                     class="bx bx-user"></i></span>
-                            <input type="text" name="nama" class="form-control"
+                            <input type="text" name="nama" value="<?= $d->nama ?>"  class="form-control"
                                 id="basic-icon-default-fullname" />
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label class="form-label" for="basic-icon-default-fullname">Email</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                     class="bx bx-user"></i></span>
-                            <input type="text" name="email" class="form-control"
+                            <input type="text" name="email" value="<?= $d->email ?>"  class="form-control"
                                 id="basic-icon-default-fullname" />
                         </div>
-                    </div>
+                    </div> -->
                     <div class="mb-3">
                         <label class="form-label" for="basic-icon-default-fullname">Jenis Kelamin</label>
                         <div class="input-group input-group-merge">
                             <div class="form-check me-3 mt-3">
-                                <input name="jenis_kelamin" class="form-check-input" type="radio" value="Laki - Laki"
+                                <input name="jenis_kelamin" class="form-check-input" type="radio" <?= ($d->jenis_kelamin == "Laki - Laki") ? "checked" : "" ?> value="Laki - Laki"
                                     id="defaultRadio1" />
                                 <label class="form-check-label " for="defaultRadio1"> Laki - Laki </label>
                             </div>
                             <div class="form-check me-3 mt-3">
-                                <input name="jenis_kelamin" class="form-check-input" type="radio" value="Perempuan"
+                                <input name="jenis_kelamin" class="form-check-input" type="radio" <?= ($d->jenis_kelamin == "Perempuan") ? "checked" : "" ?> value="Perempuan"
                                     id="defaultRadio1" />
                                 <label class="form-check-label" for="defaultRadio1"> Perempuan </label>
                             </div>
@@ -57,7 +61,7 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i
                                     class="bx bx-buildings"></i></span>
-                            <input type="number" name="no_telp" id="basic-icon-default-company" class="form-control" />
+                            <input  type="number" name="no_telp" value="<?= $d->no_telp ?>" id="basic-icon-default-company" class="form-control" />
                         </div>
                     </div>
 
@@ -66,7 +70,7 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i
                                     class="bx bx-buildings"></i></span>
-                            <input type="text" name="tempat_lahir" id="basic-icon-default-company"
+                            <input type="text" name="tempat_lahir" value="<?= $d->tempat_lahir ?>"  id="basic-icon-default-company"
                                 class="form-control" />
                         </div>
                     </div>
@@ -74,7 +78,7 @@
                     <div class="mb-3 row">
                         <label for="html5-date-input" class="col-md-2 col-form-label">Tanggal Lahir</label>
                         <div class="col-md-10">
-                            <input class="form-control" type="date" name="tanggal_lahir" id="html5-date-input" />
+                            <input class="form-control" type="date" name="tanggal_lahir"  value="<?= $d->tanggal_lahir ?>" id="html5-date-input" />
                         </div>
                     </div>
 
@@ -83,7 +87,7 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i
                                     class="bx bx-buildings"></i></span>
-                            <input type="text" name="pekerjaan" id="basic-icon-default-company"
+                            <input type="text"  name="pekerjaan" value="<?= $d->pekerjaan ?>" id="basic-icon-default-company"
                                 class="form-control" />
                         </div>
                     </div>
@@ -93,7 +97,7 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i
                                     class="bx bx-buildings"></i></span>
-                            <input type="text" name="ukuran_baju" id="basic-icon-default-company"
+                            <input type="text" name="ukuran_baju" value="<?= $d->ukuran_baju ?>"  id="basic-icon-default-company"
                                 class="form-control" />
                         </div>
                     </div>
@@ -104,13 +108,14 @@
                             <span id="basic-icon-default-message2" class="input-group-text"><i
                                     class="bx bx-comment"></i></span>
                             <textarea id="basic-icon-default-message" class="form-control"
-                                name="alamat"></textarea>
+                                name="alamat"><?= $d->alamat ?></textarea>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Customer</label>
-                        <img id="outputCustomer" width="200px" class="m-3 rounded shadow" src=""  alt="">
+                        <img id="outputCustomer" width="200px" class="m-3 rounded shadow" src="/uploads/foto_customer/<?= $d->foto ?>"  alt="">
+                        <input type="hidden" name="foto_asli[customer]" value="<?= $d->foto ?>">
                         <input class="form-control" id="imgInpCustomer" type="file" name="foto[customer]" />
                       </div>
 
@@ -120,6 +125,7 @@
 
         <div class="col-xl">
             <div class="card mb-4">
+                
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Pasport</h5>
                 </div>
@@ -130,7 +136,7 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                     class="bx bx-user"></i></span>
-                            <input type="number" name="nomor_pasport" class="form-control"
+                            <input type="number"  name="nomor_pasport" value="<?= $d->nomor_pasport ?>" class="form-control"
                                 id="basic-icon-default-fullname" />
                         </div>
                     </div>
@@ -139,7 +145,7 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                     class="bx bx-user"></i></span>
-                            <input type="text" name="nama_pasport" class="form-control"
+                            <input name="nama_pasport" value="<?= $d->nama_pasport ?>" type="text"  class="form-control"
                                 id="basic-icon-default-fullname" />
                         </div>
                     </div>
@@ -148,7 +154,7 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                     class="bx bx-user"></i></span>
-                            <input type="text" name="tempat_penerbitan" class="form-control"
+                            <input type="text" name="tempat_penerbitan" value="<?= $d->tempat_penerbitan ?>"  class="form-control"
                                 id="basic-icon-default-fullname" />
                         </div>
                     </div>
@@ -156,23 +162,26 @@
                     <div class="mb-3 row">
                         <label for="html5-date-input" class="col-md-2 col-form-label">Tanggal Penerbitan</label>
                         <div class="col-md-10">
-                            <input class="form-control" type="date" name="tanggal_penerbitan" id="html5-date-input" />
+                            <input class="form-control" type="date" name="tanggal_penerbitan"  value="<?= $d->tgl_penerbitan ?>" id="html5-date-input" />
                         </div>
                     </div>
-
+             
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Pasport</label>
-                        <img width="200px" class="m-3 rounded shadow" src="" id="outputPasport" alt="">
-                        <input class="form-control" type="file" name="foto[paspor]" id="imgInpPasport" />
+                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_paspor/<?= $d->foto_paspor ?>" id="outputPasport" alt="">
+                        <input type="hidden" name="foto_asli[paspor]" value="<?= $d->foto_paspor ?>">
+                        <input class="form-control" type="file" name="foto_lama[paspor]" id="imgInpPasport" />
                       </div>
 
                       <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Pasport Hal2</label>
-                        <img width="200px" class="m-3 rounded shadow" src="" id="outputPasport2" alt="">
+                        <input type="hidden" name="foto_asli[paspor2]" value="<?= $d->foto_paspor_hal2 ?>">
+                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_paspor2/<?= $d->foto_paspor_hal2 ?>" id="outputPasport2" alt="">
                         <input class="form-control" type="file" name="foto[paspor2]" id="imgInpPasport2" />
                       </div>
                 </div>
             </div>
+            
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Dokument</h5>
@@ -181,13 +190,15 @@
 
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Foto KTP</label>
-                        <img width="200px" class="m-3 rounded shadow" src="" id="outputKtp" alt="">
+                        <input type="hidden" name="foto_asli[ktp]" value="<?= $d->foto_ktp ?>">
+                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_ktp/<?= $d->foto_ktp ?>" id="outputKtp" alt="">
                         <input class="form-control" type="file" name="foto[ktp]" id="imgInpKtp" />
                     </div>
 
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Kartu Keluarga</label>
-                        <img width="200px" class="m-3 rounded shadow" src="" id="outputKk" alt="">
+                        <input type="hidden" name="foto_asli[keluarga]" value="<?= $d->foto_kartu_keluarga ?>">
+                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_keluarga/<?= $d->foto_kartu_keluarga ?>" id="outputKk" alt="">
                         <input class="form-control" type="file" name="foto[keluarga]" id="imgInpKk" />
                       </div>
 
@@ -198,13 +209,16 @@
 
                       <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Akta kelahiran</label>
-                        <img width="200px" class="m-3 rounded shadow" src="" id="outputAkte" alt="">
+                        <input type="hidden" name="foto_asli[akte]" value="<?= $d->foto_akte_kelahiran ?>">
+                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_akte/<?= $d->foto_akte_kelahiran ?>" id="outputAkte" alt="">
                         <input class="form-control" type="file" name="foto[akte]" id="imgInpAkte" />
                       </div>
 
                       <div class="mb-3">
                         <label for="formFile" class="form-label">Foto BPJS</label>
-                        <img width="200px" class="m-3 rounded shadow" src="" id="outputBpjs" alt="">
+                        <input type="hidden" name="foto_asli[bpjs]" value="<?= $d->foto_bpjs ?>">
+                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_bpjs/<?= $d->foto_bpjs ?>" id="outputAkte" alt="">
+                        <!-- <img width="200px" class="m-3 rounded shadow" src="" id="outputBpjs" alt="/uploads/foto_bpjs/<?= $d->foto_bpjs ?>"> -->
                         <input class="form-control" type="file" name="foto[bpjs]" id="imgInpBpjs" />
                       </div>
                      
@@ -217,7 +231,7 @@
     </div>
     </form>
 </div>
-
+<?php endforeach; ?>
 
 <script>
     imgInpCustomer.onchange = evt => {

@@ -189,8 +189,8 @@ $(document).ready(function() {
 
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Brosur</label>
-                        <img width="200px" src="" id="blah" alt="">
-                        <input id="imgInp" class="form-control" type="file" name="foto_brosur" id="formFile" />
+                        <img width="200px" class="m-3 rounded shadow" src="" id="outputBrosur" alt="">
+                        <input id="imgInpBrosur" class="form-control" type="file" name="foto_brosur" />
                       </div>
                         
                 </div>
@@ -289,7 +289,8 @@ $(document).ready(function() {
                  
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Hotel</label>
-                        <input class="form-control" name="foto_hotel[]" type="file" id="formFile" />
+                        <img width="200px" class="m-3 rounded shadow" src="" id="outputMekkah" alt="">
+                        <input class="form-control" name="foto_hotel[]"  type="file" id="imgInpMekkah" />
                       </div>
 
                         <div class="mb-3">
@@ -357,7 +358,8 @@ $(document).ready(function() {
 
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Hotel</label>
-                        <input class="form-control" type="file" name="foto_hotel[]" id="formFile" />
+                        <img width="200px" class="m-3 rounded shadow" src="" id="outputMadinah" alt="">
+                        <input class="form-control" type="file" name="foto_hotel[]" id="imgInpMadinah"/>
                       </div>
 
                         <div class="mb-3">
@@ -384,13 +386,3 @@ $(document).ready(function() {
       </form>
     </div>
 </div>
-
-<script>
-  
-imgInp.onchange = evt => {
-  const [file] = imgInp.files
-  if (file) {
-    blah.src = URL.createObjectURL(file)
-  }
-}
-</script>
