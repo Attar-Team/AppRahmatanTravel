@@ -105,7 +105,7 @@ class CustomerModel
 
     public function deleteDokument($id)
     {
-        $query = $this->connection->prepare('DELETE FROM customer WHERE NIK = ?');
+        $query = $this->connection->prepare('DELETE FROM dokumen WHERE customer_id = ?');
         $query->execute([$id]);
         $query->closeCursor();
         return $query->rowCount();
