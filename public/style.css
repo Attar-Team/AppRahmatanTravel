@@ -177,20 +177,21 @@ section{
 }
 
 /* paket */
-.paket .header-content{
+.header-content{
+    padding: 0 100px ;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
 }
-.paket .header-content .title {
+.header-content .title {
     width: 60%;
 }
-.paket .header-content .title h1{
+.header-content .title h1{
     font-size: 30px;
     font-weight: bold;
 }
-.paket .header-content .btn a{
+.header-content .btn a{
     padding: 15px;
     background-color: var(--cream);
     color: #fff;
@@ -205,26 +206,25 @@ section{
     gap: 30px;
 }
 .paket .container .box{
-    width: 31%;
+    width: 350px;
 }
 .paket .container .box .image{
    position: relative;
-   width: 90%;
+   width: 80%;
    left: 50%;
    
 transform: translateX(-50%);
 }
 .paket .container .box .image img{
-
     border-radius: 20px;
     
 }
 .paket .container .box .body{
-    padding-top: 180px;
+    padding-top: 200px;
     padding-bottom: 50px;
     padding-left: 30px;
     padding-right: 30px;
-    margin-top: -150px;
+    margin-top: -180px;
     border-radius: 20px;
     background-color: #f2f2f2;
     border: 1px solid #ddd;
@@ -300,7 +300,42 @@ transform: translateX(-50%);
 .pengalaman .container .box .person .desc i{
     color: #FCCC29;
 }
-
+.artikel .container{
+    display: flex;
+    margin-top: 70px;
+    justify-content: center;
+    gap: 70px;
+}
+.artikel .container .box{
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+}
+.artikel .container .box img{
+    width: 100%;
+    position: relative;
+    margin-top: -70px;
+    margin-bottom: -20px;
+}
+.artikel .container .box .date{
+    position: relative;
+    display: inline-block;
+    margin-bottom: -200px;
+    padding: 10px;
+    color: #fff;
+    background-color: var(--orange);
+    border: 20px;
+    right: 0;
+    top: -50px;
+    border-radius: 10px;
+}
+.artikel .container .box .btn{
+    background-color: var(--cream);
+    color: #fff;
+}
+.artikel .container .box h2{
+    font-size: 25px;
+}
 footer{
     background-color: #000;
     color: #fff;
@@ -331,6 +366,10 @@ footer .footer .box .sosial a{
 footer .footer .box a{
     color: #fff;
     text-decoration: none;
+    transition: .3s;
+}
+footer .footer .box a:hover{
+    transform: translateX(10px);
 }
 
 footer .copyright{
@@ -373,3 +412,54 @@ footer .copyright{
       display: block;
       width: 100%;
     }
+
+    /* Animasi Scroll */
+.transparan{
+    opacity: 0;
+    transition: 1s ease-in;
+}
+.transparan.appear{
+    opacity: 1;
+}
+.smoth-in{
+    opacity: 0;
+    transition: 1.3s ease-in;
+    transform: translateY(10px);
+}
+.smoth-in.appear{
+    opacity: 1;
+    transform: translateY(0);
+}
+.fade-in{
+    opacity: 0;
+    transition: 1s ease-in;
+    transform: translateY(30px);
+}
+.fade-in.appear{
+    opacity: 1;
+    transform: translateY(0);
+}
+.fade-out{
+    opacity: 0;
+    transition: 1s ease-in;
+    transform: translateY(-30px);
+}
+.fade-out.appear{
+    opacity: 1;
+    transform: translateY(0);
+}
+.from-left{
+    transform: translateX(-40px);
+    opacity: 0;
+    transition: 1s ease-in;
+}
+.from-right{
+    transform: translateX(40px);
+    opacity: 0;
+    transition: 1s ease-in;
+}
+.from-left.appear,
+.from-right.appear{
+    transform: translateX(0);
+    opacity: 1;
+}

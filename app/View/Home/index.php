@@ -71,9 +71,9 @@
     <section>
         <div class="welcome">
 
-            <img src="image/welcome.png" alt="">
+            <img class="from-left" src="image/welcome.png" alt="">
 
-            <div class="desc">
+            <div class="desc from-right">
                 <h2>SELAMAT DATANG <br>DI RAHMATAN TRAVEL</h2>
                 <h4>Rahmatan Travel Sebuah Platform Untuk
                     Menemani Perjalanan Ibadah Anda
@@ -114,7 +114,7 @@
                     <a href="#">Lihat Semua</a>
                 </div>
             </div>
-            <div class="container">
+            <div class="container fade-in">
                 <div class="box">
                     <div class="image">
                         <img src="image/brosur.jpg" class="card-img-top" alt="...">
@@ -250,7 +250,7 @@
                         <a href="#" class="btn">Lihat Selengkapnya</a>
                     </div>
                 </div>
-                <div class="box">
+                <!-- <div class="box">
                     <div class="image">
                         <img src="image/brosur.jpg" class="card-img-top" alt="...">
                     </div>
@@ -294,25 +294,26 @@
                         </div>
                         <a href="#" class="btn">Lihat Selengkapnya</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
 
     <section>
+        <h2 class="text-center m-5" style="font-size: 40px;">Galery</h2>
         <div style="position: relative; height: 100%;">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                        <img src="/image/galeri2.png" />
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                        <img src="/image/galeri3.png" />
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                        <img src="/image/galeri1.png" />
                     </div>
-                    <div class="swiper-slide">
+                    <!-- <div class="swiper-slide">
                         <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
                     </div>
                     <div class="swiper-slide">
@@ -326,7 +327,7 @@
                     </div>
                     <div class="swiper-slide">
                         <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="swiper-pagination"></div>
@@ -336,8 +337,8 @@
 
     <section>
         <div class="pengalaman">
-            <h4 class="tittle">SPESIAL TERBAIK UNTUK ANDA</h4>
-            <H2 class="tittle-desc">SPESIAL PAKET TRAVEL</H2>
+            <h4 class="tittle">Pengalaman Pengguna</h4>
+            <H2 class="tittle-desc">Rahmatan Travel</H2>
             <div class="container">
                 <div class="box">
                     <p>Travel yang sangat amanah,memberikan pengalaman yang terbaik untuk menjalankan ibadah umroh saya
@@ -402,11 +403,54 @@
 
     </section>
 
+    <section>
+        <div class="artikel">
+            <div class="header-content">
+                <div class="title">
+                    <h4>SPESIAL TERBAIK UNTUK ANDA</h4>
+                    <H2>SPESIAL PAKET TRAVEL</H2>
+                </div>
+                <div class="btn">
+                    <a href="#">Lihat Semua</a>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="box shadow">
+                    <img src="/image/artikel.png" alt="">
+                    <div class="date">
+                    <p class="m-0">20 oktober 2023</p>
+                    </div>
+                    <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium placeat, iste est. Dolor, asperiores dignissimos.</p>
+                    <a href="#" class="btn">Baca Sekarang</a>
+                </div>
+
+                <div class="box shadow">
+                    <img src="/image/artikel.png" alt="">
+                    <div class="date shadow">
+                        <p class="m-0">20 oktober 2023</p>
+                    </div>
+                    <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium placeat, iste est. Dolor, asperiores dignissimos.</p>
+                    <a href="#" class="btn">Baca Sekarang</a>
+                </div>
+                <div class="box shadow">
+                    <img src="/image/artikel.png" alt="">
+                    <div class="date">
+                        <p class="m-0">20 oktober 2023</p>
+                    </div>
+                    <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium placeat, iste est. Dolor, asperiores dignissimos.</p>
+                    <a href="#" class="btn">Baca Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <footer>
         <div class="footer">
-
-
             <div class="box">
                 <img class="mb-3" src="image/Logo (2).png" width="200px" alt="">
                 <h2>Rahmatan Travel</h2>
@@ -469,10 +513,10 @@
                 </div>
 
             </div>
-          </div>
-          <div class="copyright">
-              <small>Copyright © 2021 - SMAN 1 Garum.</small>
-          </div>
+        </div>
+        <div class="copyright">
+            <small>Copyright © 2021 - SMAN 1 Garum.</small>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

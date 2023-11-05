@@ -21,7 +21,57 @@ window.addEventListener("scroll", function(){
     var header = document.querySelector("nav");
     header.classList.toggle("sticky", window.scrollY > 1) 
    })
+  //   Animasi Scroll 
+  const fadersOut = document.querySelectorAll('.fade-out');
+  const fadersIn = document.querySelectorAll('.fade-in');
+  const fromLeft = document.querySelectorAll('.from-left');
+  const fromRight = document.querySelectorAll('.from-right');
+  const transparan = document.querySelectorAll('.transparan');
+  const smothIn = document.querySelectorAll('.smoth-in');
+  const appearOption = {
+      threshold: 0,
+      rootMargin: "0px 0px -100px 0px"
+  };
+  
+  const appearOnScroll = new IntersectionObserver(function(
+      entries,
+      appearOnScroll
+  ){
+      entries.forEach(entry => {
+          if (!entry.isIntersecting){
+              return;
+          }else{
+              entry.target.classList.add('appear');
+              appearOnScroll.unobserve(entry.target);
+          }
+      })
+  },appearOption )
+  
+  fadersIn.forEach(faderIn => {
+      appearOnScroll.observe(faderIn);
+  })
+  
+  fadersOut.forEach(faderOut => {
+      appearOnScroll.observe(faderOut);
+  })
+  
+  fromLeft.forEach(left => {
+      appearOnScroll.observe(left);
+  })
+  
+  fromRight.forEach(Right => {
+      appearOnScroll.observe(Right);
+  })
+  
+  transparan.forEach(trans => {
+      appearOnScroll.observe(trans);
+  })
+  
+  smothIn.forEach(smothI => {
+      appearOnScroll.observe(smothI);
+  })
 
+  
    imgInpBrosur.onchange = evt => {
     const [file] = imgInpBrosur.files
     if (file) {
@@ -140,3 +190,6 @@ togglePassword.addEventListener("click", function () {
 // }
 
 // addBtn.addEventListener("click",addInput())
+
+
+  
