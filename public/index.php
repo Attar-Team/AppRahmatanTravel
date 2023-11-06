@@ -37,6 +37,8 @@ Router::add("POST","/login",LoginController::class,"login");
 
 //Router untuk menangani Homepage
 Router::add("GET","/", HomeController::class,"index");
+Router::add("GET","/about", HomeController::class,"about");
+Router::add("GET","/detail-paket", HomeController::class,"detailPaket");
 
 //Router untuk menangani Dashboard Admin
 Router::add("GET","/admin/dashboard", DashboardController::class,"index");

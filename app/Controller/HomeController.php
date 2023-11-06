@@ -14,8 +14,22 @@ class HomeController
     }
     public function index()
     {
-        View::render("headerhome", []);
+        View::render("home/header", []);
         View::render("home/index", []);
-        View::render("footerHome", []);
+        View::render("home/footer", []);
+    }
+
+    public function about()
+    {
+        View::render("home/header", []);
+        View::render("home/about", []);
+        View::render("home/footer", []); 
+    }
+
+    public function detailPaket()
+    {
+        View::render("Home/header", []);
+        View::render("Home/detailPaket", []);
+        View::render("Home/footer", []); 
     }
 }

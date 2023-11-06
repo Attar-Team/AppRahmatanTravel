@@ -1,57 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahmatan Travel</title>
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-</head>
-
-<body style="background-color: #E9EAEC;">
-    <nav style="position: fixed;top: 0;right: 0; left: 0;z-index: 6;transition: .3s;" class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div style="justify-content: space-between; margin: 0 60px;" class="collapse navbar-collapse "
-                id="navbarSupportedContent">
-                <a class="navbar-brand" href="#"><img src="image/Logo (2).png" width="200px" alt=""></a>
-                <ul class="navbar-nav mb-lg-0">
-                    <li class="nav-item px-2 me-2">
-                        <a class="nav-link active-nav" style="color: #000;" aria-current="page"
-                            href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item px-2 me-2">
-                        <a class="nav-link" style="color: #000;" aria-current="page" href="about.html">About Us</a>
-                    </li>
-                    <li class="nav-item px-2 me-2">
-                        <a class="nav-link" style="color: #000;" aria-current="page" href="gallery.html">Paket
-                            Travel</a>
-                    </li>
-                    <li class="nav-item px-2 me-3">
-                        <a class="nav-link" style="color: #000;" aria-current="page" href="contact.html">Galery</a>
-                    </li>
-
-                    <li class="nav-item px-2 me-1" style="border: 1px solid; border-radius: 10px;">
-                        <a class="nav-link" style="color: #000;" aria-current="page" href="contact.html">Log In</a>
-                    </li>
-                    <li class="nav-item px-2 me-1" style="background-color: #000; border-radius: 10px;">
-                        <a class="nav-link" style="color: #fff;" aria-current="page" href="contact.html">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <div class="nav-image">
         <div class="desc">
@@ -132,7 +79,7 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
+                            <i class="fa-solid fa-clock"></i>
                                 <p>Durasi paket</p>
                             </div>
                             <div class="isi">
@@ -141,7 +88,7 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
+                            <i class="fa-solid fa-user"></i>
                                 <p>Total Seat</p>
                             </div>
                             <div class="isi">
@@ -150,16 +97,39 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <p>Berangkat dari</p>
+                            <i style="font-weight: bolder; color:#13C100" class="fa-solid fa-user"></i>
+                                <p style="font-weight: bolder; color:#13C100">Available Seat</p>
                             </div>
-                            <div class="isi">
-                                Jakarta
+                            <div class="isi "style="font-weight: bolder; color:#13C100">
+                                20 pax
                             </div>
                         </div>
+                        <div class="ket">
+                            <div class="ttl">
+                            <i class="fa-solid fa-hotel"></i>
+                                <p>Hotel</p>
+                            </div>
+                            <div class="isi" style="color:#FF6600;">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="ket">
+                            <div class="ttl">
+                                <i class="fa-solid fa-plane"></i>
+                                <p>Maskapai</p>
+                            </div>
+                            <div class="isi">
+                                Garuda
+                            </div>
+                        </div>
+
+                            <h3>Rp. 32.000.000</h3>
+
                         <a href="#" class="btn">Lihat Selengkapnya</a>
                     </div>
                 </div>
+
                 <div class="box">
                     <div class="image">
                         <img src="image/brosur.jpg" class="card-img-top" alt="...">
@@ -177,7 +147,7 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
+                            <i class="fa-solid fa-clock"></i>
                                 <p>Durasi paket</p>
                             </div>
                             <div class="isi">
@@ -186,7 +156,7 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
+                            <i class="fa-solid fa-user"></i>
                                 <p>Total Seat</p>
                             </div>
                             <div class="isi">
@@ -195,16 +165,39 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <p>Berangkat dari</p>
+                            <i style="font-weight: bolder; color:#13C100" class="fa-solid fa-user"></i>
+                                <p style="font-weight: bolder; color:#13C100">Available Seat</p>
                             </div>
-                            <div class="isi">
-                                Jakarta
+                            <div class="isi "style="font-weight: bolder; color:#13C100">
+                                20 pax
                             </div>
                         </div>
+                        <div class="ket">
+                            <div class="ttl">
+                            <i class="fa-solid fa-hotel"></i>
+                                <p>Hotel</p>
+                            </div>
+                            <div class="isi" style="color:#FF6600;">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="ket">
+                            <div class="ttl">
+                                <i class="fa-solid fa-plane"></i>
+                                <p>Maskapai</p>
+                            </div>
+                            <div class="isi">
+                                Garuda
+                            </div>
+                        </div>
+
+                            <h3>Rp. 32.000.000</h3>
+
                         <a href="#" class="btn">Lihat Selengkapnya</a>
                     </div>
                 </div>
+
                 <div class="box">
                     <div class="image">
                         <img src="image/brosur.jpg" class="card-img-top" alt="...">
@@ -222,7 +215,7 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
+                            <i class="fa-solid fa-clock"></i>
                                 <p>Durasi paket</p>
                             </div>
                             <div class="isi">
@@ -231,7 +224,7 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
+                            <i class="fa-solid fa-user"></i>
                                 <p>Total Seat</p>
                             </div>
                             <div class="isi">
@@ -240,16 +233,39 @@
                         </div>
                         <div class="ket">
                             <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <p>Berangkat dari</p>
+                            <i style="font-weight: bolder; color:#13C100" class="fa-solid fa-user"></i>
+                                <p style="font-weight: bolder; color:#13C100">Available Seat</p>
                             </div>
-                            <div class="isi">
-                                Jakarta
+                            <div class="isi "style="font-weight: bolder; color:#13C100">
+                                20 pax
                             </div>
                         </div>
+                        <div class="ket">
+                            <div class="ttl">
+                            <i class="fa-solid fa-hotel"></i>
+                                <p>Hotel</p>
+                            </div>
+                            <div class="isi" style="color:#FF6600;">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="ket">
+                            <div class="ttl">
+                                <i class="fa-solid fa-plane"></i>
+                                <p>Maskapai</p>
+                            </div>
+                            <div class="isi">
+                                Garuda
+                            </div>
+                        </div>
+
+                            <h3>Rp. 32.000.000</h3>
+
                         <a href="#" class="btn">Lihat Selengkapnya</a>
                     </div>
                 </div>
+                
                 <!-- <div class="box">
                     <div class="image">
                         <img src="image/brosur.jpg" class="card-img-top" alt="...">
@@ -422,7 +438,7 @@
                     <p class="m-0">20 oktober 2023</p>
                     </div>
                     <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium placeat, iste est. Dolor, asperiores dignissimos.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium .</p>
                     <a href="#" class="btn">Baca Sekarang</a>
                 </div>
 
@@ -432,7 +448,7 @@
                         <p class="m-0">20 oktober 2023</p>
                     </div>
                     <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium placeat, iste est. Dolor, asperiores dignissimos.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium .</p>
                     <a href="#" class="btn">Baca Sekarang</a>
                 </div>
                 <div class="box shadow">
@@ -441,7 +457,7 @@
                         <p class="m-0">20 oktober 2023</p>
                     </div>
                     <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium placeat, iste est. Dolor, asperiores dignissimos.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium .</p>
                     <a href="#" class="btn">Baca Sekarang</a>
                 </div>
             </div>
@@ -449,81 +465,4 @@
     </section>
 
 
-    <footer>
-        <div class="footer">
-            <div class="box">
-                <img class="mb-3" src="image/Logo (2).png" width="200px" alt="">
-                <h2>Rahmatan Travel</h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus quis cupiditate aliquam excepturi
-                    illum
-                    quaerat impedit ex maiores omnis veniam officia facilis quibusdam voluptas praesentium tenetur
-                    ratione,
-                    delectus pariatur exercitationem.</p>
-            </div>
-
-            <div class="box">
-                <h2 class="mb-4">Contact Info</h2>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa-solid fa-phone me-3"></i>
-                    <p class="m-0">085942972801</p>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa-solid fa-envelope me-3"></i>
-                    <p class="m-0">rahmatantravel@gmail.com</p>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa-solid fa-location-dot me-3"></i>
-                    <p class="m-0">Ruko De Rainbow Square, Jl. Brawijaya No.22, Jubung Lor, Jubung, Kec. Sukorambi,
-                        Kabupaten Jember, Jawa Timur 68151</p>
-                </div>
-
-                <div class="sosial d-flex align-items-center">
-                    <a href="#" class="fab fa-facebook-f"></a>
-                    <a href="#" class="fab fa-twitter"></a>
-                    <a href="#" class="fab fa-instagram"></a>
-                    <a href="#" class="fab fa-linkedin"></a>
-                </div>
-
-            </div>
-
-            <div class="box">
-                <h2 class="mb-4">Quick Link</h2>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa-solid fa-arrow-right me-3"></i>
-                    <a href="#">Home</a>
-                </div>
-
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa-solid fa-arrow-right me-3"></i>
-                    <a href="#">About</a>
-                </div>
-
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa-solid fa-arrow-right me-3"></i>
-                    <a href="#">Paket</a>
-                </div>
-
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa-solid fa-arrow-right me-3"></i>
-                    <a href="#">Galery</a>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa-solid fa-arrow-right me-3"></i>
-                    <a href="#">Artikel</a>
-                </div>
-
-            </div>
-        </div>
-        <div class="copyright">
-            <small>Copyright © 2021 - SMAN 1 Garum.</small>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+    

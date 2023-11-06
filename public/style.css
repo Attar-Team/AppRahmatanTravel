@@ -208,20 +208,20 @@ section{
 .paket .container .box{
     width: 350px;
 }
-.paket .container .box .image{
-   position: relative;
-   width: 80%;
-   left: 50%;
-   
-transform: translateX(-50%);
-}
+
 .paket .container .box .image img{
     border-radius: 20px;
-    
+    width: 300px;
+    height: 300px;
+    position: relative;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  object-fit: cover;
 }
 .paket .container .box .body{
     padding-top: 200px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
     margin-top: -180px;
@@ -237,17 +237,23 @@ transform: translateX(-50%);
     background-color: var(--cream);
     color: #fff;
 }
+.paket .container .box .body h3{
+    font-weight: bolder;
+    margin-bottom: 15px;
+    color: var(--orange);
+}
 .paket .container .box .body h5{
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 20px;
-    font-size: 25px;
+    color: #444;
+    font-size: 20px;
     font-weight: bolder;
 }
 .paket .container .box .body .ket{
     justify-content: space-between;
     display: flex;
     font-size: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #777;
      align-items: center;
 }
@@ -378,8 +384,203 @@ footer .copyright{
     border-top: 1px solid #ddd;
 }
 
+/* About Us */
+.header-image{
+    background-image: url("image/header-img.PNG");
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -5;
+    background-size: cover;
+}
+.header-image .tl{
+    text-align: center;
+    padding-top: 180px;
+}
+.header-image .tl h1{
+    font-size: 65px;
+    font-weight: bolder;
+    color: #fff;
+    font-family: 'Kaufmann BT', sans-serif;
+}
+.header-image .tl p{
+    font-size: 20px;
+    color: #fff;
+}
+.about{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 150px;
+}
+.about img{
+    width: 40%;
+}
+.about .desc{
+    width: 55%;
+}
+.about .desc h1{
+    color: var(--orange);
+    font-weight: bolder;
+}
+.about .desc h1 span{
+    color: #000;
+}
+.visi-misi{
+    margin: 70px 300px 0 300px;
+}
+.visi-misi h1{
+    color: var(--orange);
+    font-weight: bolder;
+}
+.visi-misi h1 span{
+    color: #000;
+    font-weight: bolder;
+}
+.visi-misi h2{
+    font-weight: bolder;
+    color: var(--orange);
+}
 
+/* Detail Paket */
+.detail-paket{
+    padding: 70px 50px ;
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+}
+.detail-paket .header-detail{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+}
+.detail-paket .header-detail img{
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+}
+.detail-paket .header-detail .desc{
+    width: 600px;
+}
+.detail-paket .header-detail .desc h2{
+    font-size: 45px;
+    font-weight: bolder;
+    color: #414765;
+}
+.detail-paket .header-detail .desc .harga{
+    font-size: 40px;
+    color: var(--orange);
+    box-shadow: var(--box-shadow);
+    padding: 15px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 15px;
+}
+.detail-paket .header-detail .desc .harga-detail{
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+.detail-paket .header-detail .desc .harga-detail h4{
+    background-color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+.detail-paket .header-detail .desc .btn-admin{
+    background-color: #2BC48A;
+    padding: 10px 60px;
+    box-shadow: var(--box-shadow);
+    color: #fff;
+    border-radius: 20px;
+    margin-right: 15px;
+    text-decoration: none;
+}
+.detail-paket .header-detail .desc .btn-booking{
+    background-color: #414765;
+    padding: 10px 40px;
+    box-shadow: var(--box-shadow);
+    color: #fff;
+    border-radius: 20px;
+    margin-right: 15px;
+    text-decoration: none;
+}
+.desc-detail{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    gap: 50px;
+}
+.desc-detail .desc{
+    width: 600px;
+}
+.desc-detail .desc h2{
+    font-weight: bolder;
+    font-size: 45px;
+}
+.desc-detail .desc h4{
+    font-weight: bold;
+}
+.desc-detail .hotel{
+    width: 400px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.desc-detail .hotel h2{
+    font-size: 45px;
+    font-weight: bolder;
 
+}
+.desc-detail .hotel .box .desc-body{
+    padding: 10px 25px;
+    background-color: #fff;
+    border-radius: 0 0 15px 15px ;
+    box-shadow: var(--box-shadow);
+}
+.desc-detail .hotel .box .desc-body p{
+    font-size: 13px;
+    margin-top: 10px;
+    color: #414765;
+}
+.desc-detail .hotel .box img{
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+}
+.paket-lain{
+    padding: 50px 160px;
+}
+.paket-lain .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.paket-lain .container .box{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+.paket-lain .container .box img{
+    width: 100%;
+    height: 200px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+.paket-lain .container .box h2{
+    font-size: 20px;
+    font-weight: bolder;
+}
+.paket-lain .container .box .btn{
+    background-color: var(--orange);
+        color: #fff;
+}
 @media screen and (max-width: 1100px) {
     .img-login {
       display: none;
