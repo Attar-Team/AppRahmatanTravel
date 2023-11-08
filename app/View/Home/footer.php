@@ -64,7 +64,8 @@
             </div>
         </div>
         <div class="copyright">
-            <small>Copyright © 2021 - SMAN 1 Garum.</small>
+            <small>Copyright © 2023 - Rahmatan Travel.</small><br>
+            <small>Built with  by Attar Team® — TIF D Politeknik Negeri Jember</small>
         </div>
     </footer>
 

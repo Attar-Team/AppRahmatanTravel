@@ -58,6 +58,12 @@
   </head>
 
   <body>
+    <div id="pageLoader" class="page-loader" style="inset: 0; background-color: #ddd;display:flex;justify-content: center;align-items: center; position:fixed;z-index: 9999;">
+      <!-- <img src="/image/logo 1.png" alt=""> -->
+      <div class="spinner-border  spinner-border-lg text-warning" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+    </div>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">

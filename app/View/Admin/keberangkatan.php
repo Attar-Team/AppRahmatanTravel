@@ -27,12 +27,15 @@
                         <td><?= $d['nama'] ?></td>
                         <td><?= $d['seats'] ?></td>
                         <td>
-                        <a class="btn btn-danger" href="/admin/hapus-paket/<?= $d['keberangkatan_id'] ?>" onclick="return confirm('Apakah yakin menghapus')" role="button"><i class='bx bx-trash' ></i></a>
-                          <a class="btn btn-warning" href="/admin/edit-paket/<?= $d['keberangkatan_id'] ?>" role="button"><i class='bx bxs-edit-alt'></i></a>
-                          <a class="btn btn-success" href="/admin/detail-paket/<?= $d['keberangkatan_id'] ?>" role="button"><i class='bx bx-message-detail' ></i></a>
+                        <a class="btn btn-danger" href="/admin/hapus-keberangkatan/<?= $d['keberangkatan_id'] ?>" onclick="return confirm('Apakah yakin menghapus')" role="button"><i class='bx bx-trash' ></i></a>
+                          <!-- <a class="btn btn-warning" href="/admin/edit-paket/<?= $d['keberangkatan_id'] ?>" role="button"><i class='bx bxs-edit-alt'></i></a> -->
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#ModalEditKeberangkatan<?= $d['keberangkatan_id'] ?>" class="btn btn-warning"><i class='bx bxs-edit-alt'></i></button>
+                          <a class="btn btn-success" href="/admin/detail-keberangkatan/<?= $d['keberangkatan_id'] ?>" role="button"><i class='bx bx-message-detail' ></i></a>
                         </td>
                       </tr>
-                      <?php $no++; endforeach; ?>
+                      <?php 
+                      include'Modal/ModalEditKeberangkatan.php';
+                      $no++; endforeach; ?>
                       
                     </tbody>
                    

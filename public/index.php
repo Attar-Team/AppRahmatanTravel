@@ -67,7 +67,10 @@ Router::add("GET","/admin/verifikasi-pemesanan", PemesananController::class,"vie
 
 //Router untuk menangani Dashboard Keberangkatan
 Router::add("GET","/admin/keberangkatan", KeberangkatanController::class,"index");
+Router::add("GET","/admin/detail-keberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,"viewDetailData");
 Router::add("POST","/admin/tambah-keberangkatan", KeberangkatanController::class,"tambahKeberangkatan");
+Router::add("POST","/admin/edit-keberangkatan", KeberangkatanController::class,"editKeberangkatan");
+Router::add("GET","/admin/hapus-keberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,"hapusKeberangkatan");
 
 //Router untuk menangani Dashboard Agen
 Router::add("GET","/admin/agen", AgenController::class,"index");
@@ -98,4 +101,8 @@ Router::add("GET","/apiGetPaket/([0-9a-zA-Z]*)", PaketController::class,"apiGetP
 Router::add("GET","/apiGetKeberangkatan", KeberangkatanController::class,'apiGetKeberangkatan');
 Router::add("GET","/apiGetKeberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,'apiGetKeberangkatanById');
 Router::add("GET","/admin/delete-harga/([0-9a-zA-Z]*)/([0-9a-zA-Z]*)", PaketController::class, "deleteHarga");
+
+
+
+Router::add("POST","/testVoley", Test::class, "testVoley");
 Router::run();

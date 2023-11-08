@@ -22,7 +22,7 @@ class KeberangkatanModel
     {
         $query = $this->connection->prepare("SELECT * FROM keberangkatan WHERE keberangkatan_id = ?");
         $query->execute([$id]);
-        $result = $query->fetchAll();
+        $result = $query->fetchAll(\PDO::FETCH_OBJ);
         return $result;
     }
 
@@ -32,4 +32,17 @@ class KeberangkatanModel
         $query->execute([$data['paket_id'],$data['tanggal_keberangkatan'],'Belum Berangkat',$data['seats'],$data['tanggal_ditutup']]);
         return $query->rowCount();
     }
+
+    public function update($data){
+        $query = $this->connection->prepare('UPDATE keberangkatan SET paket_id = ?, tanggal = ?, status = ?, seats = ?, tanggal_ditutup = ? WHERE keberangkatan_id = ?');
+        $query->execute([$data['paket_id'],$data['tanggal'],$data['status'],$data['seats'],$data['tanggal_ditutup'],$data['keberangkatan_id']]);
+        return $query->rowCount();
+    }
+
+    public function delete($id){
+        $query = $this->connection->prepare('DELETE FROM keberangkatan WHERE keberangkatan_id = ?');
+        $query->execute([$id]);
+        return $query->rowCount();
+    }
+    
 }

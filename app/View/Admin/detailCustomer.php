@@ -2,9 +2,6 @@
  
         <?php
         foreach($data['dataCustomer'] as $d):
-        //     $termasukHarga = explode(",", $d->termasuk_harga);
-        //     $tidakTermasukHarga = explode(",", $d->tidak_termasuk_harga);
-        //     $keunggulan = explode(",", $d->keunggulan);
     ?>
 <div class="row">
         <div class="col-xl">

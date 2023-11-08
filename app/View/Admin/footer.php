@@ -9,6 +9,7 @@
     </div>
     <!-- / Layout wrapper -->
 
+    
     <script src="/script.js"></script>
 
     <!-- Core JS -->
@@ -32,6 +33,14 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    
+    <script>
+$(document).ready(function(){
+ 
+    // $("#pageLoader").fadeOut();
+    $("#pageLoader").fadeOut("slow");
+    // $("#pageLoader").fadeOut(3000);
+
+});
+</script>
   </body>
 </html>
