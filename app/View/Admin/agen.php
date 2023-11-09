@@ -11,7 +11,7 @@
                     />
                   </div>
                 </div>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#basicModal" class="btn btn-primary">Tambah</button>
+                <a href="/admin/tambah-agen"  class="btn btn-primary d-flex align-items-center">Tambah</a>
               </div>
               
               <div class="card">
@@ -21,26 +21,30 @@
                       <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>Kode Referal</th>
                         <th>Alamat</th>
-                        <th>Nomor Telepon</th>
-                        <th>Jenis Kelamin</th>
+                        <th>No telpon</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
+                        <?php 
+                        // var_dump($data);
+                        // die();
+                        foreach($data['dataAgen'] as $d): ?>
                       <tr>
                         <td>1</td>
-                        <td>Zarif</td>
-                        <td>BLitar</td>
-                        <td>085942972801</td>
-                        <td>Laki - Laki</td>
+                        <td><?= $d['nama'] ?></td>
+                        <td><?= $d['alamat'] ?></td>
+                        <td><?= $d['notelp'] ?></td>
+                        <td><?= $d['jenis_kelamin'] ?></td>
                         <td>
-                        
-                          <button type="button" data-bs-toggle="modal" data-bs-target="#updateContact<?= $d['contactId'] ?>" data-bs-whatever="@mdo" class="btn btn-primary">Updated</button>
-                          <a class="btn btn-danger" href="/admin/deleteClientAddress/<?= $d['clientId'] ?>" role="button">Deleted</a>
-                     
+                          <a class="btn btn-danger" href="/admin/hapus-customer/<?= $d['NIK'] ?>" onclick="return confirm('Apakah yakin menghapus')" role="button"><i class='bx bx-trash' ></i></a>
+                          <a class="btn btn-warning" href="/admin/edit-customer/<?= $d['NIK'] ?>" role="button"><i class='bx bxs-edit-alt'></i></a>
+                          <a class="btn btn-success" href="/admin/detail-customer/<?= $d['NIK'] ?>" role="button"><i class='bx bx-message-detail' ></i></a>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                       
                     </tbody>
                    

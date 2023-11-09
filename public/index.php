@@ -74,7 +74,9 @@ Router::add("GET","/admin/hapus-keberangkatan/([0-9a-zA-Z]*)", KeberangkatanCont
 
 //Router untuk menangani Dashboard Agen
 Router::add("GET","/admin/agen", AgenController::class,"index");
+Router::add("GET","/admin/tambah-agen", AgenController::class,"viewTambahData");
 Router::add("GET","/admin/verifikasi-komisi-agen", AgenController::class,"viewVerifikasiAgen");
+Router::add("POST","/admin/tambah-agen", AgenController::class,"tambahAgen");
 
 //Router untuk menangani Dashboard Galery
 Router::add("GET","/admin/galery", GaleryController::class,"index");
