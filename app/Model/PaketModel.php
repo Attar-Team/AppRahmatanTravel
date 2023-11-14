@@ -45,6 +45,13 @@ class PaketModel
         return $statement->fetchAll();
     }
 
+    public function getBintangHotel($id)
+    {
+        $statement = $this->connection->prepare("SELECT bintang FROM hotel WHERE paket_id = ? LIMIT 1");
+        $statement->execute([$id]);
+        return $statement->fetchAll();
+    }
+
     public function savePaket(array $data)
     {
         $statement = $this->connection->prepare("INSERT INTO paket (`nama`,`menu`,`lama_hari`,`minim_dp`,`termasuk_harga`,`tidak_termasuk_harga`,`keunggulan`,`maskapai`,`foto_brosur`) VALUES (?,?,?,?,?,?,?,?,?)");

@@ -38,8 +38,8 @@ Router::add("POST","/login",LoginController::class,"login");
 //Router untuk menangani Homepage
 Router::add("GET","/", HomeController::class,"index");
 Router::add("GET","/about", HomeController::class,"about");
-Router::add("GET","/detail-paket", HomeController::class,"detailPaket");
-Router::add("GET","/pemesanan", HomeController::class,"pemesanan");
+Router::add("GET","/detail-paket/([0-9a-zA-Z]*)", HomeController::class,"detailPaket");
+Router::add("GET","/pemesanan/([0-9a-zA-Z]*)", HomeController::class,"pemesanan");
 Router::add("GET","/pembayaran", HomeController::class,"pembayaran");
 Router::add("GET","/profile", HomeController::class,"profile");
 Router::add("GET","/tambah-jamaah", HomeController::class,"tambahJamaah");

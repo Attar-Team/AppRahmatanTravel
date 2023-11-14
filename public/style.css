@@ -537,7 +537,7 @@ footer .copyright{
 .desc-detail .hotel .box .desc-body{
     padding: 10px 25px;
     background-color: #fff;
-    border-radius: 0 0 15px 15px ;
+    border-radius: 15px ;
     box-shadow: var(--box-shadow);
 }
 .desc-detail .hotel .box .desc-body p{

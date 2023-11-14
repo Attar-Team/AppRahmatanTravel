@@ -29,7 +29,7 @@
             </button>
             <div style="justify-content: space-between; margin: 0 60px;" class="collapse navbar-collapse "
                 id="navbarSupportedContent">
-                <a class="navbar-brand" href="#"><img src="image/Logo (2).png" width="200px" alt=""></a>
+                <a class="navbar-brand" href="#"><img src="/image/Logo (2).png" width="200px" alt=""></a>
                 <ul class="navbar-nav mb-lg-0">
                     <li class="nav-item px-2 me-2">
                         <a class="nav-link active-nav" style="color: #000;" aria-current="page" href="/">Home</a>

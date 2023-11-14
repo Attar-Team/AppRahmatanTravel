@@ -12,9 +12,16 @@ class KeberangkatanModel
 
     public function get()
     {
-        $query = $this->connection->prepare("SELECT * FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id");
+        $query = $this->connection->prepare("SELECT * FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id LEFT JOIN hotel ON paket.paket_id = hotel.hotel_id LEFT JOIN harga_paket ON paket.paket_id = paket.paket_id GROUP BY keberangkatan.keberangkatan_id");
         $query->execute();
         $result = $query->fetchAll();
+        return $result;
+    }
+    public function getDetail($id)
+    {
+        $query = $this->connection->prepare("SELECT * FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id WHERE keberangkatan_id = ?");
+        $query->execute([$id]);
+        $result = $query->fetchAll(\PDO::FETCH_OBJ);
         return $result;
     }
 
