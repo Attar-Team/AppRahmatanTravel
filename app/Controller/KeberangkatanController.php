@@ -59,6 +59,7 @@ class KeberangkatanController
             $data = [
                 'paket_id' => $_POST['paket_id'],
                 'tanggal_keberangkatan' => $newTglKeberangkatan,
+                'keberangkatan_dari'=> $_POST['keberangkatan_dari'],
                 'seats' => $_POST['seats'],
                 'tanggal_ditutup' => $newTglDitutup
             ];
@@ -89,6 +90,7 @@ class KeberangkatanController
                 "paket_id" => $_POST["paket_id"],
                 "tanggal" => $newDateTanggal,
                 "tanggal_ditutup" => $newDateTutup,
+                "keberangkatan_dari"=> $_POST["keberangkatan_dari"],
                 "status" => $_POST['status'],
                 'seats' => $_POST['seats'],
                 'keberangkatan_id' => $_POST['keberangkatan_id']

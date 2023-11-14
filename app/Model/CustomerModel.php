@@ -56,8 +56,8 @@ class CustomerModel
 
     public function saveDocument($id, $data)
     {
-        $query = $this->connection->prepare('INSERT INTO dokumen (`customer_id`, `foto_ktp`, `foto_kartu_keluarga`, `foto_paspor`, `foto_paspor_hal2`, `foto_buku_rekening`, `foto_akte_kelahiran`, `foto_buku_pernikahan`, `foto_bpjs`) VALUES(?,?,?,?,?,?,?,?,?)');
-        $query->execute([$id,$data['ktp'],$data['keluarga'],$data['paspor'],$data['paspor2'],"",$data['akte'],"",$data['bpjs']]);
+        $query = $this->connection->prepare('INSERT INTO dokumen (`customer_id`, `foto_ktp`, `foto_kartu_keluarga`, `foto_paspor`, `foto_paspor_hal2`, `foto_buku_rekening`, `foto_akte_kelahiran`, `foto_buku_pernikahan`) VALUES(?,?,?,?,?,?,?,?)');
+        $query->execute([$id,$data['ktp'],$data['keluarga'],$data['paspor'],$data['paspor2'],$data['rekening'],$data['akte'],$data['pernikahan']]);
         $query->closeCursor();
         return $query->rowCount();
 

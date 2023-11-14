@@ -15,6 +15,14 @@
                             <?php endforeach ?>
                           </select>
                         </div>
+
+                        <div class="mb-3">
+                          <label for="sts" class="form-label">Pilih keberangkatan</label>
+                          <select id="sts" name="keberangkatan_dari" class="form-select">
+                              <option value="Surabaya">Surabaya</option>
+                              <option value="Jakarta">Jakarta</option>
+                          </select>
+                        </div>
                 
                         <div class="mb-3">
                         <label for="html5-date-input" class=" col-form-label">Tanggal Keberangkatan</label>
@@ -22,6 +30,7 @@
                             <input class="form-control" type="date" name="tanggal_keberangkatan" id="html5-date-input" />
                         </div>
                     </div>
+         
                     <div class="mb-3">
                         <label for="html5-date-input" class=" col-form-label">Tanggal Ditutup</label>
                         <div class="col-md-10">

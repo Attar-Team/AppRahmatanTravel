@@ -18,6 +18,15 @@
                         </div>
 
                         <div class="mb-3">
+                          <label for="sts" class="form-label">Pilih keberangkatan</label>
+                          <select id="sts" name="keberangkatan_dari" class="form-select">
+                              <option <?= ($d['keberangkatan_dari'] == "Surabaya") ? 'selected' : '' ?> value="Surabaya">Surabaya</option>
+                              <option <?= ($d['keberangkatan_dari'] == "Jakarta") ? 'selected' : '' ?> value="Jakarta">Jakarta</option>
+                              <option value="Jakarta">Jakarta</option>
+                          </select>
+                        </div>
+
+                        <div class="mb-3">
                           <label for="sts" class="form-label">Status</label>
                           <select id="sts" name="status" class="form-select">
                                 <option <?= ($d['status'] == "Belum Berangkat") ? 'selected' : '' ?> value="Belum Berangkat">Belum Berangkat</option>

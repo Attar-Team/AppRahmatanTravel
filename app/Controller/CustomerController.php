@@ -56,35 +56,6 @@ class CustomerController
     {
 
         try {
-            $rename = array();
-            foreach ($_FILES as $key => $value) {
-                $filename = $value['name'];
-
-                foreach ($filename as $k => $v) {
-                    $rename[$k] = "";
-                    if (!$filename[$k] == "") {
-                        $filesize = $value['size'][$k];
-                        $tmpname = $value['tmp_name'][$k];
-
-                        $formatfile = pathinfo($filename[$k], PATHINFO_EXTENSION);
-                        $rename[$k] = "foto_$k" . time() . '.' . $formatfile;
-
-                        $allowedtype = array('png', 'jpeg', 'jpg', 'gif', 'JPG');
-
-                        if (!in_array($formatfile, $allowedtype)) {
-                            throw new ValidationException('file tidak di izinkan');
-                        } elseif ($filesize > 1000000) {
-                            throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
-                        } else {
-                            if (!file_exists("uploads/foto_$k/")) {
-                                mkdir("uploads/foto_$k/", 0777, true);
-                            }
-                            move_uploaded_file($tmpname, "uploads/foto_$k/" . $rename[$k]);
-                        }
-                    }
-                }
-            }
-            var_dump($rename);
             $dataUser = [
                 "email" => $_POST["email"],
                 "password" => password_hash('12345678', PASSWORD_DEFAULT),
@@ -96,6 +67,34 @@ class CustomerController
                 $idUser = $createAcount['lastId'];
                 $tgl_lahir = str_replace('-"', '/', $_POST['tanggal_lahir']);
                 $newTglLahir = date("Y-m-d", strtotime($tgl_lahir));
+                $rename = array();
+                foreach ($_FILES as $key => $value) {
+                    $filename = $value['name'];
+    
+                    foreach ($filename as $k => $v) {
+                        $rename[$k] = "";
+                        if (!$filename[$k] == "") {
+                            $filesize = $value['size'][$k];
+                            $tmpname = $value['tmp_name'][$k];
+    
+                            $formatfile = pathinfo($filename[$k], PATHINFO_EXTENSION);
+                            $rename[$k] = "foto_$k" . time() . '.' . $formatfile;
+    
+                            $allowedtype = array('png', 'jpeg', 'jpg', 'gif', 'JPG');
+    
+                            if (!in_array($formatfile, $allowedtype)) {
+                                throw new ValidationException('file tidak di izinkan');
+                            } elseif ($filesize > 1000000) {
+                                throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
+                            } else {
+                                if (!file_exists("uploads/foto_$k/")) {
+                                    mkdir("uploads/foto_$k/", 0777, true);
+                                }
+                                move_uploaded_file($tmpname, "uploads/foto_$k/" . $rename[$k]);
+                            }
+                        }
+                    }
+                }
                 $dataCustomer = [
                     'NIK' => $_POST['NIK'],
                     'user_id' => $idUser,
@@ -132,6 +131,80 @@ class CustomerController
             } else {
                 throw new ValidationException("gagal di tambah");
             }
+        } catch (\Throwable $e) {
+            throw new ValidationException($e);
+        }
+    }
+
+    public function tambahCustomerUser()
+    {
+
+        try {
+
+                $tgl_lahir = str_replace('-"', '/', $_POST['tanggal_lahir']);
+                $newTglLahir = date("Y-m-d", strtotime($tgl_lahir));
+                $rename = array();
+                foreach ($_FILES as $key => $value) {
+                    $filename = $value['name'];
+    
+                    foreach ($filename as $k => $v) {
+                        $rename[$k] = "";
+                        if (!$filename[$k] == "") {
+                            $filesize = $value['size'][$k];
+                            $tmpname = $value['tmp_name'][$k];
+    
+                            $formatfile = pathinfo($filename[$k], PATHINFO_EXTENSION);
+                            $rename[$k] = "foto_$k" . time() . '.' . $formatfile;
+    
+                            $allowedtype = array('png', 'jpeg', 'jpg', 'gif', 'JPG');
+    
+                            if (!in_array($formatfile, $allowedtype)) {
+                                throw new ValidationException('file tidak di izinkan');
+                            } elseif ($filesize > 1000000) {
+                                throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
+                            } else {
+                                if (!file_exists("uploads/foto_$k/")) {
+                                    mkdir("uploads/foto_$k/", 0777, true);
+                                }
+                                move_uploaded_file($tmpname, "uploads/foto_$k/" . $rename[$k]);
+                            }
+                        }
+                    }
+                }
+                $dataCustomer = [
+                    'NIK' => $_POST['NIK'],
+                    'user_id' => 1,
+                    'nama' => $_POST['nama'],
+                    'tempat_lahir' => $_POST['tempat_lahir'],
+                    'tanggal_lahir' => $newTglLahir,
+                    'alamat' => $_POST['alamat'],
+                    'jenis_kelamin' => $_POST['jenis_kelamin'],
+                    'pekerjaan' => $_POST['pekerjaan'],
+                    'ukuran_baju' => $_POST['ukuran_baju'],
+                    'no_telp' => $_POST['no_telp'],
+                    'foto' => $rename['customer'],
+                ];
+
+                $saveCustomer = $this->customer->save($dataCustomer);
+                if ($saveCustomer['count'] > 0) {
+                    $tgl_penerbitan = str_replace('-"', '/', $_POST['tanggal_penerbitan']);
+                    $newTglPenerbitan = date("Y-m-d", strtotime($tgl_penerbitan));
+                    $dataPasport = [
+                        'nomor_pasport' => $_POST['nomor_pasport'],
+                        'customer_id' => $_POST['NIK'],
+                        'nama_pasport' => $_POST['nama_pasport'],
+                        'tempat_penerbitan' => $_POST['tempat_penerbitan'],
+                        'tgl_penerbitan' => $newTglPenerbitan
+                    ];
+                    $savePasport = $this->customer->savePasport($dataPasport);
+                    $saveDocument = $this->customer->saveDocument($_POST['NIK'], $rename);
+                    if ($saveDocument > 0 && $savePasport > 0) {
+                        View::redirect('/');
+                    } else {
+                        throw new ValidationException("gagal di tambah");
+                    }
+                }
+       
         } catch (\Throwable $e) {
             throw new ValidationException($e);
         }

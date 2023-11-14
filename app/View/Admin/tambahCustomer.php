@@ -191,10 +191,11 @@
                         <input class="form-control" type="file" name="foto[keluarga]" id="imgInpKk" />
                       </div>
 
-                       <!-- <div class="mb-3">
-                        <label for="formFile" class="form-label">Foto Kartu Rekening</label>
-                        <input class="form-control" type="file" name="foto_kartu_keluarga" id="formFile" />
-                      </div> -->
+                      <div class="mb-3">
+                        <label for="formFile" class="form-label">Foto Buku Rekening</label>
+                        <img width="200px" class="m-3 rounded shadow" src="" id="outputRekening" alt="">
+                        <input class="form-control" type="file" name="foto[rekening]" id="imgInpRekening" />
+                      </div>
 
                       <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Akta kelahiran</label>
@@ -203,9 +204,9 @@
                       </div>
 
                       <div class="mb-3">
-                        <label for="formFile" class="form-label">Foto BPJS</label>
-                        <img width="200px" class="m-3 rounded shadow" src="" id="outputBpjs" alt="">
-                        <input class="form-control" type="file" name="foto[bpjs]" id="imgInpBpjs" />
+                        <label for="formFile" class="form-label">Foto Buku Pernikahan</label>
+                        <img width="200px" class="m-3 rounded shadow" src="" id="outputPernikahan" alt="">
+                        <input class="form-control" type="file" name="foto[pernikahan]" id="imgInpPernikahan" />
                       </div>
                      
                 </div>
