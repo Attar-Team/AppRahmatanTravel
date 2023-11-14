@@ -32,4 +32,32 @@ class HomeController
         View::render("Home/detailPaket", []);
         View::render("Home/footer", []); 
     }
+
+    public function pemesanan()
+    {
+        View::render("Home/header", []);
+        View::render("Home/pemesanan", []);
+        View::render("Home/footer", []); 
+    }
+
+    public function pembayaran()
+    {
+        View::render("Home/header", []);
+        View::render("Home/pembayaran", []);
+        View::render("Home/footer", []); 
+    }
+
+    public function profile()
+    {
+        View::render("Home/header", []);
+        View::render("Home/profile", []);
+        View::render("Home/footer", []); 
+    }
+
+    public function tambahJamaah()
+    {
+ 
+        View::render("Home/tambahCustomer", []);
+
+    }
 }

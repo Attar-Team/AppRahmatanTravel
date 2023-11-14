@@ -18,6 +18,12 @@ class Test
         $this->testModel = new testModel($connection);
         $this->login = new LoginModel($connection);
     }
+    public function buktiBayar()
+    {
+        View::render("Home/header", []);
+        View::render("Home/buktiTransfer", []);
+        View::render("Home/footer", []); 
+    }
     public function index()
     {
         $data['all'] = $this->testModel->getData();
@@ -26,6 +32,11 @@ class Test
 
     public function testt(){
         echo "testt";
+    }
+
+    public function testFile(){
+        var_dump($_FILES);
+        die();
     }
 
     public function testVoley()

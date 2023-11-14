@@ -10,6 +10,13 @@ class PaketModel
         $this->connection = $pdo;
     }
     
+    public function getById($id)
+    {
+        $query = $this->connection->prepare("SELECT * FROM paket JOIN hotel ON paket.paket_id = hotel.paket_id JOIN harga_paket ON paket.paket_id = harga_paket.paket_id WHERE paket_id = ?");
+        $query->execute([$id]);
+        return $query->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function getPaket()
     {
         $query = $this->connection->prepare("SELECT * FROM paket");
@@ -75,7 +82,7 @@ class PaketModel
     }
     public function deleteHargaById($id)
     {
-        $statement = $this->connection->prepare('DELETE FROM harga_paket WHERE harga_paket_id = ?');
+        $statement = $this->connection->prepare('DELETE FROM harga_paket WHERE paket_id = ?');
         $statement->execute([$id]);
         return $statement->rowCount();
     }
@@ -94,7 +101,7 @@ class PaketModel
 
     public function deleteHotel($id)
     {
-        $statement = $this->connection->prepare('DELETE FROM hotel WHERE hotel_id = ?');
+        $statement = $this->connection->prepare('DELETE FROM hotel WHERE paket_id = ?');
         $statement->execute([$id]);
         return $statement->rowCount();
     }

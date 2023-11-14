@@ -194,7 +194,7 @@
 
                             <h3>Rp. 32.000.000</h3>
 
-                        <a href="#" class="btn">Lihat Selengkapnya</a>
+                        <a href="/detail-paket" class="btn">Lihat Selengkapnya</a>
                     </div>
                 </div>
 

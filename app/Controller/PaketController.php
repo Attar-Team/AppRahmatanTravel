@@ -232,9 +232,21 @@ class PaketController
     public function hapusPaket($id)
     {
         try {
-            $hapusPaket = $this->paket->deletePaket($id);
+
+            $check = $this->paket->getById($id);
+            if(count($check) > 0){
+                foreach($check as $c){
+                    if(file_exists('uploads/foto_brosur/'.$c->foto_brosur)) {
+                        unlink('uploads/foto_brosur/'.$c->foto_brosur);
+                    }
+                    if(file_exists('uploads/foto_hotel/'.$c->foto_hotel)) {
+                        unlink('uploads/foto_hotel/'.$c->foto_hotel);
+                    }
+                }
+            }
             $hapusHarga = $this->paket->deleteHargaPaket($id);
             $hapusHotel = $this->paket->deleteHotel($id);
+            $hapusPaket = $this->paket->deletePaket($id);
 
             if( $hapusPaket > 0 || $hapusHarga > 0 || $hapusHotel > 0){
                 View::redirect("/admin/paket");

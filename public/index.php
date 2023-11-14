@@ -39,6 +39,11 @@ Router::add("POST","/login",LoginController::class,"login");
 Router::add("GET","/", HomeController::class,"index");
 Router::add("GET","/about", HomeController::class,"about");
 Router::add("GET","/detail-paket", HomeController::class,"detailPaket");
+Router::add("GET","/pemesanan", HomeController::class,"pemesanan");
+Router::add("GET","/pembayaran", HomeController::class,"pembayaran");
+Router::add("GET","/profile", HomeController::class,"profile");
+Router::add("GET","/tambah-jamaah", HomeController::class,"tambahJamaah");
+Router::add("POST","/tambah-jamaah-user", CustomerController::class,"tambahCustomerUser");
 
 //Router untuk menangani Dashboard Admin
 Router::add("GET","/admin/dashboard", DashboardController::class,"index");
@@ -107,4 +112,6 @@ Router::add("GET","/admin/delete-harga/([0-9a-zA-Z]*)/([0-9a-zA-Z]*)", PaketCont
 
 
 Router::add("POST","/testVoley", Test::class, "testVoley");
+Router::add("POST","/testFile", Test::class, "testFile");
+Router::add("GET","/bukti-pembayaran", Test::class, "buktiBayar");
 Router::run();

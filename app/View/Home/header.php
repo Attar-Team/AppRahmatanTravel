@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
 </head>
 
 <body style="background-color: #E9EAEC;">
@@ -28,8 +32,7 @@
                 <a class="navbar-brand" href="#"><img src="image/Logo (2).png" width="200px" alt=""></a>
                 <ul class="navbar-nav mb-lg-0">
                     <li class="nav-item px-2 me-2">
-                        <a class="nav-link active-nav" style="color: #000;" aria-current="page"
-                            href="/">Home</a>
+                        <a class="nav-link active-nav" style="color: #000;" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item px-2 me-2">
                         <a class="nav-link" style="color: #000;" aria-current="page" href="/about">About Us</a>
@@ -48,6 +51,18 @@
                     <li class="nav-item px-2 me-1" style="background-color: #000; border-radius: 10px;">
                         <a class="nav-link" style="color: #fff;" aria-current="page" href="contact.html">Sign Up</a>
                     </li>
+                    <div class="btn-group dropstart">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Zarif <i class="fa-solid fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Profil</a></li>
+                            <li><a class="dropdown-item" href="#">Pemesanan</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+
                 </ul>
             </div>
         </div>

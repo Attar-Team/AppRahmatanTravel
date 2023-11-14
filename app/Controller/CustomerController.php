@@ -297,10 +297,15 @@ class CustomerController
                 unlink('uploads/foto_paspor/'.$c->foto_paspor);
             }
 
-            if(file_exists('uploads/foto_bpjs/'.$c->foto_bpjs)) {
-                unlink('uploads/foto_bpjs/'.$c->foto_bpjs);
+            if(file_exists('uploads/foto_rekening/'.$c->foto_buku_rekening)) {
+                unlink('uploads/foto_rekening/'.$c->foto_buku_rekening);
             }
 
+            if(file_exists('uploads/foto_pernikahan/'.$c->foto_buku_pernikahan)) {
+                unlink('uploads/foto_pernikahan/'.$c->foto_buku_pernikahan);
+            }
+
+            
             if(file_exists('uploads/foto_paspor2/'.$c->foto_paspor_hal2)) {
                 unlink('uploads/foto_paspor2/'.$c->foto_paspor_hal2);
             }
