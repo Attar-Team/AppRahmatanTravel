@@ -11,6 +11,10 @@
     --cream: #D0AE6E;
     --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.2);
 }
+.btn-orange{
+    background-color: var(--orange) !important;
+    color: #fff !important;
+}
 .tittle{
     text-align: center;
     font-weight: bold;
@@ -585,8 +589,8 @@ footer .copyright{
 /* Pemesanan */
 .urutan{
     width: 100%;
-    padding-top: 160px;
-    height: 230px;
+    padding-top: 70px;
+    height: 100px;
 }
 .urutan .box{
     display: flex;
@@ -628,9 +632,6 @@ footer .copyright{
     border: none !important;
     /* box-shadow: var(--box-shadow); */
 }
-.pemesanan{
-
-}
 .pemesanan .pemesanan-container{
     display: flex;
     justify-content: center;
@@ -650,13 +651,21 @@ footer .copyright{
     width: 400px;
     background-color: #fff;
     padding: 25px;
+    box-shadow: var(--box-shadow);
     border-radius: 10px;
 }
 .pemesanan .pemesanan-container .paket-cont .detail-pkt .header-detail{
     border-bottom: 1px solid #ddd;
     width: 100%;
+    display: flex;
+    gap: 20px;
+    padding-bottom: 15px;
 }
-
+.pemesanan .pemesanan-container .paket-cont .detail-pkt .header-detail h2{
+    font-weight: bolder;
+    font-size: 35px;
+    color: var(--orange);
+}
 .pemesanan .pemesanan-container .paket-cont .detail-pkt .body-detail .ket{
     justify-content: space-between;
     display: flex;

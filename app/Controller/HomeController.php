@@ -51,12 +51,21 @@ class HomeController
         View::render("Home/footer", []); 
     }
 
-    public function pemesanan($id)
+    public function pemesanan($idKeberangkatan)
     {
-        
-        View::render("Home/header", []);
-        View::render("Home/pemesanan", []);
-        View::render("Home/footer", []); 
+        $keberangkatan = $this->keberangkatan->getDetail($idKeberangkatan);
+        foreach ($keberangkatan as $k) {
+            $idPaket = $k->paket_id;
+        }
+        $hotel = $this->paket->getHotelPaket($idPaket);
+        $harga = $this->paket->getHargaPaket($idPaket);
+        $bintang = $this->paket->getBintangHotel($idPaket);
+        View::render("Home/pemesanan", [
+            "hotel"=> $hotel,
+            "harga"=> $harga,
+            "bintang"=> $bintang,
+            "keberangkatan"=> $keberangkatan
+        ]);
     }
 
     public function pembayaran()
@@ -72,11 +81,15 @@ class HomeController
         View::render("Home/profile", []);
         View::render("Home/footer", []); 
     }
+    public function paketUmrah()
+    {
+        View::render("Home/header", []);
+        View::render("Home/paketUmrah", []);
+        View::render("Home/footer", []); 
+    }
 
     public function tambahJamaah()
     {
- 
         View::render("Home/tambahCustomer", []);
-
     }
 }

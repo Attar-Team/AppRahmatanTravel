@@ -42,6 +42,7 @@ Router::add("GET","/detail-paket/([0-9a-zA-Z]*)", HomeController::class,"detailP
 Router::add("GET","/pemesanan/([0-9a-zA-Z]*)", HomeController::class,"pemesanan");
 Router::add("GET","/pembayaran", HomeController::class,"pembayaran");
 Router::add("GET","/profile", HomeController::class,"profile");
+Router::add("GET","/paket-umrah", HomeController::class,"paketUmrah");
 Router::add("GET","/tambah-jamaah", HomeController::class,"tambahJamaah");
 Router::add("POST","/tambah-jamaah-user", CustomerController::class,"tambahCustomerUser");
 

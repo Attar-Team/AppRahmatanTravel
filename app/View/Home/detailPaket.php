@@ -70,7 +70,7 @@ foreach($data['keberangkatan'] as $k) :
             <div class="d-flex">
                 <a class="btn-admin" href="#"><i class="fa-brands fa-whatsapp"></i> Tanya Admin</a>
                 <a class="btn-booking" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login untuk booking</a>
-                <a class="btn-booking" href="/pemesanan/<?= $k->keberangkatan_id ?>"><i class="fa-solid fa-share-from-square"></i></i> Pesan sekarang</a>
+                <!-- <a class="btn-booking" href="/pemesanan/<?= $k->keberangkatan_id ?>"><i class="fa-solid fa-share-from-square"></i></i> Pesan sekarang</a> -->
             </div>
         </div>
     </div>
