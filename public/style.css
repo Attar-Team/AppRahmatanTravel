@@ -777,12 +777,51 @@ footer .copyright{
     border-radius: 10px;
     box-shadow: var(--box-shadow);
 }
-
+.filter-paket{
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    margin-top: -150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.filter-paket .filter-pkt-container{
+    display: flex;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    gap: 25px;
+    justify-content: center;
+    background-color: #fff;
+}
+.filter-paket .filter-pkt-container .box{
+    width: 210px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.filter-paket .filter-pkt-container .box input,select{
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid #666;
+}
+.filter-paket .filter-pkt-container .box .inp-num{
+    width: 100px;
+    display: inline-block;
+    margin-right: 15px;
+}
+.filter-paket .filter-pkt-container .box i{
+    font-size: 35px;
+    color: var(--orange);
+}
 @media screen and (max-width: 1100px) {
     .img-login {
       display: none;
     }
 }
+
 @media screen and (max-width: 456px) {
     .login{
         width: 350px;
@@ -790,7 +829,7 @@ footer .copyright{
 }
 
     .swiper {
-      width: 80%;
+      width: 90%;
       padding-top: 50px;
       padding-bottom: 50px;
     }

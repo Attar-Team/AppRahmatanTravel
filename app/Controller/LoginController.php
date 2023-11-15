@@ -30,6 +30,7 @@ class LoginController
 
     public function login()
     {
+
         try {
             if ($_POST['email'] == "" || $_POST['password'] == "") {
                 throw new ValidationException("Field harus di isi");
@@ -41,10 +42,27 @@ class LoginController
             session_start();
             $_SESSION['status_login'] = true;
             $_SESSION['level'] = $row['level'];
-            View::redirect("/admin/dashboard");
+            if($row['level'] == 'admin'){
+                View::redirect("/admin/dashboard");
+            }else if($row["level"] == "customer"){
+                View::redirect("/");
+            }
         } catch (\Throwable $th) {
             View::render("login", ["error" => $th->getMessage()]);
         }
+    }
+
+    public function logout()
+    {
+        session_start();
+        if($_SESSION['level'] == 'admin'){
+            session_destroy();
+            View::redirect("/login");
+        }else if($_SESSION["level"] == "customer"){
+            session_destroy();
+            View::redirect("/");
+        }
+        
     }
 
     public function apiLogin()

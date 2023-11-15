@@ -333,4 +333,96 @@ class CustomerController
         }
 
     }
+
+
+    public function apiTambahProfileCustomer()
+    {
+        try {
+            $tgl_lahir = str_replace('-"', '/', $_POST['tanggal_lahir']);
+            $newTglLahir = date("Y-m-d", strtotime($tgl_lahir));
+            $rename = array();
+            foreach ($_FILES as $key => $value) {
+                $filename = $value['name'];
+
+                foreach ($filename as $k => $v) {
+                    $rename[$k] = "";
+                    if (!$filename[$k] == "") {
+                        $filesize = $value['size'][$k];
+                        $tmpname = $value['tmp_name'][$k];
+
+                        $formatfile = pathinfo($filename[$k], PATHINFO_EXTENSION);
+                        $rename[$k] = "foto_$k" . time() . '.' . $formatfile;
+
+                        $allowedtype = array('png', 'jpeg', 'jpg', 'gif', 'JPG');
+
+                        if (!in_array($formatfile, $allowedtype)) {
+                            $result = [
+                                'status' => 400,
+                                'message' => 'format tidak di izinkan'
+                            ];
+                            exit();
+                        } elseif ($filesize > 1000000) {
+                            $result = [
+                                'status' => 400,
+                                'message' => 'size tidak boleh dari 1mb'
+                            ];
+                            exit();
+                        } else {
+                            if (!file_exists("uploads/foto_$k/")) {
+                                mkdir("uploads/foto_$k/", 0777, true);
+                            }
+                            move_uploaded_file($tmpname, "uploads/foto_$k/" . $rename[$k]);
+                        }
+                    }
+                }
+            }
+            $dataCustomer = [
+                'NIK' => $_POST['NIK'],
+                'user_id' => 1,
+                'nama' => $_POST['nama'],
+                'tempat_lahir' => $_POST['tempat_lahir'],
+                'tanggal_lahir' => $newTglLahir,
+                'alamat' => $_POST['alamat'],
+                'jenis_kelamin' => $_POST['jenis_kelamin'],
+                'pekerjaan' => $_POST['pekerjaan'],
+                'ukuran_baju' => $_POST['ukuran_baju'],
+                'no_telp' => $_POST['no_telp'],
+                'foto' => $rename['customer'],
+            ];
+
+            $saveCustomer = $this->customer->save($dataCustomer);
+            if ($saveCustomer['count'] > 0) {
+                $tgl_penerbitan = str_replace('-"', '/', $_POST['tgl_penerbitan']);
+                $newTglPenerbitan = date("Y-m-d", strtotime($tgl_penerbitan));
+                $dataPasport = [
+                    'nomor_pasport' => $_POST['nomor_pasport'],
+                    'customer_id' => $_POST['NIK'],
+                    'nama_pasport' => $_POST['nama_pasport'],
+                    'tempat_penerbitan' => $_POST['tempat_penerbitan'],
+                    'tgl_penerbitan' => $newTglPenerbitan
+                ];
+                $savePasport = $this->customer->savePasport($dataPasport);
+                $saveDocument = $this->customer->saveDocument($_POST['NIK'], $rename);
+                if ($saveDocument > 0 && $savePasport > 0) {
+                    $result = [
+                        'status' => 200,
+                        'message' => 'success'
+                    ];
+                } else {
+                    $result = [
+                        'status' => 400,
+                        'message' => 'failed'
+                    ];
+                }
+            }
+            echo json_encode($result);
+        } catch (\Throwable $th) {
+            $result = [
+                'status' => 400,
+                'message' => 'failed',
+                'information' => $th->getMessage()
+            ];
+            echo json_encode($result);
+        }
+    }
 }

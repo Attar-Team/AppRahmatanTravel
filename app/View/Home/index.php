@@ -2,14 +2,14 @@
 
     <div class="nav-image">
         <div class="desc">
-            <h3>Rahmatan Travel</h3>
+            <h3 class="transparan">Rahmatan Travel</h3>
             <h1 id="title">Kami Ada Untuk Melayani <br> Perjalanan Ibadah Anda</h1>
             <h1 style="margin-bottom: 20px;"></h1>
             <p class="transparan" style="margin-bottom: 13px;">Travel dengan pelayanan terbaik dan memiliki sertifikat
                 izin.<br>Putusan Izin Travel No. 12460001227810001</p>
 
-            <a class="btn-book" href="about.html">Book Now</a>
-            <a class="btn-contact" href="about.html">Contact Us</a>
+            <a class="btn-book fade-in" href="#paket">Pesan Sekarang</a>
+            <a class="btn-contact fade-in" href="/about">Tentang Kami</a>
 
         </div>
 
@@ -21,7 +21,7 @@
             <img class="from-left" src="image/welcome.png" alt="">
 
             <div class="desc from-right">
-                <h2>SELAMAT DATANG <br>DI RAHMATAN TRAVEL</h2>
+                <h2 style="font-weight: bolder;">SELAMAT DATANG <br>DI RAHMATAN TRAVEL</h2>
                 <h4>Rahmatan Travel Sebuah Platform Untuk
                     Menemani Perjalanan Ibadah Anda
                     Ke Baitullah ataupun Wisata - Wisata Halal. </h4>
@@ -49,12 +49,12 @@
   </div>
 </section> -->
 
-    <section>
+    <section id="paket">
         <div class="paket">
             <div class="header-content">
                 <div class="title">
-                    <h4>SPESIAL TERBAIK UNTUK ANDA</h4>
-                    <H2>SPESIAL PAKET TRAVEL</H2>
+                    <H2 style="font-weight: bolder;">SPESIAL PAKET TRAVEL</H2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas ut expedita sint minima corrupti consequatur ex minus? Libero id illum vitae consequatur ducimus ut deserunt doloremque magnam architecto. Placeat, quam.</p>
                 </div>
 
                 <div class="btn">
@@ -214,18 +214,31 @@
     </section>
 
     <section>
-        <h2 class="text-center m-5" style="font-size: 40px;">Galery</h2>
-        <div style="position: relative; height: 100%;">
+    <div class="header-content">
+                <div class="title">
+                    <H2 style="font-weight: bolder;">GALERY </H2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas ut expedita sint minima corrupti consequatur ex minus? Libero id illum vitae consequatur ducimus ut deserunt doloremque magnam architecto. Placeat, quam.</p>
+                </div>
+
+                <div class="btn">
+                    <a href="#">Lihat Semua</a>
+                </div>
+            </div>
+        <!-- <h2 class="text-center m-5" style="font-size: 40px;">Galery</h2> -->
+        <div class="transparan" style="position: relative; height: 100%;">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="/image/galeri2.png" />
+                        <img src="/image/glry.jpg" />
                     </div>
                     <div class="swiper-slide">
-                        <img src="/image/galeri3.png" />
+                    <img src="/image/glry.jpg" />
                     </div>
                     <div class="swiper-slide">
-                        <img src="/image/galeri1.png" />
+                    <img src="/image/glry.jpg" />
+                    </div>
+                    <div class="swiper-slide">
+                    <img src="/image/glry.jpg" />
                     </div>
                     <!-- <div class="swiper-slide">
                         <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
@@ -249,7 +262,7 @@
         </div>
     </section>
 
-    <section>
+    <!-- <section>
         <div class="pengalaman">
             <h4 class="tittle">Pengalaman Pengguna</h4>
             <H2 class="tittle-desc">Rahmatan Travel</H2>
@@ -315,14 +328,14 @@
             </div>
         </div>
 
-    </section>
+    </section> -->
 
     <section>
         <div class="artikel">
             <div class="header-content">
                 <div class="title">
-                    <h4>SPESIAL TERBAIK UNTUK ANDA</h4>
-                    <H2>SPESIAL PAKET TRAVEL</H2>
+                    <H2 style="font-weight: bolder;">Artikel</H2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat eius atque natus repellendus nobis repellat voluptate possimus at odio magnam, beatae officia nam exercitationem voluptates rerum nulla culpa, provident aspernatur.</p>
                 </div>
                 <div class="btn">
                     <a href="#">Lihat Semua</a>
@@ -330,7 +343,7 @@
             </div>
 
             <div class="container">
-                <div class="box shadow">
+                <div class="box shadow from-left">
                     <img src="/image/artikel.png" alt="">
                     <div class="date">
                     <p class="m-0">20 oktober 2023</p>
@@ -340,7 +353,7 @@
                     <a href="#" class="btn">Baca Sekarang</a>
                 </div>
 
-                <div class="box shadow">
+                <div class="box shadow fade-in">
                     <img src="/image/artikel.png" alt="">
                     <div class="date shadow">
                         <p class="m-0">20 oktober 2023</p>
@@ -349,7 +362,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium .</p>
                     <a href="#" class="btn">Baca Sekarang</a>
                 </div>
-                <div class="box shadow">
+                <div class="box shadow from-right">
                     <img src="/image/artikel.png" alt="">
                     <div class="date">
                         <p class="m-0">20 oktober 2023</p>

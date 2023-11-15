@@ -36,15 +36,15 @@
 
     <!-- Form Login -->
     <div class="wrapper">
-      <form action="">
+      <form action="/login" method="POST">
         <h1>Login</h1>
         <div class="input-box">
-          <input type="text" placeholder="Username" required />
+          <input type="email" name="email" placeholder="Username" required />
         </div>
         <div class="input-box">
-          <input type="password" placeholder="Password" required />
+          <input type="password" name="password" placeholder="Password" required />
         </div>
-        <button type="button" class="btn">Masuk</button>
+        <button type="submit" class="btn">Masuk</button>
         <div class="forgot">
           <label> <input type="checkbox" />Remember me</label>
           <a href="#">Forgot Password</a>

@@ -34,6 +34,7 @@ Router::add("POST","/addApi", Test::class, "testt", [ApiMiddleware::class]);
 Router::add("GET","/login",LoginController::class,"index");
 Router::add("GET","/register",LoginController::class,"register");
 Router::add("POST","/login",LoginController::class,"login");
+Router::add("GET","/logout", LoginController::class,"logout");
 
 //Router untuk menangani Homepage
 Router::add("GET","/", HomeController::class,"index");
@@ -109,6 +110,10 @@ Router::add("GET","/apiGetPaket/([0-9a-zA-Z]*)", PaketController::class,"apiGetP
 Router::add("GET","/apiGetKeberangkatan", KeberangkatanController::class,'apiGetKeberangkatan');
 Router::add("GET","/apiGetKeberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,'apiGetKeberangkatanById');
 Router::add("GET","/admin/delete-harga/([0-9a-zA-Z]*)/([0-9a-zA-Z]*)", PaketController::class, "deleteHarga");
+
+
+//4. api customer
+Router::add("POST","/apiTambahProfileCustomer", CustomerController::class, 'apiTambahProfileCustomer');
 
 
 

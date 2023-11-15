@@ -18,7 +18,7 @@
 
 </head>
 
-<body style="background-color: #E9EAEC;">
+<body style="background-color: #E7E7DF;">
     <nav style="position: fixed;top: 0;right: 0; left: 0;z-index: 6;transition: .3s;" class="navbar navbar-expand-lg">
         <div class="container-fluid">
 
@@ -37,20 +37,37 @@
                     <li class="nav-item px-2 me-2">
                         <a class="nav-link" style="color: #000;" aria-current="page" href="/about">About Us</a>
                     </li>
-                    <li class="nav-item px-2 me-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: #000;" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Paket Travel
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/paket-umrah">Umrah</a></li>
+                            <li><a class="dropdown-item" href="#">Haji</a></li>
+                            <li><a class="dropdown-item" href="#">Wisata Halal</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li class="nav-item px-2 me-2">
                         <a class="nav-link" style="color: #000;" aria-current="page" href="gallery.html">Paket
                             Travel</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item px-2 me-3">
                         <a class="nav-link" style="color: #000;" aria-current="page" href="contact.html">Galery</a>
                     </li>
+                    <?php
+                    session_start();
+                        if(!isset($_SESSION['status_login'])){
+
+                    ?>
 
                     <li class="nav-item px-2 me-1" style="border: 1px solid; border-radius: 10px;">
-                        <a class="nav-link" style="color: #000;" aria-current="page" href="contact.html">Log In</a>
+                        <a class="nav-link" style="color: #000;" aria-current="page" href="/login">Log In</a>
                     </li>
                     <li class="nav-item px-2 me-1" style="background-color: #000; border-radius: 10px;">
                         <a class="nav-link" style="color: #fff;" aria-current="page" href="contact.html">Sign Up</a>
                     </li>
+                    <?php }else{ ?>
                     <div class="btn-group dropstart">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -59,9 +76,10 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Profil</a></li>
                             <li><a class="dropdown-item" href="#">Pemesanan</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </div>
+                    <?php } ?>
 
                 </ul>
             </div>

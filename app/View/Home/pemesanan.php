@@ -435,6 +435,7 @@
                 </div>
             </div>
         </div>
+         </form>
         <script type="text/javascript">
         $(document).ready(function() {
             var max_field = 10;
@@ -447,7 +448,7 @@
                     x++
                     console.log(x)
                     $(wraper).append(
-                        '<div class="customer mb-2"><h3>Jamaah '+x+'</h3><div class="form-floating my-3"><select class="form-select" id="floatingSelect" aria-label="Floating label select example"><option selected>Belum ada profile harus ditambahkan dahulu</option></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="jamaa'+x+'" value="<?= $h['harga'] ?>"><label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label></div><?php endforeach; ?></div></div>'
+                        '<div class="customer mb-2"><h3>Jamaah '+x+'</h3><div class="form-floating my-3"><select class="form-select" id="floatingSelect" aria-label="Floating label select example"><option selected>Belum ada profile harus ditambahkan dahulu</option></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="jam'+x+'"  value="<?=  $h['harga'] ?>"><label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label></div><?php endforeach; ?></div></div>'
                     )
                 }
             });
@@ -455,6 +456,18 @@
                 e.preventDefault();
                 $(this).parent('div').remove();
                 x--;
+            })
+            $('input[type=radio][name=jamaah]').click(function() {
+                console.log(this.value);
+            });
+
+
+            
+
+            $(wraper).on("click", "input[type=radio][name=jam2]", function(e){
+                e.preventDefault();
+                console.log(this.value);
+                // console.log($("#jamaah2").val());
             })
 
             var form1 = $("#form-1");
@@ -491,14 +504,11 @@
                 $(transfer).hide();
             });
 
-            $('input[type=radio][name=jamaah]').change(function() {
-                console.log(this.value);
-            });
-
+         
 
         })
         </script>
-    </form>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/script.js"></script>

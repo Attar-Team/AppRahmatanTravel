@@ -35,6 +35,11 @@ class Test
     }
 
     public function testFile(){
+        // var_dump($_FILES);
+        // die();
+
+        $result = array();
+        
         $filename = $_FILES['foto']['name'];
             $tmpname = $_FILES['foto']['tmp_name'];
             $filesize = $_FILES['foto']['size'];
@@ -45,12 +50,29 @@ class Test
             $allowedtype = array('png','jpeg','jpg','gif');
 
             if(!in_array($formatfile,$allowedtype)){
-                echo'format gagal';
+                $result = [
+                    'status' => 400,
+                    'message' => 'failed',
+                    'information' => 'format tidak di izinkan'
+                ];
             }elseif($filesize > 1000000){
-                echo'size gagal';
+                $result = [
+                    'status' => 400,
+                    'message' => 'failed',
+                    'information' => 'size lebih dari 1 mb'
+                ];
             }else{
-                move_uploaded_file($tmpname, "uploads/tes/" .$rename);
-                echo "berhasil";
+                // move_uploaded_file($tmpname, "uploads/tes/" .$rename);
+                $result = [
+                    'status' => 201,
+                    'message' => 'success',
+                    "name"=> $_FILES["foto"]["name"],
+                        "full_path"=> $_FILES["foto"]["full_path"],
+                        "type"=> $_FILES["foto"]["type"],
+                        "tmp_name"=> $_FILES["foto"]["tmp_name"],
+                        "size"=> $_FILES["foto"]["size"],
+                        "error"=> $_FILES["foto"]["error"]
+                ];
             }
         // $result = [
         //     "name"=> $_FILES["foto"]["name"],
@@ -60,7 +82,7 @@ class Test
         //     "size"=> $_FILES["foto"]["size"],
         //     "error"=> $_FILES["foto"]["error"]
         // ];
-        // echo json_encode($result);
+        echo json_encode($result);
     }
 
     public function testVoley()

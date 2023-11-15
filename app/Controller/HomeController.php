@@ -83,8 +83,9 @@ class HomeController
     }
     public function paketUmrah()
     {
+        $keberangkatan = $this->keberangkatan->get();
         View::render("Home/header", []);
-        View::render("Home/paketUmrah", []);
+        View::render("Home/paketUmrah", ['dataKeberangkatan' => $keberangkatan]);
         View::render("Home/footer", []); 
     }
 

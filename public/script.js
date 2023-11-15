@@ -3,7 +3,7 @@ var swiper = new Swiper(".mySwiper", {
   loop : true,
   grabCursor: true,
   centeredSlides: true,
-  slidesPerView: 3,
+  slidesPerView: 2,
   coverflowEffect: {
     rotate: 50,
     stretch: 0,
@@ -21,6 +21,13 @@ var swiper = new Swiper(".mySwiper", {
     clickable :true
   },
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  new TypeIt("#title", {
+  }).go();
+});
+
+
 window.addEventListener("scroll", function(){ 
     var header = document.querySelector("nav");
     header.classList.toggle("sticky", window.scrollY > 1) 
