@@ -386,3 +386,26 @@ $(document).ready(function() {
       </form>
     </div>
 </div>
+
+<script>
+     imgInpBrosur.onchange = evt => {
+    const [file] = imgInpBrosur.files
+    if (file) {
+      outputBrosur.src = URL.createObjectURL(file)
+    }
+  }
+
+  imgInpMekkah.onchange = evt => {
+    const [file] = imgInpMekkah.files
+    if (file) {
+      outputMekkah.src = URL.createObjectURL(file)
+    }
+  }
+
+  imgInpMadinah.onchange = evt => {
+    const [file] = imgInpMadinah.files
+    if (file) {
+      outputMadinah.src = URL.createObjectURL(file)
+    }
+  }
+</script>

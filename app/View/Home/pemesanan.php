@@ -47,35 +47,35 @@
                         <a href="/tambah-jamaah" class="btn btn-orange">Tambah profile Jamaah</a>
                     </div>
 
-                    <div class="customer mb-2">
-                        <h3>Jamaah 1</h3>
-                        <div class="form-floating my-3">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option selected>Belum ada profile harus ditambahkan dahulu</option>
-                            </select>
-                            <label for="floatingSelect">Pilih profile</label>
-                        </div>
-
-                        <div class="harga">
-                            <h3>Variasi Harga</h3>
-                            <?php 
-                                foreach($data['harga'] as $h) :
-                            ?>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jamaah" id="test" value="<?= $h['harga'] ?>">
-                                <label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-
-
-
-                    </div>
                     <div class="inp-group">
+                        <div class="customer mb-2">
+                            <h3>Jamaah 1</h3>
+                            <div class="form-floating my-3">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option selected>Belum ada profile harus ditambahkan dahulu</option>
+                                </select>
+                                <label for="floatingSelect">Pilih profile</label>
+                            </div>
+
+                            <div class="harga">
+                                <h3>Variasi Harga</h3>
+                                <?php 
+                                    foreach($data['harga'] as $h) :
+                                ?>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="1"
+                                        value="<?=  $h['nama_jenis'] ?>,<?= $h['harga'] ?>">
+                                    <label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp.
+                                        <?= $h['harga'] ?></label>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+
+                        </div>
 
                     </div>
                     <a href="" class="btn btn-orange w-100 mt-3 add-inp">tambah</a>
-
 
                     <div class="customer mt-4">
                         <h3>Ringkasan</h3>
@@ -106,18 +106,14 @@
                             </div>
 
                             <h4>#Pesanan</h4>
-                            <div class="d-flex px-3" style="justify-content: space-between;">
-                                <p>[Quad] x1</p>
-                                <p>Rp. 32,000,000</p>
-                            </div>
-                            <div class="d-flex px-3" style="justify-content: space-between;">
-                                <p>[Triple] x1</p>
-                                <p>Rp. 33,000,000</p>
-                            </div>
+                            <div class="total-group">
+
+</div>
+                            
 
                             <div class="d-flex pt-2" style="justify-content: space-between;border-top: 1px solid #ddd;">
                                 <h5>Total</h5>
-                                <h5>Rp. 33,000,000</h5>
+                                <h5 id="total">0</h5>
                             </div>
 
 
@@ -131,7 +127,7 @@
                         $tidakTermasukHarga = explode(",", $k->tidak_termasuk_harga);
                         $keunggulan = explode(",", $k->keunggulan);
                         ?>
-                
+
                 <div class="paket-cont">
                     <div class="detail-pkt">
                         <div class="header-detail">
@@ -281,14 +277,7 @@
         <div class="pembayaran" id="form-2" style="display: none;">
             <div class="total">
                 <h2>Total Pembayaran</h2>
-                <ul>
-                    <li>total</li>
-                    <li>32,000,000</li>
-                </ul>
-                <ul>
-                    <li>total</li>
-                    <li>32,000,000</li>
-                </ul>
+              
                 <ul>
                     <li>total</li>
                     <li>32,000,000</li>
@@ -435,80 +424,144 @@
                 </div>
             </div>
         </div>
-         </form>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            var max_field = 10;
-            var wraper = $(".inp-group");
-            var addButton = $(".add-inp");
-            var x = 1;
-            $(addButton).click(function(e) {
-                e.preventDefault();
-                if (x < max_field) {
-                    x++
-                    console.log(x)
-                    $(wraper).append(
-                        '<div class="customer mb-2"><h3>Jamaah '+x+'</h3><div class="form-floating my-3"><select class="form-select" id="floatingSelect" aria-label="Floating label select example"><option selected>Belum ada profile harus ditambahkan dahulu</option></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="jam'+x+'"  value="<?=  $h['harga'] ?>"><label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label></div><?php endforeach; ?></div></div>'
-                    )
-                }
-            });
-            $(wraper).on("click", ".remove-field", function(e) {
-                e.preventDefault();
-                $(this).parent('div').remove();
-                x--;
-            })
-            $('input[type=radio][name=jamaah]').click(function() {
-                console.log(this.value);
-            });
+    </form>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var max_field = 10;
+        var wraper = $(".inp-group");
+        var addButton = $(".add-inp");
+        var wraperTotal = $(".total-group");
+        var x = 1;
+        $(addButton).click(function(e) {
+            e.preventDefault();
+            if (x < max_field) {
+                x++
+                console.log(x)
+                $(wraper).append(
+                    '<div class="customer mb-2"><h3>Jamaah ' + x +
+                    '</h3><div class="form-floating my-3"><select class="form-select" id="floatingSelect" aria-label="Floating label select example"><option selected>Belum ada profile harus ditambahkan dahulu</option></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" id="add_box" name="' +
+                    x +
+                    '"  value="<?=  $h['nama_jenis'] ?>,<?=  $h['harga'] ?>"><label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label></div><?php endforeach; ?></div><a href="" class="btn btn-danger remove-field" id="hps">hapus</a></div>'
+                )
+            }
+        });
+        $(wraper).on("click", ".remove-field", function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
 
+        var sum = 0;
+        var total = 0;
+        var result = [];
+        var arr = [];
 
-            
+        //         $("input[type=radio][name=first]").change(function(){
+        //             // e.preventDefault();
+        //             result.length = 0
+        //             var string = $(":input[type=radio][name=first]:checked").val();
+        //                 arr = string.split(',');
+        //                 result.push(arr);
+        // //             result.length = 0
+        // //             var a = $(":input[type=radio]:checked");
+        // //             console.log(a.length);
+        // //             for(var i = 0; i < a.length; i++){
+        // //                 var no = i+1;
 
-            $(wraper).on("click", "input[type=radio][name=jam2]", function(e){
-                e.preventDefault();
-                console.log(this.value);
-                // console.log($("#jamaah2").val());
-            })
+        // //             }
+        //             console.log(result);
+        // //             sum = 0;
+        // //             for (var i = 0; i < result.length; i++) {
+        // //     sum += result[i][1] << 0;
+        // // }
+        // // console.log(sum);
+        //         })
 
-            var form1 = $("#form-1");
-            var form2 = $("#form-2");
-            var urutan1 = $("#urutan1");
-            var urutan2 = $("#urutan2");
-            var next1 = $("#next-1");
+        $(wraper).on("change", $(":input[type=radio]"), function() {
+            result.length = 0
+            var a = $(":input[type=radio][id=add_box]:checked");
+            console.log(a.length);
+            for (var i = 0; i <= a.length; i++) {
+                var no = i + 1;
+                var string = $(":input[type=radio][name=" + no + "]:checked").val();
+                arr = string.split(',');
+                result.push(arr);
+            }
+            tampilTotal();
+        })
 
-            $(next1).click(function(e) {
-                e.preventDefault();
-                $(form1).hide();
-                $(urutan1).hide();
-                $(form2).show();
-                $(urutan2).show();
-            });
+        $(wraper).on("click", "#hps", function() {
+            result.length = 0
+            var a = $(":input[type=radio][id=add_box]:checked");
+            console.log(a.length);
+            for (var i = 0; i <= a.length; i++) {
+                var no = i + 1;
+                var string = $(":input[type=radio][name=" + no + "]:checked").val();
+                arr = string.split(',');
+                result.push(arr);
+            }
 
-            $checkTransfer = $("#checkTransfer");
-            $checkCash = $("#checkCash");
-            $checkTalangan = $("#checkTalangan");
-            $transfer = $("#transfer");
-
-            $(checkTransfer).change(function(e) {
-                e.preventDefault();
-                $(transfer).show();
-            });
-
-            $($checkCash).change(function(e) {
-                e.preventDefault();
-                $(transfer).hide();
-            });
-
-            $($checkTalangan).change(function(e) {
-                e.preventDefault();
-                $(transfer).hide();
-            });
-
-         
+            tampilTotal();
 
         })
-        </script>
-   
+
+
+        function tampilTotal() {
+            
+            
+            $(wraperTotal).children().remove();
+            for (var i = 0; i < result.length; i++) {
+                $(wraperTotal).append(
+                    '<div class="d-flex px-3" id="list" style="justify-content: space-between;"><p>'+result[i][0]+'</p><p>'+result[i][1]+'</p></div>'
+                    );
+                    }
+                    sum = 0;
+            for (var i = 0; i < result.length; i++) {
+                sum += parseInt(result[i][1]) ;
+            }
+            $("#total").html(sum);
+        }
+
+
+        var form1 = $("#form-1");
+        var form2 = $("#form-2");
+        var urutan1 = $("#urutan1");
+        var urutan2 = $("#urutan2");
+        var next1 = $("#next-1");
+
+        $(next1).click(function(e) {
+            e.preventDefault();
+            $(form1).hide();
+            $(urutan1).hide();
+            $(form2).show();
+            $(urutan2).show();
+        });
+
+        $checkTransfer = $("#checkTransfer");
+        $checkCash = $("#checkCash");
+        $checkTalangan = $("#checkTalangan");
+        $transfer = $("#transfer");
+
+        $(checkTransfer).change(function(e) {
+            e.preventDefault();
+            $(transfer).show();
+        });
+
+        $($checkCash).change(function(e) {
+            e.preventDefault();
+            $(transfer).hide();
+        });
+
+        $($checkTalangan).change(function(e) {
+            e.preventDefault();
+            $(transfer).hide();
+        });
+
+
+
+    })
+    </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/script.js"></script>

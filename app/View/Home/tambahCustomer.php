@@ -107,10 +107,10 @@
              <label for="">Foto</label>
              <img id="outputCustomer" width="200px" class="m-1 rounded shadow" src=""  alt="">
                 <div class="input-group mb-3">
-                    <input type="file" class="form-control foto" name="foto[customer]" id="imgInpCustomer">
+                    <input type="file" class="form-control" name="foto[customer]" id="imgInpCustomer">
                 </div>
 
-                <button class="btn btn-primary"  id="next1">Selanjutnya</button>
+                <button class="btn btn-primary" disabled id="next1">Selanjutnya</button>
             </div>
 
             <div class="container" id="step2" style="display: none;">
@@ -294,21 +294,21 @@
     </script>
 
     <script>
-    // const nextButton1 = document.getElementById("next1");
+    const nextButton1 = document.getElementById("next1");
     const step1Inputs = [document.getElementById("nama"), document.getElementById("NIK"), document.getElementById(
             "no_telp"), document.getElementById("lahir"), document.getElementById("alamat"), document
-        .getElementById("jenis_kelamin"), document.getElementsByClassName("foto"), document.getElementById("tanggal_lahir"),document.getElementById("pekerjaan"),document.getElementById("ukuran_baju"),
+        .getElementById("jenis_kelamin"), document.getElementById("imgInpCustomer"), document.getElementById("tanggal_lahir"),document.getElementById("pekerjaan"),document.getElementById("ukuran_baju")
     ];
 
-    // function isStepFormValid(inputs) {
-    //     return inputs.every(input => input.value.trim() !== "");
-    // }
+    function isStepFormValid(inputs) {
+        return inputs.every(input => input.value.trim() !== "");
+    }
 
-    // step1Inputs.forEach(input => {
-    //     input.addEventListener("input", () => {
-    //         nextButton1.disabled = !isStepFormValid(step1Inputs);
-    //     });
-    // });
+    step1Inputs.forEach(input => {
+        input.addEventListener("input", () => {
+            nextButton1.disabled = !isStepFormValid(step1Inputs);
+        });
+    });
     imgInpCustomer.onchange = evt => {
     const [file] = imgInpCustomer.files
     if (file) {

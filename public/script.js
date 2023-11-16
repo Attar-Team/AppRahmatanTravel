@@ -83,26 +83,7 @@ window.addEventListener("scroll", function(){
   })
 
   
-   imgInpBrosur.onchange = evt => {
-    const [file] = imgInpBrosur.files
-    if (file) {
-      outputBrosur.src = URL.createObjectURL(file)
-    }
-  }
 
-  imgInpMekkah.onchange = evt => {
-    const [file] = imgInpMekkah.files
-    if (file) {
-      outputMekkah.src = URL.createObjectURL(file)
-    }
-  }
-
-  imgInpMadinah.onchange = evt => {
-    const [file] = imgInpMadinah.files
-    if (file) {
-      outputMadinah.src = URL.createObjectURL(file)
-    }
-  }
   
   imgInpCustomer.onchange = evt => {
     const [file] = imgInpCustomer.files
