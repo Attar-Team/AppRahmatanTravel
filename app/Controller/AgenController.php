@@ -107,7 +107,7 @@ class AgenController
             $cek = $this->agen->checkReferal($id);
             if(count($cek) > 0){
                 foreach($cek as $row){
-                    echo $row->nama;
+                    echo $row->nama.",".$row->NIK;
                 }
             }else{
                 echo'tidak ada';

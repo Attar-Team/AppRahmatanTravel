@@ -19,7 +19,10 @@
 </head>
 
 <body style="background-color: #E9EAEC;">
-    <form action="">
+
+<form action="/pemesanan" method="POST">
+                        
+
         <div class="urutan" id="urutan1">
             <div class="box">
                 <p class="order-active-p"><span class="order-active">1</span> Detail Pemesanan</p>
@@ -45,6 +48,9 @@
                         $keunggulan = explode(",", $k->keunggulan);
                         ?>
         <div class="pemesanan" id="form-1">
+        <input type="hidden" name="keberangkatan_id" value="<?= $k->keberangkatan_id  ?>">
+                <input type="hidden" name="total_tagihan">
+            
             <div class="pemesanan-container">
                 <div class="detail-pemesanan " id="">
                     <div class="d-flex mb-3" style="justify-content: space-between;">
@@ -56,9 +62,9 @@
                         <div class="customer mb-2">
                             <h3>Jamaah 1</h3>
                             <div class="form-floating my-3">
-                                <select class="form-select" id="floatingSelect"
+                                <select class="form-select" name="customer_id[]" id="floatingSelect"
                                     aria-label="Floating label select example">
-                                    <option selected>Belum ada profile harus ditambahkan dahulu</option>
+                                    <option value="1" selected>Belum ada profile harus ditambahkan dahulu</option>
                                 </select>
                                 <label for="floatingSelect">Pilih profile</label>
                             </div>
@@ -70,7 +76,7 @@
                                 ?>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="1"
-                                        value="<?=  $h['nama_jenis'] ?>,<?= $h['harga'] ?>">
+                                        value="<?=  $h['nama_jenis'] ?>,<?= $h['harga'] ?>,<?= $h['harga_paket_id'] ?>">
                                     <label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp.
                                         <?= $h['harga'] ?></label>
                                 </div>
@@ -84,7 +90,7 @@
 
                     <div class="customer mt-4">
                         <h3>Ringkasan</h3>
-                        <form action="">
+                        
                             <!-- <div class="d-flex">
                     <div class="form-floating mb-3 w-100 me-2">
                         <input type="text" class="form-control" id="namaInput" placeholder="Password">
@@ -101,13 +107,14 @@
                                     <label for="alamatinput">Kode Referal Agen</label>
                                 </div>
                                 <div>
+                                    <input type="hidden" name="agen_id" id="agenId">
                                         <button type="button" class="btn btn-orange" id="btnCekReferal">Check</button>
                                     <!-- <a href="#" id="btnCekReferal" class="btn btn-orange">Check</a> -->
                                 </div>
                             </div>
                             <p id="result-agen"></p>
                             <div class="form-floating mb-3">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                <textarea name="catatan_pemesanan" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                                     style="height: 100px"></textarea>
                                 <label for="floatingTextarea2">Comments</label>
                             </div>
@@ -124,7 +131,7 @@
                             </div>
 
 
-                        </form>
+     
 
                     </div>
                 </div>
@@ -279,6 +286,7 @@
 
         <div class="pembayaran" id="form-2" style="display: none;">
             <div class="total">
+            
                 <h4>Rincian Pembayaran</h4>
               
                 <div id="total-pembayaran">
@@ -294,15 +302,15 @@
             <div class="pilih-pembayaran">
                 <h4 class="mb-4">Pilih pembayaran</h4>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="checkCash" name="inlineRadioOptions"
-                        id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" id="checkCash" name="jenis_pembayaran"
+                        id="inlineRadio1" value="cash">
                     <label class="form-check-label chck" for="inlineRadio1"><i class="fa-solid fa-money-bill"></i>
                         Cash</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" id="checkTransfer" type="radio" name="inlineRadioOptions"
-                        id="inlineRadio1" value="option1">
+                    <input class="form-check-input" id="checkTransfer" type="radio" name="jenis_pembayaran"
+                        id="inlineRadio1" value="transfer">
                     <label class="form-check-label chck" for="inlineRadio1"><i
                             class="fa-solid fa-money-bill-transfer"></i> Transfer</label>
                 </div>
@@ -427,7 +435,7 @@
 
             <div class="mb-5" style="padding: 0 100px;">
                 <button type="button" class="btn w-100 btn-warning mb-3" id="back-1">Kembali</button>
-                <button class="btn w-100 btn-orange" id="next-2">Pesan</button>
+                <button type="submit" class="btn w-100 btn-orange" >Pesan</button>
             </div>
        
         </div>
@@ -447,9 +455,9 @@
                 console.log(x)
                 $(wraper).append(
                     '<div class="customer mb-2"><h3>Jamaah ' + x +
-                    '</h3><div class="form-floating my-3"><select class="form-select" id="floatingSelect" aria-label="Floating label select example"><option selected>Belum ada profile harus ditambahkan dahulu</option></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" id="add_box" name="' +
+                    '</h3><div class="form-floating my-3"><select class="form-select" name="customer_id[]" id="floatingSelect" aria-label="Floating label select example"><option value="2" selected>Belum ada profile harus ditambahkan dahulu</option></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" id="add_box" name="' +
                     x +
-                    '"  value="<?=  $h['nama_jenis'] ?>,<?=  $h['harga'] ?>"><label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label></div><?php endforeach; ?></div><a href="" class="btn btn-danger remove-field" id="hps">hapus</a></div>'
+                    '"  value="<?=  $h['nama_jenis'] ?>,<?=  $h['harga'] ?>,<?= $h['harga_paket_id'] ?>"><label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label></div><?php endforeach; ?></div><a href="" class="btn btn-danger remove-field" id="hps">hapus</a></div>'
                 )
             }
         });
@@ -493,8 +501,14 @@
         var btnCheck = $("#btnCekReferal");
         $(btnCheck).click(function(){
             var xhr = new XMLHttpRequest();
-            xhr.onload = function(){       
-                $("#result-agen").html(xhr.responseText)
+            xhr.onload = function(){  
+                var data = xhr.responseText;     
+                var hasil = data.split(',');
+                $("#result-agen").html(hasil[0])
+
+                if(xhr.responseText != "tidak ada"){
+                    $("#agenId").val(hasil[1]);
+                }
             }
             var url;
             if($("#kodeReferal").val() == ""){
@@ -528,6 +542,7 @@
                     );
                     }
                     $("#total-bayar").html(sum);
+                    $("input[type=hidden][name=total_tagihan]").val(sum);
         }
         var form1 = $("#form-1");
         var form2 = $("#form-2");

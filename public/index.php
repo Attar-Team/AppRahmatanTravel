@@ -71,6 +71,7 @@ Router::add("GET","/admin/hapus-paket/([0-9a-zA-Z]*)", PaketController::class,"h
 //Router untuk menangani Dashboard Pemesanan
 Router::add("GET","/admin/pemesanan", PemesananController::class,"index");
 Router::add("GET","/admin/verifikasi-pemesanan", PemesananController::class,"viewVerifikasiPembayaran");
+Router::add("POST","/pemesanan", PemesananController::class ,"tambahPemesanan");
 
 //Router untuk menangani Dashboard Keberangkatan
 Router::add("GET","/admin/keberangkatan", KeberangkatanController::class,"index");
