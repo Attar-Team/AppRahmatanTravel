@@ -199,7 +199,8 @@ class CustomerController
                     $savePasport = $this->customer->savePasport($dataPasport);
                     $saveDocument = $this->customer->saveDocument($_POST['NIK'], $rename);
                     if ($saveDocument > 0 && $savePasport > 0) {
-                        View::redirect('/');
+                        $url = "/pemesanan/".$_POST['idKeberangkatan']."";
+                        View::redirect($url);
                     } else {
                         throw new ValidationException("gagal di tambah");
                     }

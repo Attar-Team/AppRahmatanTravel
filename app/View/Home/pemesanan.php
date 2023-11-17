@@ -38,13 +38,18 @@
                 <p><span>3</span> Detail Pemesanan</p>
             </div>
         </div>
-
+        <?php
+                    foreach($data['keberangkatan'] as $k) : 
+                        $termasukHarga = explode(",", $k->termasuk_harga);
+                        $tidakTermasukHarga = explode(",", $k->tidak_termasuk_harga);
+                        $keunggulan = explode(",", $k->keunggulan);
+                        ?>
         <div class="pemesanan" id="form-1">
             <div class="pemesanan-container">
                 <div class="detail-pemesanan " id="">
                     <div class="d-flex mb-3" style="justify-content: space-between;">
                         <h2>Data jamaah</h2>
-                        <a href="/tambah-jamaah" class="btn btn-orange">Tambah profile Jamaah</a>
+                        <a href="/tambah-jamaah/<?= $k->keberangkatan_id ?>" class="btn btn-orange">Tambah profile Jamaah</a>
                     </div>
 
                     <div class="inp-group">
@@ -92,13 +97,15 @@
                 </div> -->
                             <div class="d-flex mb-3" style="align-items: center; gap: 20px;">
                                 <div class="form-floating w-100">
-                                    <input type="text" class="form-control" id="alamatinput" placeholder="Password">
+                                    <input type="text" class="form-control" id="kodeReferal" placeholder="Password">
                                     <label for="alamatinput">Kode Referal Agen</label>
                                 </div>
                                 <div>
-                                    <a href="" class="btn btn-orange">Check</a>
+                                        <button type="button" class="btn btn-orange" id="btnCekReferal">Check</button>
+                                    <!-- <a href="#" id="btnCekReferal" class="btn btn-orange">Check</a> -->
                                 </div>
                             </div>
+                            <p id="result-agen"></p>
                             <div class="form-floating mb-3">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                                     style="height: 100px"></textarea>
@@ -121,12 +128,7 @@
 
                     </div>
                 </div>
-                <?php
-                    foreach($data['keberangkatan'] as $k) : 
-                        $termasukHarga = explode(",", $k->termasuk_harga);
-                        $tidakTermasukHarga = explode(",", $k->tidak_termasuk_harga);
-                        $keunggulan = explode(",", $k->keunggulan);
-                        ?>
+              
 
                 <div class="paket-cont">
                     <div class="detail-pkt">
@@ -265,7 +267,7 @@
                     </div>
                 </div>
 
-                <?php endforeach; ?>
+               
             </div>
 
             <div class="mb-5" style="padding: 0 100px;">
@@ -273,14 +275,19 @@
             </div>
 
         </div>
+        <?php endforeach; ?>
 
         <div class="pembayaran" id="form-2" style="display: none;">
             <div class="total">
-                <h2>Total Pembayaran</h2>
+                <h4>Rincian Pembayaran</h4>
               
-                <ul>
+                <div id="total-pembayaran">
+
+                </div>
+
+                <ul class="p-0" style="font-size: 23px;font-weight: bolder;">
                     <li>total</li>
-                    <li>32,000,000</li>
+                    <li id="total-bayar">0</li>
                 </ul>
             </div>
 
@@ -300,12 +307,6 @@
                             class="fa-solid fa-money-bill-transfer"></i> Transfer</label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="checkTalangan" name="inlineRadioOptions"
-                        id="inlineRadio1" value="option1">
-                    <label class="form-check-label chck" for="inlineRadio1"><i class="fa-solid fa-cart-shopping"></i>
-                        Talangan</label>
-                </div>
 
                 <div class="bank my-3" style="display: none;" id="transfer">
                     <h4>Pilih Bank</h4>
@@ -364,7 +365,7 @@
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                             aria-controls="panelsStayOpen-collapseOne">
-                            <img src="image/logo-bca.png" width="50px" alt=""> BCA
+                            <img src="/image/logo-bca.png" width="50px" alt=""> Transfer
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
@@ -385,7 +386,7 @@
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
                             aria-controls="panelsStayOpen-collapseTwo">
-                            BRI
+                            Cash
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
@@ -401,12 +402,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item">
+                <!-- <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
                             aria-controls="panelsStayOpen-collapseThree">
-                            BSI
+                            Talangan
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
@@ -421,12 +422,19 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
+
+            <div class="mb-5" style="padding: 0 100px;">
+                <button type="button" class="btn w-100 btn-warning mb-3" id="back-1">Kembali</button>
+                <button class="btn w-100 btn-orange" id="next-2">Pesan</button>
+            </div>
+       
         </div>
     </form>
     <script type="text/javascript">
     $(document).ready(function() {
+        
         var max_field = 10;
         var wraper = $(".inp-group");
         var addButton = $(".add-inp");
@@ -456,27 +464,6 @@
         var result = [];
         var arr = [];
 
-        //         $("input[type=radio][name=first]").change(function(){
-        //             // e.preventDefault();
-        //             result.length = 0
-        //             var string = $(":input[type=radio][name=first]:checked").val();
-        //                 arr = string.split(',');
-        //                 result.push(arr);
-        // //             result.length = 0
-        // //             var a = $(":input[type=radio]:checked");
-        // //             console.log(a.length);
-        // //             for(var i = 0; i < a.length; i++){
-        // //                 var no = i+1;
-
-        // //             }
-        //             console.log(result);
-        // //             sum = 0;
-        // //             for (var i = 0; i < result.length; i++) {
-        // //     sum += result[i][1] << 0;
-        // // }
-        // // console.log(sum);
-        //         })
-
         $(wraper).on("change", $(":input[type=radio]"), function() {
             result.length = 0
             var a = $(":input[type=radio][id=add_box]:checked");
@@ -489,26 +476,8 @@
             }
             tampilTotal();
         })
-
-        $(wraper).on("click", "#hps", function() {
-            result.length = 0
-            var a = $(":input[type=radio][id=add_box]:checked");
-            console.log(a.length);
-            for (var i = 0; i <= a.length; i++) {
-                var no = i + 1;
-                var string = $(":input[type=radio][name=" + no + "]:checked").val();
-                arr = string.split(',');
-                result.push(arr);
-            }
-
-            tampilTotal();
-
-        })
-
-
+        //function untuk menambahkan total 
         function tampilTotal() {
-            
-            
             $(wraperTotal).children().remove();
             for (var i = 0; i < result.length; i++) {
                 $(wraperTotal).append(
@@ -521,21 +490,68 @@
             }
             $("#total").html(sum);
         }
+        var btnCheck = $("#btnCekReferal");
+        $(btnCheck).click(function(){
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function(){       
+                $("#result-agen").html(xhr.responseText)
+            }
+            var url;
+            if($("#kodeReferal").val() == ""){
+                url = 'http://rahmatan.travel/check-referal/1';
+            }else{
+                url = 'http://rahmatan.travel/check-referal/'+$("#kodeReferal").val();
+            }    
+            xhr.open('GET', url, true);
+            xhr.send();
+        })
 
+        $(wraper).on("click", "#hps", function() {
+            result.length = 0
+            var a = $(":input[type=radio][id=add_box]:checked");
+            console.log(a.length);
+            for (var i = 0; i <= a.length; i++) {
+                var no = i + 1;
+                var string = $(":input[type=radio][name=" + no + "]:checked").val();
+                arr = string.split(',');
+                result.push(arr);
+            }
+            tampilTotal();
+        })
 
+        function totalPembayaran()
+        {
+            $("#total-pembayaran").children().remove();
+            for (var i = 0; i < result.length; i++) {
+                $("#total-pembayaran").append(
+                    '<ul><li>'+result[i][0]+'</li><li>'+result[i][1]+'</li></ul>'
+                    );
+                    }
+                    $("#total-bayar").html(sum);
+        }
         var form1 = $("#form-1");
         var form2 = $("#form-2");
         var urutan1 = $("#urutan1");
         var urutan2 = $("#urutan2");
         var next1 = $("#next-1");
+        var back1 = $("#back-1");
 
         $(next1).click(function(e) {
+            totalPembayaran();
             e.preventDefault();
             $(form1).hide();
             $(urutan1).hide();
             $(form2).show();
             $(urutan2).show();
         });
+
+        $(back1).click(function(e){
+            e.preventDefault();
+            $(form1).show();
+            $(urutan1).show();
+            $(form2).hide();
+            $(urutan2).hide();
+        })
 
         $checkTransfer = $("#checkTransfer");
         $checkCash = $("#checkCash");
@@ -557,14 +573,14 @@
             $(transfer).hide();
         });
 
-
+       
 
     })
     </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="/script.js"></script>
+    <!-- <script src="/script.js"></script> -->
     </script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

@@ -49,8 +49,8 @@ class KeberangkatanController
 
     public function tambahKeberangkatan()
     {
-        // var_dump($_POST);
-        // die();
+            // var_dump($_POST);
+            // die();
         try {
             $tgl_keberangkatan = str_replace('-"', '/', $_POST['tanggal_keberangkatan']);
             $newTglKeberangkatan = date("Y-m-d", strtotime($tgl_keberangkatan));

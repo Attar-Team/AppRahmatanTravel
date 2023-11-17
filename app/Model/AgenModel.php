@@ -24,4 +24,12 @@ class AgenModel
         $query->execute([$data['NIK'],$data['user_id'],$data['kode_referal'],$data['nama'],$data['alamat'],$data['jenis_kelamin'],$data['no_telp'],$data['foto'],$data['saldo']]);
         return $query->rowCount();  
     }
+
+    public function checkReferal($referal)
+    {
+        $query = $this->connection->prepare('SELECT * FROM agen WHERE kode_referal = ?');
+        $query->execute([$referal]);
+        $result = $query->fetchAll(\PDO::FETCH_OBJ);
+        return $result;
+    }
 }

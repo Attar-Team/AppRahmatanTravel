@@ -50,13 +50,13 @@
     </div>
 
     <div class="tambah-customer">
-        <form action="tambah-jamaah-user" method="POST" enctype="multipart/form-data">
+        <form action="/tambah-jamaah-user" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="idKeberangkatan" value="<?= $data['idKeberangakatan'] ?>">
             <div class="container" id="step1">
              <div class="d-flex" style="gap: 10px;">
              <div class="form-floating w-100 mb-3">
                     <input type="number" id="NIK" name="NIK" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">NIK</label>
-
                 </div>
                 <div class="form-floating w-100 mb-3">
                     <input type="text" id="nama" name="nama" class="form-control" id="floatingInput" placeholder="name@example.com">

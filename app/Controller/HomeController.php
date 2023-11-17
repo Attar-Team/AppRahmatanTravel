@@ -89,8 +89,10 @@ class HomeController
         View::render("Home/footer", []); 
     }
 
-    public function tambahJamaah()
+    public function tambahJamaah($idKeberangkatan)
     {
-        View::render("Home/tambahCustomer", []);
+        View::render("Home/tambahCustomer", [
+            'idKeberangakatan' => $idKeberangkatan
+        ]);
     }
 }

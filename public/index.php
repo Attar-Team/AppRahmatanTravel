@@ -44,7 +44,7 @@ Router::add("GET","/pemesanan/([0-9a-zA-Z]*)", HomeController::class,"pemesanan"
 Router::add("GET","/pembayaran", HomeController::class,"pembayaran");
 Router::add("GET","/profile", HomeController::class,"profile");
 Router::add("GET","/paket-umrah", HomeController::class,"paketUmrah");
-Router::add("GET","/tambah-jamaah", HomeController::class,"tambahJamaah");
+Router::add("GET","/tambah-jamaah/([0-9a-zA-Z]*)", HomeController::class,"tambahJamaah");
 Router::add("POST","/tambah-jamaah-user", CustomerController::class,"tambahCustomerUser");
 
 //Router untuk menangani Dashboard Admin
@@ -84,6 +84,7 @@ Router::add("GET","/admin/agen", AgenController::class,"index");
 Router::add("GET","/admin/tambah-agen", AgenController::class,"viewTambahData");
 Router::add("GET","/admin/verifikasi-komisi-agen", AgenController::class,"viewVerifikasiAgen");
 Router::add("POST","/admin/tambah-agen", AgenController::class,"tambahAgen");
+Router::add("GET","/check-referal/([0-9a-zA-Z]*)", AgenController::class,"checkReferal");
 
 //Router untuk menangani Dashboard Galery
 Router::add("GET","/admin/galery", GaleryController::class,"index");
@@ -103,7 +104,7 @@ Router::add("POST","/apiGetToken", LoginController::class,"apiGetToken");
 Router::add("POST","/apiRegister", UserController::class,"apiRegister");
 
 //2. api paket
-Router::add("GET","/kontolPaket", PaketController::class,"apiGetPaket");
+Router::add("GET","/apiPaket", PaketController::class,"apiGetPaket");
 Router::add("GET","/apiGetPaket/([0-9a-zA-Z]*)", PaketController::class,"apiGetPaketById");
 
 //3. api keberangkatan

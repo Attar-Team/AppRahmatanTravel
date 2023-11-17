@@ -101,4 +101,19 @@ class AgenController
             throw new ValidationException($th->getMessage());
         }
     }
+
+    public function checkReferal($id){
+        try {
+            $cek = $this->agen->checkReferal($id);
+            if(count($cek) > 0){
+                foreach($cek as $row){
+                    echo $row->nama;
+                }
+            }else{
+                echo'tidak ada';
+            }
+        } catch (\Exception $th) {
+            throw new ValidationException($th->getMessage());
+        }
+    }
 }
