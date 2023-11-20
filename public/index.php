@@ -43,6 +43,7 @@ Router::add("GET","/detail-paket/([0-9a-zA-Z]*)", HomeController::class,"detailP
 Router::add("GET","/pemesanan/([0-9a-zA-Z]*)", HomeController::class,"pemesanan");
 Router::add("GET","/pembayaran", HomeController::class,"pembayaran");
 Router::add("GET","/profile", HomeController::class,"profile");
+Router::add("GET","/bukti-transfer/([0-9a-zA-Z]*)", HomeController::class,"buktiTransfer");
 Router::add("GET","/paket-umrah", HomeController::class,"paketUmrah");
 Router::add("GET","/tambah-jamaah/([0-9a-zA-Z]*)", HomeController::class,"tambahJamaah");
 Router::add("POST","/tambah-jamaah-user", CustomerController::class,"tambahCustomerUser");
@@ -72,6 +73,7 @@ Router::add("GET","/admin/hapus-paket/([0-9a-zA-Z]*)", PaketController::class,"h
 Router::add("GET","/admin/pemesanan", PemesananController::class,"index");
 Router::add("GET","/admin/verifikasi-pemesanan", PemesananController::class,"viewVerifikasiPembayaran");
 Router::add("POST","/pemesanan", PemesananController::class ,"tambahPemesanan");
+Router::add("GET","/delete-pemesanan-invalid/([0-9a-zA-Z]*)", PemesananController::class ,"invalidPemesanan");
 
 //Router untuk menangani Dashboard Keberangkatan
 Router::add("GET","/admin/keberangkatan", KeberangkatanController::class,"index");

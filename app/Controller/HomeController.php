@@ -6,21 +6,25 @@ use Attar\App\Rahmatan\Travel\App\Database;
 use Attar\App\Rahmatan\Travel\App\View;
 use Attar\App\Rahmatan\Travel\Model\KeberangkatanModel;
 use Attar\App\Rahmatan\Travel\Model\PaketModel;
+use Attar\App\Rahmatan\Travel\Model\PemesananModel;
 
 class HomeController
 {
     private $keberangkatan;
     private $paket;
+    private $pemesanan;
     public function __construct()
     {
         $conection = Database::getConnection();
         $this->keberangkatan = new KeberangkatanModel($conection);
         $this->paket = new PaketModel($conection);
+        $this->pemesanan = new PemesananModel($conection);
     }
     public function index()
     {
+        $pemesanan = $this->pemesanan->get();
         $keberangkatan = $this->keberangkatan->get();
-        View::render("home/header", []);
+        View::render("home/header", ['pemesanan' => $pemesanan]);
         View::render("home/index", ['dataKeberangkatan' => $keberangkatan]);
         View::render("home/footer", []);
     }
@@ -31,6 +35,7 @@ class HomeController
         View::render("home/about", []);
         View::render("home/footer", []); 
     }
+
 
     public function detailPaket($idKeberangkatan)
     {
@@ -87,6 +92,17 @@ class HomeController
         View::render("Home/header", []);
         View::render("Home/paketUmrah", ['dataKeberangkatan' => $keberangkatan]);
         View::render("Home/footer", []); 
+    }
+
+    public function buktiTransfer($idPemesanan)
+    {
+        
+        $dataPemesanan = $this->pemesanan->getById($idPemesanan);
+        if(count($dataPemesanan) == 0){
+            View::redirect("/");
+            exit();
+        }
+        View::render("Home/buktiTransfer",['pemesanan' => $dataPemesanan,'idPemesanan' => $idPemesanan]);
     }
 
     public function tambahJamaah($idKeberangkatan)

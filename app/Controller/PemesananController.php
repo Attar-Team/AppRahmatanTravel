@@ -62,8 +62,27 @@ class PemesananController
                 }
             }
             
-            View::redirect("/");
+            View::redirect("/bukti-transfer/$pemesananId");
             
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage()) ;
+        }
+    }
+
+    public function invalidPemesanan($idPemesanan)
+    {
+        try {
+            $check = $this->pemesanan->checkValid($idPemesanan);
+            if(count($check) == 0) {
+                $delete = $this->pemesanan->delete($idPemesanan);
+                if($delete) {
+                    echo "Berhasil di delete";
+                } else {
+                    echo "gagal di delete";
+                }
+            }else{
+                echo "gausah delete";
+            }
         } catch (\Throwable $th) {
             throw new ValidationException($th->getMessage()) ;
         }
