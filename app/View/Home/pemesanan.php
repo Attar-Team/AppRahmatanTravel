@@ -64,7 +64,13 @@
                             <div class="form-floating my-3">
                                 <select class="form-select" name="customer_id[]" id="floatingSelect"
                                     aria-label="Floating label select example">
-                                    <option value="1" selected>Belum ada profile harus ditambahkan dahulu</option>
+                                    <?php if($data['profile'] == 0) { ?>
+                                    <option value="" selected>Belum ada profile harus ditambahkan dahulu</option>
+                                    <?php 
+                                    }else{
+                                    foreach($data['profile'] as $p) : ?>
+                                    <option value="<?= $p['NIK'] ?>"><?= $p['nama_customer'] ?></option>
+                                    <?php endforeach;} ?>
                                 </select>
                                 <label for="floatingSelect">Pilih profile</label>
                             </div>
@@ -455,7 +461,7 @@
                 console.log(x)
                 $(wraper).append(
                     '<div class="customer mb-2"><h3>Jamaah ' + x +
-                    '</h3><div class="form-floating my-3"><select class="form-select" name="customer_id[]" id="floatingSelect" aria-label="Floating label select example"><option value="2" selected>Belum ada profile harus ditambahkan dahulu</option></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" id="add_box" name="' +
+                    '</h3><div class="form-floating my-3"><select class="form-select" name="customer_id[]" id="floatingSelect"aria-label="Floating label select example"><?php if($data["profile"] == 0) { ?><option value="" selected>Belum ada profile harus ditambahkan dahulu</option><?php }else{foreach($data['profile'] as $p) : ?><option value="<?= $p['NIK'] ?>"><?= $p['nama_customer'] ?></option><?php endforeach;} ?></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" id="add_box" name="' +
                     x +
                     '"  value="<?=  $h['nama_jenis'] ?>,<?=  $h['harga'] ?>,<?= $h['harga_paket_id'] ?>"><label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label></div><?php endforeach; ?></div><a href="" class="btn btn-danger remove-field" id="hps">hapus</a></div>'
                 )

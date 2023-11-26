@@ -23,7 +23,7 @@
                       <tr>
                         <td><?= $no ?></td>
                         <td><?= $d['tanggal'] ?></td>
-                        <td><?= $d['status'] ?></td>
+                        <td><?= $d['status_keberangkatan'] ?></td>
                         <td><?= $d['nama'] ?></td>
                         <td><?= $d['seats'] ?></td>
                         <td>

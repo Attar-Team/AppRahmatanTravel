@@ -42,12 +42,22 @@ Router::add("GET","/about", HomeController::class,"about");
 Router::add("GET","/detail-paket/([0-9a-zA-Z]*)", HomeController::class,"detailPaket");
 Router::add("GET","/pemesanan/([0-9a-zA-Z]*)", HomeController::class,"pemesanan");
 Router::add("GET","/pembayaran", HomeController::class,"pembayaran");
-Router::add("GET","/profile", HomeController::class,"profile");
 Router::add("GET","/bukti-transfer/([0-9a-zA-Z]*)", HomeController::class,"buktiTransfer");
+Router::add("POST","/tambah-bukti-transfer", PemesananController::class,"saveBuktiTransfer");
 Router::add("GET","/paket-umrah", HomeController::class,"paketUmrah");
 Router::add("GET","/tambah-jamaah/([0-9a-zA-Z]*)", HomeController::class,"tambahJamaah");
 Router::add("POST","/tambah-jamaah-user", CustomerController::class,"tambahCustomerUser");
+Router::add("POST","/tambah-cicilan", PemesananController::class,"saveBuktiTransfer");
 
+//Router untuk menangani Customer
+Router::add("GET","/profile", HomeController::class,"profile");
+Router::add("GET","/pemesanan-user", CustomerController::class,"viewCustomerHome");
+Router::add("GET","/tambah-cicilan/([0-9a-zA-Z]*)", CustomerController::class,"viewTambahCicilan");
+Router::add("GET","/tambah-jamaah", HomeController::class,"tambahJamaahProfile");
+Router::add("GET","/edit-jamaah/([0-9a-zA-Z]*)", CustomerController::class,"editJamaahProfile");
+Router::add("GET","/detail-pemesanan/([0-9a-zA-Z]*)", HomeController::class,"viewDetailPemesanan");
+Router::add("GET","/cetak-tagihan/([0-9a-zA-Z]*)", HomeController::class,"viewCetakTagihan");
+Router::add("GET","/nota-pembayaran/([0-9a-zA-Z]*)", HomeController::class,"viewNotaPembayaran");
 //Router untuk menangani Dashboard Admin
 Router::add("GET","/admin/dashboard", DashboardController::class,"index");
 
@@ -71,9 +81,11 @@ Router::add("GET","/admin/hapus-paket/([0-9a-zA-Z]*)", PaketController::class,"h
 
 //Router untuk menangani Dashboard Pemesanan
 Router::add("GET","/admin/pemesanan", PemesananController::class,"index");
+Router::add("GET","/admin/detail-pemesanan/([0-9a-zA-Z]*)", PemesananController::class,"viewDetailPemesanan");
 Router::add("GET","/admin/verifikasi-pemesanan", PemesananController::class,"viewVerifikasiPembayaran");
 Router::add("POST","/pemesanan", PemesananController::class ,"tambahPemesanan");
 Router::add("GET","/delete-pemesanan-invalid/([0-9a-zA-Z]*)", PemesananController::class ,"invalidPemesanan");
+Router::add("POST","/admin/edit-status-pembayaran", PemesananController::class ,"editStatusPembayaran");
 
 //Router untuk menangani Dashboard Keberangkatan
 Router::add("GET","/admin/keberangkatan", KeberangkatanController::class,"index");
@@ -118,10 +130,12 @@ Router::add("GET","/admin/delete-harga/([0-9a-zA-Z]*)/([0-9a-zA-Z]*)", PaketCont
 
 //4. api customer
 Router::add("POST","/apiTambahProfileCustomer", CustomerController::class, 'apiTambahProfileCustomer');
+Router::add("GET","/apiGetProfileCustomer/([0-9a-zA-Z]*)", CustomerController::class, 'getApiJamaah');
 
 
 
 Router::add("POST","/testVoley", Test::class, "testVoley");
+Router::add("POST","/uploadPasport", Test::class, "uploadPasport");
 Router::add("POST","/testFile", Test::class, "testFile");
 Router::add("GET","/bukti-pembayaran", Test::class, "buktiBayar");
 Router::run();

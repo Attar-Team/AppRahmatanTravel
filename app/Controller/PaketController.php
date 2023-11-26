@@ -287,7 +287,7 @@ class PaketController
                 ];
             }, $this->paket->getPaket());
             $result = [
-                                'status' => '200',
+                                'status' => 200,
                                 'message' => 'success',
                                 'data' => $data
                             ];
@@ -295,9 +295,9 @@ class PaketController
         } catch (\Throwable $e) {
             http_response_code(404);
                         $result = array(
-                            "status" => "Failed",
-                            "response" => 404,
-                            "message" => $e->getMessage()
+                            'status' => 404,
+                                'message' => 'failed',
+                            "data" => $e->getMessage()
                         );
                         echo json_encode($result);
         }

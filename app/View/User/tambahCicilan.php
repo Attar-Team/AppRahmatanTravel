@@ -23,23 +23,15 @@
 
 
 
-<div class="urutan" id="urutan1">
-    <div class="box">
-        <p><span>1</span> Detail Pemesanan</p>
-        <span class="line"></span>
-        <p><span>2</span> Pembayaran</p>
-        <span class="line"></span>
-        <p class="order-active-p"><span class="order-active">3</span> Detail Pemesanan</p>
-    </div>
-</div>
 
-<input type="hidden" value="<?= $data['idPemesanan'] ?>" id="keywoard">
+
+<!-- <input type="hidden" value="<?= $data['idPemesanan'] ?>" id="keywoard"> -->
 
 <div class="bukti-transfer">
     
     
     <div class="bukti-container">
-                <form action="/tambah-bukti-transfer" method="POST" enctype="multipart/form-data">
+                <form action="/tambah-cicilan" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="pemesanan_id" value="<?= $data['idPemesanan'] ?>">
                 <div class="inp-uploads shadow">
                     <h4>Uploads bukti transfer</h4>
@@ -59,18 +51,18 @@
                         <input class="form-control" name="foto" type="file" id="formFile">
                     </div>
 
-                    <button type="submit" class="btn btn-success">Kirim</button>
-                    <a href="/" type="submit" class="btn btn-orange">kembali ke halaman utama</a>
+                    <button type="submit" class="btn btn-success">Tambah</button>
                 </div>
 
                 </form>
                 <?php 
             foreach($data["pemesanan"] as $p ) :
                 
-                $tgl_pemesanan = $p['tanggal_pemesanan'];
+                $tgl_pemesanan = $p['tanggal_ditutup'];
                 $date=date_create($tgl_pemesanan);
-                date_add($date,date_interval_create_from_date_string("1 days"));
                 $tenggat = date_format($date,"F j, Y H:i:s");
+
+                $kurangBayar = $p['total_tagihan'] - $p['sudah_bayar'];
                 ?>
                 <div class="desc-harga shadow">
                     <p class="countdown" id="asd"
@@ -106,6 +98,10 @@
                     <ul>
                         <li>Jumlah bayar</li>
                         <li>Rp <?= $p['sudah_bayar'] ?></li>
+                    </ul>
+                    <ul>
+                        <li>Kurang Bayar</li>
+                        <li>Rp <?= $kurangBayar ?></li>
                     </ul>
 
                 </div>
@@ -162,20 +158,20 @@
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Output the result in an element with id="demo"
-            document.getElementById("asd").innerHTML = hours + "h " +
+            document.getElementById("asd").innerHTML = days+ "days" + hours + "h " +
                 minutes + "m " + seconds + "s ";
 
             // If the count down is over, write some text 
             if (distance < 0) {
-                var xhr = new XMLHttpRequest();
-                xhr.onload = function() {
-                    console.log(xhr.responseText)
-                    // $("#result").html(xhr.responseText);
-                }
+                // var xhr = new XMLHttpRequest();
+                // xhr.onload = function() {
+                //     console.log(xhr.responseText)
+                //     // $("#result").html(xhr.responseText);
+                // }
 
-                xhr.open('GET', '/delete-pemesanan-invalid/' + $("#keywoard").val(), true);
-                xhr.send();
-                window.location='/';
+                // xhr.open('GET', '/delete-pemesanan-invalid/' + $("#keywoard").val(), true);
+                // xhr.send();
+                // window.location='/';
                 clearInterval(x);
                 document.getElementById("asd").innerHTML = "EXPIRED";
             }
@@ -192,7 +188,7 @@
             integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgl    doEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
         </script>
 </body>
 

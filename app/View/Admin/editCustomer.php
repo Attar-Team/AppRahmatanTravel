@@ -26,7 +26,7 @@
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                     class="bx bx-user"></i></span>
-                            <input type="text" name="nama" value="<?= $d->nama ?>"  class="form-control"
+                            <input type="text" name="nama" value="<?= $d->nama_customer ?>"  class="form-control"
                                 id="basic-icon-default-fullname" />
                         </div>
                     </div>

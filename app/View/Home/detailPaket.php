@@ -1,4 +1,4 @@
-<?php 
+<?php
 foreach($data['keberangkatan'] as $k) : 
     $termasukHarga = explode(",", $k->termasuk_harga);
     $tidakTermasukHarga = explode(",", $k->tidak_termasuk_harga);
@@ -69,8 +69,11 @@ foreach($data['keberangkatan'] as $k) :
             </div>
             <div class="d-flex">
                 <a class="btn-admin" href="#"><i class="fa-brands fa-whatsapp"></i> Tanya Admin</a>
+                <?php if(!isset($_SESSION['status_login'])) {?>
                 <a class="btn-booking" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login untuk booking</a>
-                <!-- <a class="btn-booking" href="/pemesanan/<?= $k->keberangkatan_id ?>"><i class="fa-solid fa-share-from-square"></i></i> Pesan sekarang</a> -->
+                <?php }else{ ?>
+                <a class="btn-booking" href="/pemesanan/<?= $k->keberangkatan_id ?>"><i class="fa-solid fa-share-from-square"></i></i> Pesan sekarang</a>
+                <?php } ?>
             </div>
         </div>
     </div>

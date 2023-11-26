@@ -24,7 +24,7 @@
                         ?>
                       <tr>
                         <td><?= $no ?></td>
-                        <td><?= $d['nama'] ?></td>
+                        <td><?= $d['nama_customer'] ?></td>
                         <td><?= $d['tempat_lahir'] ?></td>
                         <td><?= $d['tanggal_lahir'] ?></td>
                         <td><?= $d['no_telp'] ?></td>

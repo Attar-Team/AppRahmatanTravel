@@ -18,6 +18,13 @@ class CustomerModel
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getCustomerByUserId($userId)
+    {
+        $query = $this->connection->prepare("SELECT * FROM customer LEFT JOIN pasport ON customer.NIK = pasport.customer_id LEFT JOIN dokumen ON customer.NIK = dokumen.customer_id  WHERE customer.user_id = ?");
+        $query->execute([$userId]);
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getById($id)
     {
         $query = $this->connection->prepare("SELECT * FROM customer LEFT JOIN user ON customer.user_id = user.userId LEFT JOIN pasport ON customer.NIK = pasport.customer_id LEFT JOIN dokumen ON customer.NIK = dokumen.customer_id WHERE NIK = ?");
@@ -41,7 +48,7 @@ class CustomerModel
      
     public function save(array $data)
     {
-        $query = $this->connection->prepare("INSERT INTO customer (`NIK`,`user_id`,`nama`,`tempat_lahir`,`tanggal_lahir`,`alamat`,`jenis_kelamin`,`pekerjaan`,`ukuran_baju`,`no_telp`,`foto`) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        $query = $this->connection->prepare("INSERT INTO customer (`NIK`,`user_id`,`nama_customer`,`tempat_lahir`,`tanggal_lahir`,`alamat`,`jenis_kelamin`,`pekerjaan`,`ukuran_baju`,`no_telp`,`foto`) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
         $query->execute([$data['NIK'],$data['user_id'],$data['nama'],$data['tempat_lahir'],$data['tanggal_lahir'],$data['alamat'],$data['jenis_kelamin'],$data['pekerjaan'],$data['ukuran_baju'],$data['no_telp'],$data['foto']]);
         $result = ['count'=> $query->rowCount(),'lastId'=> $this->connection->lastInsertId()];
         return $result;
@@ -65,7 +72,7 @@ class CustomerModel
 
     public function updateCustomer($data,$date,$foto)
     {
-        $query = $this->connection->prepare('UPDATE customer SET nama = ?, tempat_lahir = ?, tanggal_lahir = ?, alamat = ?, jenis_kelamin = ?, pekerjaan = ?, ukuran_baju = ?, no_telp = ?, foto = ? WHERE NIK = ?');
+        $query = $this->connection->prepare('UPDATE customer SET nama_customer = ?, tempat_lahir = ?, tanggal_lahir = ?, alamat = ?, jenis_kelamin = ?, pekerjaan = ?, ukuran_baju = ?, no_telp = ?, foto = ? WHERE NIK = ?');
         $query->execute([$data['nama'],$data['tempat_lahir'],$date,$data['alamat'],$data['jenis_kelamin'],$data['pekerjaan'],$data['ukuran_baju'],$data['no_telp'],$foto,$data['NIK']]);
         $query->closeCursor();
         return $query->rowCount();

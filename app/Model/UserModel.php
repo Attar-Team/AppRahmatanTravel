@@ -1,6 +1,7 @@
 <?php
 
 namespace Attar\App\Rahmatan\Travel\Model;
+use Attar\App\Rahmatan\Travel\Exception\ValidationException;
 
 class UserModel
 {
@@ -18,9 +19,13 @@ class UserModel
     }
 
     public function save($data){
+        try {
         $statement = $this->connection->prepare("INSERT INTO user (`email`,`password`,`level`) VALUES (?,?,?)");
         $statement->execute([$data['email'], $data['password'], $data['level']]);
         $result = ['count'=> $statement->rowCount(),'lastId'=> $this->connection->lastInsertId()];
         return $result;
+        }catch (\PDOException $e) {
+            throw new ValidationException("Data Gagal Ditambakan ".$e->getMessage());
+        }
     }
 }
