@@ -118,11 +118,16 @@ class PaketController
                             $this->paket->saveHotel($lastId,$_POST['lokasi'][$j],$_POST['nama_hotel'][$j],$_POST['deskripsi'][$j],$_POST['bintang'][$j],$rename);
                         }
                     }       
-                    View::redirect('/admin/paket');
+                    $data = $this->paket->getPaket();
+        View::render("/Admin/header", ["title" => "Paket"]);
+        View::render("/Admin/paket", ["dataPaket" => $data, "success"=> "Data paket berhasil ditambahkan"]);
+        View::render("/Admin/footer", []);
                 }
             }
-        } catch (\Exception $th) {
-            throw new ValidationException($th->getMessage());
+        } catch (ValidationException $exception) {
+            View::render("Admin/header", ["title" => "Paket"]);
+            View::render("Admin/tambahPaket", ["error" => "Data Gagal Di tambahkan ". $exception->getMessage()]);
+            View::render("Admin/footer", []);
         }
     }
 
@@ -209,10 +214,15 @@ class PaketController
                 //             $newDateOut = date("Y-m-d", strtotime($dateCheckOut));  
                 $this->paket->updateHotel($_POST['nama_hotel'][$j],$_POST['deskripsi'][$j],$_POST['bintang'][$j],$foto_hotel,$_POST['hotel_id'][$j]);
             }
-            View::redirect('/admin/paket');
+            $data = $this->paket->getPaket();
+        View::render("/Admin/header", ["title" => "Paket"]);
+        View::render("/Admin/paket", ["dataPaket" => $data, "success"=> "Data paket berhasil diedit"]);
+        View::render("/Admin/footer", []);
 
-        } catch (\Throwable $e) {
-            throw new ValidationException($e->getMessage());
+        } catch (ValidationException $exception) {
+            View::render("Admin/header", ["title" => "Paket"]);
+            View::render("Admin/tambahPaket", ["error" => "Data Gagal Di Edit ". $exception->getMessage()]);
+            View::render("Admin/footer", []);
         }
     }
     public function deleteHarga($id, $hotel_id)
@@ -249,12 +259,18 @@ class PaketController
             $hapusPaket = $this->paket->deletePaket($id);
 
             if( $hapusPaket > 0 || $hapusHarga > 0 || $hapusHotel > 0){
-                View::redirect("/admin/paket");
+                $data = $this->paket->getPaket();
+        View::render("/Admin/header", ["title" => "Paket"]);
+        View::render("/Admin/paket", ["dataPaket" => $data, "success"=> "Data paket berhasil dihapus"]);
+        View::render("/Admin/footer", []);
             }else{
                 throw new ValidationException('data gagal di delete');
             }
         } catch (\Throwable $e) {
-            throw new ValidationException($e->getMessage());
+            $data = $this->paket->getPaket();
+            View::render("/Admin/header", ["title" => "Paket"]);
+            View::render("/Admin/paket", ["dataPaket" => $data, "error"=> "Data paket gagal dihapus"]);
+            View::render("/Admin/footer", []);
         }
     }
     public function apiGetPaket()

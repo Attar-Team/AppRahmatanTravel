@@ -77,7 +77,6 @@ class CustomerController
 
     public function tambahCustomer()
     {
-
         $dataUser = [
             "email" => $_POST["email"],
             "password" => password_hash('12345678', PASSWORD_DEFAULT),
@@ -149,7 +148,10 @@ class CustomerController
                         if($_POST['idKeberangkatan'] == 0){
                             View::redirect('/profile');
                         }else{
-                            View::redirect('/admin/customer');
+                            $data = $this->customer->get();
+                            View::render("Admin/header", ["title" => "Customer"]);
+                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil ditambahkan']);
+                            View::render("Admin/footer", []);
                         }
                     } else {
                         throw new ValidationException("gagal di tambah");
@@ -296,9 +298,14 @@ class CustomerController
             $this->customer->updatePasport($_POST, $newTglPenerbitan);
 
             $this->customer->updateDocument($_POST['NIK'], $rename);
-            View::redirect('/admin/customer');
-        } catch (\Throwable $e) {
-            throw new ValidationException($e->getMessage());
+            $data = $this->customer->get();
+                            View::render("Admin/header", ["title" => "Customer"]);
+                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil di edit']);
+                            View::render("Admin/footer", []);
+        } catch (ValidationException $exception) {
+            View::render("Admin/header", ["title" => "Customer"]);
+            View::render("Admin/tambahCustomer", ["error" => $exception->getMessage()]);
+            View::render("Admin/footer", []);
         }
     }
 
@@ -306,6 +313,7 @@ class CustomerController
 
     public function hapusCustomer($id)
     {
+        error_reporting(0);
         try {
             // var_dump($id); 
             // if(file_exists("uploads/foto_customer/foto_customer1699116602.png")) {
@@ -363,9 +371,15 @@ class CustomerController
         $this->customer->deletePasport($id);
         $this->customer->deleteDokument($id);
         $this->customer->deleteCustomer($id);
-        View::redirect('/admin/customer');
+        $data = $this->customer->get();
+                            View::render("Admin/header", ["title" => "Customer"]);
+                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil dihapus']);
+                            View::render("Admin/footer", []);
         } catch (\Throwable $e) {
-            throw new ValidationException($e->getMessage());
+            $data = $this->customer->get();
+            View::render("Admin/header", ["title" => "Customer"]);
+            View::render("Admin/customer", ['dataCustomer' => $data,'error' => 'data customer gagal dihapus']);
+            View::render("Admin/footer", []); throw new ValidationException($e->getMessage());
         }
 
     }

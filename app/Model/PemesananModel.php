@@ -1,6 +1,7 @@
 <?php
 
 namespace Attar\App\Rahmatan\Travel\Model;
+use Attar\App\Rahmatan\Travel\Exception\ValidationException;
 
 class PemesananModel
 {
@@ -81,57 +82,89 @@ class PemesananModel
 
     public function delete($id)
     {
+       try {
         $query = $this->connection->prepare("DELETE FROM pemesanan WHERE pemesanan_id = ?");
         $query->execute([$id]);
         return $query->rowCount();
+       } catch (\Throwable $th) {
+        throw  new ValidationException($th->getMessage());
+       }
     }
 
     public function save($data){
-        $statement = $this->connection->prepare("INSERT INTO pemesanan (`agen_id`,`keberangkatan_id`,`jenis_pembayaran`, `status`, `tanggal_pemesanan`, `catatan_pemesanan`, `sudah_bayar`, `total_tagihan`) VALUES (?,?,?,?,?,?,?,?)");
+        try {
+            $statement = $this->connection->prepare("INSERT INTO pemesanan (`agen_id`,`keberangkatan_id`,`jenis_pembayaran`, `status`, `tanggal_pemesanan`, `catatan_pemesanan`, `sudah_bayar`, `total_tagihan`) VALUES (?,?,?,?,?,?,?,?)");
         $statement->execute([$data['agen_id'],$data['keberangkatan_id'],$data['jenis_pembayaran'],$data['status'],$data['tanggal'],$data['catatan_pemesanan'],$data['jumlah_bayar'],$data['total_tagihan']]);
         $result = ['count'=> $statement->rowCount(),'lastId'=> $this->connection->lastInsertId()];
         return $result;
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
 
     public function saveBuktiTransfer($data)
     {
-        $statement = $this->connection->prepare('INSERT INTO detail_pemesanan (`pemesanan_id`,`jumlah_bayar`,`status_verivikasi`,`tanggal`,`catatan`,`foto_bukti`) VALUES (?,?,?,?,?,?)');
+        try {
+            $statement = $this->connection->prepare('INSERT INTO detail_pemesanan (`pemesanan_id`,`jumlah_bayar`,`status_verivikasi`,`tanggal`,`catatan`,`foto_bukti`) VALUES (?,?,?,?,?,?)');
         $statement->execute([$data['pemesanan_id'],$data['jumlah_bayar'],$data['status_verivikasi'],$data['tanggal'],$data['catatan'],$data['foto_bukti']]);
         return $statement->rowCount();
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
 
     public function saveDetailCustomerPemesanan($pemesanan_id,$customer_id,$harga_paket_id)
     {
-        $statement = $this->connection->prepare('INSERT INTO detail_customer_pemesan (`pemesanan_id`, `customer_id`, `harga_paket_id`) VALUES (?,?,?)');
+        try {
+            $statement = $this->connection->prepare('INSERT INTO detail_customer_pemesan (`pemesanan_id`, `customer_id`, `harga_paket_id`) VALUES (?,?,?)');
         $statement->execute([$pemesanan_id,$customer_id,$harga_paket_id]);
         return $statement->rowCount();
+        } catch (\Throwable $th) {
+           throw new ValidationException($th->getMessage());
+        }
     }
 
     public function editStatusPembayaranDetailPemesanan($data)
     {
-        $statement = $this->connection->prepare('UPDATE detail_pemesanan SET status_verivikasi = ? WHERE detail_pemesanan_id = ?');
+        try {
+            $statement = $this->connection->prepare('UPDATE detail_pemesanan SET status_verivikasi = ? WHERE detail_pemesanan_id = ?');
         $statement->execute([$data['status_verivikasi'], $data['detail_pemesanan_id']]);
         return $statement->rowCount();
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
 
     public function updateJumlahBayarDetailPemesanan($data)
     {
-        $statement = $this->connection->prepare('UPDATE detail_pemesanan SET jumlah_bayar = ? WHERE detail_pemesanan_id = ?');
+        try {
+            $statement = $this->connection->prepare('UPDATE detail_pemesanan SET jumlah_bayar = ? WHERE detail_pemesanan_id = ?');
         $statement->execute([$data['jumlah_bayar'], $data['detail_pemesanan_id']]);
         return $statement->rowCount();
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
 
     public function updateSudahBayar($data)
     {
-        $statement = $this->connection->prepare('UPDATE pemesanan SET sudah_bayar = ? WHERE pemesanan_id = ?');
+        try {
+            $statement = $this->connection->prepare('UPDATE pemesanan SET sudah_bayar = ? WHERE pemesanan_id = ?');
         $statement->execute([$data['jumlah_bayar'], $data['pemesanan_id']]);
         return $statement->rowCount();
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
 
     public function updateStatusPembayaranPemesanan($data)
     {
-        $statement = $this->connection->prepare('UPDATE pemesanan SET status = ? WHERE pemesanan_id = ?');
+        try {
+            $statement = $this->connection->prepare('UPDATE pemesanan SET status = ? WHERE pemesanan_id = ?');
         $statement->execute([$data['status'], $data['pemesanan_id']]);
         return $statement->rowCount();
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
 }

@@ -2,6 +2,13 @@
     foreach($data['dataCustomer'] as $d):
 ?>
 <div class="container-xxl flex-grow-1 container-p-y">
+<?php
+    if(isset($data['error'])){ ?>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+                        <?= $data['error'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
 <form method="POST" action="/admin/edit-customer" enctype="multipart/form-data">
     <div class="row">
         <div class="col-xl">
@@ -215,11 +222,19 @@
                       </div>
 
                       <div class="mb-3">
-                        <label for="formFile" class="form-label">Foto BPJS</label>
-                        <input type="hidden" name="foto_asli[bpjs]" value="<?= $d->foto_bpjs ?>">
-                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_bpjs/<?= $d->foto_bpjs ?>" id="outputAkte" alt="">
+                        <label for="formFile" class="form-label">Foto Buku rekening</label>
+                        <input type="hidden" name="foto_asli[rekening]" value="<?= $d->foto_buku_rekening ?>">
+                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_rekening/<?= $d->foto_buku_rekening ?>" id="outputRekening" alt="">
                         <!-- <img width="200px" class="m-3 rounded shadow" src="" id="outputBpjs" alt="/uploads/foto_bpjs/<?= $d->foto_bpjs ?>"> -->
-                        <input class="form-control" type="file" name="foto[bpjs]" id="imgInpBpjs" />
+                        <input class="form-control" type="file" name="foto[rekening]" id="imgInpRekening" />
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="formFile" class="form-label">Foto Buku Pernikahan</label>
+                        <input type="hidden" name="foto_asli[pernikahan]" value="<?= $d->foto_buku_pernikahan ?>">
+                        <img width="200px" class="m-3 rounded shadow" src="/uploads/foto_pernikahan/<?= $d->foto_buku_pernikahan ?>" id="outputAkte" alt="">
+                        <!-- <img width="200px" class="m-3 rounded shadow" src="" id="outputBpjs" alt="/uploads/foto_bpjs/<?= $d->foto_bpjs ?>"> -->
+                        <input class="form-control" type="file" name="foto[pernikahan]" id="imgInpPernikahan" />
                       </div>
                      
                 </div>
