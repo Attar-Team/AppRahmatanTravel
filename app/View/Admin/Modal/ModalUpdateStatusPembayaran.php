@@ -14,7 +14,7 @@
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-company2" class="input-group-text"><i
                                             class="bx bx-buildings"></i></span>
-                                    <input type="number" name="jumlah_bayar" id="basic-icon-default-company" class="form-control" />
+                                    <input type="number" name="jumlah_bayar" id="basic-icon-default-company" required class="form-control" />
                                 </div>
                             </div>
 

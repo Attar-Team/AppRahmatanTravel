@@ -71,7 +71,7 @@
             <div class="container" id="step1">
              <div class="d-flex" style="gap: 10px;">
              <div class="form-floating w-100 mb-3">
-                    <input type="number" id="NIK" value="<?php if(isset($_POST['NIK'])) ?>" name="NIK" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="number" id="NIK" value="<?php if(isset($_POST['NIK'])) echo $_POST['NIK'] ?>" name="NIK" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">NIK</label>
                 </div>
                 <div class="form-floating w-100 mb-3">

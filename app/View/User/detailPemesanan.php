@@ -123,16 +123,23 @@
             </ul> 
             <ul style="display: flex; list-style: none; justify-content: space-between; padding: 0;">
                 <li>Kurang Bayar</li>
-                <li><?= $kurangBayar ?></li>
+                <li><?php if($kurangBayar >= 0){
+                    echo $kurangBayar;
+                }else{
+                    echo'Sudah Lunas';
+                } 
+                
+                ?></li>
             </ul> 
 
             <div class="d-flex" style="gap: 20px;">
             <?php if($d['status'] == "belum lunas") { ?>
                 <a href="/cetak-tagihan/<?= $d['pemesanan_id'] ?>" target="_blank" class="btn btn-warning w-100">Cetak Tagihan</a>
+                <a href="/tambah-cicilan/<?= $d['pemesanan_id'] ?>"  class="btn btn-info w-100">Bayar Cicilan</a>
                 <?php }else if( $d['status'] == 'lunas') { ?>
                 <a href="/nota-pembayaran/<?= $d['pemesanan_id'] ?>" target="_blank" class="btn btn-primary w-100">Cetak Nota</a>
                 <?php } ?>
-                <a href="/tambah-cicilan/<?= $d['pemesanan_id'] ?>" class="btn btn-info w-100">Bayar Cicilan</a>
+                
             </div>
                 </div>
                 <div class="box-dtl-pms">
