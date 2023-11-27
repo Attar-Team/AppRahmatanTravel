@@ -6,11 +6,15 @@ use Attar\App\Rahmatan\Travel\App\Database;
 use Attar\App\Rahmatan\Travel\App\View;
 use Attar\App\Rahmatan\Travel\Exception\ValidationException;
 use Attar\App\Rahmatan\Travel\Model\CustomerModel;
+use Attar\App\Rahmatan\Travel\Model\KeberangkatanModel;
+use Attar\App\Rahmatan\Travel\Model\PaketModel;
 use Attar\App\Rahmatan\Travel\Model\PemesananModel;
 use Attar\App\Rahmatan\Travel\Model\UserModel;
 
 class CustomerController
 {
+    private $keberangkatan;
+    private $paket;
     private $customer;
     private $user;
     private $pemesanan;
@@ -20,6 +24,8 @@ class CustomerController
         $this->customer = new CustomerModel($conection);
         $this->user = new UserModel($conection);
         $this->pemesanan = new PemesananModel($conection);
+        $this->keberangkatan = new KeberangkatanModel($conection);
+        $this->paket = new PaketModel($conection);
     }
 
     public function index()
@@ -173,7 +179,7 @@ class CustomerController
 
     public function tambahCustomerUser()
     {
-
+        error_reporting(0);
         try {
 
                 $tgl_lahir = str_replace('-"', '/', $_POST['tanggal_lahir']);
@@ -235,14 +241,34 @@ class CustomerController
                     $saveDocument = $this->customer->saveDocument($_POST['NIK'], $rename);
                     if ($saveDocument > 0 && $savePasport > 0) {
                         $url = "/pemesanan/".$_POST['idKeberangkatan']."";
-                        View::redirect($url);
+                        session_start();
+        $idCustomer = $_SESSION['uid_user'];
+        $keberangkatan = $this->keberangkatan->getDetail($_POST['idKeberangkatan']);
+        foreach ($keberangkatan as $k) {
+            $idPaket = $k->paket_id;
+        }
+        $hotel = $this->paket->getHotelPaket($idPaket);
+        $harga = $this->paket->getHargaPaket($idPaket);
+        $bintang = $this->paket->getBintangHotel($idPaket);
+        $profile = $this->customer->getCustomerByUserId($idCustomer);
+        View::render("Home/pemesanan", [
+            "hotel"=> $hotel,
+            "harga"=> $harga,
+            "bintang"=> $bintang,
+            "keberangkatan"=> $keberangkatan,
+            "profile"=> $profile,
+            "success"=> "Data berhasil ditambahkan",
+            "keberangkatan_id"=> $_POST['idKeberangkatan']
+        ]);
                     } else {
                         throw new ValidationException("gagal di tambah");
                     }
                 }
-       
-        } catch (\Throwable $e) {
-            throw new ValidationException($e);
+        } catch (ValidationException $e) {
+            View::render("Home/tambahCustomer", [
+                'idKeberangakatan' => $_POST['idKeberangkatan'],
+                'error'=> "Data gagal di update".$e->getMessage()
+            ]);
         }
     }
 
@@ -388,7 +414,7 @@ class CustomerController
     public function apiTambahProfileCustomer()
     {
         try {
-            $tgl_lahir = str_replace('-"', '/', $_POST['tanggal_lahir']);
+            $tgl_lahir = str_replace('-"', '/', str_replace('-"', '/', $_POST['tanggal_lahir']));
             $newTglLahir = date("Y-m-d", strtotime($tgl_lahir));
             $rename = array();
             foreach ($_FILES as $key => $value) {
@@ -427,16 +453,16 @@ class CustomerController
                 }
             }
             $dataCustomer = [
-                'NIK' => $_POST['NIK'],
+                'NIK' => str_replace('"', '', $_POST['NIK']),
                 'user_id' => 1,
-                'nama' => $_POST['nama'],
-                'tempat_lahir' => $_POST['tempat_lahir'],
+                'nama' => str_replace('-"', '/', $_POST['nama']),
+                'tempat_lahir' =>str_replace('-"', '/', $_POST['tempat_lahir']),
                 'tanggal_lahir' => $newTglLahir,
-                'alamat' => $_POST['alamat'],
-                'jenis_kelamin' => $_POST['jenis_kelamin'],
-                'pekerjaan' => $_POST['pekerjaan'],
-                'ukuran_baju' => $_POST['ukuran_baju'],
-                'no_telp' => $_POST['no_telp'],
+                'alamat' => str_replace('-"', '/', $_POST['alamat']),
+                'jenis_kelamin' => str_replace('-"', '/', $_POST['jenis_kelamin']),
+                'pekerjaan' => str_replace('-"', '/', $_POST['pekerjaan']),
+                'ukuran_baju' =>str_replace('-"', '/', $_POST['ukuran_baju']),
+                'no_telp' => str_replace('-"', '/', $_POST['no_telp']),
                 'foto' => $rename['customer'],
             ];
 
@@ -445,14 +471,14 @@ class CustomerController
                 $tgl_penerbitan = str_replace('-"', '/', $_POST['tgl_penerbitan']);
                 $newTglPenerbitan = date("Y-m-d", strtotime($tgl_penerbitan));
                 $dataPasport = [
-                    'nomor_pasport' => $_POST['nomor_pasport'],
-                    'customer_id' => $_POST['NIK'],
-                    'nama_pasport' => $_POST['nama_pasport'],
-                    'tempat_penerbitan' => $_POST['tempat_penerbitan'],
+                    'nomor_pasport' => str_replace('-"', '/', $_POST['nomor_pasport']),
+                    'customer_id' =>str_replace('-"', '/', $_POST['NIK']),
+                    'nama_pasport' => str_replace('-"', '/', $_POST['nama_pasport']),
+                    'tempat_penerbitan' => str_replace('-"', '/', $_POST['tempat_penerbitan']),
                     'tgl_penerbitan' => $newTglPenerbitan
                 ];
                 $savePasport = $this->customer->savePasport($dataPasport);
-                $saveDocument = $this->customer->saveDocument($_POST['NIK'], $rename);
+                $saveDocument = $this->customer->saveDocument(str_replace('-"', '/', $_POST['NIK']), $rename);
                 if ($saveDocument > 0 && $savePasport > 0) {
                     $result = [
                         'status' => 200,
@@ -477,10 +503,8 @@ class CustomerController
     }
     public function getApiJamaah($id)
     {
-        // var_dump($id);
-        // die();
         try {
-            // $result = ;
+ 
             
                 $data = array_map(function($customer){
                     return [

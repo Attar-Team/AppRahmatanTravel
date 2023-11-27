@@ -25,6 +25,7 @@ class PaketModel
         return $query->fetchAll();
     }
 
+    
     public function getPaketById($id)
     {
         $query = $this->connection->prepare("SELECT * FROM paket WHERE paket_id = ?");

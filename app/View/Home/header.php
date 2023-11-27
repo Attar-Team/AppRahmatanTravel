@@ -65,7 +65,9 @@
                     <li class="nav-item px-2 me-1" style="background-color: #000; border-radius: 10px;">
                         <a class="nav-link" style="color: #fff;" aria-current="page" href="contact.html">Sign Up</a>
                     </li>
-                    <?php }else{ ?>
+                    <?php }else{ 
+                        if($_SESSION['level'] == "customer"){
+                        ?>
                     <div class="btn-group dropstart">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -77,7 +79,19 @@
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </div>
-                    <?php } ?>
+                    <?php }else if($_SESSION['level'] == "agen"){ ?>
+                        <div class="btn-group dropstart">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Zarif <i class="fa-solid fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/profile-agen">Profile</a></li>
+                            <li><a class="dropdown-item" href="/pelanggan-agen">Pelanggan</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                    <?php }} ?>
 
                 </ul>
             </div>

@@ -191,10 +191,10 @@ class KeberangkatanController
         try {
             $data = array_map(function ($keberangkatan) {
                 return [
-                    'id' => $keberangkatan['keberangkatan_id'],
-                    'tanggal' => $keberangkatan['tanggal'],
-                    'status' => $keberangkatan['status'],
-                    'seats' => $keberangkatan['seats'],
+                    'id' => $keberangkatan->keberangkatan_id,
+                    'tanggal' => $keberangkatan->tanggal,
+                    'status' => $keberangkatan->status_keberangkatan,
+                    'seats' => $keberangkatan->seats,
                     'paket' => array_map(
                         fn ($paket) =>
                         [
@@ -211,7 +211,7 @@ class KeberangkatanController
                                 'jenis' => $harga['nama_jenis'],
                                 'diskon' => $harga['diskon'],
                                 'harga' => $harga['harga']
-                            ], $this->paket->getHargaPaket($keberangkatan["paket_id"])),
+                            ], $this->paket->getHargaPaket($keberangkatan->paket_id)),
                             "hotel" => array_map(fn ($hotel) => [
                                 'nama_hotel' => $hotel['nama_hotel'],
                                 'deskripsi' => $hotel['deskripsi'],
@@ -219,9 +219,9 @@ class KeberangkatanController
                                 // 'check_in' => $hotel['check_in'],
                                 // 'check_out' => $hotel['check_out'],
                                 'foto_hotel' => $hotel['foto_hotel']
-                            ], $this->paket->getHotelPaket($keberangkatan['paket_id']))
+                            ], $this->paket->getHotelPaket($keberangkatan->paket_id))
                         ],
-                        $this->paket->getPaketById($keberangkatan['paket_id'])
+                        $this->paket->getPaketById($keberangkatan->paket_id)
                     ),
                 ];
             }, $this->keberangkatan->getById($id));

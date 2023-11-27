@@ -49,13 +49,29 @@
         </div>
     </div>
 
+
     <div class="tambah-customer">
+ 
         <form action="/tambah-jamaah-user" method="POST" enctype="multipart/form-data">
+        <?php
+    if(isset($data['error'])){ ?>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+                        <?= $data['error'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
+    <?php
+    if(isset($data['success'])){ ?>
+          <div class="alert alert-success alert-dismissible" role="alert">
+                        <?= $data['success'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
             <input type="hidden" name="idKeberangkatan" value="<?= $data['idKeberangakatan'] ?>">
             <div class="container" id="step1">
              <div class="d-flex" style="gap: 10px;">
              <div class="form-floating w-100 mb-3">
-                    <input type="number" id="NIK" name="NIK" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="number" id="NIK" value="<?php if(isset($_POST['NIK'])) ?>" name="NIK" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">NIK</label>
                 </div>
                 <div class="form-floating w-100 mb-3">

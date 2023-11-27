@@ -53,6 +53,11 @@
           <p>Belum Punya Akun?<a href="/register"> Daftar</a></p>
         </div>
       </form>
+     <?php if(isset($data['error'])){ ?>
+      <div class="alert alert-danger" role="alert">
+  <?= $data['error'] ?>
+</div>
+      <?php } ?>
     </div>
     <!-- Akhir Form Login -->
 

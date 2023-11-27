@@ -36,11 +36,40 @@ class AgenController
         View::render("Admin/footer",[]);
     }
 
-    public function viewVerifikasiAgen()
+    public function viewDataAgenBelumDibayar()
     {
+        $dataKodeReferal = $this->agen->getDataAgenBelumBayar();
         View::render("Admin/header",["title"=> "Verifikasi Agen"]);
-        View::render("Admin/verifikasiKomisiAgen",[]);
+        View::render("Admin/dataAgenBelumDibayar",['pemesanan' => $dataKodeReferal]);
         View::render("Admin/footer",[]);
+    }
+
+    public function viewDataAgenSudahDibayar()
+    {
+        $dataKodeReferal = $this->agen->getDataAgenSudahBayar();
+        View::render("Admin/header",["title"=> "Verifikasi Agen"]);
+        View::render("Admin/dataAgenSudahDibayar",['pemesanan' => $dataKodeReferal]);
+        View::render("Admin/footer",[]);
+    }
+
+    public function viewDataPelanggan()
+    {
+        session_start();
+        $dataPelanggan = $this->agen->getPemesananUserId($_SESSION['uid_user']);
+        View::render("Agen/dataPelanggan",["title"=> "Data Pelanggan","pelanggan"=> $dataPelanggan]);
+    }
+
+    public function viewProfileAgen()
+    {
+        session_start();
+        $user_id = $_SESSION['uid_user'];
+        $jumlahPelanggan = count($this->agen->getPemesananUserId($user_id));
+        $pemasukan = $this->agen->getJumlahPemasukan($user_id);
+        foreach( $pemasukan as $row){
+            $jml_pemasukan = $row['jumlah_pemasukan'];
+        }
+        $data = $this->agen->getByUserId($_SESSION['uid_user']);
+        View::render("Agen/profile",["title"=> "Verifikasi Agen","profile"=> $data,"jumlah_pelanggan"=> $jumlahPelanggan,"jumlah_pemasukan"=> $jml_pemasukan]);
     }
 
     public function tambahAgen()
@@ -99,6 +128,30 @@ class AgenController
             }
         } catch (\Throwable $th) {
             throw new ValidationException($th->getMessage());
+        }
+    }
+
+    public function tambahGajiAgen()
+    {
+        try {
+            $tanggal = date("Y-m-d");
+            $data = [
+                'pemesanan_id'=> htmlspecialchars($_POST['pemesanan_id']),
+                'jumlah_bonus'=> htmlspecialchars($_POST['jumlah_bonus']),
+                'tanggal'=> $tanggal
+            ];
+            $tambahGaji = $this->agen->saveGaji($data);
+
+            if( $tambahGaji > 0){
+                $dataKodeReferal = $this->agen->getDataAgenBelumBayar();
+        View::render("Admin/header",["title"=> "Verifikasi Agen"]);
+        View::render("Admin/dataAgenBelumDibayar",['pemesanan' => $dataKodeReferal,'success' => 'Data Berhasil ditambahkan']);
+        View::render("Admin/footer",[]);
+            }
+        } catch (ValidationException $th) {
+            View::render("Admin/header",["title"=> "Verifikasi Agen"]);
+            View::render("Admin/dataAgenBelumDibayar",['pemesanan' => $dataKodeReferal,'error' => 'Data Gagal ditambahkan'. $th->getMessage()]);
+            View::render("Admin/footer",[]);
         }
     }
 

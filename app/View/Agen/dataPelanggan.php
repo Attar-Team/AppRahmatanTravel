@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,56 +14,69 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+  
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 </head>
-<?php foreach($data['user'] as $u) : ?>
-<div class="profile">
-    <div class="container-profile">
-    <div class="box-info rounded shadow p-5 d-flex" style="justify-content: center;flex-direction: column;align-items: center;">
-       <img src="/assets/DSCF1999 (1).JPG" width="250px" class="rounded-circle shadow d-flex mb-5" style="justify-content: center;" alt="">
-       <p><i class="fa-solid fa-user"></i> <?= $u['username'] ?></p>
-       <p><i class="fa-solid fa-envelope"></i> <?= $u['email'] ?></p>
-       <p><i class="fa-solid fa-circle-info"></i> <?= $u['level'] ?></p>
-       
-    </div>
+<body>
+<div class="header-user">
+  <div class="header-title">
+    <h4>Data Pelanggan</h4>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint distinctio qui sunt ipsa suscipit dolorem iusto quia. Eveniet tenetur aliquam quibusdam optio quas enim magni. Exercitationem dolorem vitae voluptas fuga.</p>
+  </div>
+  <div class="header-akun">
+  <div class="btn-group dropstart">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Zarif <i class="fa-solid fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/pemesanan-user">Pemesanan</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+    <img src="/assets/DSCF1999 (1).JPG" width="50px" class="rounded-circle shadow" alt="">
+  </div>
+</div>
 
-    <?php endforeach; ?>
-
-        <div class="box-profile">
-        <H2>Profile</H2>
-        <a href="/tambah-jamaah" class="btn btn-primary">Tambah</a>
-
-        <table class="table table-striped">
-        <thead>
+<div class="p-3 mx-5 rounded shadow" style="">
+<table id="myTable" class="table table-striped table-hover">
+<thead>
     <tr>
-      <th scope="col">NIK</th>
-      <th scope="col">Nama</th>
-      <th scope="col">No telepon</th>
-      <th scope="col">Jenis Kelamin</th>
+      <th scope="col">id</th>
+      <th scope="col">Nama Paket</th>
+      <th scope="col">Tanggal</th>
+      <th scope="col">Status</th>
+      <th scope="col">Total Tagihan</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach($data['profile'] as $p) : ?>
+    <?php
+      $no = 1;
+    foreach($data['pelanggan'] as $p): ?>
     <tr>
-      <td><?= $p['NIK'] ?></td>
+      <td><?= $p['pemesanan_id'] ?></td>
       <td><?= $p['nama_customer'] ?></td>
-      <td><?= $p['no_telp'] ?></td>
-      <td><?= $p['jenis_kelamin'] ?></td>
+      <td><?= $p['tanggal_pemesanan'] ?></td>
+      <td><?= $p['status'] ?></td>
+      <td><?= $p['total_tagihan'] ?></td>
       <td>
-        <a href="/edit-jamaah/<?= $p['NIK'] ?>" class="btn btn-warning">Edit</a>
-        <a href="" class="btn btn-danger">Hapus</a>
+        <a href="/detail-pemesanan/<?= $p['pemesanan_id'] ?>" class="btn btn-info">Detail</a>
+        <a href="/bukti-transfer/<?= $p['pemesanan_id'] ?>" class="btn btn-orange">Bayar</a>
+        <a href="" class="btn btn-success">Print Nota</a>
       </td>
     </tr>
-    <?php endforeach; ?>
-  </tbody>  
+    <?php $no++; endforeach; ?>
+  </tbody>
 </table>
-    </div>
-
- 
-    </div>
 </div>
+
+
+<script>
+  let table = new DataTable('#myTable');
+</script>
 
 <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
     <script src="/path/to/typeit/source"></script>

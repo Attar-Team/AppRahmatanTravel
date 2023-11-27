@@ -750,8 +750,8 @@ footer .copyright{
 }
 
 .profile{
-    margin-top: 100px;
-    background-color: #fff;
+    margin: 70px;
+    padding: 50px;
 }
 .profile .container-profile{
     display: flex;

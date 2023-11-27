@@ -58,6 +58,10 @@ Router::add("GET","/edit-jamaah/([0-9a-zA-Z]*)", CustomerController::class,"edit
 Router::add("GET","/detail-pemesanan/([0-9a-zA-Z]*)", HomeController::class,"viewDetailPemesanan");
 Router::add("GET","/cetak-tagihan/([0-9a-zA-Z]*)", HomeController::class,"viewCetakTagihan");
 Router::add("GET","/nota-pembayaran/([0-9a-zA-Z]*)", HomeController::class,"viewNotaPembayaran");
+
+//Router untuk menangani Agen
+Router::add("GET","/profile-agen", AgenController::class,"viewProfileAgen");
+Router::add("GET","/pelanggan-agen", AgenController::class,"viewDataPelanggan");
 //Router untuk menangani Dashboard Admin
 Router::add("GET","/admin/dashboard", DashboardController::class,"index");
 
@@ -97,8 +101,10 @@ Router::add("GET","/admin/hapus-keberangkatan/([0-9a-zA-Z]*)", KeberangkatanCont
 //Router untuk menangani Dashboard Agen
 Router::add("GET","/admin/agen", AgenController::class,"index");
 Router::add("GET","/admin/tambah-agen", AgenController::class,"viewTambahData");
-Router::add("GET","/admin/verifikasi-komisi-agen", AgenController::class,"viewVerifikasiAgen");
+Router::add("GET","/admin/data-sudah-dibayar", AgenController::class,"viewDataAgenSudahDibayar");
+Router::add("GET","/admin/data-belum-dibayar", AgenController::class,"viewDataAgenBelumDibayar");
 Router::add("POST","/admin/tambah-agen", AgenController::class,"tambahAgen");
+Router::add("POST","/admin/tambah-gaji-agen", AgenController::class,"tambahGajiAgen");
 Router::add("GET","/check-referal/([0-9a-zA-Z]*)", AgenController::class,"checkReferal");
 
 //Router untuk menangani Dashboard Galery
@@ -131,6 +137,9 @@ Router::add("GET","/admin/delete-harga/([0-9a-zA-Z]*)/([0-9a-zA-Z]*)", PaketCont
 //4. api customer
 Router::add("POST","/apiTambahProfileCustomer", CustomerController::class, 'apiTambahProfileCustomer');
 Router::add("GET","/apiGetProfileCustomer/([0-9a-zA-Z]*)", CustomerController::class, 'getApiJamaah');
+
+//5. pemesanan
+Router::add('POST','/apiTambahPemesanan', PemesananController::class,'apiTambahPemesanan');
 
 
 

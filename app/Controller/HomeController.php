@@ -8,6 +8,7 @@ use Attar\App\Rahmatan\Travel\Model\CustomerModel;
 use Attar\App\Rahmatan\Travel\Model\KeberangkatanModel;
 use Attar\App\Rahmatan\Travel\Model\PaketModel;
 use Attar\App\Rahmatan\Travel\Model\PemesananModel;
+use Attar\App\Rahmatan\Travel\Model\UserModel;
 
 class HomeController
 {
@@ -15,6 +16,7 @@ class HomeController
     private $paket;
     private $pemesanan;
     private $customer;
+    private $user;
     public function __construct()
     {
         $conection = Database::getConnection();
@@ -22,6 +24,7 @@ class HomeController
         $this->paket = new PaketModel($conection);
         $this->pemesanan = new PemesananModel($conection);
         $this->customer = new CustomerModel($conection);
+        $this->user = new UserModel($conection);
     }
     public function index()
     {
@@ -92,8 +95,9 @@ class HomeController
     {
         session_start();
         $idCustomer = $_SESSION['uid_user'];
+        $user = $this->user->getById($idCustomer);
         $profile = $this->customer->getCustomerByUserId($idCustomer);
-        View::render("User/profile", [ 'profile'=> $profile]);
+        View::render("User/profile", ['user' => $user,'profile'=> $profile]);
     }
     public function paketUmrah()
     {

@@ -235,4 +235,49 @@ class PemesananController
             throw new ValidationException($th->getMessage()) ;
         }
     }
+
+    public function apiTambahPemesanan()
+    { 
+        // foreach($_POST['customer'] as $key => $value){
+        //     echo $_POST['harga'][$key];
+        // }
+        // die();
+        try {
+            $tanggal = date("Y-m-j h:i:s");
+            $data = [
+                "agen_id"=> str_replace('"', '', $_POST['agen_id']),
+                "keberangkatan_id"=> str_replace('"', '', $_POST['keberangkatan_id']),
+                "catatan_pemesanan"=> str_replace('"', '', $_POST['catatan_pemesanan']),
+                "jenis_pembayaran"=> str_replace('"', '', $_POST['jenis_pembayaran']),
+                "status"=> str_replace('"', '', $_POST['status']),
+                "tanggal"=> $tanggal,
+                "jumlah_bayar"=> 0,
+                "total_tagihan"=> str_replace('"', '', $_POST['total_tagihan'])
+            ];
+
+            $tambahPemesanan = $this->pemesanan->save($data);
+            if($tambahPemesanan["count"] > 0){
+                $pemesananId = $tambahPemesanan["lastId"];
+                foreach($_POST['customer'] as $key => $value){
+                    $harga = $_POST['harga'][$key];
+                    $this->pemesanan->saveDetailCustomerPemesanan($pemesananId,$value,$harga);
+                }
+            }
+            
+            $result = [
+                'status'=> 200,
+                'message'=> 'success'
+            ];
+
+            echo json_encode($result);
+            
+        } catch (ValidationException $th) {
+            $result = [
+                'status'=> 200,
+                'message'=> 'success',
+                'information'=> $th->getMessage()
+            ];
+            echo json_encode($result);
+        }   
+    }
 }

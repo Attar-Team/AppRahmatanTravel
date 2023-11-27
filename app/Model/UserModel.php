@@ -18,6 +18,13 @@ class UserModel
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getById($id)
+    {
+        $query = $this->connection->prepare("SELECT * FROM user WHERE userId = ?");
+        $query->execute([$id]);
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function save($data){
         try {
         $statement = $this->connection->prepare("INSERT INTO user (`email`,`password`,`level`) VALUES (?,?,?)");

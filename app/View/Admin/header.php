@@ -147,8 +147,8 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/admin/verifikasi-komisi-agen" class="menu-link">
-                    <div data-i18n="Without navbar">Verivikasi Gaji</div>
+                  <a href="/admin/data-belum-dibayar" class="menu-link">
+                    <div data-i18n="Without navbar">Gaji agen</div>
                   </a>
                 </li>
                 

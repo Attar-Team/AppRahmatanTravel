@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,49 +17,70 @@
 
 
 </head>
-<?php foreach($data['user'] as $u) : ?>
 <div class="profile">
     <div class="container-profile">
     <div class="box-info rounded shadow p-5 d-flex" style="justify-content: center;flex-direction: column;align-items: center;">
        <img src="/assets/DSCF1999 (1).JPG" width="250px" class="rounded-circle shadow d-flex mb-5" style="justify-content: center;" alt="">
-       <p><i class="fa-solid fa-user"></i> <?= $u['username'] ?></p>
-       <p><i class="fa-solid fa-envelope"></i> <?= $u['email'] ?></p>
-       <p><i class="fa-solid fa-circle-info"></i> <?= $u['level'] ?></p>
+       <p><i class="fa-solid fa-user"></i> Adza Zarif Nur Iskandar</p>
+       <p><i class="fa-solid fa-envelope"></i> adzazarif@gmail.com</p>
+       <p><i class="fa-solid fa-circle-info"></i> Customer</p>
        
     </div>
 
-    <?php endforeach; ?>
+    
+    <div class="box-info p-3" >
+       <div class="d-flex gap-2">
+        <div class="d-flex border p-2 shadow" style="align-items: center; gap: 15px;">
+          <div class="rounded p-3" style="background-color: red;">
+          <i style="font-size: 40px;color: #fff;" class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <p class="m-0">Pemasukan</p>
+            <h3 class="m-0"><?= $data['jumlah_pemasukan'] ?></h3>
+          </div>
+        </div>
 
-        <div class="box-profile">
-        <H2>Profile</H2>
-        <a href="/tambah-jamaah" class="btn btn-primary">Tambah</a>
+        <div class="d-flex border p-2 shadow" style="align-items: center; gap: 15px;">
+          <div class="rounded p-3" style="background-color: red;">
+          <i style="font-size: 40px;color: #fff;" class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <p class="m-0">Jumlah Pelanggan</p>
+            <h3 class="m-0"><?= $data['jumlah_pelanggan'] ?></h3>
+          </div>
+        </div>
+       </div>
+       <?php foreach($data['profile'] as $p) : ?>
+       <div class="shadow p-4 mt-3">
+        <h3>Biodata</h3>
+        <ul class="d-flex p-0 gap-3" style="list-style: none;justify-content: start ; width:300px">
+          <li>Kode Referel : </li>
+          <li><?= $p['kode_referal'] ?></li>
+        </ul>
+        <ul class="d-flex p-0 gap-3" style="list-style: none;justify-content: start ; width:300px">
+          <li>Nama : </li>
+          <li><?= $p['nama'] ?></li>
+        </ul>
 
-        <table class="table table-striped">
-        <thead>
-    <tr>
-      <th scope="col">NIK</th>
-      <th scope="col">Nama</th>
-      <th scope="col">No telepon</th>
-      <th scope="col">Jenis Kelamin</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($data['profile'] as $p) : ?>
-    <tr>
-      <td><?= $p['NIK'] ?></td>
-      <td><?= $p['nama_customer'] ?></td>
-      <td><?= $p['no_telp'] ?></td>
-      <td><?= $p['jenis_kelamin'] ?></td>
-      <td>
-        <a href="/edit-jamaah/<?= $p['NIK'] ?>" class="btn btn-warning">Edit</a>
-        <a href="" class="btn btn-danger">Hapus</a>
-      </td>
-    </tr>
-    <?php endforeach; ?>
-  </tbody>  
-</table>
+        <ul class="d-flex p-0 gap-3" style="list-style: none;justify-content: start ; width:300px">
+          <li>Alamat : </li>
+          <li><?= $p['alamat'] ?></li>
+        </ul>
+
+        <ul class="d-flex p-0 gap-3" style="list-style: none;justify-content: start ; width:300px">
+          <li>Jenis Kelamin : </li>
+          <li><?= $p['jenis_kelamin'] ?></li>
+        </ul>
+
+        <ul class="d-flex p-0 gap-3" style="list-style: none;justify-content: start ; width:300px">
+          <li>No Telepon : </li>
+          <li><?= $p['notelp'] ?></li>
+        </ul>
+
+       </div>
     </div>
+
+    <?php endforeach; ?>
 
  
     </div>

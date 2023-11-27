@@ -21,7 +21,21 @@
 <body style="background-color: #E9EAEC;">
 
 <form action="/pemesanan" method="POST">
-                        
+            
+<?php
+    if(isset($data['error'])){ ?>
+          <div class="alert alert-danger  d-inline-block alert-dismissible" style="position: relative; left: 50%;transform: translateX(-50%);" role="alert">
+                        <?= $data['error'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
+    <?php
+    if(isset($data['success'])){ ?>
+         <div class="alert alert-success d-inline-block alert-dismissible" style="position: relative; left: 50%;transform: translateX(-50%);" role="alert">
+                        <?= $data['success'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
 
         <div class="urutan" id="urutan1">
             <div class="box">
@@ -41,6 +55,8 @@
                 <p><span>3</span> Detail Pemesanan</p>
             </div>
         </div>
+
+
         <?php
                     foreach($data['keberangkatan'] as $k) : 
                         $termasukHarga = explode(",", $k->termasuk_harga);
