@@ -11,7 +11,7 @@
                     />
                   </div>
                 </div>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#basicModal" class="btn btn-primary">Tambah</button>
+                <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#ModalEditStatusPembayaran" class="btn btn-primary">Tambah</button> -->
               </div>
               
               <div class="card">
@@ -19,28 +19,35 @@
                   <table class="table text-center table-hover">
                     <thead>
                       <tr>
-                        <th>No</th>
+                        <th>Id Pemesanan</th>
                         <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Nomor Telepon</th>
-                        <th>Jenis Kelamin</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Jumlah Bayar</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Zarif</td>
-                        <td>BLitar</td>
-                        <td>085942972801</td>
-                        <td>Laki - Laki</td>
-                        <td>
+                      <?php foreach($data['detailPemesanan'] as $d): ?>
                         
-                          <button type="button" data-bs-toggle="modal" data-bs-target="#updateContact<?= $d['contactId'] ?>" data-bs-whatever="@mdo" class="btn btn-primary">Updated</button>
-                          <a class="btn btn-danger" href="/admin/deleteClientAddress/<?= $d['clientId'] ?>" role="button">Deleted</a>
-                     
+                      <tr>
+                        <td><?= $d['detail_pemesanan_id'] ?></td>
+                        <td><?= $d['nama_customer'] ?></td>
+                        <td><?= $d['tanggal'] ?></td>
+                        
+                        <td ><p style="color: #fff;padding: 10px;" class="<?php if($d['status_verivikasi'] == 'belum verivikasi')  echo "bg-warning";  else if ($d['status_verivikasi'] == 'terverivikasi') echo "bg-primary"; else if ($d['status_verivikasi'] == 'ditolak') echo "bg-danger"; ?>" ><?= $d['status_verivikasi'] ?></p></td>
+                        <td><?= $d['jumlah_bayar'] ?></td>
+                        <td>
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#ModalDetailPembayaran<?= $d['detail_pemesanan_id'] ?>" class="btn btn-success"><i class='bx bx-message-detail' ></i></button>
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#ModalEditStatusPembayaran<?= $d['detail_pemesanan_id'] ?>" class="btn btn-warning"><i class='bx bxs-edit-alt'></i></button>
+                          <!-- <button type="button" class="btn btn-danger"><i class='bx bx-trash'></i></button> -->
                         </td>
                       </tr>
+
+                      <?php 
+                  include'Modal/ModalUpdateStatusPembayaran.php';
+                  include'Modal/ModalDetailPembayaran.php';
+                    endforeach; ?>
                       
                     </tbody>
                    

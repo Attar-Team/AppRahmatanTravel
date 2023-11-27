@@ -41,6 +41,7 @@ class LoginController
             }
             session_start();
             $_SESSION['status_login'] = true;
+            $_SESSION['uid_user'] = $row['userId'];
             $_SESSION['level'] = $row['level'];
             if($row['level'] == 'admin'){
                 View::redirect("/admin/dashboard");

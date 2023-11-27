@@ -815,6 +815,86 @@ footer .copyright{
     font-size: 35px;
     color: var(--orange);
 }
+
+.header-user{
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.header-user .header-title{
+    width: 800px;
+}
+.header-user .header-title h4{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+/* detail pemesanan user */
+.detail-pmsn-user{
+    padding: 30px 100px;
+}
+.detail-pmsn-user .container-pmsn{
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+.detail-pmsn-user .header-dtl{
+    padding: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+    text-align: center;
+}
+.detail-pmsn-user .container-pmsn .box{
+    width: 500px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+.detail-pmsn-user .container-pmsn .boxs .kamar-tidur{
+    width: 500px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+.detail-pmsn-user .container-pmsn .boxs .box-pemesanan{
+    width: 500px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+.detail-pmsn-user .container-pmsn .boxs .box-dtl-pms{
+    width: 500px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: var(--box-shadow);
+}
+.detail-pmsn-user .container-pmsn .boxs .box-struk-pms{
+    width: 500px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+
+
+.detail-pmsn-user .container-pmsn .box img{
+    position: relative; 
+left: 50%;
+transform: translateX(-50%);
+}
+
 @media screen and (max-width: 1100px) {
     .img-login {
       display: none;

@@ -4,6 +4,7 @@ namespace Attar\App\Rahmatan\Travel\Controller;
 
 use Attar\App\Rahmatan\Travel\App\Database;
 use Attar\App\Rahmatan\Travel\App\View;
+use Attar\App\Rahmatan\Travel\Model\CustomerModel;
 use Attar\App\Rahmatan\Travel\Model\KeberangkatanModel;
 use Attar\App\Rahmatan\Travel\Model\PaketModel;
 use Attar\App\Rahmatan\Travel\Model\PemesananModel;
@@ -13,12 +14,14 @@ class HomeController
     private $keberangkatan;
     private $paket;
     private $pemesanan;
+    private $customer;
     public function __construct()
     {
         $conection = Database::getConnection();
         $this->keberangkatan = new KeberangkatanModel($conection);
         $this->paket = new PaketModel($conection);
         $this->pemesanan = new PemesananModel($conection);
+        $this->customer = new CustomerModel($conection);
     }
     public function index()
     {
@@ -58,6 +61,8 @@ class HomeController
 
     public function pemesanan($idKeberangkatan)
     {
+        session_start();
+        $idCustomer = $_SESSION['uid_user'];
         $keberangkatan = $this->keberangkatan->getDetail($idKeberangkatan);
         foreach ($keberangkatan as $k) {
             $idPaket = $k->paket_id;
@@ -65,11 +70,14 @@ class HomeController
         $hotel = $this->paket->getHotelPaket($idPaket);
         $harga = $this->paket->getHargaPaket($idPaket);
         $bintang = $this->paket->getBintangHotel($idPaket);
+        $profile = $this->customer->getCustomerByUserId($idCustomer);
         View::render("Home/pemesanan", [
             "hotel"=> $hotel,
             "harga"=> $harga,
             "bintang"=> $bintang,
-            "keberangkatan"=> $keberangkatan
+            "keberangkatan"=> $keberangkatan,
+            "profile"=> $profile,
+            "keberangkatan_id"=> $idKeberangkatan
         ]);
     }
 
@@ -82,12 +90,14 @@ class HomeController
 
     public function profile()
     {
-        View::render("Home/header", []);
-        View::render("Home/profile", []);
-        View::render("Home/footer", []); 
+        session_start();
+        $idCustomer = $_SESSION['uid_user'];
+        $profile = $this->customer->getCustomerByUserId($idCustomer);
+        View::render("User/profile", [ 'profile'=> $profile]);
     }
     public function paketUmrah()
     {
+        
         $keberangkatan = $this->keberangkatan->get();
         View::render("Home/header", []);
         View::render("Home/paketUmrah", ['dataKeberangkatan' => $keberangkatan]);
@@ -110,5 +120,34 @@ class HomeController
         View::render("Home/tambahCustomer", [
             'idKeberangakatan' => $idKeberangkatan
         ]);
+    }
+    
+    public function tambahJamaahProfile()
+    {
+        View::render("User/tambahCustomer", [
+            'idKeberangakatan' => 0
+        ]);
+    }
+
+    public function viewDetailPemesanan($id)
+    {
+        $dataJamaah = $this->pemesanan->getDetailCustomerPemesanan($id);
+        $riwayatPembayaran = $this->pemesanan->getRiwayatPembayaran($id);
+        $detailPemesanan = $this->pemesanan->getDetailPemesananById($id);
+        View::render('User/detailPemesanan', ['detailPemesanan' => $detailPemesanan,'riwayatPembayaran'=> $riwayatPembayaran,'jamaah'=> $dataJamaah]);
+    }
+
+    public function viewCetakTagihan($id)
+    {
+        $dataJamaah = $this->pemesanan->getDetailCustomerPemesanan($id);
+        $detailPemesanan = $this->pemesanan->getDetailPemesananById($id);
+        View::render('User/cetakTagihan', ['detailPemesanan' => $detailPemesanan,'jamaah'=> $dataJamaah]) ;
+    }
+    public function viewNotaPembayaran($id)
+    {
+        $dataJamaah = $this->pemesanan->getDetailCustomerPemesanan($id);
+        $riwayatPembayaran = $this->pemesanan->getRiwayatPembayaran($id);
+        $detailPemesanan = $this->pemesanan->getDetailPemesananById($id);
+        View::render('User/notaPembayaran', ['detailPemesanan' => $detailPemesanan,'riwayatPembayaran'=> $riwayatPembayaran,'jamaah'=> $dataJamaah]) ;
     }
 }

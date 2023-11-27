@@ -65,14 +65,18 @@ class KeberangkatanController
             ];
             $save = $this->keberangkatan->save($data);
             if ($save > 0) {
-                View::redirect("/admin/keberangkatan");
+                $data = $this->keberangkatan->get();
+                $dataPaket = $this->paket->getPaket();
+                View::render("Admin/header", ["title" => "Keberangkatan"]);
+                View::render("Admin/keberangkatan", ["dataKeberangkatan" => $data, "dataPaket" => $dataPaket, "success" => "Data berhasil ditambahkan"]);
+                View::render("Admin/footer", []);
             } else {
                 throw new ValidationException("data gagal di tambahkan");
             }
-        } catch (\Throwable $e) {
-            // View::render("/admin/keberangkatan", ["error" => $e->getMessage()]);
-            throw new ValidationException($e);
-            // View::redirect("/admin/keberangkatan");
+        } catch (ValidationException $e) {
+            View::render("Admin/header", ["title" => "Customer"]);
+            View::render("Admin/tambahCustomer", ["error" => $e->getMessage()]);
+            View::render("Admin/footer", []);
         }
     }
 
@@ -97,7 +101,11 @@ class KeberangkatanController
             ];
             $editKeberangkatan = $this->keberangkatan->update($data);
             if ($editKeberangkatan > 0) {
-                View::redirect('/admin/keberangkatan');
+                $data = $this->keberangkatan->get();
+                $dataPaket = $this->paket->getPaket();
+                View::render("Admin/header", ["title" => "Keberangkatan"]);
+                View::render("Admin/keberangkatan", ["dataKeberangkatan" => $data, "dataPaket" => $dataPaket, "success" => "Data berhasil Diedit"]);
+                View::render("Admin/footer", []);
             } else {
                 throw new ValidationException('gagal di updatee');
             }
@@ -111,7 +119,11 @@ class KeberangkatanController
         try {
             $hapus = $this->keberangkatan->delete($id);
             if ($hapus > 0) {
-                View::redirect('/admin/keberangkatan');
+                $data = $this->keberangkatan->get();
+                $dataPaket = $this->paket->getPaket();
+                View::render("Admin/header", ["title" => "Keberangkatan"]);
+                View::render("Admin/keberangkatan", ["dataKeberangkatan" => $data, "dataPaket" => $dataPaket, "success" => "Data berhasil Dihapus"]);
+                View::render("Admin/footer", []);
             } else {
                 throw new ValidationException('Data gagal di hapus');
             }

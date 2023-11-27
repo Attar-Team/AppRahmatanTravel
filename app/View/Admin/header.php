@@ -126,7 +126,7 @@
                 </li>
                 <li class="menu-item">
                   <a href="/admin/verifikasi-pemesanan" class="menu-link">
-                    <div data-i18n="Without navbar">Verivikasi pemesanan</div>
+                    <div data-i18n="Without navbar">Pembayaran</div>
                   </a>
                 </li>
                 

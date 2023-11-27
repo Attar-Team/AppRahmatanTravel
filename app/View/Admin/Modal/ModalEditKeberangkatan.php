@@ -29,9 +29,9 @@
                         <div class="mb-3">
                           <label for="sts" class="form-label">Status</label>
                           <select id="sts" name="status" class="form-select">
-                                <option <?= ($d['status'] == "Belum Berangkat") ? 'selected' : '' ?> value="Belum Berangkat">Belum Berangkat</option>
-                                <option <?= ($d['status'] == "Sedang Berangkat") ? 'selected' : '' ?> value="Sedang Berangkat">Sedang Berangkat</option>
-                                <option <?= ($d['status'] == "Selesai Berangkat") ? 'selected' : '' ?> value="Selesai Berangkat">Selesai Berangkat</option>
+                                <option <?= ($d['status_keberangkatan'] == "Belum Berangkat") ? 'selected' : '' ?> value="Belum Berangkat">Belum Berangkat</option>
+                                <option <?= ($d['status_keberangkatan'] == "Sedang Berangkat") ? 'selected' : '' ?> value="Sedang Berangkat">Sedang Berangkat</option>
+                                <option <?= ($d['status_keberangkatan'] == "Selesai Berangkat") ? 'selected' : '' ?> value="Selesai Berangkat">Selesai Berangkat</option>
                           </select>
                         </div>
                 

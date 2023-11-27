@@ -6,17 +6,20 @@ use Attar\App\Rahmatan\Travel\App\Database;
 use Attar\App\Rahmatan\Travel\App\View;
 use Attar\App\Rahmatan\Travel\Exception\ValidationException;
 use Attar\App\Rahmatan\Travel\Model\CustomerModel;
+use Attar\App\Rahmatan\Travel\Model\PemesananModel;
 use Attar\App\Rahmatan\Travel\Model\UserModel;
 
 class CustomerController
 {
     private $customer;
     private $user;
+    private $pemesanan;
     public function __construct()
     {
         $conection = Database::getConnection();
         $this->customer = new CustomerModel($conection);
         $this->user = new UserModel($conection);
+        $this->pemesanan = new PemesananModel($conection);
     }
 
     public function index()
@@ -52,15 +55,34 @@ class CustomerController
         View::render("Admin/footer", []);
     }
 
+    public function viewTambahCicilan($id)
+    {
+        $pemesanan = $this->pemesanan->getForCicilanById($id);
+        View::render("User/tambahCicilan", ["title"=> "", "pemesanan"=> $pemesanan,"idPemesanan"=> $id]);
+    }
+
+    public function viewCustomerHome()
+    {
+        session_start();
+        $idCustomer = $_SESSION["uid_user"];
+        $pemesanan = $this->pemesanan->getPemesananByCustomer($idCustomer);
+        View::render("User/pemesanan", ["title"=> "", "pemesanan"=> $pemesanan]);
+    }
+
+    public function editJamaahProfile($id)
+    {
+        $dataCustomer = $this->customer->getById($id);
+        View::render("User/editCustomer", ["title"=> "", "customer"=> $dataCustomer]);   
+    }
+
     public function tambahCustomer()
     {
-
+        $dataUser = [
+            "email" => $_POST["email"],
+            "password" => password_hash('12345678', PASSWORD_DEFAULT),
+            'level' => 'customer'
+        ];
         try {
-            $dataUser = [
-                "email" => $_POST["email"],
-                "password" => password_hash('12345678', PASSWORD_DEFAULT),
-                'level' => 'customer'
-            ];
             $createAcount = $this->user->save($dataUser);
 
             if ($createAcount['count'] > 0) {
@@ -99,7 +121,7 @@ class CustomerController
                     'NIK' => $_POST['NIK'],
                     'user_id' => $idUser,
                     'nama' => $_POST['nama'],
-                    'tempat_lahir' => $_POST['tempat_lahir'],
+                    'tempat_lahir' => $_POST['tempat_lahir'],   
                     'tanggal_lahir' => $newTglLahir,
                     'alamat' => $_POST['alamat'],
                     'jenis_kelamin' => $_POST['jenis_kelamin'],
@@ -123,16 +145,29 @@ class CustomerController
                     $savePasport = $this->customer->savePasport($dataPasport);
                     $saveDocument = $this->customer->saveDocument($_POST['NIK'], $rename);
                     if ($saveDocument > 0 && $savePasport > 0) {
-                        View::redirect('/admin/customer');
+                        if($_POST['idKeberangkatan'] == 0){
+                            View::redirect('/profile');
+                        }else{
+                            $data = $this->customer->get();
+                            View::render("Admin/header", ["title" => "Customer"]);
+                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil ditambahkan']);
+                            View::render("Admin/footer", []);
+                        }
                     } else {
                         throw new ValidationException("gagal di tambah");
                     }
+                }else{
+                    throw new ValidationException("Gagal");
                 }
             } else {
                 throw new ValidationException("gagal di tambah");
             }
-        } catch (\Throwable $e) {
-            throw new ValidationException($e);
+        } catch (ValidationException $exception) {
+            View::render("Admin/header", ["title" => "Customer"]);
+            View::render("Admin/tambahCustomer", ["error" => $exception->getMessage()]);
+            View::render("Admin/footer", []);
+            // View::render("/admin/tambah-customer", ['error'=> $e->getMessage()]);
+            // throw new ValidationException($e);
         }
     }
 
@@ -263,14 +298,22 @@ class CustomerController
             $this->customer->updatePasport($_POST, $newTglPenerbitan);
 
             $this->customer->updateDocument($_POST['NIK'], $rename);
-            View::redirect('/admin/customer');
-        } catch (\Throwable $e) {
-            throw new ValidationException($e->getMessage());
+            $data = $this->customer->get();
+                            View::render("Admin/header", ["title" => "Customer"]);
+                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil di edit']);
+                            View::render("Admin/footer", []);
+        } catch (ValidationException $exception) {
+            View::render("Admin/header", ["title" => "Customer"]);
+            View::render("Admin/tambahCustomer", ["error" => $exception->getMessage()]);
+            View::render("Admin/footer", []);
         }
     }
 
+
+
     public function hapusCustomer($id)
     {
+        error_reporting(0);
         try {
             // var_dump($id); 
             // if(file_exists("uploads/foto_customer/foto_customer1699116602.png")) {
@@ -328,9 +371,15 @@ class CustomerController
         $this->customer->deletePasport($id);
         $this->customer->deleteDokument($id);
         $this->customer->deleteCustomer($id);
-        View::redirect('/admin/customer');
+        $data = $this->customer->get();
+                            View::render("Admin/header", ["title" => "Customer"]);
+                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil dihapus']);
+                            View::render("Admin/footer", []);
         } catch (\Throwable $e) {
-            throw new ValidationException($e->getMessage());
+            $data = $this->customer->get();
+            View::render("Admin/header", ["title" => "Customer"]);
+            View::render("Admin/customer", ['dataCustomer' => $data,'error' => 'data customer gagal dihapus']);
+            View::render("Admin/footer", []); throw new ValidationException($e->getMessage());
         }
 
     }
@@ -424,6 +473,45 @@ class CustomerController
                 'information' => $th->getMessage()
             ];
             echo json_encode($result);
+        }
+    }
+    public function getApiJamaah($id)
+    {
+        // var_dump($id);
+        // die();
+        try {
+            // $result = ;
+            
+                $data = array_map(function($customer){
+                    return [
+                        "NIK" => $customer['NIK'],
+                        "user_id"=> $customer['user_id'],
+                        "nama"=> $customer['nama_customer'],
+                        "tempat_lahir"=> $customer['tempat_lahir'],
+                        "tanggal_lahir"=> $customer['tanggal_lahir'],
+                        "alamat"=> $customer['alamat'],
+                        "jenis_kelamin"=> $customer['jenis_kelamin'],
+                        "pekerjaan"=> $customer['pekerjaan'],
+                        "ukuran_baju"=> $customer['ukuran_baju'],
+                        "no_telp"=> $customer['no_telp'],
+                        "nomor_pasport"=> $customer['nomor_pasport'],
+                        "nama_pasport"=> $customer['nama_pasport'],
+                        "tempat_penerbita"=> $customer['tempat_penerbitan'],
+                        "tgl_penerbitan"=> $customer['tgl_penerbitan'],
+                        "foto_customer"=> $customer['foto'],
+                        "foto_pasport"=> $customer['foto_paspor'],
+                        "foto_pasport2"=> $customer['foto_paspor_hal2'],
+                        "foto_ktp"=> $customer['foto_ktp'],
+                        "foto_kk"=> $customer['foto_kartu_keluarga'],
+                        "foto_rekening"=> $customer['foto_buku_rekening'],
+                        "foto_akte"=> $customer['foto_akte_kelahiran'],
+                        "foto_pernikahan"=> $customer['foto_buku_pernikahan']
+                    ];
+                },$this->customer->getCustomerByUserId($id));
+            
+            echo json_encode($data);
+        } catch (\Throwable $th) {
+            echo json_encode($th->getMessage());
         }
     }
 }

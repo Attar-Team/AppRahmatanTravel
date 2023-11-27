@@ -2,6 +2,8 @@
 
 namespace Attar\App\Rahmatan\Travel\Model;
 
+use Attar\App\Rahmatan\Travel\Exception\ValidationException;
+
 class KeberangkatanModel
 {
     private \PDO $connection;
@@ -35,21 +37,33 @@ class KeberangkatanModel
 
     public function save($data)
     {
-        $query = $this->connection->prepare("INSERT INTO keberangkatan (`paket_id`,`tanggal`,`keberangkatan_dari`,`status`,`seats`,`tanggal_ditutup`) VALUES (?,?,?,?,?,?)");
+        try {
+            $query = $this->connection->prepare("INSERT INTO keberangkatan (`paket_id`,`tanggal`,`keberangkatan_dari`,`status_keberangkatan`,`seats`,`tanggal_ditutup`) VALUES (?,?,?,?,?,?)");
         $query->execute([$data['paket_id'],$data['tanggal_keberangkatan'],$data['keberangkatan_dari'],'Belum Berangkat',$data['seats'],$data['tanggal_ditutup']]);
         return $query->rowCount();
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
 
     public function update($data){
-        $query = $this->connection->prepare('UPDATE keberangkatan SET paket_id = ?, tanggal = ?,keberangkatan_dari = ?, status = ?, seats = ?, tanggal_ditutup = ? WHERE keberangkatan_id = ?');
+        try {
+            $query = $this->connection->prepare('UPDATE keberangkatan SET paket_id = ?, tanggal = ?,keberangkatan_dari = ?, status_keberangkatan = ?, seats = ?, tanggal_ditutup = ? WHERE keberangkatan_id = ?');
         $query->execute([$data['paket_id'],$data['tanggal'],$data['keberangkatan_dari'],$data['status'],$data['seats'],$data['tanggal_ditutup'],$data['keberangkatan_id']]);
         return $query->rowCount();
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
 
     public function delete($id){
-        $query = $this->connection->prepare('DELETE FROM keberangkatan WHERE keberangkatan_id = ?');
+        try {
+            $query = $this->connection->prepare('DELETE FROM keberangkatan WHERE keberangkatan_id = ?');
         $query->execute([$id]);
         return $query->rowCount();
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
     }
     
 }

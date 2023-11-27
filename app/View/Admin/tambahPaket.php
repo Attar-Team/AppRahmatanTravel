@@ -1,5 +1,12 @@
 
 <div class="container-xxl flex-grow-1 container-p-y">
+<?php
+    if(isset($data['error'])){ ?>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+                        <?= $data['error'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
 <form method="POST" action="/admin/tambah-paket" enctype="multipart/form-data">
   <script type="text/javascript">
 $(document).ready(function() {

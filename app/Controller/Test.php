@@ -34,46 +34,125 @@ class Test
         echo "testt";
     }
 
+    public function uploadPasport()
+    {
+        $rename = array();
+        foreach ($_FILES as $key => $value) {
+            $filename = $value['name'];
+
+            foreach ($filename as $k => $v) {
+                $rename[$k] = "";
+                if (!$filename[$k] == "") {
+                    $filesize = $value['size'][$k];
+                    $tmpname = $value['tmp_name'][$k];
+
+                    $formatfile = pathinfo($filename[$k], PATHINFO_EXTENSION);
+                    $rename[$k] = "foto_$k" . time() . '.' . $formatfile;
+
+                    if (!file_exists("uploads/foto_$k/")) {
+                        mkdir("uploads/foto_$k/", 0777, true);
+                    }
+                    move_uploaded_file($tmpname, "uploads/foto_$k/" . $rename[$k]);
+
+                }
+            }
+        }
+$result = [];
+        $tambah = $this->testModel->savePasport($_POST['nama'],$rename);
+        if($tambah > 0)
+        {
+              $result = [
+                        'status' => 200,
+                        'message' => 'success',
+                        'information' => 'berhasil save'
+                    ];
+        }else{
+              $result = [
+                        'status' => 400,
+                        'message' => 'failed',
+                        'information' => 'gagal save'
+                    ];
+        }
+        echo json_encode($result);
+    }
+
     public function testFile(){
-        // var_dump($_FILES);
-        // die();
+        var_dump($_FILES);
+        die();
 
         $result = array();
-        
-        $filename = $_FILES['foto']['name'];
-            $tmpname = $_FILES['foto']['tmp_name'];
-            $filesize = $_FILES['foto']['size'];
+        $rename = array();
+        foreach ($_FILES as $key => $value) {
+            $filename = $value['name'];
+            
+            foreach ($filename as $k => $v) {
+                $rename[$k] = "";
+                if (!$filename[$k] == "") {
+                    $filesize = $value['size'][$k];
+                    $tmpname = $value['tmp_name'][$k];
 
-            $formatfile = pathinfo($filename, PATHINFO_EXTENSION);
-            $rename = 'foto'.time().'.'.$formatfile;
+                    $formatfile = pathinfo($filename[$k], PATHINFO_EXTENSION);
+                    $rename[$k] = "foto_$k" . time() . '.' . $formatfile;
 
-            $allowedtype = array('png','jpeg','jpg','gif');
+                    $allowedtype = array('png','PNG','JPEG', 'jpeg', 'jpg', 'gif', 'JPG');
 
-            if(!in_array($formatfile,$allowedtype)){
-                $result = [
-                    'status' => 400,
-                    'message' => 'failed',
-                    'information' => 'format tidak di izinkan'
-                ];
-            }elseif($filesize > 1000000){
-                $result = [
-                    'status' => 400,
-                    'message' => 'failed',
-                    'information' => 'size lebih dari 1 mb'
-                ];
-            }else{
-                // move_uploaded_file($tmpname, "uploads/tes/" .$rename);
-                $result = [
-                    'status' => 201,
-                    'message' => 'success',
-                    "name"=> $_FILES["foto"]["name"],
-                        "full_path"=> $_FILES["foto"]["full_path"],
-                        "type"=> $_FILES["foto"]["type"],
-                        "tmp_name"=> $_FILES["foto"]["tmp_name"],
-                        "size"=> $_FILES["foto"]["size"],
-                        "error"=> $_FILES["foto"]["error"]
-                ];
+                    if (!in_array($formatfile, $allowedtype)) {
+                        $result = [
+                                        'status' => 400,
+                                        'message' => 'failed',
+                                        'information' => 'format tidak di izinkan'
+                                    ];
+                    } elseif ($filesize > 1000000) {
+                        $result = [
+                                        'status' => 400,
+                                        'message' => 'failed',
+                                        'information' => 'format tidak di izinkan'
+                                    ];
+                    } else {
+                        $result = [
+                            'status' => 400,
+                            'message' => 'success',
+                            'information' => 'asd'
+                        ];
+                    }
+                }
             }
+        }
+        
+        // $filename = $_FILES['foto']['name'];
+        //     $tmpname = $_FILES['foto']['tmp_name'];
+        //     $filesize = $_FILES['foto']['size'];
+
+        //     $formatfile = pathinfo($filename, PATHINFO_EXTENSION);
+        //     $rename = 'foto'.time().'.'.$formatfile;
+
+        //     $allowedtype = array('png','jpeg','jpg','gif');
+
+        //     if(!in_array($formatfile,$allowedtype)){
+        //         $result = [
+        //             'status' => 400,
+        //             'message' => 'failed',
+        //             'information' => 'format tidak di izinkan'
+        //         ];
+        //     }elseif($filesize > 1000000){
+        //         $result = [
+        //             'status' => 400,
+        //             'message' => 'failed',
+        //             'information' => 'size lebih dari 1 mb'
+        //         ];
+        //     }else{
+        //         // move_uploaded_file($tmpname, "uploads/tes/" .$rename);
+        //         $result = [
+        //             'status' => 201,
+        //             'message' => 'success',
+        //             "name"=> $_FILES["foto"]["name"],
+        //                 "full_path"=> $_FILES["foto"]["full_path"],
+        //                 "type"=> $_FILES["foto"]["type"],
+        //                 "tmp_name"=> $_FILES["foto"]["tmp_name"],
+        //                 "size"=> $_FILES["foto"]["size"],
+        //                 "error"=> $_FILES["foto"]["error"]
+        //         ];
+        //     }
         // $result = [
         //     "name"=> $_FILES["foto"]["name"],
         //     "full_path"=> $_FILES["foto"]["full_path"],

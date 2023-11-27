@@ -10,7 +10,7 @@
         <tbody>
             <tr>
                 <td>Nama</td>
-                <td><?= $d->nama ?></td>
+                <td><?= $d->nama_customer ?></td>
             </tr>
             <tr>
                 <td>Tempat , Tanggal Lahir</td>

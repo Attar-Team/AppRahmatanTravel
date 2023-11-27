@@ -5,19 +5,19 @@
         <li class="nav-item">
             <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
                 data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
-                Detail Keberangkatan
+                Detail Pemesanan
             </button>
         </li>
         <li class="nav-item">
             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                 data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
-                Detail Paket
+                Jamaah
             </button>
         </li>
         <li class="nav-item">
             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                 data-bs-target="#navs-pills-top-messages" aria-controls="navs-pills-top-messages" aria-selected="false">
-                Pemesan
+                Pembayaran
             </button>
         </li>
     </ul>
@@ -25,9 +25,29 @@
         <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
         <div class="row">
         <div class="col-xl">
-            <h5>Data Customer</h5>
+            <h5>Data Jamaah</h5>
+            <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Nama</th>
+                        <th>Paket</th>
+                        <th>Harga</th>
+                        <th>Diskon</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <?php foreach($data['detailCustomerPemesanan'] as $d) : ?>
+                    <tr>
+                        <td><?= $d['nama_customer'] ?></td>
+                        <td><?= $d['nama'] ?></td>
+                        <td><?= $d['harga'] ?></td>
+                        <td><?= $d['diskon'] ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                  </table>
             <?php
-        foreach($data['dataKeberangkatan'] as $d):
+        foreach($data['pemesanan'] as $d):
     ?>
             <table class="table table-borderless bg-white">
                 <tbody>
@@ -55,7 +75,7 @@
 
     </div>
         </div>
-        <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
+        <!-- <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
         <div class="row">
         <div class="col-xl">
             <h5>Data Customer</h5>
@@ -133,7 +153,7 @@
                 roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
                 jelly-o tart brownie jelly.
             </p>
-        </div>
+        </div> -->
     </div>
 </div>
 
