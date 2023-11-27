@@ -63,7 +63,7 @@
                 
                 $tgl_pemesanan = $p['tanggal'];
                 $date=date_create($tgl_pemesanan);
-                date_add($date,date_interval_create_from_date_string("1 minutes"));
+                date_add($date,date_interval_create_from_date_string("10 minutes"));
                 $tenggat = date_format($date,"F j, Y H:i:s");
                 ?>
                 <div class="desc-harga shadow">
