@@ -5,15 +5,18 @@ date_default_timezone_set("Asia/Jakarta");
 use Attar\App\Rahmatan\Travel\App\Database;
 use Attar\App\Rahmatan\Travel\App\View;
 use Attar\App\Rahmatan\Travel\Exception\ValidationException;
+use Attar\App\Rahmatan\Travel\Model\KeberangkatanModel;
 use Attar\App\Rahmatan\Travel\Model\PemesananModel;
 
 class PemesananController
 {
     private $pemesanan;
+    private $keberangkatan;
     public function __construct()
     {
         $connection = Database::getConnection();
         $this->pemesanan = new PemesananModel($connection);
+        $this->keberangkatan = new KeberangkatanModel($connection);
     }
 
     public function index()
@@ -40,10 +43,11 @@ class PemesananController
             View::redirect("/admin/pemesanan");
             exit();
         }
+        $keberangkatan = $this->pemesanan->getForCicilanById($idPemesanan);
         // $detailPemesanan = $this->pemesanan->getDetailPemesanan($idPemesanan);
         $detailCustomerPemesanan = $this->pemesanan->getDetailCustomerPemesanan($idPemesanan);
         View::render("Admin/header",["title"=> "Pemesanan"]);
-        View::render("Admin/detailPemesanan",['pemesanan' => $pemesanan,'detailCustomerPemesanan' => $detailCustomerPemesanan]);
+        View::render("Admin/detailPemesanan",['pemesanan' => $pemesanan,'detailCustomerPemesanan' => $detailCustomerPemesanan,'keberangkatan'=> $keberangkatan]);
         View::render("Admin/footer",[]);
     }
 

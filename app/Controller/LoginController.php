@@ -41,6 +41,7 @@ class LoginController
             session_start();
             $_SESSION['status_login'] = true;
             $_SESSION['uid_user'] = $row['userId'];
+            $_SESSION['username'] = $row['username'];
             $_SESSION['level'] = $row['level'];
             if($row['level'] == 'admin'){
                 View::redirect("/admin/dashboard");
@@ -48,7 +49,7 @@ class LoginController
                 View::redirect("/");
             }
         } catch (\Throwable $th) {
-            View::render("login", ["error" => $th->getMessage()]);
+            View::render("/login", ["error" => $th->getMessage()]);
         }
     }
 
@@ -74,11 +75,16 @@ class LoginController
             $row = $this->login->login($data['email'], $data['password']);
             if ($row) {
                 $createToken = $this->token->createToken($row['userId']);
+                
                 if ($createToken) {
+                    $token = $this->token->getToken($row['userId']);
                     http_response_code(201);
                     $result = array(
                         "status" => "success",
-                        "response" => 201
+                        "response" => 201,
+                        "nama"=> $row['username'],
+                        'user_id'=> $row['userId'],
+                        "token"=> $token['token']
                     );
                 }
             } else {

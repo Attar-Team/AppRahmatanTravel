@@ -71,9 +71,12 @@ foreach($data['keberangkatan'] as $k) :
                 <a class="btn-admin" href="#"><i class="fa-brands fa-whatsapp"></i> Tanya Admin</a>
                 <?php if(!isset($_SESSION['status_login'])) {?>
                 <a class="btn-booking" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login untuk booking</a>
-                <?php }else{ ?>
+                <?php }else{
+                    if($_SESSION['level'] == "customer"){
+                    ?>
+                    
                 <a class="btn-booking" href="/pemesanan/<?= $k->keberangkatan_id ?>"><i class="fa-solid fa-share-from-square"></i></i> Pesan sekarang</a>
-                <?php } ?>
+                <?php }} ?>
             </div>
         </div>
     </div>

@@ -1,5 +1,19 @@
 <div class="container-xxl flex-grow-1 container-p-y">
-              <div style="display: flex;justify-content: space-between;margin-bottom: 20px;gap: 50px;">
+<?php
+    if(isset($data['error'])){ ?>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+                        <?= $data['error'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
+    <?php
+    if(isset($data['success'])){ ?>
+          <div class="alert alert-success alert-dismissible" role="alert">
+                        <?= $data['success'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
+              <!-- <div style="display: flex;justify-content: space-between;margin-bottom: 20px;gap: 50px;">
                 <div class="navbar-nav bg-light shadow rounded w-100 align-items-center">
                   <div class="nav-item d-flex w-100 px-4 py-2 align-items-center">
                     <i class="bx bx-search fs-4 lh-0"></i>
@@ -11,36 +25,34 @@
                     />
                   </div>
                 </div>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#basicModal" class="btn btn-primary">Tambah</button>
-              </div>
+                <a href="/admin/tambah-paket"  class="btn btn-primary d-flex align-items-center">Tambah</a>
+              </div> -->
               
-              <div class="card">
-                <div class="table-responsive text-nowrap">
-                  <table class="table text-center table-hover">
+              <div class="card " style="margin-top: -16px;" >
+                <div class="table-responsive text-nowrap p-3">
+                <div class="d-inline-block mb-3">
+                <a href="/admin/tambah-paket"  class="btn btn-primary d-flex align-items-center">Tambah</a>
+                </div>
+                  <table id="myTable" class="table table-hover ">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Nomor Telepon</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Actions</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Pemasukan</th>
                       </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        $no = 1;
+                        foreach($data["pemesanan"] as $d): ?>
                       <tr>
-                        <td>1</td>
-                        <td>Zarif</td>
-                        <td>BLitar</td>
-                        <td>085942972801</td>
-                        <td>Laki - Laki</td>
-                        <td>
-                        
-                          <button type="button" data-bs-toggle="modal" data-bs-target="#updateContact<?= $d['contactId'] ?>" data-bs-whatever="@mdo" class="btn btn-primary">Updated</button>
-                          <a class="btn btn-danger" href="/admin/deleteClientAddress/<?= $d['clientId'] ?>" role="button">Deleted</a>
-                     
-                        </td>
+                        <td><?= $no++ ?></td>
+                        <td><?= $d['tanggal_pemesanan'] ?></td>
+                        <td><?= $d['status'] ?></td>
+                        <td><?= $d['sudah_bayar'] ?></td>
                       </tr>
+                      <?php endforeach; ?>
                       
                     </tbody>
                    
@@ -48,3 +60,7 @@
                 </div>
               </div>
             </div>
+
+            <script>
+              let table = new DataTable('#myTable');
+            </script>
