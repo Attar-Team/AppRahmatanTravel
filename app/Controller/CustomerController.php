@@ -480,11 +480,13 @@ class CustomerController
                 $savePasport = $this->customer->savePasport($dataPasport);
                 $saveDocument = $this->customer->saveDocument(str_replace('-"', '/', $_POST['NIK']), $rename);
                 if ($saveDocument > 0 && $savePasport > 0) {
+                    http_response_code(201);
                     $result = [
-                        'status' => 200,
+                        'status' => 201,
                         'message' => 'success'
                     ];
                 } else {
+                    http_response_code(400);
                     $result = [
                         'status' => 400,
                         'message' => 'failed'
@@ -493,6 +495,7 @@ class CustomerController
             }
             echo json_encode($result);
         } catch (\Throwable $th) {
+            http_response_code(400);
             $result = [
                 'status' => 400,
                 'message' => 'failed',
@@ -532,8 +535,12 @@ class CustomerController
                         "foto_pernikahan"=> $customer['foto_buku_pernikahan']
                     ];
                 },$this->customer->getCustomerByUserId($id));
-            
-            echo json_encode($data);
+            $result = [
+                'status' => 200,
+                'message'=> 'success',
+                'data'=> $data
+            ];
+            echo json_encode($result);
         } catch (\Throwable $th) {
             echo json_encode($th->getMessage());
         }

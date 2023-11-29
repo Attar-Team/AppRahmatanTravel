@@ -109,6 +109,7 @@ Router::add("GET","/check-referal/([0-9a-zA-Z]*)", AgenController::class,"checkR
 
 //Router untuk menangani Dashboard Galery
 Router::add("GET","/admin/galery", GaleryController::class,"index");
+Router::add("POST","/admin/tambah-galery", GaleryController::class,"tambahGalery");
 
 //Router untuk menangani Dashboard Artikel
 Router::add("GET","/admin/artikel", ArtikelController::class,"index");
@@ -140,6 +141,12 @@ Router::add("GET","/apiGetProfileCustomer/([0-9a-zA-Z]*)", CustomerController::c
 
 //5. pemesanan
 Router::add('POST','/apiTambahPemesanan', PemesananController::class,'apiTambahPemesanan');
+
+//6. galery
+Router::add('GET','/apiGetGalery', GaleryController::class , "apiGetGalery");
+
+//7. artikel
+Router::add("GET","/apiGetArtikel", ArtikelController::class,"apiGetArtikel");
 
 
 

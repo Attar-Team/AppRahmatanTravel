@@ -139,7 +139,7 @@ class KeberangkatanController
                 return [
                     'id' => $keberangkatan['keberangkatan_id'],
                     'tanggal' => $keberangkatan['tanggal'],
-                    'status' => $keberangkatan['status'],
+                    'status' => $keberangkatan['status_keberangkatan'],
                     'seats' => $keberangkatan['seats'],
                     'paket' => array_map(
                         fn ($paket) =>

@@ -716,7 +716,24 @@ footer .copyright{
     color: #414765;
     font-size: 30px;
 }
-
+.pembayaran .container-pembayaran{
+    display: flex;
+    justify-content: center;
+    padding: 0 100px;
+    gap: 20px;
+}
+.pembayaran .container-pembayaran .total{
+    width: 600px;
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    padding: 20px;
+}
+.pembayaran .container-pembayaran .desc-pembayaran{
+    width: 600px;
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    padding: 20px;
+}
 
 /* Bukti Transfer */
 .bukti-transfer{

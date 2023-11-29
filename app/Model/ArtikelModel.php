@@ -14,7 +14,7 @@ class ArtikelModel{
         $sql = "SELECT * FROM artikel";
         $stmt = $this->connection->prepare($sql);
         $stmt -> execute();
-        return $stmt-> fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
     public function createArtikel($judul, $tanggal, $isi, $foto)
     {
@@ -32,7 +32,7 @@ class ArtikelModel{
         $sql = "SELECT-* FROM artikel WHERE artikel_id = :id";
         $stmt = $this -> connection -> prepare($sql);
         $stmt->bindParam(':id', $artikelId);
-        $stmt->execute();
+        $stmt->execute(); 
         return $stmt->fetch();
     }
 

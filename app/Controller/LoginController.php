@@ -78,29 +78,28 @@ class LoginController
                 
                 if ($createToken) {
                     $token = $this->token->getToken($row['userId']);
-                    http_response_code(201);
+                    http_response_code(200);
                     $result = array(
-                        "status" => "success",
-                        "response" => 201,
+                        "status" => 200,
+                        "message" => "success",
                         "nama"=> $row['username'],
                         'user_id'=> $row['userId'],
                         "token"=> $token['token']
                     );
                 }
             } else {
-                http_response_code(404);
+                http_response_code(401);
                 $result = array(
-                    "status" => "Failed",
-                    "response" => 404
+                    "status" => 401,
+                    "message" => "Failed username dan password salah"
                 );
             }
             echo json_encode($result);
         } catch (ValidationException $e) {
             http_response_code(404);
             $result = array(
-                "status" => "Failed",
-                "response" => 404,
-                "message" => $e->getMessage()
+                "message" => "Failed",
+                "status" => 404,
             );
         }
     }

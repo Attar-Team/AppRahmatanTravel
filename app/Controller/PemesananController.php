@@ -67,7 +67,7 @@ class PemesananController
                 "agen_id"=> $_POST["agen_id"],
                 "keberangkatan_id"=> $_POST["keberangkatan_id"],
                 "catatan_pemesanan"=> $_POST["catatan_pemesanan"],
-                "jenis_pembayaran"=> $_POST["jenis_pembayaran"],
+                "jenis_pembayaran"=> "transfer",
                 "status"=> "belum lunas",
                 "tanggal"=> $tanggal,
                 "jumlah_bayar"=> 0,
@@ -267,9 +267,9 @@ class PemesananController
                     $this->pemesanan->saveDetailCustomerPemesanan($pemesananId,$value,$harga);
                 }
             }
-            
+            http_response_code(201);
             $result = [
-                'status'=> 200,
+                'status'=> 201,
                 'message'=> 'success'
             ];
 
@@ -277,8 +277,8 @@ class PemesananController
             
         } catch (ValidationException $th) {
             $result = [
-                'status'=> 200,
-                'message'=> 'success',
+                'status'=> 400,
+                'message'=> 'failed',
                 'information'=> $th->getMessage()
             ];
             echo json_encode($result);

@@ -1,0 +1,12 @@
+# HTID:22448267: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:22448267:
+
+RewriteEngine on
+
+# Aturan Tambahan untuk Mengarahkan dari /rahmatan/ ke /
+RewriteRule ^rahmatan/(.*)$ https://rahmatan-travel.tifd.myhost.id/$1 [R=301,L]
+
+# Aturan yang Sudah Ada
+RewriteCond %{REQUEST_URI} !^public
+RewriteRule ^([\s\S]*)$ public/$1 [L,NC,QSA]

@@ -43,7 +43,7 @@
                 <span class="line"></span>
                 <p><span>2</span> Pembayaran</p>
                 <span class="line"></span>
-                <p><span>3</span> Detail Pemesanan</p>
+                <p><span>3</span> Verivikasi Bayar</p>
             </div>
         </div>
         <div class="urutan" id="urutan2" style="display: none;">
@@ -52,7 +52,7 @@
                 <span class="line"></span>
                 <p class="order-active-p"><span class="order-active">2</span> Pembayaran</p>
                 <span class="line"></span>
-                <p><span>3</span> Detail Pemesanan</p>
+                <p><span>3</span> Verivikasi Bayar</p>
             </div>
         </div>
 
@@ -307,7 +307,7 @@
         <?php endforeach; ?>
 
         <div class="pembayaran" id="form-2" style="display: none;">
-            <div class="total">
+            <!-- <div class="total">
             
                 <h4>Rincian Pembayaran</h4>
               
@@ -383,13 +383,56 @@
                         </label>
                     </div>
                 </div>
+            </div> -->
+
+
+            <div class="container-pembayaran">
+                <div class="total bg-white">
+                    <h4>Rincian Pemesanan</h4>
+                    <div id="total-pembayaran">
+                    </div>
+                    <div class="d-flex pt-2" style="justify-content: space-between;border-top: 1px solid #ddd;">
+                                <h5>Total</h5>
+                                <h5 id="totalPemesanan">0</h5>
+                            </div>
+
+                </div>
+                <div class="desc-pembayaran bg-white">
+                    <h4>Aturan pembayaran</h4>
+                    <ul>
+                        <li>Pembayaran harus transfer ke bank yang tercantum dibawah</li>
+                    </ul>
+                    <ul>
+                        <li>Pembayaran DP ada batas waktunya maksimal satu hari setelah pemesanan. jika tidak bayar DP dalam 24 jam maka akan otomatis kehapus</li>
+                    </ul>
+                    <ul>
+                        <li>Selanjutnya pembayaran cicilan dapat dilakukan sebelum waktu berakhir yang ditentukan</li>
+                    </ul>
+                    <ul>
+                        <li>Jika sudah membayar wajib mengisi form verivikasi pembayaran terlebih dahulu untuk dicek oleh admin</li>
+                    </ul>
+                    <ul>
+                        <li>ketika sudah di verivikasi oleh admin maka total tagihab akan akan berkurang </li>
+                    </ul>
+
+                    <h4>Kirim ke bank</h4>
+                    <div class="d-flex gap-3 shadow rounded" style="align-items: center;justify-content: center;">
+                        <img src="/image/logo-bca.png" width="150px" alt="">
+                        <div>
+                            <h4>12313134214</h4>
+                            <h4>Rahmatan Travel</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            
 
 
 
 
-            <div class="accordion my-5" id="accordionPanelsStayOpenExample">
+
+            <!-- <div class="accordion my-5" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -453,7 +496,7 @@
                         </div>
                     </div>
                 </div> -->
-            </div>
+            <!-- </div> --> -->
 
             <div class="mb-5" style="padding: 0 100px;">
                 <button type="button" class="btn w-100 btn-warning mb-3" id="back-1">Kembali</button>
