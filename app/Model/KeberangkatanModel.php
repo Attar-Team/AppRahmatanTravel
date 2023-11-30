@@ -11,6 +11,14 @@ class KeberangkatanModel
     {
         $this->connection = $connection;
     }
+    
+    public function getAllApi()
+    {
+        $query = $this->connection->prepare("SELECT * FROM keberangkatan ");
+        $query->execute();
+        $result = $query->fetchAll();
+        return $result; 
+    }
 
     public function get()
     {

@@ -34,11 +34,13 @@ Router::add("POST","/addApi", Test::class, "testt", [ApiMiddleware::class]);
 Router::add("GET","/login",LoginController::class,"index");
 Router::add("GET","/register",LoginController::class,"register");
 Router::add("POST","/login",LoginController::class,"login");
+Router::add("POST","/register", LoginController::class,"saveRegister");
 Router::add("GET","/logout", LoginController::class,"logout");
 
 //Router untuk menangani Homepage
 Router::add("GET","/", HomeController::class,"index");
 Router::add("GET","/about", HomeController::class,"about");
+Router::add("GET","/galery", HomeController::class,"galery");
 Router::add("GET","/detail-paket/([0-9a-zA-Z]*)", HomeController::class,"detailPaket");
 Router::add("GET","/pemesanan/([0-9a-zA-Z]*)", HomeController::class,"pemesanan");
 Router::add("GET","/pembayaran", HomeController::class,"pembayaran");
@@ -141,6 +143,7 @@ Router::add("GET","/apiGetProfileCustomer/([0-9a-zA-Z]*)", CustomerController::c
 
 //5. pemesanan
 Router::add('POST','/apiTambahPemesanan', PemesananController::class,'apiTambahPemesanan');
+Router::add('GET','/apiGetPemesananByStatus/([0-9a-zA-Z]*)', PemesananController::class,'apiGetPemesananByStatus');
 
 //6. galery
 Router::add('GET','/apiGetGalery', GaleryController::class , "apiGetGalery");

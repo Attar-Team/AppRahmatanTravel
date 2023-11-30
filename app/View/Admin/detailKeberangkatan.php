@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <td>Status</td>
-                        <td><?= $d->status ?></td>
+                        <td><?= $d->status_keberangkatan ?></td>
                     </tr>
                     <tr>
                         <td>Seats</td>

@@ -73,6 +73,13 @@ class PemesananModel
         return $query->fetchAll();
     }
 
+    public function getByStatus($status)
+    {
+        $query = $this->connection->prepare("SELECT * FROM pemesanan WHERE status = ?");
+        $query->execute([$status]);
+        return $query->fetchAll();
+    }
+
     public function checkValid($id)
     {
         $query = $this->connection->prepare("SELECT * FROM `pemesanan` RIGHT JOIN detail_pemesanan ON pemesanan.pemesanan_id = detail_pemesanan.pemesanan_id WHERE pemesanan.pemesanan_id = ?");

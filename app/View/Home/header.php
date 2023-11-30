@@ -91,8 +91,18 @@
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </div>
+                    <?php }else if($_SESSION['level'] == "admin"){ ?>
+                        <div class="btn-group dropstart">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Zarif <i class="fa-solid fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
                     <?php }} ?>
-
                 </ul>
             </div>
         </div>

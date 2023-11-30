@@ -144,31 +144,31 @@ class KeberangkatanController
                     'paket' => array_map(
                         fn ($paket) =>
                         [
-                            "paket_id" => $paket->paket_id,
-                            "nama" => $paket->nama,
-                            "menu" => $paket->menu,
-                            "lama_hari" => $paket->lama_hari,
-                            "minim_dp" => $paket->minim_dp,
-                            "termasuk_harga" => explode(",", $paket->termasuk_harga),
-                            "tidak_termasuk_harga" => explode(",", $paket->tidak_termasuk_harga),
-                            "keunggulan" => $paket->keunggulan,
-                            "foto_paket" => $paket->foto_brosur,
+                            "paket_id" => $paket['paket_id'],
+                            "nama" => $paket['nama'],
+                            "menu" => $paket['menu'],
+                            "lama_hari" => $paket['lama_hari'],
+                            "minim_dp" => $paket['minim_dp'],
+                            "termasuk_harga" => explode(",", $paket['termasuk_harga']),
+                            "tidak_termasuk_harga" => explode(",", $paket['tidak_termasuk_harga']),
+                            "keunggulan" => $paket['keunggulan'],
+                            "foto_paket" => $paket['foto_brosur'],
                             'harga' => array_map(fn ($harga) => [
+                                'harga_paket_id'=> $harga['harga_paket_id'],
                                 'jenis' => $harga['nama_jenis'],
                                 'diskon' => $harga['diskon'],
                                 'harga' => $harga['harga']
-                            ], $this->paket->getHargaPaket($keberangkatan["paket_id"])),
+                            ], $this->paket->getHargaPaket($paket['paket_id'])),
                             "hotel" => array_map(fn ($hotel) => [
                                 'nama_hotel' => $hotel['nama_hotel'],
                                 'deskripsi' => $hotel['deskripsi'],
                                 'bintang' => $hotel['bintang'],
                                 'foto_hotel' => $hotel['foto_hotel']
-                            ], $this->paket->getHotelPaket($keberangkatan['paket_id']))
-                        ],
-                        $this->paket->getPaketById($keberangkatan['paket_id'])
+                            ], $this->paket->getHotelPaket($paket['paket_id']))
+                        ],$this->paket->getPaketById($keberangkatan['paket_id'])
                     ),
                 ];
-            }, $this->keberangkatan->get());
+            }, $this->keberangkatan->getAllApi());
             $result = [
                 'status' => '200',
                 'message' => 'success',
@@ -208,6 +208,7 @@ class KeberangkatanController
                             "keunggulan" => $paket->keunggulan,
                             "foto_paket" => $paket->foto_brosur,
                             'harga' => array_map(fn ($harga) => [
+                                'harga_paket_id'=> $harga['harga_paket_id'],
                                 'jenis' => $harga['nama_jenis'],
                                 'diskon' => $harga['diskon'],
                                 'harga' => $harga['harga']

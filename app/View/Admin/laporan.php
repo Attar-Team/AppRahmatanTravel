@@ -30,9 +30,9 @@
               
               <div class="card " style="margin-top: -16px;" >
                 <div class="table-responsive text-nowrap p-3">
-                <div class="d-inline-block mb-3">
+                <!-- <div class="d-inline-block mb-3">
                 <a href="/admin/tambah-paket"  class="btn btn-primary d-flex align-items-center">Tambah</a>
-                </div>
+                </div> -->
                   <table id="myTable" class="table table-hover ">
                     <thead>
                       <tr>

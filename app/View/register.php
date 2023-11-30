@@ -36,25 +36,28 @@
 
     <!-- Form Login -->
     <div class="wrapper">
-      <form action="">
+    <?php
+    if(isset($data['error'])){ ?>
+                      <div class="alert alert-danger" role="alert">
+                      <?= $data['error'] ?>
+</div>
+    <?php } ?>
+
+      <form action="/register" method="POST">
         <h1>Register</h1>
         <div class="input-box">
           <label class="input-user" for="nama-lengkap">Nama Lengkap</label>
-          <input id="nama-lengkap" type="text" placeholder="Masukkan Nama Lengkap Anda" required />
+          <input id="nama-lengkap" type="text" name="nama" placeholder="Masukkan Nama Lengkap Anda" required />
         </div>
         <div class="input-box">
           <label class="input-user" for="email">E-mail</label>
-          <input id="email" type="text" placeholder="Masukkan E-mail Anda" required />
-        </div>
-        <div class="input-box">
-          <label class="input-user" for="telpon">No Telpon</label>
-          <input id="telp" type="text" placeholder="Masukkan No Telpon Anda" required />
+          <input id="email" type="text" name="email" placeholder="Masukkan E-mail Anda" required />
         </div>
         <div class="input-box">
           <label class="input-password" for="Password">Password</label>
-          <input id="Password" type="password" placeholder="Password" required />
+          <input id="Password" type="password" name="password" placeholder="Password" required />
         </div>
-        <button type="button" class="btn">Daftar</button>
+        <button type="submit" class="btn">Daftar</button>
         <div class="register-link">
           <p>Punya Akun ?<a href="/login">Login</a></p>
         </div>

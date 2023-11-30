@@ -13,20 +13,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
     <?php } ?>
-              <!-- <div style="display: flex;justify-content: space-between;margin-bottom: 20px;gap: 50px;">
-                <div class="navbar-nav bg-light shadow rounded w-100 align-items-center">
-                  <div class="nav-item d-flex w-100 px-4 py-2 align-items-center">
-                    <i class="bx bx-search fs-4 lh-0"></i>
-                    <input
-                      type="text"
-                      class="form-control border-0 w-100 shadow-none"
-                      placeholder="Search..."
-                      aria-label="Search..."
-                    />
-                  </div>
-                </div>
-                <a href="/admin/tambah-paket"  class="btn btn-primary d-flex align-items-center">Tambah</a>
-              </div> -->
+
               
               <div class="card " style="margin-top: -16px;" >
                 <div class="table-responsive text-nowrap p-3">
@@ -57,7 +44,6 @@
                         </td>
                       </tr>
                       <?php
-                    include '';
                     endforeach; ?>
                       
                     </tbody>

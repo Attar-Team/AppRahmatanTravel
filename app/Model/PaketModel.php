@@ -30,7 +30,7 @@ class PaketModel
     {
         $query = $this->connection->prepare("SELECT * FROM paket WHERE paket_id = ?");
         $query->execute([$id]);
-        return $query->fetchAll(\PDO::FETCH_OBJ);
+        return $query->fetchAll();
     }
 
     public function getHargaPaket($id)

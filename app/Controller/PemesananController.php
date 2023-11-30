@@ -284,4 +284,36 @@ class PemesananController
             echo json_encode($result);
         }   
     }
+
+    public function apiGetPemesananByStatus($status)
+    {
+        try {
+            if($status == "belumLunas"){
+                $status = "belum lunas";
+            }
+            $data = array_map(function ($pemesanan){
+                return [
+                    'pemesanan_id'=> $pemesanan['pemesanan_id'],
+                    'agen_id'=> $pemesanan['agen_id'],
+                    'jenis_pembayaran'=> $pemesanan['jenis_pembayaran'],
+                    'status'=> $pemesanan['status'],
+                    'tanggal_pemesanan'=> $pemesanan['tanggal_pemesanan'],
+                    'catatan_pemesanan'=> $pemesanan['catatan_pemesanan'],
+                    'sudah_bayar'=> $pemesanan['sudah_bayar'],
+                    'total_tagihan'=> $pemesanan['total_tagihan'],
+                ];
+            },$this->pemesanan->getByStatus($status));
+
+            http_response_code(200);
+            $result = [
+                'status'=> 200,
+                'message'=> 'success',
+                'data'=> $data
+            ];
+
+            echo json_encode($result);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

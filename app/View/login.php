@@ -36,6 +36,12 @@
 
     <!-- Form Login -->
     <div class="wrapper">
+    <?php
+    if(isset($data['success'])){ ?>
+                      <div class="alert alert-success" role="alert">
+                      <?= $data['success'] ?>
+</div>
+    <?php } ?>
       <form action="/login" method="POST">
         <h1>Login</h1>
         <div class="input-box">

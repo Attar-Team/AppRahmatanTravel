@@ -91,6 +91,13 @@ class HomeController
         View::render("Home/footer", []); 
     }
 
+    public function galery()
+    {
+        View::render("Home/header", []);
+        View::render("Home/galery", []);
+        View::render("Home/footer", []); 
+    }
+
     public function profile()
     {
         session_start();

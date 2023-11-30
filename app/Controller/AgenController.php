@@ -76,6 +76,7 @@ class AgenController
     {
         try {
             $dataUser = [
+                'nama'=> htmlspecialchars($_POST['nama']),
                 "email"=> htmlspecialchars($_POST['email']),
                 'password'=> "12345678",
                 'level'=> "agen"

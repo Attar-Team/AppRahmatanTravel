@@ -45,18 +45,18 @@
                     <h4>Uploads bukti transfer</h4>
 
                     <div class="form-floating mb-3">
-                        <input type="number" name="jumlah_bayar" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <input type="number" name="jumlah_bayar" class="form-control" id="floatingInput" required placeholder="name@example.com">
                         <label for="floatingInput">Jumlah Bayar</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" name="catatan" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <input type="text" name="catatan" class="form-control" id="floatingInput" required placeholder="name@example.com">
                         <label for="floatingInput">Catatan</label>
                     </div>
 
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Default file input example</label>
-                        <input class="form-control" name="foto" type="file" id="formFile">
+                        <input class="form-control" required name="foto" type="file" id="formFile">
                     </div>
 
                     <button type="submit" class="btn btn-success">Kirim</button>

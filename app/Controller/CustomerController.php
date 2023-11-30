@@ -84,6 +84,7 @@ class CustomerController
     public function tambahCustomer()
     {
         $dataUser = [
+            'nama' => $_POST['nama'],
             "email" => $_POST["email"],
             "password" => password_hash('12345678', PASSWORD_DEFAULT),
             'level' => 'customer'

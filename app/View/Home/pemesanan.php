@@ -78,7 +78,7 @@
                         <div class="customer mb-2">
                             <h3>Jamaah 1</h3>
                             <div class="form-floating my-3">
-                                <select class="form-select" name="customer_id[]" id="floatingSelect"
+                                <select class="form-select" name="customer_id[]" id="prof"
                                     aria-label="Floating label select example">
                                     <?php if($data['profile'] == 0) { ?>
                                     <option value="" selected>Belum ada profile harus ditambahkan dahulu</option>
@@ -97,7 +97,7 @@
                                     foreach($data['harga'] as $h) :
                                 ?>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="1"
+                                    <input class="form-check-input" id="harga1" type="radio" name="1"
                                         value="<?=  $h['nama_jenis'] ?>,<?= $h['harga'] ?>,<?= $h['harga_paket_id'] ?>">
                                     <label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp.
                                         <?= $h['harga'] ?></label>
@@ -300,7 +300,7 @@
             </div>
 
             <div class="mb-5" style="padding: 0 100px;">
-                <button class="btn w-100 btn-orange" id="next-1">selanjutnya</button>
+                <button class="btn w-100 btn-orange" disabled id="next-1">selanjutnya</button>
             </div>
 
         </div>
@@ -540,7 +540,6 @@
         $(wraper).on("change", $(":input[type=radio]"), function() {
             result.length = 0
             var a = $(":input[type=radio][id=add_box]:checked");
-            console.log(a.length);
             for (var i = 0; i <= a.length; i++) {
                 var no = i + 1;
                 var string = $(":input[type=radio][name=" + no + "]:checked").val();
@@ -607,6 +606,7 @@
                     );
                     }
                     $("#total-bayar").html(sum);
+                    $("#totalPemesanan").html(sum);
                     $("input[type=hidden][name=total_tagihan]").val(sum);
         }
         var form1 = $("#form-1");
@@ -653,11 +653,23 @@
             $(transfer).hide();
         });
 
-       
-
     })
     </script>
 
+<script>
+    const nextButton1 = document.getElementById("next-1");
+    const step1Inputs = [document.getElementById("harga1"), document.getElementById("prof")];
+
+    function isStepFormValid(inputs) {
+        return inputs.every(input => input.value.trim() !== "");
+    }
+
+    step1Inputs.forEach(input => {
+        input.addEventListener("input", () => {
+            nextButton1.disabled = !isStepFormValid(step1Inputs);
+        });
+    });
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- <script src="/script.js"></script> -->

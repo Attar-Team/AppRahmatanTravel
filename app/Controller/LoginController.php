@@ -7,16 +7,19 @@ use Attar\App\Rahmatan\Travel\App\View;
 use Attar\App\Rahmatan\Travel\Exception\ValidationException;
 use Attar\App\Rahmatan\Travel\Model\LoginModel;
 use Attar\App\Rahmatan\Travel\Model\TokenModel;
+use Attar\App\Rahmatan\Travel\Model\UserModel;
 
 class LoginController
 {
     private $login;
     private $token;
+    private $user;
     public function __construct()
     {
         $connection = Database::getConnection();
         $this->login = new LoginModel($connection);
         $this->token = new TokenModel($connection);
+        $this->user = new UserModel($connection);
     }
 
     public function index()
@@ -50,6 +53,27 @@ class LoginController
             }
         } catch (\Throwable $th) {
             View::render("/login", ["error" => $th->getMessage()]);
+        }
+    }
+
+    public function saveRegister()
+    {
+        try {
+            $data = [
+                "nama"=> htmlspecialchars($_POST["nama"]) ,
+                "password"=> htmlspecialchars($_POST["password"]) ,
+                "email"=> htmlspecialchars($_POST["email"]),
+                "level"=> "customer"
+            ];
+            $tambah = $this->user->save($data);
+
+            if($tambah > 0){
+                View::render("login", ["success" => "Register berhasil"]);
+            }else{
+                throw new ValidationException("Gagal ditambahkan");
+            }
+        } catch (ValidationException $th) {
+            View::render("register", ["error" => $th->getMessage()]);
         }
     }
 
