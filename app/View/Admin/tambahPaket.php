@@ -1,5 +1,12 @@
 
 <div class="container-xxl flex-grow-1 container-p-y">
+<?php
+    if(isset($data['error'])){ ?>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+                        <?= $data['error'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
 <form method="POST" action="/admin/tambah-paket" enctype="multipart/form-data">
   <script type="text/javascript">
 $(document).ready(function() {
@@ -189,7 +196,8 @@ $(document).ready(function() {
 
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Brosur</label>
-                        <input class="form-control" type="file" name="foto_brosur" id="formFile" />
+                        <img width="200px" class="m-3 rounded shadow" src="" id="outputBrosur" alt="">
+                        <input id="imgInpBrosur" class="form-control" type="file" name="foto_brosur" />
                       </div>
                         
                 </div>
@@ -288,7 +296,8 @@ $(document).ready(function() {
                  
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Hotel</label>
-                        <input class="form-control" name="foto_hotel[]" type="file" id="formFile" />
+                        <img width="200px" class="m-3 rounded shadow" src="" id="outputMekkah" alt="">
+                        <input class="form-control" name="foto_hotel[]"  type="file" id="imgInpMekkah" />
                       </div>
 
                         <div class="mb-3">
@@ -356,7 +365,8 @@ $(document).ready(function() {
 
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Hotel</label>
-                        <input class="form-control" type="file" name="foto_hotel[]" id="formFile" />
+                        <img width="200px" class="m-3 rounded shadow" src="" id="outputMadinah" alt="">
+                        <input class="form-control" type="file" name="foto_hotel[]" id="imgInpMadinah"/>
                       </div>
 
                         <div class="mb-3">
@@ -383,3 +393,26 @@ $(document).ready(function() {
       </form>
     </div>
 </div>
+
+<script>
+     imgInpBrosur.onchange = evt => {
+    const [file] = imgInpBrosur.files
+    if (file) {
+      outputBrosur.src = URL.createObjectURL(file)
+    }
+  }
+
+  imgInpMekkah.onchange = evt => {
+    const [file] = imgInpMekkah.files
+    if (file) {
+      outputMekkah.src = URL.createObjectURL(file)
+    }
+  }
+
+  imgInpMadinah.onchange = evt => {
+    const [file] = imgInpMadinah.files
+    if (file) {
+      outputMadinah.src = URL.createObjectURL(file)
+    }
+  }
+</script>

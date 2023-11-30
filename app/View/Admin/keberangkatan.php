@@ -1,46 +1,55 @@
 <div class="container-xxl flex-grow-1 container-p-y">
-              <div style="display: flex;justify-content: space-between;margin-bottom: 20px;gap: 50px;">
-                <div class="navbar-nav bg-light shadow rounded w-100 align-items-center">
-                  <div class="nav-item d-flex w-100 px-4 py-2 align-items-center">
-                    <i class="bx bx-search fs-4 lh-0"></i>
-                    <input
-                      type="text"
-                      class="form-control border-0 w-100 shadow-none"
-                      placeholder="Search..."
-                      aria-label="Search..."
-                    />
-                  </div>
-                </div>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#basicModal" class="btn btn-primary">Tambah</button>
-              </div>
+<?php
+    if(isset($data['error'])){ ?>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+                        <?= $data['error'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
+    <?php
+    if(isset($data['success'])){ ?>
+          <div class="alert alert-success alert-dismissible" role="alert">
+                        <?= $data['success'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    <?php } ?>
+    
               
-              <div class="card">
-                <div class="table-responsive text-nowrap">
-                  <table class="table text-center table-hover">
+              <div class="card" style="margin-top: -16px;">
+                <div class="table-responsive text-nowrap p-3">
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#ModalTambahKeberangkatan" class="btn btn-primary mb-3">Tambah</button>
+                  <table id="myTable" class="table text-center table-hover">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Nomor Telepon</th>
-                        <th>Jenis Kelamin</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Nama Paket</th>
+                        <th>Seats</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php
+                      $no = 1;
+                        foreach($data['dataKeberangkatan'] as $d):
+                      ?>
                       <tr>
-                        <td>1</td>
-                        <td>Zarif</td>
-                        <td>BLitar</td>
-                        <td>085942972801</td>
-                        <td>Laki - Laki</td>
+                        <td><?= $no ?></td>
+                        <td><?= $d['tanggal'] ?></td>
+                        <td><?= $d['status_keberangkatan'] ?></td>
+                        <td><?= $d['nama'] ?></td>
+                        <td><?= $d['seats'] ?></td>
                         <td>
-                        
-                          <button type="button" data-bs-toggle="modal" data-bs-target="#updateContact<?= $d['contactId'] ?>" data-bs-whatever="@mdo" class="btn btn-primary">Updated</button>
-                          <a class="btn btn-danger" href="/admin/deleteClientAddress/<?= $d['clientId'] ?>" role="button">Deleted</a>
-                     
+                        <a class="btn btn-danger" href="/admin/hapus-keberangkatan/<?= $d['keberangkatan_id'] ?>" onclick="return confirm('Apakah yakin menghapus')" role="button"><i class='bx bx-trash' ></i></a>
+                          <!-- <a class="btn btn-warning" href="/admin/edit-paket/<?= $d['keberangkatan_id'] ?>" role="button"><i class='bx bxs-edit-alt'></i></a> -->
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#ModalEditKeberangkatan<?= $d['keberangkatan_id'] ?>" class="btn btn-warning"><i class='bx bxs-edit-alt'></i></button>
+                          <a class="btn btn-success" href="/admin/detail-keberangkatan/<?= $d['keberangkatan_id'] ?>" role="button"><i class='bx bx-message-detail' ></i></a>
                         </td>
                       </tr>
+                      <?php 
+                      include'Modal/ModalEditKeberangkatan.php';
+                      $no++; endforeach; ?>
                       
                     </tbody>
                    
@@ -48,3 +57,7 @@
                 </div>
               </div>
             </div>
+            <script>
+              let table = new DataTable('#myTable');
+            </script>
+            <?php include'Modal/ModalTambahKeberangkatan.php';  ?>

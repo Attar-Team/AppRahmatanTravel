@@ -41,7 +41,7 @@ class UserController
             $data = json_decode($jsonData, true);
 
             $tambah = $this->user->save($data);
-            if($tambah){
+            if($tambah['count'] > 0){
                 http_response_code(201);
                     $result = array(
                         "status" => 201,

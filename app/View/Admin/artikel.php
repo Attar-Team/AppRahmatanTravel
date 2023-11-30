@@ -34,7 +34,7 @@
                         <td><?= $article['artikel_id'] ?></td>
                         <td><?= $article['judul']?></td>
                         <td><?= $article['tanggal']?></td>
-                        <td><?= $article['foto']?></td>
+                        <td><img src="/uploads/foto_artikel/<?= $article['foto']?>" width="150px" class="shadow rounded" alt=""></td>
                         <td> <?=substr($article['isi'], 0, 20)?> ...</td>
                         <td>
                         <button class="btn btn-danger" href="/admin/deleteArtikel/<?= $article['artikel_id']?>" role="button"><i class='bx bx-trash' ></i></button>

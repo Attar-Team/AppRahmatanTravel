@@ -39,4 +39,34 @@ class ArtikelController
     exit();
     }
 
+    public function apiGetArtikel()
+    {
+        try {
+            $data = array_map(function ($artikel) {
+                return[
+                    "artikel_id"=> $artikel['artikel_id'],
+                    'user_id'=> $artikel['user_id'],
+                    'judul'=> $artikel['judul'],
+                    'isi'=> $artikel['isi'],
+                    'foto'=> $artikel['foto']
+                ];
+            }, $this->artikel->getAllArticle());
+            
+            $result = [
+                'status'=> 200,
+                'message'=> 'success',
+                'data'=> $data
+            ];
+
+            echo json_encode($result);
+        } catch (\Throwable $th) {
+            $result = [
+                'status'=> 404,
+                'message'=> 'failed'
+            ];
+
+            echo json_encode($result);
+        }
+    }
+
 }

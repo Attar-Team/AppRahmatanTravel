@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="/assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
+    
 
     <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
@@ -51,9 +52,18 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+  
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
   </head>
 
   <body>
+    <div id="pageLoader" class="page-loader" style="inset: 0; background-color: #ddd;display:flex;justify-content: center;align-items: center; position:fixed;z-index: 9999;">
+      <!-- <img src="/image/logo 1.png" alt=""> -->
+      <div class="spinner-border  spinner-border-lg text-warning" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+    </div>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -116,7 +126,7 @@
                 </li>
                 <li class="menu-item">
                   <a href="/admin/verifikasi-pemesanan" class="menu-link">
-                    <div data-i18n="Without navbar">Verivikasi pemesanan</div>
+                    <div data-i18n="Without navbar">Pembayaran</div>
                   </a>
                 </li>
                 
@@ -137,8 +147,8 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/admin/verifikasi-komisi-agen" class="menu-link">
-                    <div data-i18n="Without navbar">Verivikasi Gaji</div>
+                  <a href="/admin/data-belum-dibayar" class="menu-link">
+                    <div data-i18n="Without navbar">Gaji agen</div>
                   </a>
                 </li>
                 

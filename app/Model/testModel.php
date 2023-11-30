@@ -19,6 +19,12 @@ class testModel
     //     ]
     //     ];
 
+    public function savePasport($nama,$foto){
+        $statement = $this->connection->prepare("INSERT INTO `test`(`nama`, `foto1`, `foto2`) VALUES (?,?,?)");
+            $statement->execute([$nama,$foto['foto1'],$foto['foto2']]);
+            return $statement->rowCount();
+    }
+
         public function getData()
         {
             $statement = $this->connection->prepare("SELECT * FROM user");
