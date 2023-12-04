@@ -65,7 +65,11 @@ $(document).ready(function(){
 });
 
 </script>
-
+<style>
+                .modal-backdrop {
+  z-index: 200;
+}
+              </style>
 <script src="/sweetalert.js"></script>
 
 

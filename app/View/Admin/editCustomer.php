@@ -10,6 +10,7 @@
                       </div>
     <?php } ?>
 <form method="POST" action="/admin/edit-customer" enctype="multipart/form-data">
+<input type="hidden" name="redirect" value="admin" id="">
     <div class="row">
         <div class="col-xl">
             <div class="card mb-4">

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rahmatan Travel</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="icon"  href="/image/icon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -35,24 +36,26 @@
                     <li class="nav-item px-2 me-2">
                         <a class="nav-link" style="color: #000;" aria-current="page" href="/about">About Us</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item px-2 me-2">
+                        <a class="nav-link" style="color: #000;" aria-current="page" href="/paket-travel">Paket Travel</a>
+                    </li>
+                    <li class="nav-item dropdown  px-2 me-3">
                         <a class="nav-link dropdown-toggle" style="color: #000;" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Paket Travel
+                            Galery & Artikel
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/paket-umrah">Umrah</a></li>
-                            <li><a class="dropdown-item" href="#">Haji</a></li>
-                            <li><a class="dropdown-item" href="#">Wisata Halal</a></li>
+                            <li><a class="dropdown-item" href="/galery">Galery</a></li>
+                            <li><a class="dropdown-item" href="/artikel">Artikel</a></li>
                         </ul>
                     </li>
                     <!-- <li class="nav-item px-2 me-2">
                         <a class="nav-link" style="color: #000;" aria-current="page" href="gallery.html">Paket
                             Travel</a>
                     </li> -->
-                    <li class="nav-item px-2 me-3">
+                    <!-- <li class="nav-item px-2 me-3">
                         <a class="nav-link" style="color: #000;" aria-current="page" href="contact.html">Galery</a>
-                    </li>
+                    </li> -->
                     <?php
                     session_start();
                         if(!isset($_SESSION['status_login'])){
@@ -63,7 +66,7 @@
                         <a class="nav-link" style="color: #000;" aria-current="page" href="/login">Log In</a>
                     </li>
                     <li class="nav-item px-2 me-1" style="background-color: #000; border-radius: 10px;">
-                        <a class="nav-link" style="color: #fff;" aria-current="page" href="contact.html">Sign Up</a>
+                        <a class="nav-link" style="color: #fff;" aria-current="page" href="/register">Sign Up</a>
                     </li>
                     <?php }else{ 
                         if($_SESSION['level'] == "customer"){
@@ -71,7 +74,7 @@
                     <div class="btn-group dropstart">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Zarif <i class="fa-solid fa-user"></i>
+                            <?= substr($_SESSION['username'],0,5) ?> <i class="fa-solid fa-user"></i>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/profile">Profile</a></li>
@@ -83,7 +86,7 @@
                         <div class="btn-group dropstart">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Zarif <i class="fa-solid fa-user"></i>
+                            <?= substr($_SESSION['username'],0,5) ?> <i class="fa-solid fa-user"></i>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/profile-agen">Profile</a></li>

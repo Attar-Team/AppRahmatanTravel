@@ -50,6 +50,8 @@
 
     <?php foreach($data['customer'] as $d) : ?>
     <div class="tambah-customer">
+        <form action="/admin/edit-customer" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="redirect" value="user" id="">
 
             <div class="container" id="step1">
              <div class="d-flex" style="gap: 10px;">

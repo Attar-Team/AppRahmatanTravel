@@ -69,7 +69,6 @@ class CustomerController
 
     public function viewCustomerHome()
     {
-        session_start();
         $idCustomer = $_SESSION["uid_user"];
         $pemesanan = $this->pemesanan->getPemesananByCustomer($idCustomer);
         View::render("User/pemesanan", ["title"=> "", "pemesanan"=> $pemesanan]);
@@ -152,13 +151,9 @@ class CustomerController
                     $savePasport = $this->customer->savePasport($dataPasport);
                     $saveDocument = $this->customer->saveDocument($_POST['NIK'], $rename);
                     if ($saveDocument > 0 && $savePasport > 0) {
-                        if($_POST['idKeberangkatan'] == 0){
-                            View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
-                            View::redirect('/profile');
-                        }else{
-                            View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
+                     
+                        View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
                             View::redirect('/admin/customer');
-                        }
                     } else {
                         throw new ValidationException("gagal di tambah");
                     }
@@ -213,7 +208,7 @@ class CustomerController
                 }
                 $dataCustomer = [
                     'NIK' => $_POST['NIK'],
-                    'user_id' => 1,
+                    'user_id' => $_SESSION['uid_user'],
                     'nama' => $_POST['nama'],
                     'tempat_lahir' => $_POST['tempat_lahir'],
                     'tanggal_lahir' => $newTglLahir,
@@ -246,8 +241,13 @@ class CustomerController
         foreach ($keberangkatan as $k) {
             $idPaket = $k->paket_id;
         }
-        View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
-        View::redirect('/admin/customer');
+        if($_POST['idKeberangkatan'] == 0){
+            View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
+            View::redirect('/profile');
+        }else{
+            View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
+            View::redirect($url);
+        }
                     } else {
                         throw new ValidationException("gagal di tambah");
                     }
@@ -309,8 +309,14 @@ class CustomerController
             $this->customer->updatePasport($_POST, $newTglPenerbitan);
 
             $this->customer->updateDocument($_POST['NIK'], $rename);
-            View::setFlasher('success','Berhasil','Data berhasil di edit');
-            View::redirect('/admin/customer');
+           
+            if($_POST['redirect'] == "admin"){
+                View::setFlasher('success','Berhasil','Data berhasil di edit');
+                View::redirect('/admin/customer');
+            }else if($_POST['redirect'] == 'user'){
+                View::setFlasher('success','Berhasil','Data berhasil di edit');
+                View::redirect('/profile');
+            }
         } catch (ValidationException $exception) {
             View::setFlasher('warning','Gagal di delete',$exception->getMessage());
             View::redirect('/admin/edit-customer/'.$_POST['NIK']);
@@ -319,7 +325,7 @@ class CustomerController
 
 
 
-    public function hapusCustomer($id)
+    public function hapusCustomer($id, $redirect)
     {
         error_reporting(0);
         try {
@@ -379,10 +385,16 @@ class CustomerController
         $this->customer->deletePasport($id);
         $this->customer->deleteDokument($id);
         $this->customer->deleteCustomer($id);
+
+        if($redirect == 'admin') {
         View::setFlasher('success','Berhasil','Data berhasil di delete');
             View::redirect('/admin/customer');
+        }else if($redirect == 'customer') {
+            View::setFlasher('success','Berhasil','Data berhasil di delete');
+            View::redirect('/profile');
+        }
         } catch (\Throwable $e) {
-            View::setFlasher('waring','Gagal di delete', $e->getMessage());    
+            View::setFlasher('warning','Gagal di delete', $e->getMessage());    
             View::redirect('/admin/customer');
         }
 
@@ -392,7 +404,8 @@ class CustomerController
     public function apiTambahProfileCustomer()
     {
         try {
-            $tgl_lahir = str_replace('-"', '/', str_replace('-"', '/', $_POST['tanggal_lahir']));
+            error_reporting(0);
+            $tgl_lahir = str_replace('-', '/', $_POST['tanggal_lahir']);
             $newTglLahir = date("Y-m-d", strtotime($tgl_lahir));
             $rename = array();
             foreach ($_FILES as $key => $value) {

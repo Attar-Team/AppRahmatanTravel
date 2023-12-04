@@ -28,13 +28,20 @@ class DashboardController
         $jumlahPemesanan = $this->dashboard->getAllJumlahPemesanan();
         $jumlahPemasukanPerHari = $this->dashboard->getDaysJumlahPemasukan($dateAwal,$dateAkhir);
         $jumlahPemesananPerHari = $this->dashboard->getDaysJumlahPemesanan($dateAwal,$dateAkhir);
+        $jumlahAgen = $this->dashboard->getJumlahAgen();
+        $jumlahBayarPerhari = $this->dashboard->getJumlahBayarDays($dateAwal,$dateAkhir);
+        $jumlahBayar = $this->dashboard->getJumlahBayar();
 
         View::render("Admin/header",["title"=> "Dashboard"]);
         View::render("Admin/dashboard",[
             'jumlahPemasukan' => $jumlahPemasukan[0]->jumlah_pemasukan,
             'jumlahPemesanan' => $jumlahPemesanan[0]->jumlah_pemesanan,
             'jumlahPemasukanPerHari' => $jumlahPemasukanPerHari[0]->jumlah_pemasukan,
-            'jumlahPemesananPerHari' => $jumlahPemesananPerHari[0]->jumlah_pemesanan
+            'jumlahPemesananPerHari' => $jumlahPemesananPerHari[0]->jumlah_pemesanan,
+            'jumlahAgen'=> $jumlahAgen[0]->jumlah_agen,
+            'jumlahBayarHari'=> $jumlahBayarPerhari[0]->jumlah_bayar,
+            'jumlahBayar'=> $jumlahBayar[0]->jumlah_bayar
+            
     ]);
         View::render("Admin/footer",[]);
     }

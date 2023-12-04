@@ -199,7 +199,7 @@ foreach($data['keberangkatan'] as $k) :
 </div>
 <?php endforeach; ?>
 
-<div class="paket-lain">
+<!-- <div class="paket-lain">
     <h3>Paket Lain yang bisa anda liat</h3>
 
     <div class="container">
@@ -274,4 +274,4 @@ foreach($data['keberangkatan'] as $k) :
         </div>
 
     </div>
-</div>
+</div> -->

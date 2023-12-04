@@ -17,8 +17,10 @@ use Attar\App\Rahmatan\Travel\Controller\PemesananController;
 use Attar\App\Rahmatan\Travel\Controller\Test;
 use Attar\App\Rahmatan\Travel\Controller\UserController;
 use Attar\App\Rahmatan\Travel\Middleware\AdminMiddleware;
+use Attar\App\Rahmatan\Travel\Middleware\AgenMiddleWare;
 use Attar\App\Rahmatan\Travel\Middleware\ApiMiddleware;
 use Attar\App\Rahmatan\Travel\Middleware\AuthMiddleware;
+use Attar\App\Rahmatan\Travel\Middleware\CustomerMiddleware;
 
 // Router::add("GET","/",Test::class,"index");
 // Router::add("GET","/test/([0-9a-zA-Z]*)",Test::class,"test");
@@ -45,86 +47,89 @@ Router::add("POST","/verivikasi-lupa-password", LoginController::class,"cekVeriv
 Router::add("GET","/", HomeController::class,"index");
 Router::add("GET","/about", HomeController::class,"about");
 Router::add("GET","/galery", HomeController::class,"galery");
+Router::add("GET","/artikel", HomeController::class,"artikel");
+Router::add("GET","/detail-artikel/([0-9a-zA-Z]*)", HomeController::class,"detailArtikel");
 Router::add("GET","/detail-paket/([0-9a-zA-Z]*)", HomeController::class,"detailPaket");
-Router::add("GET","/pemesanan/([0-9a-zA-Z]*)", HomeController::class,"pemesanan");
+Router::add("GET","/pemesanan/([0-9a-zA-Z]*)", HomeController::class,"pemesanan",[AuthMiddleware::class,CustomerMiddleware::class]);
 Router::add("GET","/pembayaran", HomeController::class,"pembayaran");
-Router::add("GET","/bukti-transfer/([0-9a-zA-Z]*)", HomeController::class,"buktiTransfer");
-Router::add("POST","/tambah-bukti-transfer", PemesananController::class,"saveBuktiTransfer");
-Router::add("GET","/paket-umrah", HomeController::class,"paketUmrah");
-Router::add("GET","/tambah-jamaah/([0-9a-zA-Z]*)", HomeController::class,"tambahJamaah");
-Router::add("POST","/tambah-jamaah-user", CustomerController::class,"tambahCustomerUser");
-Router::add("POST","/tambah-cicilan", PemesananController::class,"saveBuktiTransfer");
+Router::add("GET","/bukti-transfer/([0-9a-zA-Z]*)", HomeController::class,"buktiTransfer",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("POST","/tambah-bukti-transfer", PemesananController::class,"saveBuktiTransfer",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/paket-travel", HomeController::class,"paketTravel");
+Router::add("POST","/search-paket", HomeController::class,"searchPaket");
+Router::add("GET","/tambah-jamaah/([0-9a-zA-Z]*)", HomeController::class,"tambahJamaah",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("POST","/tambah-jamaah-user", CustomerController::class,"tambahCustomerUser",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("POST","/tambah-cicilan", PemesananController::class,"saveBuktiTransfer",[AuthMiddleware::class,CustomerMiddleware::class]);
 
 //Router untuk menangani Customer
-Router::add("GET","/profile", HomeController::class,"profile");
-Router::add("GET","/pemesanan-user", CustomerController::class,"viewCustomerHome");
-Router::add("GET","/tambah-cicilan/([0-9a-zA-Z]*)", CustomerController::class,"viewTambahCicilan");
-Router::add("GET","/tambah-jamaah", HomeController::class,"tambahJamaahProfile");
-Router::add("GET","/edit-jamaah/([0-9a-zA-Z]*)", CustomerController::class,"editJamaahProfile");
-Router::add("GET","/detail-pemesanan/([0-9a-zA-Z]*)", HomeController::class,"viewDetailPemesanan");
-Router::add("GET","/cetak-tagihan/([0-9a-zA-Z]*)", HomeController::class,"viewCetakTagihan");
-Router::add("GET","/nota-pembayaran/([0-9a-zA-Z]*)", HomeController::class,"viewNotaPembayaran");
+Router::add("GET","/profile", HomeController::class,"profile",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/pemesanan-user", CustomerController::class,"viewCustomerHome",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/tambah-cicilan/([0-9a-zA-Z]*)", CustomerController::class,"viewTambahCicilan",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/tambah-jamaah", HomeController::class,"tambahJamaahProfile",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/edit-jamaah/([0-9a-zA-Z]*)", CustomerController::class,"editJamaahProfile",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/detail-pemesanan/([0-9a-zA-Z]*)", HomeController::class,"viewDetailPemesanan",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/cetak-tagihan/([0-9a-zA-Z]*)", HomeController::class,"viewCetakTagihan",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/nota-pembayaran/([0-9a-zA-Z]*)", HomeController::class,"viewNotaPembayaran",[AuthMiddleware::class,CustomerMiddleware::class]);
 
 //Router untuk menangani home Agen
-Router::add("GET","/profile-agen", AgenController::class,"viewProfileAgen");
-Router::add("GET","/pelanggan-agen", AgenController::class,"viewDataPelanggan");
+Router::add("GET","/profile-agen", AgenController::class,"viewProfileAgen",[AuthMiddleware::class,AgenMiddleWare::class]);
+Router::add("GET","/pelanggan-agen", AgenController::class,"viewDataPelanggan",[AuthMiddleware::class,AgenMiddleWare::class]);
 //Router untuk menangani Dashboard Admin
-Router::add("GET","/admin/dashboard", DashboardController::class,"index");
+Router::add("GET","/admin/dashboard", DashboardController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router untuk menangani Dashboard Customer
-Router::add("GET","/admin/customer", CustomerController::class,"index");
-Router::add("GET","/admin/tambah-customer", CustomerController::class,"viewTambah");
-Router::add("GET","/admin/edit-customer/([0-9a-zA-Z]*)", CustomerController::class,"viewEditTambah");
-Router::add("GET","/admin/detail-customer/([0-9a-zA-Z]*)", CustomerController::class,"viewDetailTambah");
-Router::add("POST","/admin/tambah-customer", CustomerController::class,"tambahCustomer");
-Router::add("POST","/admin/edit-customer", CustomerController::class,"editCustomer");
-Router::add("GET","/admin/hapus-customer/([0-9a-zA-Z]*)", CustomerController::class,"hapusCustomer");
+Router::add("GET","/admin/customer", CustomerController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/tambah-customer", CustomerController::class,"viewTambah",[AuthMiddleware::class]);
+Router::add("GET","/admin/edit-customer/([0-9a-zA-Z]*)", CustomerController::class,"viewEditTambah",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/detail-customer/([0-9a-zA-Z]*)", CustomerController::class,"viewDetailTambah",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/tambah-customer", CustomerController::class,"tambahCustomer",[AuthMiddleware::class]);
+Router::add("POST","/admin/edit-customer", CustomerController::class,"editCustomer",[AuthMiddleware::class]);
+Router::add("GET","/admin/hapus-customer/([0-9a-zA-Z]*)/([0-9a-zA-Z]*)", CustomerController::class,"hapusCustomer",[AuthMiddleware::class]);
 
 //Router untuk menangani Dashboard Paket
-Router::add("GET","/admin/paket", PaketController::class,"index");
-Router::add("GET","/admin/tambah-paket", PaketController::class,"viewTambahData");
-Router::add("GET","/admin/edit-paket/([0-9a-zA-Z]*)", PaketController::class,"viewEditData");
-Router::add("GET","/admin/detail-paket/([0-9a-zA-Z]*)", PaketController::class,"viewDetailData");
-Router::add("POST","/admin/tambah-paket", PaketController::class,"tambahPaket");
-Router::add("POST","/admin/edit-paket", PaketController::class,"editPaket");
-Router::add("GET","/admin/hapus-paket/([0-9a-zA-Z]*)", PaketController::class,"hapusPaket");
+Router::add("GET","/admin/paket", PaketController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/tambah-paket", PaketController::class,"viewTambahData",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/edit-paket/([0-9a-zA-Z]*)", PaketController::class,"viewEditData",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/detail-paket/([0-9a-zA-Z]*)", PaketController::class,"viewDetailData",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/tambah-paket", PaketController::class,"tambahPaket",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/edit-paket", PaketController::class,"editPaket",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/hapus-paket/([0-9a-zA-Z]*)", PaketController::class,"hapusPaket",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router untuk menangani Dashboard Pemesanan
-Router::add("GET","/admin/pemesanan", PemesananController::class,"index");
-Router::add("GET","/admin/detail-pemesanan/([0-9a-zA-Z]*)", PemesananController::class,"viewDetailPemesanan");
-Router::add("GET","/admin/verifikasi-pemesanan", PemesananController::class,"viewVerifikasiPembayaran");
-Router::add("POST","/pemesanan", PemesananController::class ,"tambahPemesanan");
-Router::add("GET","/delete-pemesanan-invalid/([0-9a-zA-Z]*)", PemesananController::class ,"invalidPemesanan");
-Router::add("POST","/admin/edit-status-pembayaran", PemesananController::class ,"editStatusPembayaran");
+Router::add("GET","/admin/pemesanan", PemesananController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/detail-pemesanan/([0-9a-zA-Z]*)", PemesananController::class,"viewDetailPemesanan",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/verifikasi-pemesanan", PemesananController::class,"viewVerifikasiPembayaran",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/pemesanan", PemesananController::class ,"tambahPemesanan",[AuthMiddleware::class,CustomerMiddleware::class]);
+Router::add("GET","/delete-pemesanan-invalid/([0-9a-zA-Z]*)", PemesananController::class ,"invalidPemesanan",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/edit-status-pembayaran", PemesananController::class ,"editStatusPembayaran",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router untuk menangani Dashboard Keberangkatan
-Router::add("GET","/admin/keberangkatan", KeberangkatanController::class,"index");
-Router::add("GET","/admin/detail-keberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,"viewDetailData");
-Router::add("POST","/admin/tambah-keberangkatan", KeberangkatanController::class,"tambahKeberangkatan");
-Router::add("POST","/admin/edit-keberangkatan", KeberangkatanController::class,"editKeberangkatan");
-Router::add("GET","/admin/hapus-keberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,"hapusKeberangkatan");
+Router::add("GET","/admin/keberangkatan", KeberangkatanController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/detail-keberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,"viewDetailData",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/tambah-keberangkatan", KeberangkatanController::class,"tambahKeberangkatan",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/edit-keberangkatan", KeberangkatanController::class,"editKeberangkatan",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/hapus-keberangkatan/([0-9a-zA-Z]*)", KeberangkatanController::class,"hapusKeberangkatan",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router untuk menangani Dashboard Agen
-Router::add("GET","/admin/agen", AgenController::class,"index");
-Router::add("GET","/admin/edit-agen/([0-9a-zA-Z]*)", AgenController::class,"viewEditAgen");
-Router::add("POST","/admin/edit-agen", AgenController::class,"editAgen");
-Router::add("GET","/admin/tambah-agen", AgenController::class,"viewTambahData");
-Router::add("GET","/admin/data-sudah-dibayar", AgenController::class,"viewDataAgenSudahDibayar");
-Router::add("GET","/admin/data-belum-dibayar", AgenController::class,"viewDataAgenBelumDibayar");
-Router::add("POST","/admin/tambah-agen", AgenController::class,"tambahAgen");
-Router::add("POST","/admin/tambah-gaji-agen", AgenController::class,"tambahGajiAgen");
-Router::add("GET","/check-referal/([0-9a-zA-Z]*)", AgenController::class,"checkReferal");
+Router::add("GET","/admin/agen", AgenController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/edit-agen/([0-9a-zA-Z]*)", AgenController::class,"viewEditAgen",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/edit-agen", AgenController::class,"editAgen",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/tambah-agen", AgenController::class,"viewTambahData",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/data-sudah-dibayar", AgenController::class,"viewDataAgenSudahDibayar",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/admin/data-belum-dibayar", AgenController::class,"viewDataAgenBelumDibayar",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/tambah-agen", AgenController::class,"tambahAgen",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/tambah-gaji-agen", AgenController::class,"tambahGajiAgen",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/check-referal/([0-9a-zA-Z]*)", AgenController::class,"checkReferal",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router untuk menangani Dashboard Galery
-Router::add("GET","/admin/galery", GaleryController::class,"index");
-Router::add("POST","/admin/tambah-galery", GaleryController::class,"tambahGalery");
+Router::add("GET","/admin/galery", GaleryController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/tambah-galery", GaleryController::class,"tambahGalery",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router untuk menangani Dashboard Artikel
-Router::add("GET","/admin/artikel", ArtikelController::class,"index");
-Router::add("POST","/admin/tambah-artikel", ArtikelController::class,"tambah");
+Router::add("GET","/admin/artikel", ArtikelController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/tambah-artikel", ArtikelController::class,"tambah",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router untuk menangani Dashboard Laporan
-Router::add("GET","/admin/laporan", LaporanController::class,"index");
+Router::add("GET","/admin/laporan", LaporanController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router Untuk Menangani API ke MOBILE JANGAN di ubah ubah
 //1. api login

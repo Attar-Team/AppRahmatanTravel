@@ -95,7 +95,7 @@ class LoginController
             if ($_POST['email'] == "" || $_POST['password'] == "") throw new ValidationException("Field harus di isi");
 
             $row = $this->login->login($_POST['email']);
-            if (count($row) > 0){
+            if ($row){
                 if(password_verify($_POST['password'], $row['password'])){
                     session_start();
                     $_SESSION['status_login'] = true;
@@ -155,13 +155,14 @@ class LoginController
         
     }
 
+
     public function apiLogin()
     {
         try {
             $jsonData = file_get_contents("php://input");
             $data = json_decode($jsonData, true);
 
-            $row = $this->login->login($data['semail']);
+            $row = $this->login->login($data['email']);
 
             if ($row) {
                 if(password_verify($data['password'], $row['password'])){
@@ -175,7 +176,8 @@ class LoginController
                             "message" => "success",
                             "nama"=> $row['username'],
                             'user_id'=> $row['userId'],
-                            "token"=> $token['token']
+                            "token"=> $token['token'],
+                            'foto'=> $row['foto_user']
                         );
                     }
                 }else{

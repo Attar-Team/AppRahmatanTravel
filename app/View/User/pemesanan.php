@@ -46,7 +46,7 @@
     <tr>
       <th scope="col">id</th>
       <th scope="col">Nama Paket</th>
-      <th scope="col">Tanggal</th>
+      <th scope="col">Tanggal Pemesanan</th>
       <th scope="col">Status</th>
       <th scope="col">Total Tagihan</th>
       <th scope="col">Action</th>
@@ -58,20 +58,20 @@
     foreach($data['pemesanan'] as $p): ?>
     <tr>
       <td><?= $p['pemesanan_id'] ?></td>
-      <td><?= $p['nama_customer'] ?></td>
+      <td><?= $p['nama'] ?></td>
       <td><?= $p['tanggal_pemesanan'] ?></td>
       <td><?= $p['status'] ?></td>
       <td><?= $p['total_tagihan'] ?></td>
       <td>
-        <a href="/detail-pemesanan/<?= $p['pemesanan_id'] ?>" class="btn btn-info">Detail</a>
+        <a href="/detail-pemesanan/<?= $p['pemesanan_id'] ?>" class="btn btn-success">Detail & Bayar</a>
         <?php 
           if($p['status'] == "lunas"){
         ?>
- <a href="/nota-pembayaran/<?= $d['pemesanan_id'] ?>" target="_blank" class="btn btn-primary">Cetak Nota</a>
+ <a href="/nota-pembayaran/<?= $p['pemesanan_id'] ?>" target="_blank" class="btn btn-primary">Cetak Nota</a>
         <?php 
           }else if($p["status"] == "belum lunas"){
         ?>
-        <a href="/cetak-tagihan/<?= $d['pemesanan_id'] ?>" target="_blank" class="btn btn-warning">Cetak Tagihan</a>
+        <a href="/cetak-tagihan/<?= $p['pemesanan_id'] ?>" target="_blank" class="btn btn-warning">Cetak Tagihan</a>
         <?php } ?>
       </td>
     </tr>

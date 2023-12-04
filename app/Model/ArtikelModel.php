@@ -38,11 +38,11 @@ class ArtikelModel{
 
     public function readArtikel($artikelId)
     {
-        $sql = "SELECT-* FROM artikel WHERE artikel_id = :id";
+        $sql = "SELECT * FROM artikel WHERE artikel_id = :id";
         $stmt = $this -> connection -> prepare($sql);
         $stmt->bindParam(':id', $artikelId);
         $stmt->execute(); 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
     public function updateArtikel($artikelId, $judul, $tanggal, $isi, $foto)

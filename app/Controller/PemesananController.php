@@ -62,7 +62,7 @@ class PemesananController
         // die();
 
         try {
-            $tanggal = date("Y-m-j h:i:s");
+            $tanggal = date("Y-m-j H:i:s");
             $data = [
                 "agen_id"=> $_POST["agen_id"],
                 "keberangkatan_id"=> $_POST["keberangkatan_id"],
@@ -93,7 +93,7 @@ class PemesananController
 
     public function saveBuktiTransfer(){
         try {
-            $tanggal = date("Y-m-j h:i:s");
+            $tanggal = date("Y-m-j H:i:s");
 
             $filename = $_FILES['foto']['name'];
             $tmpname = $_FILES['foto']['tmp_name'];
@@ -115,7 +115,7 @@ class PemesananController
                 move_uploaded_file($tmpname, "uploads/foto_bukti/" .$rename);
                 $dataPemesanan = [
                     "pemesanan_id"=> $_POST["pemesanan_id"],
-                    "jumlah_bayar"=> $_POST["jumlah_bayar"],
+                    "jumlah_bayar"=> str_replace('.', '', $_POST['jumlah_bayar']),
                     "status_verivikasi"=> "belum verivikasi",
                     "tanggal"=> $tanggal,
                     "catatan"=> $_POST["catatan"],
@@ -136,7 +136,7 @@ class PemesananController
     // public function saveTambahCicilan()
     // {
     //     try {
-    //         $tanggal = date("Y-m-j h:i:s");
+    //         $tanggal = date("Y-m-j H:i:s");
 
     //         $filename = $_FILES['foto']['name'];
     //         $tmpname = $_FILES['foto']['tmp_name'];
@@ -247,7 +247,7 @@ class PemesananController
         // }
         // die();
         try {
-            $tanggal = date("Y-m-j h:i:s");
+            $tanggal = date("Y-m-j H:i:s");
             $data = [
                 "agen_id"=> str_replace('"', '', $_POST['agen_id']),
                 "keberangkatan_id"=> str_replace('"', '', $_POST['keberangkatan_id']),
@@ -267,7 +267,7 @@ class PemesananController
                     $this->pemesanan->saveDetailCustomerPemesanan($pemesananId,$value,$harga);
                 }
 
- $tanggal = date("Y-m-j h:i:s");
+ $tanggal = date("Y-m-j H:i:s");
 
             $filename = $_FILES['foto']['name'];
             $tmpname = $_FILES['foto']['tmp_name'];
@@ -330,7 +330,7 @@ class PemesananController
     public function apiTambahCicilan()
     {
         try {
-            $tanggal = date("Y-m-j h:i:s");
+            $tanggal = date("Y-m-j H:i:s");
 
             $filename = $_FILES['foto']['name'];
             $tmpname = $_FILES['foto']['tmp_name'];

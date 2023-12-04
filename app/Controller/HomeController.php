@@ -50,6 +50,22 @@ class HomeController
         View::render("Home/footer", []); 
     }
 
+    public function artikel()
+    {
+        $artikel = $this->artikel->getAllArticle();
+        View::render("Home/header", []);
+        View::render("Home/artikel", ['artikel' => $artikel]);
+        View::render("Home/footer", []); 
+    }
+
+    public function detailArtikel($id)
+    {
+        $artikel = $this->artikel->readArtikel($id);
+        View::render("Home/header", []);
+        View::render("Home/detailArtikel", ['artikel' => $artikel]);
+        View::render("Home/footer", []); 
+    }
+
 
     public function detailPaket($idKeberangkatan)
     {
@@ -72,7 +88,7 @@ class HomeController
 
     public function pemesanan($idKeberangkatan)
     {
-        session_start();
+        // session_start();
         $idCustomer = $_SESSION['uid_user'];
         $keberangkatan = $this->keberangkatan->getDetail($idKeberangkatan);
         foreach ($keberangkatan as $k) {
@@ -101,26 +117,44 @@ class HomeController
 
     public function galery()
     {
+        $galery = $this->galery->get();
         View::render("Home/header", []);
-        View::render("Home/galery", []);
+        View::render("Home/galery", ['galery'=>$galery]);
         View::render("Home/footer", []); 
     }
 
     public function profile()
     {
-        session_start();
+        // session_start();
         $idCustomer = $_SESSION['uid_user'];
         $user = $this->user->getById($idCustomer);
         $profile = $this->customer->getCustomerByUserId($idCustomer);
         View::render("User/profile", ['user' => $user,'profile'=> $profile]);
     }
-    public function paketUmrah()
+    public function paketTravel()
     {
         
         $keberangkatan = $this->keberangkatan->get();
         View::render("Home/header", []);
-        View::render("Home/paketUmrah", ['dataKeberangkatan' => $keberangkatan]);
+        View::render("Home/paketTravel", ['dataKeberangkatan' => $keberangkatan]);
         View::render("Home/footer", []); 
+    }
+
+    public function searchPaket()
+    {
+        
+        try {
+            $date=date_create($_POST['keberangkatan']);
+                $tanggal = date_format($date,"Y-m-d");
+            $harga = explode(",", $_POST["start_harga"]);
+  
+            $keberangkatan = $this->keberangkatan->searchKeberangkatan($_POST['menu'],$_POST['start'],$harga[0],$harga[1],$tanggal);
+            View::render("Home/header", []);
+            View::render("Home/paketTravel", ['dataKeberangkatan' => $keberangkatan]);
+            View::render("Home/footer", []); 
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
     }
 
     public function buktiTransfer($idPemesanan)

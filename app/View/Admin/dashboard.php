@@ -1,3 +1,7 @@
+<?php
+
+use Attar\App\Rahmatan\Travel\Util\FormatRupiah;
+?>
 <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class=" mb-4 order-0">
@@ -5,7 +9,7 @@
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <!-- <h5 class="card-title text-primary">Selamat Datang <?= $_SESSION['username'] ?> 🎉</h5> -->
+                          <h5 class="card-title text-primary">Selamat Datang <?= $_SESSION['username'] ?> 🎉</h5>
                           <p class="mb-4">
                           Temukan kemudahan mengelola aktivitas, proyek, dan pencapaian Anda di satu tempat yang terpusat.
                           </p>
@@ -59,8 +63,8 @@
                           </div>
                         </div>
                         <span class="fw-semibold d-block mb-1">Pemasukan</span>
-                        <h3 class="card-title mb-2">Rp <?= $data['jumlahPemasukan'] ?></h3>
-                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +Rp <?= $data['jumlahPemasukanPerHari'] ?></small>
+                        <h3 class="card-title mb-2">Rp <?= FormatRupiah::Rupiah($data['jumlahPemasukan']) ?></h3>
+                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +Rp <?= FormatRupiah::Rupiah($data['jumlahPemasukanPerHari']) ?></small>
                       </div>
                     </div>
                   </div>
@@ -92,9 +96,9 @@
                             </div>
                           </div>
                         </div>
-                        <span>Customer</span>
-                        <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                        <span>Verivkasi Pembayaran</span>
+                        <h3 class="card-title text-nowrap mb-1"><?= $data['jumlahBayarHari'] ?></h3>
+                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i><?= $data['jumlahBayar'] ?></small>
                       </div>
                     </div>
                   </div>
@@ -131,8 +135,8 @@
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">Pemesanan</span>
-                          <h3 class="card-title mb-2">Rp <?= $data['jumlahPemesanan'] ?></h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +7Rp <?= $data['jumlahPemasukanPerHari'] ?></small>
+                          <h3 class="card-title mb-2">Rp <?= FormatRupiah::Rupiah($data['jumlahPemesanan']) ?></h3>
+                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>Rp <?= FormatRupiah::Rupiah($data['jumlahPemasukanPerHari']) ?></small>
                         </div>
                       </div>
                     </div>
@@ -164,9 +168,8 @@
                               </div>
                             </div>
                           </div>
-                          <span>Sales</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                          <span>Agen</span>
+                          <h3 class="card-title text-nowrap mb-1"><?= $data['jumlahAgen'] ?></h3>
                         </div>
                       </div>
                     </div>

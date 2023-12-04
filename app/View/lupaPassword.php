@@ -51,7 +51,7 @@
         </div>
         <div class="input-box">
           <label class="input-user" for="email">Hoby</label>
-          <input id="email" type="text" name="hoby" placeholder="Masukkan E-mail Anda" required />
+          <input id="email" type="text" name="hoby" placeholder="Masukkan Hoby anda" required />
         </div>
 
         <button type="submit" class="btn">Verivikasi</button>

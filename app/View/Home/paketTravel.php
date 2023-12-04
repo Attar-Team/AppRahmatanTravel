@@ -5,13 +5,28 @@
    </div>
 </div>
 
+<form action="/search-paket" method="POST">
 <div class="filter-paket">
     <div class="filter-pkt-container">
+
+    <div class="box">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      <div class="w-100">
+         <p>Menu</p>
+         <select name="menu" class="w-100" id="">
+            <option value="">Pilih </option>
+            <option value="Umrah">Umrah</option>
+            <option value="Haji">Haji</option>
+         </select>
+      </div>
+      </div>
+
+
       <div class="box">
       <i class="fa-solid fa-plane-departure"></i>
       <div class="w-100">
          <p>Start</p>
-         <select name="" class="w-100" id="">
+         <select name="start" class="w-100" id="">
             <option value="">Pilih </option>
             <option value="Surabaya">Surabaya</option>
             <option value="Jakarta">Jakarta</option>
@@ -23,39 +38,30 @@
       <i class="fa-solid fa-calendar-days"></i>
       <div class="w-100">
          <p>Pilih Keberangkatan</p>
-         <input type="month" id="start" name="start" min="2018-03" value="2018-05" />
+         <input type="month" id="start" name="keberangkatan" min="2022-03" />
       </div>
       </div>
 
-      <div class="box">
-      <i class="fa-solid fa-clock-rotate-left"></i>
-      <div class="w-100">
-         <p>Durasi Hari</p>
-         <div class="d-flex" style="align-items: center;">
-         <input type="number" placeholder="9" class="inp-num">
-         <p class="m-0">Hari</p>
-         </div>
-      </div>
-      </div>
 
       <div class="box">
       <i class="fa-solid fa-money-bill"></i>
       <div class="w-100">
          <p>Start Harga</p>
-         <select name="" class="w-100" id="">
+         <select name="start_harga" class="w-100" id="">
             <option value="">Pilih </option>
-            <option value="Surabaya">3</option>
-            <option value="Jakarta">Jakarta</option>
+            <option value="30000000,32000000">30.000.00 - 32.000.000</option>
+            <option value="33000000,34000000">33.000.00 - 34.000.000</option>
+            <option value="35000000,37000000">35.000.00 - 37.000.000</option>
          </select>
       </div>
       </div>
 
       <div class="box" style="width: 100px;" >
-         <button class="btn btn-orange">Search</button>
+         <button type="submit" class="btn btn-orange">Search</button>
       </div>
     </div>
 </div>
-
+</form>
 
         <div class="paket" style="position: relative;" >
             <div class="container fade-in">

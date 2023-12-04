@@ -4,11 +4,11 @@ namespace Attar\App\Rahmatan\Travel\Middleware;
 
 use Attar\App\Rahmatan\Travel\App\View;
 
-class AdminMiddleware implements Middleware
+class AgenMiddleWare implements Middleware
 {
     public function before(): void
     {
-        if($_SESSION['level'] != "admin"){
+        if($_SESSION['level'] != "agen"){
             View::render("erorUnauthorized", [''] );
             exit();
         }

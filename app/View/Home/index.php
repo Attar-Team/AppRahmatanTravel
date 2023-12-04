@@ -182,7 +182,7 @@ use Attar\App\Rahmatan\Travel\Util\FormatRupiah;
                 </div>
 
                 <div class="btn">
-                    <a href="#">Lihat Semua</a>
+                    <a href="/galery">Lihat Semua</a>
                 </div>
             </div>
         <!-- <h2 class="text-center m-5" style="font-size: 40px;">Galery</h2> -->
@@ -279,7 +279,7 @@ use Attar\App\Rahmatan\Travel\Util\FormatRupiah;
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat eius atque natus repellendus nobis repellat voluptate possimus at odio magnam, beatae officia nam exercitationem voluptates rerum nulla culpa, provident aspernatur.</p>
                 </div>
                 <div class="btn">
-                    <a href="#">Lihat Semua</a>
+                    <a href="/artikel">Lihat Semua</a>
                 </div>
             </div>
 
@@ -293,7 +293,7 @@ use Attar\App\Rahmatan\Travel\Util\FormatRupiah;
                     </div>
                     <h2><?= $k['judul'] ?></h2>
                     <p><?= substr($k['isi'],0,200) ?></p>
-                    <a href="#" class="btn">Baca Sekarang</a>
+                    <a href="/detail-artikel/<?= $k['artikel_id'] ?>" class="btn">Baca Sekarang</a>
                 </div>
             <?php endforeach; ?>
             </div>

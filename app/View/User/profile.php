@@ -52,7 +52,7 @@
       <td><?= $p['jenis_kelamin'] ?></td>
       <td>
         <a href="/edit-jamaah/<?= $p['NIK'] ?>" class="btn btn-warning">Edit</a>
-        <a href="" class="btn btn-danger">Hapus</a>
+        <a href="/admin/hapus-customer/<?= $p['NIK'] ?>/customer" onclick="return confirm('Apakah yakin dihapus')" class="btn btn-danger">Hapus</a>
       </td>
     </tr>
     <?php endforeach; ?>
@@ -63,7 +63,24 @@
  
     </div>
 </div>
+<script src="/sweetalert.js"></script>
 
+
+<?php 
+
+  if(isset($_SESSION['flash'])){
+?>
+<script>
+  Swal.fire({
+  icon: "<?= $_SESSION['flash']['status'] ?>",
+  title: "<?= $_SESSION['flash']['title'] ?>",
+  text: "<?= $_SESSION['flash']['message'] ?>",
+});
+</script>
+<?php 
+unset($_SESSION['flash']);
+} ?>
+<script src="/script.js"></script>
 <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
     <script src="/path/to/typeit/source"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->

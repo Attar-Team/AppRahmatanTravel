@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 
 <html
@@ -17,7 +16,7 @@
     />
 
     <title>Rahmatan Travel</title>
-
+    <link rel="icon"  href="/image/icon.png" />
     <meta name="description" content="" />
 
     <!-- Favicon -->
@@ -70,7 +69,7 @@
       <div class="layout-container" >
         <!-- Menu -->
 
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="z-index: 1;">
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"style="z-index: 1;" >
           <div class="app-brand demo mb-3">
             <a href="index.html" class="app-brand-link">
               <img width="220px" src="/assets/Logo (2).png" alt="">
@@ -232,7 +231,7 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
+                            <span class="fw-semibold d-block"><?= $_SESSION['username'] ?></span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -245,21 +244,6 @@
                       <a class="dropdown-item" href="#">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
                       </a>
                     </li>
                     <li>

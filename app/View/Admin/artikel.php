@@ -4,7 +4,7 @@
               <div class="card " style="margin-top: -16px;" >
                 <div class="table-responsive text-nowrap p-3">
                 <div class="d-inline-block mb-3">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalTambahGalery" class="btn btn-primary mb-3">Tambah</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalTambahArtikel" class="btn btn-primary mb-3">Tambah</button>
 
                 </div>
                   <table id="myTable" class="table table-hover ">
@@ -46,7 +46,7 @@
                 </div>
               </div>
             </div>
-<?php include'Modal/ModalTambahGalery.php'; ?>
+<?php include'Modal/ModalTambahArtikel.php'; ?>
             <script>
               let table = new DataTable('#myTable');
             </script>

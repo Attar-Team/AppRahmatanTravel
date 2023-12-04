@@ -27,7 +27,7 @@ class PemesananModel
 
     public function getPemesananByCustomer($idCustomer)
     {
-        $query = $this->connection->prepare("SELECT * FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id LEFT JOIN customer ON detail_customer_pemesan.customer_id = customer.NIK LEFT JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.keberangkatan_id  WHERE customer.user_id = ? GROUP BY pemesanan.pemesanan_id");
+        $query = $this->connection->prepare("SELECT * FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id LEFT JOIN customer ON detail_customer_pemesan.customer_id = customer.NIK LEFT JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.keberangkatan_id JOIN paket ON keberangkatan.paket_id = paket.paket_id  WHERE customer.user_id = ? GROUP BY pemesanan.pemesanan_id");
         $query->execute([$idCustomer]);
         return $query->fetchAll();
     }

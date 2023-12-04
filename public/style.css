@@ -913,6 +913,20 @@ left: 50%;
 transform: translateX(-50%);
 }
 
+.galery{
+    margin: 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+.galery .imagee{
+    width: 400px;
+    text-align: center;
+}
+.galery .imagee img{
+    width: 100%;
+}
 @media screen and (max-width: 1100px) {
     .img-login {
       display: none;
