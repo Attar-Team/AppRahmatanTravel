@@ -61,31 +61,31 @@
             <h5>Data Customer</h5>
             <?php
         foreach($data['dataPaket'] as $p):
-            $termasukHarga = explode(",", $p->termasuk_harga);
-            $tidakTermasukHarga = explode(",", $p->tidak_termasuk_harga);
-            $keunggulan = explode(",", $p->keunggulan);
+            $termasukHarga = explode(",", $p['termasuk_harga']);
+            $tidakTermasukHarga = explode(",", $p['tidak_termasuk_harga']);
+            $keunggulan = explode(",", $p['keunggulan']);
     ?>
             <table class="table table-borderless bg-white">
                 <tbody>
                     <tr>
                         <td>Nama Paket</td>
-                        <td><?= $p->nama ?></td>
+                        <td><?= $p['nama'] ?></td>
                     </tr>
                     <tr>
                         <td>Menu</td>
-                        <td><?= $p->menu ?></td>
+                        <td><?= $p['menu'] ?></td>
                     </tr>
                     <tr>
                         <td>Lama Hari</td>
-                        <td><?= $p->lama_hari ?></td>
+                        <td><?= $p['lama_hari'] ?></td>
                     </tr>
                     <tr>
                         <td>Minim DP</td>
-                        <td><?= $p->minim_dp ?></td>
+                        <td><?= $p['minim_dp'] ?></td>
                     </tr>
                     <tr>
                         <td>Maskapai</td>
-                        <td><?= $p->maskapai ?></td>
+                        <td><?= $p['maskapai'] ?></td>
                     </tr>
                     <tr>
                         <td>Termasuk Harga</td>
@@ -113,7 +113,7 @@
                     </tr>
                     <tr>
                         <td>Foto brosur</td>
-                        <td><img src="/uploads/foto_brosur/<?= $p->foto_brosur ?>" width="200px" alt=""></td>
+                        <td><img src="/uploads/foto_brosur/<?= $p['foto_brosur'] ?>" width="200px" alt=""></td>
                     </tr>
                 </tbody>
 
@@ -124,15 +124,26 @@
     </div>
         </div>
         <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
-            <p>
-                Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
-                cupcake gummi bears cake chocolate.
-            </p>
-            <p class="mb-0">
-                Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
-                roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
-                jelly-o tart brownie jelly.
-            </p>
+        <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Sudah bayar</th>
+                        <th>Total Tagihan</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <?php foreach($data['pemesanan'] as $p): ?>
+                        <tr>
+                            <td><?= $p['tanggal_pemesanan'] ?></td>
+                            <td><?= $p['status'] ?></td>
+                            <td><?= $p['sudah_bayar'] ?></td>
+                            <td><?= $p['total_tagihan'] ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                  </table>
         </div>
     </div>
 </div>

@@ -41,34 +41,34 @@ $(document).ready(function() {
                 <div class="card-body">
                 <?php 
 foreach($data["dataPaket"] as $d) : 
-    $termasukHarga = explode(",", $d->termasuk_harga);
-    $tidakTermasukHarga = explode(",", $d->tidak_termasuk_harga);
-    $keunggulan = explode(",", $d->keunggulan);
+    $termasukHarga = explode(",", $d['termasuk_harga']);
+    $tidakTermasukHarga = explode(",", $d['tidak_termasuk_harga']);
+    $keunggulan = explode(",", $d['keunggulan']);
  ?>
                         <div class="mb-3">
                             <label class="form-label" for="basic-icon-default-fullname">Nama paket</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class="bx bx-user"></i></span>
-                                        <input type="hidden" name="paket_id" value="<?= $d->paket_id ?>">
-                                <input type="text" name="nama_paket" value="<?= $d->nama ?>" class="form-control" id="basic-icon-default-fullname" />
+                                        <input type="hidden" name="paket_id" value="<?= $d['paket_id'] ?>">
+                                <input type="text" name="nama_paket" value="<?= $d['nama'] ?>" class="form-control" id="basic-icon-default-fullname" />
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="basic-icon-default-fullname">Menu</label>
                             <div class="input-group input-group-merge">
                                 <div class="form-check me-3 mt-3">
-                                    <input name="menu" class="form-check-input" <?= ($d->menu == "Umrah") ? "checked" : "" ?> type="radio" value="Umrah"
+                                    <input name="menu" class="form-check-input" <?= ($d['menu'] == "Umrah") ? "checked" : "" ?> type="radio" value="Umrah"
                                         id="defaultRadio1" />
                                     <label class="form-check-label " for="defaultRadio1"> Umrah </label>
                                 </div>
                                 <div class="form-check me-3 mt-3">
-                                    <input name="menu" class="form-check-input" type="radio" value="Haji" <?= ($d->menu == "Haji") ? "checked" : "" ?>
+                                    <input name="menu" class="form-check-input" type="radio" value="Haji" <?= ($d['menu'] == "Haji") ? "checked" : "" ?>
                                         id="defaultRadio1" />
                                     <label class="form-check-label" for="defaultRadio1"> Haji </label>
                                 </div>
                                 <div class="form-check mt-3">
-                                    <input name="menu" class="form-check-input" type="radio" value="Wisata Halal" <?= ($d->menu == "Wisata Halal") ? "checked" : "" ?>
+                                    <input name="menu" class="form-check-input" type="radio" value="Wisata Halal" <?= ($d['menu'] == "Wisata Halal") ? "checked" : "" ?>
                                         id="defaultRadio1" />
                                     <label class="form-check-label" for="defaultRadio1"> Wisata Halal </label>
                                 </div>
@@ -80,7 +80,7 @@ foreach($data["dataPaket"] as $d) :
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i
                                         class="bx bx-buildings"></i></span>
-                                <input type="number" id="basic-icon-default-company" name="durasi" class="form-control" value="<?= $d->lama_hari ?>" />
+                                <input type="number" id="basic-icon-default-company" name="durasi" class="form-control" value="<?= $d['lama_hari'] ?>" />
                             </div>
                         </div>
                         <div class="mb-3">
@@ -88,7 +88,7 @@ foreach($data["dataPaket"] as $d) :
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i
                                         class="bx bx-buildings"></i></span>
-                                <input type="number" name="minim_dp" id="basic-icon-default-company" value="<?= $d->minim_dp ?>" class="form-control" />
+                                <input type="number" name="minim_dp" id="basic-icon-default-company" value="<?= $d['minim_dp'] ?>" class="form-control" />
                             </div>
                         </div>
 
@@ -97,7 +97,7 @@ foreach($data["dataPaket"] as $d) :
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i
                                         class="bx bx-buildings"></i></span>
-                                <input type="text" value="<?= $d->maskapai ?>" name="maskapai" id="basic-icon-default-company" class="form-control" />
+                                <input type="text" value="<?= $d['maskapai'] ?>" name="maskapai" id="basic-icon-default-company" class="form-control" />
                             </div>
                         </div>
 
@@ -202,8 +202,8 @@ foreach($data["dataPaket"] as $d) :
                         <div class="mb-3">
                             
                         <label for="formFile" class="form-label">Foto Brosur</label><br>
-                        <input type="hidden" name="foto_brosur" value="<?= $d->foto_brosur ?>">
-                        <img src="/uploads/foto_brosur/<?= $d->foto_brosur ?>" class="mb-3 shadow" style="width: 200px;border-radius: 10px;" alt="">
+                        <input type="hidden" name="foto_brosur" value="<?= $d['foto_brosur'] ?>">
+                        <img src="/uploads/foto_brosur/<?= $d['foto_brosur'] ?>" class="mb-3 shadow" style="width: 200px;border-radius: 10px;" alt="">
                         <input class="form-control" type="file" name="foto_brosur_update" id="formFile" />
                       </div>
                         <?php endforeach; ?>
@@ -248,7 +248,7 @@ foreach($data["dataPaket"] as $d) :
                                     <input type="number" id="basic-icon-default-company" value="<?= $h['harga'] ?>" name="harga[]" class="form-control"/>
                                 </div>
                             </div>
-                            <a class="btn btn-danger" href="/admin/delete-harga/<?= $d->paket_id ?>/<?= $h['harga_paket_id'] ?>"><i class='bx bx-trash' ></i></a>
+                            <a class="btn btn-danger" href="/admin/delete-harga/<?= $d['paket_id'] ?>/<?= $h['harga_paket_id'] ?>"><i class='bx bx-trash' ></i></a>
                         </div>
                         
                         <?php $no++; endforeach; ?>

@@ -43,12 +43,8 @@
 </div>
     <?php } ?>
 
-      <form action="/register" method="POST">
-        <h1>Register</h1>
-        <div class="input-box">
-          <label class="input-user" for="nama-lengkap">Nama Lengkap</label>
-          <input id="nama-lengkap" type="text" name="nama" placeholder="Masukkan Nama Lengkap Anda" required />
-        </div>
+      <form action="/verivikasi-lupa-password" method="POST">
+        <h1>Verivikasi Lupa password</h1>
         <div class="input-box">
           <label class="input-user" for="email">E-mail</label>
           <input id="email" type="text" name="email" placeholder="Masukkan E-mail Anda" required />
@@ -57,21 +53,35 @@
           <label class="input-user" for="email">Hoby</label>
           <input id="email" type="text" name="hoby" placeholder="Masukkan E-mail Anda" required />
         </div>
-        <div class="input-box">
-          <label class="input-password" for="Password">Password</label>
-          <input id="Password" type="password" name="password" placeholder="Password" required />
-        </div>
-        <button type="submit" class="btn">Daftar</button>
-        <div class="register-link">
-          <p>Punya Akun ?<a href="/login">Login</a></p>
-        </div>
+
+        <button type="submit" class="btn">Verivikasi</button>
+
       </form>
     </div>
     <!-- Akhir Form Login -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
+  <script src="/sweetalert.js"></script>
+
+
+<?php 
+session_start();
+  if(isset($_SESSION['flash'])){
+?>
+<script>
+  Swal.fire({
+  icon: "<?= $_SESSION['flash']['status'] ?>",
+  title: "<?= $_SESSION['flash']['title'] ?>",
+  text: "<?= $_SESSION['flash']['message'] ?>",
+});
+</script>
+<?php 
+unset($_SESSION['flash']);
+} ?>
 </html>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

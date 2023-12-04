@@ -314,6 +314,7 @@ section{
     display: flex;
     margin-top: 70px;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 70px;
 }
 .artikel .container .box{
@@ -921,6 +922,32 @@ transform: translateX(-50%);
 @media screen and (max-width: 456px) {
     .login{
         width: 350px;
+    }
+    .nav-image .desc{
+        width: 300px;
+    }
+    .welcome{
+        flex-direction: column;
+        padding: 10px 15px;
+    }
+    .welcome .desc{
+        width: 100%;
+    }
+    .nav-image .desc h3{
+        font-family: 'Kaufmann BT', sans-serif;
+        font-size: 40px;
+        font-weight: bold;
+        color: var(--orange);                               
+    }
+    .nav-image .desc h1{
+        font-size: 35px;
+        font-weight: bold;                               
+    }
+    .header-content {
+        flex-direction: column;
+    }
+    .header-content .title {
+        width: 100%;
     }
 }
 

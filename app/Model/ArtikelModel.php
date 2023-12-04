@@ -16,15 +16,24 @@ class ArtikelModel{
         $stmt -> execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
-    public function createArtikel($judul, $tanggal, $isi, $foto)
+    public function getArticleLimit() 
     {
-        $sql = "INSERT INTO artikel (judul, tanggal, isi, foto) VALUES (:judul, :tanggal, :isi, :foto)";
+        $sql = "SELECT * FROM artikel LIMIT 3";
         $stmt = $this->connection->prepare($sql);
+        $stmt -> execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public function createArtikel($user_id,$judul, $tanggal, $isi, $foto)
+    {
+        $sql = "INSERT INTO artikel (user_id ,judul, tanggal, isi, foto) VALUES (:user_id ,:judul, :tanggal, :isi, :foto)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':judul', $judul);
         $stmt->bindParam(':tanggal', $tanggal);
         $stmt->bindParam(':isi', $isi);
         $stmt->bindParam(':foto', $foto);
-        return $stmt -> execute();
+        $stmt -> execute();
+        return $stmt->rowCount();
     }
 
     public function readArtikel($artikelId)

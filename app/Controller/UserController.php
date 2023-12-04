@@ -34,36 +34,69 @@ class UserController
         }
     }
 
+    // public function apiRegister()
+    // {
+    //     try {
+    //         $jsonData = file_get_contents("php://input");
+    //         $data = json_decode($jsonData, true);
+
+    //         $tambah = $this->user->save($data);
+    //         if($tambah['count'] > 0){
+    //             http_response_code(201);
+    //                 $result = array(
+    //                     "status" => 201,
+    //                     "message" => "success"
+    //                 );
+    //         }else{
+    //             http_response_code(404);
+    //                 $result = array(
+    //                     "status" => 404,
+    //                     "message" => "success"
+    //                 );
+    //         }
+    //         echo json_encode($result);
+            
+    //     } catch (\Throwable $e) {
+    //         http_response_code(404);
+    //                     $result = array(
+    //                         "status" => "Failed",
+    //                         "response" => 404,
+    //                         "message" => $e->getMessage()
+    //                     );
+    //                     echo json_encode($result);
+    //     }
+    // }
+
     public function apiRegister()
     {
         try {
-            $jsonData = file_get_contents("php://input");
-            $data = json_decode($jsonData, true);
-
+            $data = [
+                "nama"=> htmlspecialchars(str_replace('"', '', $_POST["nama"])) ,
+                "password"=> password_hash(htmlspecialchars(str_replace('"', '', $_POST["password"])), PASSWORD_DEFAULT) ,
+                "email"=> htmlspecialchars(str_replace('"', '', $_POST["email"])),
+                "level"=> "customer",
+                "hoby"=> htmlspecialchars(str_replace('"', '', $_POST["hoby"]))
+            ];
             $tambah = $this->user->save($data);
-            if($tambah['count'] > 0){
+
+            if($tambah > 0){
                 http_response_code(201);
-                    $result = array(
-                        "status" => 201,
-                        "message" => "success"
-                    );
+                $result = array(
+                    "status" => "success",
+                    "response" => 201
+                );
             }else{
-                http_response_code(404);
-                    $result = array(
-                        "status" => 404,
-                        "message" => "success"
-                    );
+                throw new ValidationException("Gagal ditambahkan");
             }
             echo json_encode($result);
-            
-        } catch (\Throwable $e) {
-            http_response_code(404);
-                        $result = array(
-                            "status" => "Failed",
-                            "response" => 404,
-                            "message" => $e->getMessage()
-                        );
-                        echo json_encode($result);
+        } catch (ValidationException $th) {
+            http_response_code(400);
+            $result = array(
+                "status" => "failed",
+                "response" => 400,
+                "info"=> $th->getMessage()
+            );
+            echo json_encode($result);
         }
     }
 }

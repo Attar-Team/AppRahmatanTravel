@@ -26,6 +26,7 @@
                         <th>Status</th>
                         <th>Nama Paket</th>
                         <th>Seats</th>
+                        <th>Available Seats</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -40,6 +41,7 @@
                         <td><?= $d['status_keberangkatan'] ?></td>
                         <td><?= $d['nama'] ?></td>
                         <td><?= $d['seats'] ?></td>
+                        <td><?= $d['available_seat'] ?></td>
                         <td>
                         <a class="btn btn-danger" href="/admin/hapus-keberangkatan/<?= $d['keberangkatan_id'] ?>" onclick="return confirm('Apakah yakin menghapus')" role="button"><i class='bx bx-trash' ></i></a>
                           <!-- <a class="btn btn-warning" href="/admin/edit-paket/<?= $d['keberangkatan_id'] ?>" role="button"><i class='bx bxs-edit-alt'></i></a> -->

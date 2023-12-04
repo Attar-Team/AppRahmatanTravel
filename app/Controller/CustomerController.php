@@ -153,12 +153,11 @@ class CustomerController
                     $saveDocument = $this->customer->saveDocument($_POST['NIK'], $rename);
                     if ($saveDocument > 0 && $savePasport > 0) {
                         if($_POST['idKeberangkatan'] == 0){
+                            View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
                             View::redirect('/profile');
                         }else{
-                            $data = $this->customer->get();
-                            View::render("Admin/header", ["title" => "Customer"]);
-                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil ditambahkan']);
-                            View::render("Admin/footer", []);
+                            View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
+                            View::redirect('/admin/customer');
                         }
                     } else {
                         throw new ValidationException("gagal di tambah");
@@ -170,9 +169,8 @@ class CustomerController
                 throw new ValidationException("gagal di tambah");
             }
         } catch (ValidationException $exception) {
-            View::render("Admin/header", ["title" => "Customer"]);
-            View::render("Admin/tambahCustomer", ["error" => $exception->getMessage()]);
-            View::render("Admin/footer", []);
+            View::setFlasher('warning','Gagal',$exception->getMessage());
+            View::redirect('/admin/tambah-customer');
             // View::render("/admin/tambah-customer", ['error'=> $e->getMessage()]);
             // throw new ValidationException($e);
         }
@@ -248,28 +246,15 @@ class CustomerController
         foreach ($keberangkatan as $k) {
             $idPaket = $k->paket_id;
         }
-        $hotel = $this->paket->getHotelPaket($idPaket);
-        $harga = $this->paket->getHargaPaket($idPaket);
-        $bintang = $this->paket->getBintangHotel($idPaket);
-        $profile = $this->customer->getCustomerByUserId($idCustomer);
-        View::render("Home/pemesanan", [
-            "hotel"=> $hotel,
-            "harga"=> $harga,
-            "bintang"=> $bintang,
-            "keberangkatan"=> $keberangkatan,
-            "profile"=> $profile,
-            "success"=> "Data berhasil ditambahkan",
-            "keberangkatan_id"=> $_POST['idKeberangkatan']
-        ]);
+        View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
+        View::redirect('/admin/customer');
                     } else {
                         throw new ValidationException("gagal di tambah");
                     }
                 }
         } catch (ValidationException $e) {
-            View::render("Home/tambahCustomer", [
-                'idKeberangakatan' => $_POST['idKeberangkatan'],
-                'error'=> "Data gagal di update".$e->getMessage()
-            ]);
+            View::setFlasher('warning','Gagal Ditambahkan',$e->getMessage());
+            View::redirect('/admin/tambah-customer');
         }
     }
 
@@ -277,8 +262,7 @@ class CustomerController
     {
 
         try {
-            // var_dump($_POST);
-            // die();
+
             $rename = array();
             foreach ($_FILES as $key => $value) {
                 $filename = $value['name'];
@@ -325,14 +309,11 @@ class CustomerController
             $this->customer->updatePasport($_POST, $newTglPenerbitan);
 
             $this->customer->updateDocument($_POST['NIK'], $rename);
-            $data = $this->customer->get();
-                            View::render("Admin/header", ["title" => "Customer"]);
-                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil di edit']);
-                            View::render("Admin/footer", []);
+            View::setFlasher('success','Berhasil','Data berhasil di edit');
+            View::redirect('/admin/customer');
         } catch (ValidationException $exception) {
-            View::render("Admin/header", ["title" => "Customer"]);
-            View::render("Admin/tambahCustomer", ["error" => $exception->getMessage()]);
-            View::render("Admin/footer", []);
+            View::setFlasher('warning','Gagal di delete',$exception->getMessage());
+            View::redirect('/admin/edit-customer/'.$_POST['NIK']);
         }
     }
 
@@ -398,15 +379,11 @@ class CustomerController
         $this->customer->deletePasport($id);
         $this->customer->deleteDokument($id);
         $this->customer->deleteCustomer($id);
-        $data = $this->customer->get();
-                            View::render("Admin/header", ["title" => "Customer"]);
-                            View::render("Admin/customer", ['dataCustomer' => $data,'success' => 'data customer berhasil dihapus']);
-                            View::render("Admin/footer", []);
+        View::setFlasher('success','Berhasil','Data berhasil di delete');
+            View::redirect('/admin/customer');
         } catch (\Throwable $e) {
-            $data = $this->customer->get();
-            View::render("Admin/header", ["title" => "Customer"]);
-            View::render("Admin/customer", ['dataCustomer' => $data,'error' => 'data customer gagal dihapus']);
-            View::render("Admin/footer", []); throw new ValidationException($e->getMessage());
+            View::setFlasher('waring','Gagal di delete', $e->getMessage());    
+            View::redirect('/admin/customer');
         }
 
     }
@@ -455,31 +432,31 @@ class CustomerController
             }
             $dataCustomer = [
                 'NIK' => str_replace('"', '', $_POST['NIK']),
-                'user_id' => 1,
-                'nama' => str_replace('-"', '/', $_POST['nama']),
-                'tempat_lahir' =>str_replace('-"', '/', $_POST['tempat_lahir']),
+                'user_id' =>  str_replace('"', '', $_POST['user_id']),
+                'nama' => str_replace('"', '', $_POST['nama']),
+                'tempat_lahir' =>str_replace('"', '', $_POST['tempat_lahir']),
                 'tanggal_lahir' => $newTglLahir,
-                'alamat' => str_replace('-"', '/', $_POST['alamat']),
-                'jenis_kelamin' => str_replace('-"', '/', $_POST['jenis_kelamin']),
-                'pekerjaan' => str_replace('-"', '/', $_POST['pekerjaan']),
-                'ukuran_baju' =>str_replace('-"', '/', $_POST['ukuran_baju']),
-                'no_telp' => str_replace('-"', '/', $_POST['no_telp']),
+                'alamat' => str_replace('"', '', $_POST['alamat']),
+                'jenis_kelamin' => str_replace('"', '', $_POST['jenis_kelamin']),
+                'pekerjaan' => str_replace('"', '', $_POST['pekerjaan']),
+                'ukuran_baju' =>str_replace('"', '', $_POST['ukuran_baju']),
+                'no_telp' => str_replace('"', '', $_POST['no_telp']),
                 'foto' => $rename['customer'],
             ];
 
             $saveCustomer = $this->customer->save($dataCustomer);
             if ($saveCustomer['count'] > 0) {
-                $tgl_penerbitan = str_replace('-"', '/', $_POST['tgl_penerbitan']);
+                $tgl_penerbitan = str_replace('"', '', $_POST['tgl_penerbitan']);
                 $newTglPenerbitan = date("Y-m-d", strtotime($tgl_penerbitan));
                 $dataPasport = [
-                    'nomor_pasport' => str_replace('-"', '/', $_POST['nomor_pasport']),
-                    'customer_id' =>str_replace('-"', '/', $_POST['NIK']),
-                    'nama_pasport' => str_replace('-"', '/', $_POST['nama_pasport']),
-                    'tempat_penerbitan' => str_replace('-"', '/', $_POST['tempat_penerbitan']),
+                    'nomor_pasport' => str_replace('"', '', $_POST['nomor_pasport']),
+                    'customer_id' =>str_replace('"', '', $_POST['NIK']),
+                    'nama_pasport' => str_replace('"', '', $_POST['nama_pasport']),
+                    'tempat_penerbitan' => str_replace('"', '', $_POST['tempat_penerbitan']),
                     'tgl_penerbitan' => $newTglPenerbitan
                 ];
                 $savePasport = $this->customer->savePasport($dataPasport);
-                $saveDocument = $this->customer->saveDocument(str_replace('-"', '/', $_POST['NIK']), $rename);
+                $saveDocument = $this->customer->saveDocument(str_replace('"', '', $_POST['NIK']), $rename);
                 if ($saveDocument > 0 && $savePasport > 0) {
                     http_response_code(201);
                     $result = [

@@ -19,7 +19,9 @@
 
 <body>
 
-    <?php foreach($data['detailPemesanan'] as $d) : 
+    <?php 
+    use Attar\App\Rahmatan\Travel\Util\FormatRupiah; 
+    foreach($data['detailPemesanan'] as $d) :
         $kurangBayar = $d['total_tagihan'] - $d['sudah_bayar'];
         ?>
 
@@ -52,7 +54,7 @@
                 </ul>
                 <ul style="display: flex; list-style: none; justify-content: space-between; padding: 0;">
                     <li>Minim DP</li>
-                    <li><?= $d['minim_dp'] ?></li>
+                    <li><?= FormatRupiah::Rupiah($d['minim_dp']) ?></li>
                 </ul>
             </div>
 
@@ -76,7 +78,7 @@
                                 <td>
                                     [<?= $j['nama_jenis'] ?>]
                                     <br>
-                                    Rp <?= $j['harga'] ?>
+                                    Rp <?= FormatRupiah::Rupiah($j['harga']) ?>
                                 </td>
                                 <td><?= $j['nama_customer'] ?></td>
                             </tr>
@@ -115,16 +117,16 @@
             <div class="box-struk-pms mb-3">
                 <ul style="display: flex; list-style: none; justify-content: space-between; padding: 0;">
                 <li>Total</li>
-                <li><?= $d['total_tagihan'] ?></li>
+                <li><?= FormatRupiah::Rupiah($d['total_tagihan']) ?></li>
             </ul>  
             <ul style="display: flex; list-style: none; justify-content: space-between; padding: 0;">
                 <li>Sudah Bayar</li>
-                <li><?= $d['sudah_bayar'] ?></li>
+                <li><?= FormatRupiah::Rupiah($d['sudah_bayar']) ?></li>
             </ul> 
             <ul style="display: flex; list-style: none; justify-content: space-between; padding: 0;">
                 <li>Kurang Bayar</li>
                 <li><?php if($kurangBayar >= 0){
-                    echo $kurangBayar;
+                    echo FormatRupiah::Rupiah($kurangBayar);
                 }else{
                     echo'Sudah Lunas';
                 } 
@@ -153,18 +155,14 @@
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Jumlah bayar</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($data['riwayatPembayaran'] as $p) : ?>
                             <tr>
                                 <th scope="row"><?= $p['tanggal'] ?></th>
-                                <td><?= $p['jumlah_bayar'] ?></td>
+                                <td><?= FormatRupiah::Rupiah($p['jumlah_bayar']) ?></td>
                                 <td><?= $p['status_verivikasi'] ?></td>
-                                <td>
-                                    <button type="button" class="btn btn-warning"><i class='bx bxs-edit-alt'></i></button>
-                                </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

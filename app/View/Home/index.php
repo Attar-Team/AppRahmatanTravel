@@ -62,7 +62,13 @@
                 </div>
             </div>
             <div class="container fade-in">
-                <?php foreach($data['dataKeberangkatan'] as $k) : ?>
+                <?php
+
+use Attar\App\Rahmatan\Travel\Util\FormatRupiah;
+
+ foreach($data['dataKeberangkatan'] as $k) : 
+                    if($k['available_seat'] > 0) {    
+                ?>
                 <div class="box">
                     <div class="image">
                         <img src="image/brosur.jpg" class="card-img-top" alt="...">
@@ -111,7 +117,7 @@
                                 <p style="font-weight: bolder; color:#13C100">Available Seat</p>
                             </div>
                             <div class="isi "style="font-weight: bolder; color:#13C100">
-                                20 pax
+                                <?= $k['available_seat'] ?>
                             </div>
                         </div>
                         <div class="ket">
@@ -156,59 +162,14 @@
                             </div>
                         </div>
 
-                            <h3>Rp. <?= $k['harga'] ?></h3>
+                            <h3>Rp. <?= FormatRupiah::Rupiah($k['harga']) ?></h3>
 
                         <a href="/detail-paket/<?= $k['keberangkatan_id'] ?>" class="btn">Lihat Selengkapnya</a>
                     </div>
                 </div>
-                <?php endforeach; ?>
+                <?php } endforeach; ?>
 
                 
-                <!-- <div class="box">
-                    <div class="image">
-                        <img src="image/brosur.jpg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="body">
-                        <h5 class="card-title">Paket Umrah Ramadhan</h5>
-                        <div class="ket">
-                            <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <p>Jadwal Keberangkatan</p>
-                            </div>
-                            <div class="isi">
-                                15 mar 24
-                            </div>
-                        </div>
-                        <div class="ket">
-                            <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <p>Durasi paket</p>
-                            </div>
-                            <div class="isi">
-                                15 hari
-                            </div>
-                        </div>
-                        <div class="ket">
-                            <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <p>Total Seat</p>
-                            </div>
-                            <div class="isi">
-                                40 pax
-                            </div>
-                        </div>
-                        <div class="ket">
-                            <div class="ttl">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <p>Berangkat dari</p>
-                            </div>
-                            <div class="isi">
-                                Jakarta
-                            </div>
-                        </div>
-                        <a href="#" class="btn">Lihat Selengkapnya</a>
-                    </div>
-                </div> -->
             </div>
         </div>
     </section>
@@ -228,33 +189,13 @@
         <div class="transparan" style="position: relative; height: 100%;">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
+
+                <?php foreach($data['galery'] as $g) : ?>
                     <div class="swiper-slide">
-                        <img src="/image/glry.jpg" />
+                        <img src="/uploads/foto_galery/<?= $g['foto'] ?>" />
                     </div>
-                    <div class="swiper-slide">
-                    <img src="/image/glry.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                    <img src="/image/glry.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                    <img src="/image/glry.jpg" />
-                    </div>
-                    <!-- <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                    </div> -->
+                    <?php endforeach; ?>
+
 
                 </div>
                 <div class="swiper-pagination"></div>
@@ -343,34 +284,18 @@
             </div>
 
             <div class="container">
+
+            <?php foreach($data['artikel'] as $k) : ?>
                 <div class="box shadow from-left">
                     <img src="/image/artikel.png" alt="">
                     <div class="date">
-                    <p class="m-0">20 oktober 2023</p>
+                    <p class="m-0"><?= $k['tanggal'] ?></p>
                     </div>
-                    <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium .</p>
+                    <h2><?= $k['judul'] ?></h2>
+                    <p><?= substr($k['isi'],0,200) ?></p>
                     <a href="#" class="btn">Baca Sekarang</a>
                 </div>
-
-                <div class="box shadow fade-in">
-                    <img src="/image/artikel.png" alt="">
-                    <div class="date shadow">
-                        <p class="m-0">20 oktober 2023</p>
-                    </div>
-                    <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium .</p>
-                    <a href="#" class="btn">Baca Sekarang</a>
-                </div>
-                <div class="box shadow from-right">
-                    <img src="/image/artikel.png" alt="">
-                    <div class="date">
-                        <p class="m-0">20 oktober 2023</p>
-                    </div>
-                    <h2>Ciri - ciri Haji dan Tanda - Tandanya Haji Mabrur</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores voluptatum in impedit blanditiis aut nisi, ullam illum libero tempore optio harum dicta laudantium .</p>
-                    <a href="#" class="btn">Baca Sekarang</a>
-                </div>
+            <?php endforeach; ?>
             </div>
         </div>
     </section>

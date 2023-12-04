@@ -266,12 +266,54 @@ class PemesananController
                     $harga = $_POST['harga'][$key];
                     $this->pemesanan->saveDetailCustomerPemesanan($pemesananId,$value,$harga);
                 }
-            }
-            http_response_code(201);
+
+ $tanggal = date("Y-m-j h:i:s");
+
+            $filename = $_FILES['foto']['name'];
+            $tmpname = $_FILES['foto']['tmp_name'];
+            $filesize = $_FILES['foto']['size'];
+
+            $formatfile = pathinfo($filename, PATHINFO_EXTENSION);
+            $rename = 'bukti_transfer'.time().'.'.$formatfile;
+
+            $allowedtype = array('png','jpeg','jpg','gif');
+
+            if(!in_array($formatfile,$allowedtype)){
+                throw new ValidationException('file tidak di izinkan');
+            }elseif($filesize > 1000000){
+                throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
+            }else{
+                if (!file_exists("uploads/foto_bukti/")) {
+                    mkdir("uploads/foto_bukti/", 0777, true);
+                }
+                move_uploaded_file($tmpname, "uploads/foto_bukti/" .$rename);
+                $dataPemesanan = [
+                    "pemesanan_id"=> $pemesananId,
+                    "jumlah_bayar"=> $_POST["jumlah_bayar"],
+                    "status_verivikasi"=> "belum verivikasi",
+                    "tanggal"=> $tanggal,
+                    "catatan"=> $_POST["catatan"],
+                    "foto_bukti"=> $rename
+                ];
+                $save = $this->pemesanan->saveBuktiTransfer($dataPemesanan);
+                if($save){
+                    http_response_code(201);
             $result = [
                 'status'=> 201,
                 'message'=> 'success'
             ];
+                }else{
+                    throw new ValidationException("Gagal ditambah");
+                }
+            }
+
+
+            }
+            // http_response_code(201);
+            // $result = [
+            //     'status'=> 201,
+            //     'message'=> 'success'
+            // ];
 
             echo json_encode($result);
             
@@ -285,7 +327,60 @@ class PemesananController
         }   
     }
 
-    public function apiGetPemesananByStatus($status)
+    public function apiTambahCicilan()
+    {
+        try {
+            $tanggal = date("Y-m-j h:i:s");
+
+            $filename = $_FILES['foto']['name'];
+            $tmpname = $_FILES['foto']['tmp_name'];
+            $filesize = $_FILES['foto']['size'];
+
+            $formatfile = pathinfo($filename, PATHINFO_EXTENSION);
+            $rename = 'bukti_transfer'.time().'.'.$formatfile;
+
+            $allowedtype = array('png','jpeg','jpg','gif');
+
+            if(!in_array($formatfile,$allowedtype)){
+                throw new ValidationException('file tidak di izinkan');
+            }elseif($filesize > 1000000){
+                throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
+            }else{
+                if (!file_exists("uploads/foto_bukti/")) {
+                    mkdir("uploads/foto_bukti/", 0777, true);
+                }
+                move_uploaded_file($tmpname, "uploads/foto_bukti/" .$rename);
+                $dataPemesanan = [
+                    "pemesanan_id"=> $_POST["pemesanan_id"],
+                    "jumlah_bayar"=> $_POST["jumlah_bayar"],
+                    "status_verivikasi"=> "belum verivikasi",
+                    "tanggal"=> $tanggal,
+                    "catatan"=> $_POST["catatan"],
+                    "foto_bukti"=> $rename
+                ];
+                $save = $this->pemesanan->saveBuktiTransfer($dataPemesanan);
+                if($save){
+                    http_response_code(201);
+            $result = [
+                'status'=> 201,
+                'message'=> 'success'
+            ];
+            echo json_encode($result);
+                }else{
+                    throw new ValidationException("Gagal ditambah");
+                }
+            }
+        } catch (\Throwable $th) {
+            http_response_code(400);
+            $result = [
+                'status'=> 400,
+                'message'=> 'failed'
+            ];
+            echo json_encode($result);
+        }
+    }
+
+    public function apiGetPemesananByStatus($status,$user_id)
     {
         try {
             if($status == "belumLunas"){
@@ -293,6 +388,7 @@ class PemesananController
             }
             $data = array_map(function ($pemesanan){
                 return [
+                    "nama_paket"=> $pemesanan["nama"],
                     'pemesanan_id'=> $pemesanan['pemesanan_id'],
                     'agen_id'=> $pemesanan['agen_id'],
                     'jenis_pembayaran'=> $pemesanan['jenis_pembayaran'],
@@ -302,7 +398,7 @@ class PemesananController
                     'sudah_bayar'=> $pemesanan['sudah_bayar'],
                     'total_tagihan'=> $pemesanan['total_tagihan'],
                 ];
-            },$this->pemesanan->getByStatus($status));
+            },$this->pemesanan->getByStatus($status,$user_id));
 
             http_response_code(200);
             $result = [

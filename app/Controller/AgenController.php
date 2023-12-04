@@ -52,6 +52,14 @@ class AgenController
         View::render("Admin/footer",[]);
     }
 
+    public function viewEditAgen($id)
+    {
+        $agen = $this->agen->getById($id);
+        View::render("Admin/header",["title"=> "Verifikasi Agen"]);
+        View::render("Admin/editAgen",['agen' => $agen]);
+        View::render("Admin/footer",[]);
+    }
+
     public function viewDataPelanggan()
     {
         session_start();
@@ -119,16 +127,66 @@ class AgenController
                 ];
                 $tambah = $this->agen->save($data);
                 if($tambah > 0){
+                    View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
                     View::redirect('/admin/agen');
                 }else{
                     throw new ValidationException('Data Gagal Di update');
                 }
             }
             }else{
-                throw new ValidationException('gagal user');
+                throw new ValidationException('gagal menambahkan user');
             }
-        } catch (\Throwable $th) {
-            throw new ValidationException($th->getMessage());
+        } catch (ValidationException $th) {
+            View::setFlasher('warning','Gagal',$th->getMessage());
+            View::redirect('/admin/tambah-paket');
+        }
+    }
+
+    public function editAgen()
+    {
+        try {
+            if($_FILES['foto_agen']['name']!= ''){
+                $filename = $_FILES['foto_agen']['name'];
+                $tmpname = $_FILES['foto_agen']['tmp_name'];
+                $filesize = $_FILES['foto_agen']['size'];
+
+                $formatfile = pathinfo($filename, PATHINFO_EXTENSION);
+                $rename = 'foto_agen'.time().'.'.$formatfile;
+                $allowedtype = array('png','jpeg','jpg','gif');
+                if(!in_array($formatfile,$allowedtype)){
+                    throw new ValidationException('file tidak di izinkan');
+                }elseif($filesize > 1000000){
+                    throw new ValidationException('ukuraan file tidak boleh lebih dari 1mb');
+                }else{
+                    if(file_exists("uploads/foto_agen/" .$_POST['foto_asli'])){
+                        unlink("uploads/foto_agen/" .$_POST['foto_asli']);
+                    }
+                }
+                move_uploaded_file($tmpname, "uploads/foto_agen/" .$rename);
+            }else{
+                $rename = $_POST['foto_asli'];
+            }
+
+            $data = [
+                "NIK"=> htmlspecialchars($_POST['NIK']),
+                'kode_referal'=> htmlspecialchars($_POST['kode_referal']),
+                'nama'=> htmlspecialchars($_POST['nama']),
+                'alamat'=> htmlspecialchars($_POST['alamat']),
+                'jenis_kelamin'=> htmlspecialchars($_POST['jenis_kelamin']),
+                'no_telp'=> htmlspecialchars($_POST['no_telp']),
+                'foto'=> $rename
+            ];
+
+            $update = $this->agen->updateAgen($data);
+            if($update > 0){
+                View::setFlasher('success','Berhasil','Data berhasil di edit');
+                View::redirect('/admin/agen');
+            }else{
+                throw new ValidationException('Data gagal di update');
+            }
+        } catch (ValidationException $th) {
+            View::setFlasher('error','Gagal', $th->getMessage());
+            View::redirect('/admin/edit-agen/'.$_POST['NIK']);
         }
     }
 
@@ -168,6 +226,34 @@ class AgenController
             }
         } catch (\Exception $th) {
             throw new ValidationException($th->getMessage());
+        }
+    }
+
+    public function apiCheckReferal($id){
+        try {
+            $data = array();
+            $cek = $this->agen->checkReferal($id);
+            if(count($cek) > 0){
+                foreach($cek as $row){
+                    $data = [
+                        'NIK'=> $row->NIK,
+                        'nama'=> $row->nama
+                    ];
+                }
+        }
+            $result = [
+                'status' => 200,
+                'message' => 'success',
+                'data' => $data
+            ];
+        echo json_encode($result);
+        } catch (\Exception $th) {
+            $result = [
+                'status' => 400,
+                'message' => 'failed',
+                'data' => $th->getMessage()
+            ];
+        echo json_encode($result);
         }
     }
 }

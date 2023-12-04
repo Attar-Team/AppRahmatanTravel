@@ -64,8 +64,15 @@
       <td><?= $p['total_tagihan'] ?></td>
       <td>
         <a href="/detail-pemesanan/<?= $p['pemesanan_id'] ?>" class="btn btn-info">Detail</a>
-        <a href="/bukti-transfer/<?= $p['pemesanan_id'] ?>" class="btn btn-orange">Bayar</a>
-        <a href="" class="btn btn-success">Print Nota</a>
+        <?php 
+          if($p['status'] == "lunas"){
+        ?>
+ <a href="/nota-pembayaran/<?= $d['pemesanan_id'] ?>" target="_blank" class="btn btn-primary">Cetak Nota</a>
+        <?php 
+          }else if($p["status"] == "belum lunas"){
+        ?>
+        <a href="/cetak-tagihan/<?= $d['pemesanan_id'] ?>" target="_blank" class="btn btn-warning">Cetak Tagihan</a>
+        <?php } ?>
       </td>
     </tr>
     <?php $no++; endforeach; ?>

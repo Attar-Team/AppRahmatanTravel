@@ -4,7 +4,9 @@ namespace Attar\App\Rahmatan\Travel\Controller;
 
 use Attar\App\Rahmatan\Travel\App\Database;
 use Attar\App\Rahmatan\Travel\App\View;
+use Attar\App\Rahmatan\Travel\Model\ArtikelModel;
 use Attar\App\Rahmatan\Travel\Model\CustomerModel;
+use Attar\App\Rahmatan\Travel\Model\GaleryModel;
 use Attar\App\Rahmatan\Travel\Model\KeberangkatanModel;
 use Attar\App\Rahmatan\Travel\Model\PaketModel;
 use Attar\App\Rahmatan\Travel\Model\PemesananModel;
@@ -17,6 +19,8 @@ class HomeController
     private $pemesanan;
     private $customer;
     private $user;
+    private $galery;
+    private $artikel;
     public function __construct()
     {
         $conection = Database::getConnection();
@@ -25,21 +29,25 @@ class HomeController
         $this->pemesanan = new PemesananModel($conection);
         $this->customer = new CustomerModel($conection);
         $this->user = new UserModel($conection);
+        $this->galery = new GaleryModel($conection);
+        $this->artikel = new ArtikelModel($conection);
     }
     public function index()
     {
         $pemesanan = $this->pemesanan->get();
-        $keberangkatan = $this->keberangkatan->get();
-        View::render("home/header", ['pemesanan' => $pemesanan]);
-        View::render("home/index", ['dataKeberangkatan' => $keberangkatan]);
-        View::render("home/footer", []);
+        $keberangkatan = $this->keberangkatan->getLimit();
+        $galery = $this->galery->get();
+        $artikel = $this->artikel->getArticleLimit();
+        View::render("Home/header", ['pemesanan' => $pemesanan]);
+        View::render("Home/index", ['dataKeberangkatan' => $keberangkatan,'galery'=> $galery,'artikel'=> $artikel]);
+        View::render("Home/footer", []);
     }
 
     public function about()
     {
-        View::render("home/header", []);
-        View::render("home/about", []);
-        View::render("home/footer", []); 
+        View::render("Home/header", []);
+        View::render("Home/about", []);
+        View::render("Home/footer", []); 
     }
 
 

@@ -19,6 +19,14 @@ class AgenModel
         return $result;
     }
 
+    public function getById($id)
+    {
+        $query = $this->connection->prepare("SELECT * FROM agen WHERE NIK = ?");
+        $query->execute([$id]);
+        $result = $query->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getByUserId($id)
     {
         $query = $this->connection->prepare("SELECT * FROM agen WHERE user_id = ?");
@@ -29,7 +37,7 @@ class AgenModel
 
     public function getPemesananUserId($id)
     {
-        $query = $this->connection->prepare("SELECT * FROM pemesanan WHERE agen_id = ?");
+        $query = $this->connection->prepare("SELECT * FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id LEFT JOIN customer ON detail_customer_pemesan.customer_id = customer.NIK LEFT JOIN agen_gajian ON pemesanan.pemesanan_id = agen_gajian.pemesanan_id WHERE agen_id = ? GROUP BY pemesanan.agen_id");
         $query->execute([$id]);
         $result = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
@@ -65,6 +73,17 @@ class AgenModel
             $query = $this->connection->prepare("INSERT INTO agen (`NIK`,`user_id`,`kode_referal`,`nama`,`alamat`,`jenis_kelamin`,`noTelp`,`foto`,`saldo`) VALUES (?,?,?,?,?,?,?,?,?)");
         $query->execute([$data['NIK'],$data['user_id'],$data['kode_referal'],$data['nama'],$data['alamat'],$data['jenis_kelamin'],$data['no_telp'],$data['foto'],$data['saldo']]);
         return $query->rowCount();  
+        } catch (\Throwable $th) {
+            throw new ValidationException($th->getMessage());
+        }
+    }
+
+    public function updateAgen($data)
+    {
+        try {
+            $query = $this->connection->prepare('UPDATE `agen` SET `kode_referal`= ?,`nama`= ?,`alamat`= ?,`jenis_kelamin`= ?,`notelp`= ?,`foto`= ? WHERE NIK = ?');
+            $query->execute([$data['kode_referal'],$data['nama'],$data['alamat'],$data['jenis_kelamin'],$data['notelp'],$data['foto'],$data['NIK']]);
+            return $query->rowCount();
         } catch (\Throwable $th) {
             throw new ValidationException($th->getMessage());
         }

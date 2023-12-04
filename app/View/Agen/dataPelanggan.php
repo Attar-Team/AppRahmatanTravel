@@ -48,7 +48,7 @@
       <th scope="col">Nama Paket</th>
       <th scope="col">Tanggal</th>
       <th scope="col">Status</th>
-      <th scope="col">Total Tagihan</th>
+      <th scope="col">Komisi</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -61,11 +61,9 @@
       <td><?= $p['nama_customer'] ?></td>
       <td><?= $p['tanggal_pemesanan'] ?></td>
       <td><?= $p['status'] ?></td>
-      <td><?= $p['total_tagihan'] ?></td>
+      <td><?= $p['gaji'] ?></td>
       <td>
         <a href="/detail-pemesanan/<?= $p['pemesanan_id'] ?>" class="btn btn-info">Detail</a>
-        <a href="/bukti-transfer/<?= $p['pemesanan_id'] ?>" class="btn btn-orange">Bayar</a>
-        <a href="" class="btn btn-success">Print Nota</a>
       </td>
     </tr>
     <?php $no++; endforeach; ?>

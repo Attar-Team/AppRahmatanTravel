@@ -1,18 +1,4 @@
 <div class="container-xxl flex-grow-1 container-p-y">
-<?php
-    if(isset($data['error'])){ ?>
-          <div class="alert alert-danger alert-dismissible" role="alert">
-                        <?= $data['error'] ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-    <?php } ?>
-    <?php
-    if(isset($data['success'])){ ?>
-          <div class="alert alert-success alert-dismissible" role="alert">
-                        <?= $data['success'] ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-    <?php } ?>
 
               
               <div class="card " style="margin-top: -16px;" >

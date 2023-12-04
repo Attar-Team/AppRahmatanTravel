@@ -1,4 +1,7 @@
 <?php
+
+use Attar\App\Rahmatan\Travel\Util\FormatRupiah;
+
 foreach($data['keberangkatan'] as $k) : 
     $termasukHarga = explode(",", $k->termasuk_harga);
     $tidakTermasukHarga = explode(",", $k->tidak_termasuk_harga);
@@ -49,11 +52,11 @@ foreach($data['keberangkatan'] as $k) :
             <?php foreach( $data['harga'] as $key => $h) : ?>
 
             <?php if($key == 0){ ?>
-            <h3 class="harga">Rp <?= $h['harga']?>,- <?= $h['nama_jenis']?></h3>
+            <h3 class="harga">Rp <?= FormatRupiah::Rupiah($h['harga'])?>,- <?= $h['nama_jenis']?></h3>
             <div class="harga-detail">
                 <?php } ?>
                 <?php if($key > 0){ ?>
-                <h4>Rp.<?= $h['harga']?>,- <?= $h['nama_jenis']?></h4>
+                <h4>Rp.<?= FormatRupiah::Rupiah($h['harga']) ?>,- <?= $h['nama_jenis']?></h4>
                 <?php } ?>
                 <?php endforeach; ?>
             </div>
@@ -68,14 +71,17 @@ foreach($data['keberangkatan'] as $k) :
 
             </div>
             <div class="d-flex">
-                <a class="btn-admin" href="#"><i class="fa-brands fa-whatsapp"></i> Tanya Admin</a>
+                <a class="btn-admin" target="_blank" href="https://wa.me/+62895366960593?text=hello"><i
+                        class="fa-brands fa-whatsapp"></i> Tanya Admin</a>
                 <?php if(!isset($_SESSION['status_login'])) {?>
-                <a class="btn-booking" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login untuk booking</a>
+                <a class="btn-booking" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login untuk
+                    booking</a>
                 <?php }else{
                     if($_SESSION['level'] == "customer"){
                     ?>
-                    
-                <a class="btn-booking" href="/pemesanan/<?= $k->keberangkatan_id ?>"><i class="fa-solid fa-share-from-square"></i></i> Pesan sekarang</a>
+
+                <a class="btn-booking" href="/pemesanan/<?= $k->keberangkatan_id ?>"><i
+                        class="fa-solid fa-share-from-square"></i></i> Pesan sekarang</a>
                 <?php }} ?>
             </div>
         </div>
@@ -92,7 +98,7 @@ foreach($data['keberangkatan'] as $k) :
         </div>
         <div class="d-flex mb-2" style="align-items: center;">
             <i class="fa-solid fa-money-bill me-3"></i>
-            <p class="m-0">DP hanya Rp <?= $k->minim_dp; ?></p>
+            <p class="m-0">DP hanya Rp <?= FormatRupiah::Rupiah($k->minim_dp) ?></p>
         </div>
         <div class="d-flex mb-2" style="align-items: center;">
             <i class="fa-solid fa-clock me-3"></i>
@@ -102,7 +108,7 @@ foreach($data['keberangkatan'] as $k) :
         <h4>Paket Kamar</h4>
         <ul>
             <?php foreach( $data['harga'] as $key => $h) : ?>
-            <li>Rp <?= $h['harga']?>,- <?= $h['nama_jenis']?></li>
+            <li>Rp <?= FormatRupiah::Rupiah($h['harga'])?>,- <?= $h['nama_jenis']?></li>
             <?php endforeach; ?>
         </ul>
 
@@ -138,27 +144,27 @@ foreach($data['keberangkatan'] as $k) :
                 <div class="d-flex" style="align-items: center;">
                     <h3 class="my-0 me-3"><?= $h['nama_hotel'] ?></h3>
                     <div style="color: #FCCC29;">
-                    <?php  if($h['bintang'] == 1) { ?>
-                    <i class="fa-solid fa-star"></i>
-                    <?php }else if($h['bintang'] == 2){?>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <?php }else if($h['bintang'] == 3){?>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <?php }else if($h['bintang'] == 4){?>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <?php }else if($h['bintang'] == 5){?>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <?php } ?>
+                        <?php  if($h['bintang'] == 1) { ?>
+                        <i class="fa-solid fa-star"></i>
+                        <?php }else if($h['bintang'] == 2){?>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <?php }else if($h['bintang'] == 3){?>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <?php }else if($h['bintang'] == 4){?>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <?php }else if($h['bintang'] == 5){?>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <?php } ?>
                     </div>
                 </div>
                 <p><?= $h['lokasi'] ?></p>

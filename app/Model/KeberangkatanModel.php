@@ -22,7 +22,14 @@ class KeberangkatanModel
 
     public function get()
     {
-        $query = $this->connection->prepare("SELECT * FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id LEFT JOIN hotel ON paket.paket_id = hotel.hotel_id LEFT JOIN harga_paket ON paket.paket_id = paket.paket_id GROUP BY keberangkatan.keberangkatan_id");
+        $query = $this->connection->prepare("SELECT *, keberangkatan.keberangkatan_id AS id, keberangkatan.seats - (SELECT COUNT(*) FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id WHERE pemesanan.keberangkatan_id = id) AS available_seat FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id JOIN hotel ON paket.paket_id = hotel.hotel_id JOIN harga_paket ON paket.paket_id = paket.paket_id GROUP BY keberangkatan.keberangkatan_id");
+        $query->execute();
+        $result = $query->fetchAll();
+        return $result;
+    }
+    public function getLimit()
+    {
+        $query = $this->connection->prepare("SELECT *, keberangkatan.keberangkatan_id AS id, keberangkatan.seats - (SELECT COUNT(*) FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id WHERE pemesanan.keberangkatan_id = id) AS available_seat FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id JOIN hotel ON paket.paket_id = hotel.hotel_id JOIN harga_paket ON paket.paket_id = paket.paket_id WHERE keberangkatan.tanggal_ditutup > DATE(NOW()) GROUP BY keberangkatan.keberangkatan_id LIMIT 6");
         $query->execute();
         $result = $query->fetchAll();
         return $result;
@@ -38,6 +45,14 @@ class KeberangkatanModel
     public function getById($id)
     {
         $query = $this->connection->prepare("SELECT * FROM keberangkatan WHERE keberangkatan_id = ?");
+        $query->execute([$id]);
+        $result = $query->fetchAll(\PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    public function getByMenu($id)
+    {
+        $query = $this->connection->prepare("SELECT * FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id WHERE paket.menu = ? GROUP BY keberangkatan.keberangkatan_id");
         $query->execute([$id]);
         $result = $query->fetchAll(\PDO::FETCH_OBJ);
         return $result;

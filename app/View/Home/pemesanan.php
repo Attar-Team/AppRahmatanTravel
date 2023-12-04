@@ -23,6 +23,9 @@
 <form action="/pemesanan" method="POST">
             
 <?php
+
+use Attar\App\Rahmatan\Travel\Util\FormatRupiah;
+
     if(isset($data['error'])){ ?>
           <div class="alert alert-danger  d-inline-block alert-dismissible" style="position: relative; left: 50%;transform: translateX(-50%);" role="alert">
                         <?= $data['error'] ?>
@@ -95,12 +98,23 @@
                                 <h3>Variasi Harga</h3>
                                 <?php 
                                     foreach($data['harga'] as $h) :
+                                    $harga_diskon = $h['harga'] - $h['diskon'];
                                 ?>
+                                
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" id="harga1" type="radio" name="1"
-                                        value="<?=  $h['nama_jenis'] ?>,<?= $h['harga'] ?>,<?= $h['harga_paket_id'] ?>">
-                                    <label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp.
-                                        <?= $h['harga'] ?></label>
+                                        value="<?=  $h['nama_jenis'] ?>,<?= $h['harga'] ?>,<?= $h['harga_paket_id'] ?>,<?= $h['diskon'] ?>">
+                                    <label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br>
+                                    <?php if($h['diskon'] > 0) {?> 
+                                        <div style="position: relative;">
+                                            <span style="width: 100%;height: 2px;background-color: red;position: absolute; top:12px;"></span>
+                                        Rp.<?= FormatRupiah::Rupiah($h['harga']) ?>
+                                        </div>
+                                        Rp. <?= FormatRupiah::Rupiah($harga_diskon) ?>
+                                        <?php }else{ ?>
+                                            Rp. <?= FormatRupiah::Rupiah($h['harga']) ?>
+                                            <?php } ?>
+                                    </label>
                                 </div>
                                 <?php endforeach; ?>
                             </div>
@@ -143,8 +157,16 @@
 
                             <h4>#Pesanan</h4>
                             <div class="total-group">
+                            </div>
 
-</div>
+                            <div class="d-flex pt-2" style="justify-content: space-between;">
+                                <h5>Subtotal</h5>
+                                <h5 id="subtotal">0</h5>
+                            </div>
+                            <div class="d-flex pt-2" style="justify-content: space-between;">
+                                <h5>Diskon</h5>
+                                <h5 id="diskon">0</h5>
+                            </div>
                             
 
                             <div class="d-flex pt-2" style="justify-content: space-between;border-top: 1px solid #ddd;">
@@ -391,6 +413,14 @@
                     <h4>Rincian Pemesanan</h4>
                     <div id="total-pembayaran">
                     </div>
+                    <div class="d-flex pt-2" style="justify-content: space-between">
+                                <h5>Sub Total</h5>
+                                <h5 id="subTotalPemesanan">0</h5>
+                            </div>
+                            <div class="d-flex pt-2" style="justify-content: space-between">
+                                <h5>Diskon</h5>
+                                <h5 id="diskonPemesanan">0</h5>
+                            </div>
                     <div class="d-flex pt-2" style="justify-content: space-between;border-top: 1px solid #ddd;">
                                 <h5>Total</h5>
                                 <h5 id="totalPemesanan">0</h5>
@@ -522,9 +552,7 @@
                     '<div class="customer mb-2"><h3>Jamaah ' + x +
                     '</h3><div class="form-floating my-3"><select class="form-select" name="customer_id[]" id="floatingSelect"aria-label="Floating label select example"><?php if($data["profile"] == 0) { ?><option value="" selected>Belum ada profile harus ditambahkan dahulu</option><?php }else{foreach($data['profile'] as $p) : ?><option value="<?= $p['NIK'] ?>"><?= $p['nama_customer'] ?></option><?php endforeach;} ?></select><label for="floatingSelect">Pilih profile</label></div><div class="harga"><h3>Variasi Harga</h3><?php foreach($data['harga'] as $h) :?><div class="form-check form-check-inline"><input class="form-check-input" type="radio" id="add_box" name="' +
                     x +
-                    '"  value="<?=  $h['nama_jenis'] ?>,<?=  $h['harga'] ?>,<?= $h['harga_paket_id'] ?>"><label class="form-check-label" for="inlineRadio1"><?= $h['nama_jenis'] ?> <br> Rp. <?= $h['harga'] ?></label></div><?php endforeach; ?></div><a href="" class="btn btn-danger remove-field" id="hps">hapus</a></div>'
-                )
-            }
+                    '"  value="<?=  $h['nama_jenis'] ?>,<?=  $h['harga'] ?>,<?= $h['harga_paket_id'] ?>,<?= $h['diskon'] ?>"><label class="form-check-label" for="inlineRadio1"><?php if($h['diskon'] > 0) { $harga_diskon = $h['harga'] - $h['diskon']; ?> <div style="position: relative;"><span style="width: 100%;height: 2px;background-color: red;position: absolute; top:12px;"></span>Rp.<?= FormatRupiah::Rupiah($h['harga']) ?></div>Rp. <?= FormatRupiah::Rupiah($harga_diskon) ?><?php }else{ ?>Rp. <?= FormatRupiah::Rupiah($h['harga']) ?><?php } ?></label></div><?php endforeach; ?></div><a href="" class="btn btn-danger remove-field" id="hps">hapus</a></div>')}
         });
         $(wraper).on("click", ".remove-field", function(e) {
             e.preventDefault();
@@ -532,10 +560,12 @@
             x--;
         })
 
-        var sum = 0;
+        var subtotal = 0;
+        var diskon = 0;
         var total = 0;
         var result = [];
         var arr = [];
+
 
         $(wraper).on("change", $(":input[type=radio]"), function() {
             result.length = 0
@@ -553,15 +583,35 @@
             $(wraperTotal).children().remove();
             for (var i = 0; i < result.length; i++) {
                 $(wraperTotal).append(
-                    '<div class="d-flex px-3" id="list" style="justify-content: space-between;"><p>'+result[i][0]+'</p><p>'+result[i][1]+'</p></div>'
+                    '<div class="d-flex px-3" id="list" style="justify-content: space-between;"><p>'+result[i][0]+'</p><p>'+formatRupiah(result[i][1])+'</p></div>'
                     );
                     }
-                    sum = 0;
+                    subtotal = 0;
+                    diskon = 0;
             for (var i = 0; i < result.length; i++) {
-                sum += parseInt(result[i][1]) ;
+                subtotal += parseInt(result[i][1]) ;
+                diskon += parseInt(result[i][3]);
             }
-            $("#total").html(sum);
+            total =subtotal - diskon;
+            $("#subtotal").html(formatRupiah(subtotal));
+            $("#diskon").html(formatRupiah(diskon));
+            $("#total").html(formatRupiah(total));
         }
+        function formatRupiah(angka) {
+    var number_string = angka.toString();
+    var split = number_string.split(',');
+    var sisa = split[0].length % 3;
+    var rupiah = split[0].substr(0, sisa);
+    var ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return 'Rp ' + rupiah;
+}
         var btnCheck = $("#btnCekReferal");
         $(btnCheck).click(function(){
             var xhr = new XMLHttpRequest();
@@ -602,12 +652,14 @@
             $("#total-pembayaran").children().remove();
             for (var i = 0; i < result.length; i++) {
                 $("#total-pembayaran").append(
-                    '<ul><li>'+result[i][0]+'</li><li>'+result[i][1]+'</li></ul>'
+                    '<ul><li>'+result[i][0]+'</li><li>'+formatRupiah(result[i][1])+'</li></ul>'
                     );
                     }
-                    $("#total-bayar").html(sum);
-                    $("#totalPemesanan").html(sum);
-                    $("input[type=hidden][name=total_tagihan]").val(sum);
+                    $("#total-bayar").html(total);
+                    $("#totalPemesanan").html(formatRupiah(total));
+                    $("#diskonPemesanan").html(formatRupiah(diskon));
+                    $("#subTotalPemesanan").html(formatRupiah(subtotal));
+                    $("input[type=hidden][name=total_tagihan]").val(total);
         }
         var form1 = $("#form-1");
         var form2 = $("#form-2");
@@ -670,6 +722,8 @@
         });
     });
 </script>
+
+<script src="/script.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- <script src="/script.js"></script> -->

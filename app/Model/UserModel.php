@@ -27,12 +27,21 @@ class UserModel
 
     public function save($data){
         try {
-        $statement = $this->connection->prepare("INSERT INTO user (`username`,`email`,`password`,`level`) VALUES (?,?,?,?)");
-        $statement->execute([$data['nama'],$data['email'], $data['password'], $data['level']]);
+        $statement = $this->connection->prepare("INSERT INTO user (`username`,`email`,`password`,`level`,`hoby`) VALUES (?,?,?,?,?)");
+        $statement->execute([$data['nama'],$data['email'], $data['password'], $data['level'],$data['hoby']]);
         $result = ['count'=> $statement->rowCount(),'lastId'=> $this->connection->lastInsertId()];
         return $result;
         }catch (\PDOException $e) {
             throw new ValidationException("Data Gagal Ditambakan ".$e->getMessage());
         }
+    }
+
+    public function gantipassword($data)
+    {
+
+            $statement = $this->connection->prepare('UPDATE user SET password = ? WHERE userId = ?');
+        $statement->execute([$data['password'],$data['user_id']]);
+        return $statement->rowCount();
+  
     }
 }

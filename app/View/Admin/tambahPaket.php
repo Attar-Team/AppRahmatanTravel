@@ -20,7 +20,7 @@ $(document).ready(function() {
             x++
             console.log(x)
             $(wraper).append(
-                '<div style="border: 1px solid #ddd; margin-bottom: 10px; padding: 10px 20px;"><h5>jenis '+x+'</h5><div class="mb-3"><label class="form-label" for="basic-icon-default-fullname">Nama Jenis</label><div class="input-group input-group-merge"><span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-spreadsheet"></i></span><input type="text" class="form-control" name="nama_jenis[]" id="basic-icon-default-fullname"/></div></div><div class="mb-3"><label class="form-label" for="basic-icon-default-company">Diskon</label><div class="input-group input-group-merge"><span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-money"></i></span><input type="number" id="basic-icon-default-company" name="diskon[]" class="form-control"/></div></div><div class="mb-3"><label class="form-label" for="basic-icon-default-company">Harga</label><div class="input-group input-group-merge"><span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-money"></i></span><input type="number" id="basic-icon-default-company" name="harga[]" class="form-control"/></div></div><a id="" class="btn btn-danger remove-field" style="color: #fff;"><i class="bx bx-trash"></i></a></div>'
+                '<div style="border: 1px solid #ddd; margin-bottom: 10px; padding: 10px 20px;"><h5>jenis '+x+'</h5><div class="mb-3"><label class="form-label" for="basic-icon-default-fullname">Nama Jenis</label><div class="input-group input-group-merge"><span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-spreadsheet"></i></span><input type="text" class="form-control" name="nama_jenis[]" id="basic-icon-default-fullname"/></div></div><div class="mb-3"><label class="form-label" for="basic-icon-default-company">Diskon</label><div class="input-group input-group-merge"><span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-money"></i></span><input type="text" id="formatRupiah" onkeyup="rupiah(this)" name="diskon[]" class="form-control"/></div></div><div class="mb-3"><label class="form-label" for="basic-icon-default-company">Harga</label><div class="input-group input-group-merge"><span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-money"></i></span><input type="text" id="formatRupiah" onkeyup="rupiah(this)" name="harga[]" class="form-control"/></div></div><a id="" class="btn btn-danger remove-field" style="color: #fff;"><i class="bx bx-trash"></i></a></div>'
                 )
         }
     });
@@ -82,7 +82,7 @@ $(document).ready(function() {
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i
                                         class="bx bx-buildings"></i></span>
-                                <input type="number" name="minim_dp" id="basic-icon-default-company" class="form-control" />
+                                <input type="text" name="minim_dp" onkeyup="rupiah(this)" id="basic-icon-default-company" class="form-control" />
                             </div>
                         </div>
 
@@ -225,7 +225,7 @@ $(document).ready(function() {
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-company2" class="input-group-text">
                                     <i class='bx bx-money'></i></span>
-                                    <input type="number" id="basic-icon-default-company" name="diskon[]" class="form-control"/>
+                                    <input type="text" id="formatRupiah" onkeyup="rupiah(this)" name="diskon[]" class="form-control"/>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -233,7 +233,7 @@ $(document).ready(function() {
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-company2" class="input-group-text">
                                       <i class='bx bx-money'></i></span>
-                                    <input type="number" id="basic-icon-default-company" name="harga[]" class="form-control"/>
+                                    <input type="text" id="formatRupiah" onkeyup="rupiah(this)" name="harga[]" class="form-control"/>
                                 </div>
                             </div>
                         </div>

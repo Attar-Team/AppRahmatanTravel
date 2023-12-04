@@ -11,4 +11,12 @@ class View{
         header('Location:'.$url);
         exit();
     }
+    public static function setFlasher(string $status,String $title, string $message){
+        session_start();
+        $_SESSION['flash'] = [
+            'status'=> $status,
+            'title'=> $title,
+            'message'=> $message
+        ];
+    }
 }

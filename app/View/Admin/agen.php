@@ -45,8 +45,8 @@
                         <td><?= $d['jenis_kelamin'] ?></td>
                         <td>
                           <a class="btn btn-danger" href="/admin/hapus-customer/<?= $d['NIK'] ?>" onclick="return confirm('Apakah yakin menghapus')" role="button"><i class='bx bx-trash' ></i></a>
-                          <a class="btn btn-warning" href="/admin/edit-customer/<?= $d['NIK'] ?>" role="button"><i class='bx bxs-edit-alt'></i></a>
-                          <a class="btn btn-success" href="/admin/detail-customer/<?= $d['NIK'] ?>" role="button"><i class='bx bx-message-detail' ></i></a>
+                          <a class="btn btn-warning" href="/admin/edit-agen/<?= $d['NIK'] ?>" role="button"><i class='bx bxs-edit-alt'></i></a>
+                          <!-- <a class="btn btn-success" href="/admin/detail-customer/<?= $d['NIK'] ?>" role="button"><i class='bx bx-message-detail' ></i></a> -->
                         </td>
                       </tr>
                       <?php endforeach; ?>

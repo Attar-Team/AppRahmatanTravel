@@ -73,10 +73,17 @@ class PemesananModel
         return $query->fetchAll();
     }
 
-    public function getByStatus($status)
+    public function getByStatus($status,$user_id)
     {
-        $query = $this->connection->prepare("SELECT * FROM pemesanan WHERE status = ?");
-        $query->execute([$status]);
+        $query = $this->connection->prepare("SELECT * FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id JOIN customer ON detail_customer_pemesan.customer_id = customer.NIK JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.keberangkatan_id JOIN paket ON keberangkatan.paket_id = paket.paket_id WHERE pemesanan.status = ? AND customer.user_id = ? GROUP BY pemesanan.pemesanan_id");
+        $query->execute([$status,$user_id]);
+        return $query->fetchAll();
+    }
+
+    public function getByKeberangkatan($id)
+    {
+        $query = $this->connection->prepare("SELECT * FROM pemesanan WHERE keberangkatan_id = ?");
+        $query->execute([$id]);
         return $query->fetchAll();
     }
 

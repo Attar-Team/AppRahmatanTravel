@@ -9,11 +9,11 @@ class LoginModel
         $this->connection = $pdo;
     }
 
-    public function login(string $email, string $password)
+    public function login(string $email)
     {
-        $statement = $this->connection->prepare("SELECT * FROM user WHERE email = ? AND password = ?");
+        $statement = $this->connection->prepare("SELECT * FROM user WHERE email = ?");
         $statement->execute([
-            $email,$password
+            $email
         ]);
 
         if($row = $statement->fetch()){
@@ -23,5 +23,10 @@ class LoginModel
         }
     }
 
-    
+    public function verivikasiEmail($data)
+    {
+        $statement = $this->connection->prepare("SELECT * FROM user WHERE email = ? AND hoby = ?");
+        $statement->execute([$data['email'], $data['hoby']]);
+        return $statement->fetchAll();
+    }
 }
