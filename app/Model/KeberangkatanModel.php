@@ -27,10 +27,17 @@ class KeberangkatanModel
         $result = $query->fetchAll();
         return $result;
     }
+    public function getForPaketTravel()
+    {
+        $query = $this->connection->prepare("SELECT *, keberangkatan.keberangkatan_id AS id, keberangkatan.seats - (SELECT COUNT(*) FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id WHERE pemesanan.keberangkatan_id = id) AS available_seat FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id JOIN hotel ON paket.paket_id = hotel.hotel_id JOIN harga_paket ON paket.paket_id = paket.paket_id WHERE keberangkatan.tanggal_ditutup > DATE(NOW()) GROUP BY keberangkatan.keberangkatan_id");
+        $query->execute();
+        $result = $query->fetchAll();
+        return $result;
+    }
 
     public function searchKeberangkatan($menu, $keberangkatan, $hargaMinim, $hargaMax, $start)
     {
-        $query = $this->connection->prepare("SELECT *,MONTH(keberangkatan.tanggal) AS month, keberangkatan.keberangkatan_id AS id, keberangkatan.seats - (SELECT COUNT(*) FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id WHERE pemesanan.keberangkatan_id = id) AS available_seat FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id JOIN hotel ON paket.paket_id = hotel.hotel_id JOIN harga_paket ON paket.paket_id = paket.paket_id WHERE paket.menu = ? || keberangkatan.keberangkatan_dari = ? || harga_paket.harga > ? AND harga_paket.harga < ? GROUP BY keberangkatan.keberangkatan_id HAVING month = MONTH(?)");
+        $query = $this->connection->prepare("SELECT *,MONTH(keberangkatan.tanggal) AS month, keberangkatan.keberangkatan_id AS id, keberangkatan.seats - (SELECT COUNT(*) FROM pemesanan JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id WHERE pemesanan.keberangkatan_id = id) AS available_seat FROM keberangkatan JOIN paket ON keberangkatan.paket_id = paket.paket_id JOIN hotel ON paket.paket_id = hotel.hotel_id JOIN harga_paket ON paket.paket_id = paket.paket_id WHERE paket.menu = ? AND keberangkatan.keberangkatan_dari = ? AND harga_paket.harga >= ? AND harga_paket.harga <= ? GROUP BY keberangkatan.keberangkatan_id HAVING month = MONTH(?)");
         $query->execute([$menu,$keberangkatan,$hargaMinim,$hargaMax,$start]);
         $result = $query->fetchAll();
         return $result;

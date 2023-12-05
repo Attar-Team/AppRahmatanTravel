@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<div class="p-3 mx-5 rounded shadow" style="">
+<div class="p-3 mx-5 rounded shadow" >
 <table id="myTable" class="table table-striped table-hover">
 <thead>
     <tr>
@@ -90,6 +90,23 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/script.js"></script>
+    <script src="/sweetalert.js"></script>
+
+
+<?php 
+// session_start();
+  if(isset($_SESSION['flash'])){
+?>
+<script>
+  Swal.fire({
+  icon: "<?= $_SESSION['flash']['status'] ?>",
+  title: "<?= $_SESSION['flash']['title'] ?>",
+  text: "<?= $_SESSION['flash']['message'] ?>",
+});
+</script>
+<?php 
+unset($_SESSION['flash']);
+} ?>
     </script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

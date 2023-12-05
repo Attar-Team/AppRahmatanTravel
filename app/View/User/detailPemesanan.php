@@ -31,7 +31,7 @@
             <p class="countdown" id="asd"
                         style="padding: 10px;border-radius: 10px;background-color: red;color: #fff;text-align: center;display: inline-block;font-size: 25px;">
                     </p>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a href="/delete-pemesanan/<?= $d['pemesanan_id'] ?>" onclick="return confirm('apakah yakin mmbatalkan pesanan')" class="btn btn-danger">Batalkan pesanan</a>
         
         </div>
         <div class="container-pmsn">
@@ -217,6 +217,23 @@ endforeach; ?>
             }
         }, 1000);
         </script>
+        <script src="/sweetalert.js"></script>
+
+
+<?php 
+
+  if(isset($_SESSION['flash'])){
+?>
+<script>
+  Swal.fire({
+  icon: "<?= $_SESSION['flash']['status'] ?>",
+  title: "<?= $_SESSION['flash']['title'] ?>",
+  text: "<?= $_SESSION['flash']['message'] ?>",
+});
+</script>
+<?php 
+unset($_SESSION['flash']);
+} ?>
     <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
     <script src="/path/to/typeit/source"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->

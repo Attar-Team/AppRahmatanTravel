@@ -22,4 +22,15 @@ class LaporanController
         View::render("Admin/footer",[]);
     }
 
+    public function cetakLaporan()
+    {
+        $date_awal =date_create($_POST['tanggal_awal']);
+        $dateAwal = date_format($date_awal ,"Y-m-d H:i:s");
+        $date_akhir =date_create($_POST['tanggal_akhir']);
+        $dateAkhir = date_format($date_akhir ,"Y-m-d H:i:s");
+        $data = $this->pemesanan->getByTanggal($dateAwal,$dateAkhir);
+        View::render("Admin/cetakLaporan",["pemesanan"=> $data,"dateAkhir"=> $dateAkhir,'dateAwal'=>$dateAwal]);
+
+    }
+
 }

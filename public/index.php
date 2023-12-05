@@ -100,6 +100,7 @@ Router::add("GET","/admin/detail-pemesanan/([0-9a-zA-Z]*)", PemesananController:
 Router::add("GET","/admin/verifikasi-pemesanan", PemesananController::class,"viewVerifikasiPembayaran",[AuthMiddleware::class,AdminMiddleware::class]);
 Router::add("POST","/pemesanan", PemesananController::class ,"tambahPemesanan",[AuthMiddleware::class,CustomerMiddleware::class]);
 Router::add("GET","/delete-pemesanan-invalid/([0-9a-zA-Z]*)", PemesananController::class ,"invalidPemesanan",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("GET","/delete-pemesanan/([0-9a-zA-Z]*)", PemesananController::class ,"hapusPemesanan",[AuthMiddleware::class]);
 Router::add("POST","/admin/edit-status-pembayaran", PemesananController::class ,"editStatusPembayaran",[AuthMiddleware::class,AdminMiddleware::class]);
 
 //Router untuk menangani Dashboard Keberangkatan
@@ -130,6 +131,7 @@ Router::add("POST","/admin/tambah-artikel", ArtikelController::class,"tambah",[A
 
 //Router untuk menangani Dashboard Laporan
 Router::add("GET","/admin/laporan", LaporanController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);
+Router::add("POST","/admin/cetak-laporan", LaporanController::class,"cetakLaporan");
 
 //Router Untuk Menangani API ke MOBILE JANGAN di ubah ubah
 //1. api login

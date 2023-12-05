@@ -52,20 +52,16 @@ class GaleryController
                 ];
                 $tambah = $this->galery->save($data);
                 if($tambah > 0){
-                    $galery = $this->galery->get();
-            View::render("Admin/header",["title"=>"Galery"]);
-            View::render("Admin/galery",["galery"=> $galery,'success' => 'Data berhasil ditambahkan']);
-            View::render("Admin/footer",[]);
+                    View::setFlasher('success','Berhasil','Data berhasil di tambahkan');
+                    View::redirect('/admin/galery');
                 }else{
                     throw new ValidationException('Gagal Di tambahkan');
                 }
             }
            
         } catch (ValidationException $th) {
-            $galery = $this->galery->get();
-            View::render("Admin/header",["title"=>"Galery"]);
-            View::render("Admin/galery",["galery"=> $galery,'error' => $th->getMessage()]);
-            View::render("Admin/footer",[]);
+            View::setFlasher('error','Gagal',$th->getMessage());
+                    View::redirect('/admin/galery');
         }
     }
 

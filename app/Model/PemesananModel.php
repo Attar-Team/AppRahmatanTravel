@@ -53,6 +53,13 @@ class PemesananModel
     //     return $query->fetchAll();
     // }
 
+    public function getByTanggal($tanggal_awal, $tanggal_akhir)
+    {
+        $query = $this->connection->prepare("SELECT * FROM pemesanan LEFT JOIN detail_customer_pemesan ON pemesanan.pemesanan_id = detail_customer_pemesan.pemesanan_id LEFT JOIN customer ON detail_customer_pemesan.customer_id = customer.NIK JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.keberangkatan_id WHERE tanggal_pemesanan BETWEEN ? AND ? GROUP BY pemesanan.pemesanan_id");
+        $query->execute([$tanggal_awal,$tanggal_akhir]);
+        return $query->fetchAll();
+    }
+
     public function getDetailCustomerPemesanan($id)
     {
         $query = $this->connection->prepare("SELECT * FROM detail_customer_pemesan LEFT JOIN customer on detail_customer_pemesan.customer_id = customer.NIK LEFT JOIN harga_paket ON detail_customer_pemesan.harga_paket_id = harga_paket.harga_paket_id LEFT JOIN paket ON harga_paket.paket_id = paket.paket_id WHERE detail_customer_pemesan.pemesanan_id = ?");
@@ -95,10 +102,33 @@ class PemesananModel
     }
 
 
+
     public function delete($id)
     {
        try {
         $query = $this->connection->prepare("DELETE FROM pemesanan WHERE pemesanan_id = ?");
+        $query->execute([$id]);
+        return $query->rowCount();
+       } catch (\Throwable $th) {
+        throw  new ValidationException($th->getMessage());
+       }
+    }
+
+    public function deleteDetail($id)
+    {
+       try {
+        $query = $this->connection->prepare("DELETE FROM detail_pemesanan WHERE pemesanan_id = ?");
+        $query->execute([$id]);
+        return $query->rowCount();
+       } catch (\Throwable $th) {
+        throw  new ValidationException($th->getMessage());
+       }
+    }
+
+    public function deletedetailCustomer($id)
+    {
+       try {
+        $query = $this->connection->prepare("DELETE FROM detail_customer_pemesan WHERE pemesanan_id = ?");
         $query->execute([$id]);
         return $query->rowCount();
        } catch (\Throwable $th) {

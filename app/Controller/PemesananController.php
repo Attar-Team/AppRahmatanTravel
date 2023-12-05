@@ -176,6 +176,21 @@ class PemesananController
     //     }
     // }
 
+    public function hapusPemesanan($id)
+    {
+        try {
+            $hapusPemesanan = $this->pemesanan->delete($id);
+            $hapusDetailPemesanan = $this->pemesanan->deleteDetail($id);
+            $hapusCustomerPemesan = $this->pemesanan->deletedetailCustomer($id);
+
+            View::setFlasher('success','Berhasil','Data berhasil di hapus');
+                    View::redirect('/pemesanan-user');
+        } catch (ValidationException $th) {
+            View::setFlasher('warning','Gagal','Data gagal di hapus');
+                    View::redirect('/pemesanan-user');
+        }
+    }
+
     public function invalidPemesanan($idPemesanan)
     {
         try {

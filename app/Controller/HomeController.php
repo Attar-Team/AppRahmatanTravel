@@ -134,7 +134,7 @@ class HomeController
     public function paketTravel()
     {
         
-        $keberangkatan = $this->keberangkatan->get();
+        $keberangkatan = $this->keberangkatan->getForPaketTravel();
         View::render("Home/header", []);
         View::render("Home/paketTravel", ['dataKeberangkatan' => $keberangkatan]);
         View::render("Home/footer", []); 
@@ -149,6 +149,7 @@ class HomeController
             $harga = explode(",", $_POST["start_harga"]);
   
             $keberangkatan = $this->keberangkatan->searchKeberangkatan($_POST['menu'],$_POST['start'],$harga[0],$harga[1],$tanggal);
+
             View::render("Home/header", []);
             View::render("Home/paketTravel", ['dataKeberangkatan' => $keberangkatan]);
             View::render("Home/footer", []); 

@@ -13,8 +13,8 @@
       <i class="fa-solid fa-clock-rotate-left"></i>
       <div class="w-100">
          <p>Menu</p>
-         <select name="menu" class="w-100" id="">
-            <option value="">Pilih </option>
+         <select name="menu" class="w-100" id="" required>
+            <option value=""><?php if(isset($_POST['menu'])) echo $_POST['menu'] ?> </option>
             <option value="Umrah">Umrah</option>
             <option value="Haji">Haji</option>
          </select>
@@ -26,8 +26,8 @@
       <i class="fa-solid fa-plane-departure"></i>
       <div class="w-100">
          <p>Start</p>
-         <select name="start" class="w-100" id="">
-            <option value="">Pilih </option>
+         <select name="start" class="w-100" id="" required>
+            <option value=""><?php if(isset($_POST['start'])) echo $_POST['start'] ?> </option>
             <option value="Surabaya">Surabaya</option>
             <option value="Jakarta">Jakarta</option>
          </select>
@@ -38,7 +38,7 @@
       <i class="fa-solid fa-calendar-days"></i>
       <div class="w-100">
          <p>Pilih Keberangkatan</p>
-         <input type="month" id="start" name="keberangkatan" min="2022-03" />
+         <input type="month" id="start" value="<?php if(isset($_POST['keberangkatan'])) echo $_POST['keberangkatan'] ?>" name="keberangkatan" min="2022-03" required/>
       </div>
       </div>
 
@@ -47,8 +47,8 @@
       <i class="fa-solid fa-money-bill"></i>
       <div class="w-100">
          <p>Start Harga</p>
-         <select name="start_harga" class="w-100" id="">
-            <option value="">Pilih </option>
+         <select name="start_harga" class="w-100" id="" required>
+            <option value=""><?php if(isset($_POST['start_harga'])) echo $_POST['start_harga'] ?> </option>
             <option value="30000000,32000000">30.000.00 - 32.000.000</option>
             <option value="33000000,34000000">33.000.00 - 34.000.000</option>
             <option value="35000000,37000000">35.000.00 - 37.000.000</option>
@@ -65,7 +65,9 @@
 
         <div class="paket" style="position: relative;" >
             <div class="container fade-in">
-                <?php foreach($data['dataKeberangkatan'] as $k) : ?>
+                <?php 
+                if(count($data['dataKeberangkatan']) > 0) {
+                foreach($data['dataKeberangkatan'] as $k) : ?>
                 <div class="box">
                     <div class="image">
                         <img src="image/brosur.jpg" class="card-img-top" alt="...">
@@ -164,7 +166,12 @@
                         <a href="/detail-paket/<?= $k['keberangkatan_id'] ?>" class="btn">Lihat Selengkapnya</a>
                     </div>
                 </div>
-                <?php endforeach; ?>
+                <?php endforeach;}else{ ?>
+                    <div class="shadow rounded" style="padding: 100px; background-color: #fff;margin: 50px;">
+                    <h4 style="color:red;">Keberangkatan tidak ditemukan</h4>
+                    <p>Mohon maaf tidak ada jadwal keberangkatan pada hari itu</p>
+                    </div>
+                    <?php } ?>
 
                 
                 <!-- <div class="box">
