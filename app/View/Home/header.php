@@ -17,7 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
-<body style="background-color: #E7E7DF;">
+<body style="background-color: #EEEEEE;">
     <nav style="position: fixed;top: 0;right: 0; left: 0;z-index: 6;transition: .3s;" class="navbar navbar-expand-lg">
         <div class="container-fluid">
 
