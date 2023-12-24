@@ -1,4 +1,5 @@
-<?php  date_default_timezone_set("Asia/Jakarta"); ?>
+<?php  date_default_timezone_set("Asia/Jakarta"); 
+use Attar\App\Rahmatan\Travel\Util\FormatRupiah;?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,7 +98,7 @@
       <th scope="row"><?= $no ?></th>
       <td><?= $j['nama_customer'] ?></td>
       <td><?= $j['nama_jenis'] ?></td>
-      <td><?= $j['harga'] ?></td>
+      <td><?= FormatRupiah::Rupiah($j['harga']) ?></td>
     </tr>
     <?php $no++;endforeach; ?>
 
@@ -110,15 +111,15 @@
     <div style="width: 300px;">
     <ul class="d-flex p-0 m-2" style="gap: 10px;list-style: none; width: 100%">
             <li class="w-50">Sub Total</li>
-            <li><?= $d['total_tagihan'] ?></li>
+            <li><?= FormatRupiah::Rupiah($d['total_tagihan']) ?></li>
         </ul>
         <ul class="d-flex p-0 m-2" style="gap: 10px;list-style: none; width: 100%">
             <li class="w-50">Total Pembayaran</li>
-            <li><?= $d['sudah_bayar'] ?></li>
+            <li><?= FormatRupiah::Rupiah($d['sudah_bayar']) ?></li>
         </ul>
         <ul class="d-flex p-0 m-2" style="gap: 10px;list-style: none; width: 100%">
             <li class="w-50">Sisa Pembayaran</li>
-            <li><?= $kurangBayar ?></li>
+            <li><?= FormatRupiah::Rupiah($kurangBayar) ?></li>
         </ul>
     </div>
 </div>

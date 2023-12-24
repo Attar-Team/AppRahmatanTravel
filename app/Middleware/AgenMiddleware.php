@@ -4,7 +4,7 @@ namespace Attar\App\Rahmatan\Travel\Middleware;
 
 use Attar\App\Rahmatan\Travel\App\View;
 
-class AgenMiddleWare implements Middleware
+class AgenMiddleware implements Middleware
 {
     public function before(): void
     {

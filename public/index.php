@@ -71,7 +71,7 @@ Router::add("GET","/cetak-tagihan/([0-9a-zA-Z]*)", HomeController::class,"viewCe
 Router::add("GET","/nota-pembayaran/([0-9a-zA-Z]*)", HomeController::class,"viewNotaPembayaran",[AuthMiddleware::class,CustomerMiddleware::class]);
 
 //Router untuk menangani home Agen
-Router::add("GET","/profile-agen", AgenController::class,"viewProfileAgen",[AuthMiddleware::class,AgenMiddleWare::class]);
+Router::add("GET","/profile-agen", AgenController::class,"viewProfileAgen",[AuthMiddleware::class,]);
 Router::add("GET","/pelanggan-agen", AgenController::class,"viewDataPelanggan",[AuthMiddleware::class,AgenMiddleWare::class]);
 //Router untuk menangani Dashboard Admin
 Router::add("GET","/admin/dashboard", DashboardController::class,"index",[AuthMiddleware::class,AdminMiddleware::class]);

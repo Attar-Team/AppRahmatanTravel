@@ -37,7 +37,7 @@
                     <h4>Uploads bukti transfer</h4>
 
                     <div class="form-floating mb-3">
-                        <input type="number" name="jumlah_bayar" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <input type="text" name="jumlah_bayar" onkeyup="rupiah(this)" class="form-control" id="floatingInput" placeholder="name@example.com">
                         <label for="floatingInput">Jumlah Bayar</label>
                     </div>
 
@@ -180,6 +180,7 @@
 
 
 
+<script src="/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <!-- <script src="/script.js"></script> -->
 

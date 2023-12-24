@@ -86,7 +86,7 @@ class AgenController
             $dataUser = [
                 'nama'=> htmlspecialchars($_POST['nama']),
                 "email"=> htmlspecialchars($_POST['email']),
-                'password'=> "12345678",
+                'password'=> password_hash('12345678', PASSWORD_DEFAULT),
                 'level'=> "agen"
             ];
             $tambahUser = $this->user->save($dataUser);

@@ -54,6 +54,9 @@
   </thead>
   <tbody>
     <?php
+
+use Attar\App\Rahmatan\Travel\Util\FormatRupiah;
+
       $no = 1;
     foreach($data['pemesanan'] as $p): ?>
     <tr>
@@ -61,7 +64,7 @@
       <td><?= $p['nama'] ?></td>
       <td><?= $p['tanggal_pemesanan'] ?></td>
       <td><?= $p['status'] ?></td>
-      <td><?= $p['total_tagihan'] ?></td>
+      <td><?= FormatRupiah::Rupiah($p['total_tagihan']) ?></td>
       <td>
         <a href="/detail-pemesanan/<?= $p['pemesanan_id'] ?>" class="btn btn-success">Detail & Bayar</a>
         <?php 

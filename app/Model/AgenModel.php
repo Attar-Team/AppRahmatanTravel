@@ -43,6 +43,8 @@ class AgenModel
         return $result;
     }
 
+    
+
     public function getJumlahPemasukan($id)
     {
         $query = $this->connection->prepare("SELECT SUM(gaji) AS jumlah_pemasukan FROM pemesanan LEFT JOIN agen_gajian ON pemesanan.pemesanan_id = agen_gajian.pemesanan_id WHERE pemesanan.agen_id = ?");

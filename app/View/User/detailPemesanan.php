@@ -28,9 +28,11 @@
     <div class="detail-pmsn-user">
         <div class="header-dtl">
             <h2>Detail Pemesanan</h2>
-            <p class="countdown" id="asd"
+            <?php if($d['status'] == 'belum lunas'){ ?>
+                <p class="countdown" id="asd"
                         style="padding: 10px;border-radius: 10px;background-color: red;color: #fff;text-align: center;display: inline-block;font-size: 25px;">
                     </p>
+                    <?php } ?>
             <a href="/delete-pemesanan/<?= $d['pemesanan_id'] ?>" onclick="return confirm('apakah yakin mmbatalkan pesanan')" class="btn btn-danger">Batalkan pesanan</a>
         
         </div>

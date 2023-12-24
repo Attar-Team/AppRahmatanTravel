@@ -53,13 +53,6 @@ class PemesananController
 
     public function tambahPemesanan()
     {
-        // var_dump($_POST);
-        // foreach($_POST['customer_id'] as $key => $value){
-        //     $no = $key + 1;
-        //             $data = explode(',',$_POST["$no"]);
-        //             echo $value;
-        //         }
-        // die();
 
         try {
             $tanggal = date("Y-m-j H:i:s");
