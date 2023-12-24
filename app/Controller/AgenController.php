@@ -87,7 +87,8 @@ class AgenController
                 'nama'=> htmlspecialchars($_POST['nama']),
                 "email"=> htmlspecialchars($_POST['email']),
                 'password'=> password_hash('12345678', PASSWORD_DEFAULT),
-                'level'=> "agen"
+                'level'=> "agen",
+                'hoby' => "test"
             ];
             $tambahUser = $this->user->save($dataUser);
             if ($tambahUser['count'] > 0) {

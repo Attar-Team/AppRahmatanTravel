@@ -18,8 +18,8 @@
               <div class="card " style="margin-top: -16px;" >
                 <div class="table-responsive text-nowrap p-3">
                 <div class="d-inline-block mb-3">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalTambahGalery" class="btn btn-primary mb-3">Tambah</button>
-
+                <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#ModalTambahGalery" class="btn btn-primary mb-3">Tambah</button> -->
+                <a href="/admin/tambah-agen"  class="btn btn-primary d-flex align-items-center">Tambah</a>
                 </div>
                 <table id="myTable" class="table text-center table-hover">
                     <thead>
